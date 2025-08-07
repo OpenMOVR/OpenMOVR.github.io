@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Platform Vision - MOVR Docs</title>
+    <meta name="description" content="The future of neuromuscular disease research: automated EMR integration, open source tools, collaborative platform development, and democratized research access.">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="css/docs.css">
+    
+    <link rel="icon" type="image/x-icon" href="../assets/movr_square_img.jpg">
+</head>
+<body>
+    <div class="docs-container">
+        <!-- Sidebar Navigation -->
+        <nav class="docs-sidebar">
+            <div class="docs-header">
+                <h1><a href="index.html">MOVR Docs</a></h1>
+                <p>Official Updates & Information</p>
+                <div style="margin-top: var(--spacing-md); padding-top: var(--spacing-md); border-top: 1px solid var(--border-color);">
+                    <a href="../index.html" style="font-size: 0.85rem; color: var(--primary-blue); text-decoration: none; display: flex; align-items: center; gap: 0.25rem;">
+                        ← Back to OpenMOVR
+                    </a>
+                </div>
+            </div>
+            
+            <div class="docs-nav">
+                <ul>
+                    <li><a href="index.html" class="nav-link" data-page="home">📢 MOVR Update</a></li>
+                    <li><a href="movr-data-hub.html" class="nav-link external">📊 Data Hub Metrics</a></li>
+                    <li><a href="platform-vision.html" class="nav-link external active">🚀 Platform Vision</a></li>
+                    <li><a href="#" class="nav-link" data-page="legacy">📚 MOVR Legacy</a></li>
+                    <li><a href="#" class="nav-link" data-page="next-gen">🔧 MOVR Next Gen</a></li>
+                    <li><a href="#" class="nav-link" data-page="faq">❓ FAQ</a></li>
+                    <li><a href="#" class="nav-link external" data-page="form">📋 Data Request Form</a></li>
+                </ul>
+                
+                <div class="docs-footer">
+                    <p><strong>Contact:</strong><br>
+                    <a href="mailto:MDAMOVR@mdausa.org">MDAMOVR@mdausa.org</a></p>
+                    
+                    <div style="margin-top: var(--spacing-md); padding-top: var(--spacing-md); border-top: 1px solid var(--border-color);">
+                        <a href="https://www.mda.org/science/movr" style="font-size: 0.85rem; color: var(--primary-blue); text-decoration: none; display: flex; align-items: center; gap: 0.25rem;" target="_blank">
+                            🔗 Official MDA MOVR ↗
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="docs-content">
+            <div class="content-header">
+                <h1>Platform Vision: The Future of Registry Research</h1>
+                <div class="badge badge-secondary">Technical Vision</div>
+            </div>
+
+            <!-- Overview -->
+            <div class="alert alert-info">
+                <h3>🚀 Next Generation Registry Platform</h3>
+                <p>Moving from manual data entry to automated EMR integration while maintaining gold standard data quality and building open source tools for the entire neuromuscular disease research community.</p>
+            </div>
+
+            <h2>Vision Overview</h2>
+            <p>The next generation MOVR platform represents a fundamental shift in how registry data is collected, processed, and accessed:</p>
+
+            <div class="grid-2" style="margin-top: var(--spacing-lg);">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>🏥 From Manual to Automated</h3>
+                    </div>
+                    <div class="card-content">
+                        <h4>Current Challenges</h4>
+                        <ul>
+                            <li><strong>Time-intensive:</strong> Manual data entry limits site participation</li>
+                            <li><strong>Error-prone:</strong> Duplicate entry increases inconsistencies</li>
+                            <li><strong>Limited scale:</strong> Manual processes don't scale with research needs</li>
+                            <li><strong>Site burden:</strong> Additional workload affects participation</li>
+                        </ul>
+                        
+                        <h4>Automated Solution</h4>
+                        <ul>
+                            <li><strong>EMR Integration:</strong> Direct data pull from electronic medical records</li>
+                            <li><strong>FHIR Standards:</strong> Standardized healthcare data interoperability</li>
+                            <li><strong>Real-time Processing:</strong> Continuous data capture and validation</li>
+                            <li><strong>Reduced Burden:</strong> Minimal impact on clinical workflows</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3>🌍 From Siloed to Collaborative</h3>
+                    </div>
+                    <div class="card-content">
+                        <h4>Current Limitations</h4>
+                        <ul>
+                            <li><strong>Access barriers:</strong> Complex approval processes</li>
+                            <li><strong>Limited tools:</strong> Restricted analysis capabilities</li>
+                            <li><strong>Siloed research:</strong> Isolated studies and findings</li>
+                            <li><strong>Closed development:</strong> Limited community innovation</li>
+                        </ul>
+                        
+                        <h4>Open Collaboration</h4>
+                        <ul>
+                            <li><strong>Open Source Tools:</strong> Community-developed research platform</li>
+                            <li><strong>APIs & SDKs:</strong> Developer-friendly access and integration</li>
+                            <li><strong>Standardized Data:</strong> Interoperable across studies and platforms</li>
+                            <li><strong>Transparent Development:</strong> Community-driven innovation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <h2>Technical Architecture</h2>
+            <p>Modern, scalable, open source platform built for collaboration:</p>
+
+            <div class="grid-3" style="margin-top: var(--spacing-lg);">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>🏗️ Data Layer</h3>
+                    </div>
+                    <div class="card-content">
+                        <h4>EMR Integration</h4>
+                        <ul>
+                            <li>FHIR R4 standard compliance</li>
+                            <li>HL7 message processing</li>
+                            <li>Real-time data streaming</li>
+                            <li>Clinical data mapping</li>
+                        </ul>
+                        
+                        <h4>Data Quality</h4>
+                        <ul>
+                            <li>Automated validation rules</li>
+                            <li>Quality scoring algorithms</li>
+                            <li>Anomaly detection</li>
+                            <li>Audit trails and versioning</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3>⚡ Platform Layer</h3>
+                    </div>
+                    <div class="card-content">
+                        <h4>API Infrastructure</h4>
+                        <ul>
+                            <li>RESTful APIs with GraphQL</li>
+                            <li>Rate limiting and quotas</li>
+                            <li>Authentication and authorization</li>
+                            <li>Comprehensive documentation</li>
+                        </ul>
+                        
+                        <h4>Processing Engine</h4>
+                        <ul>
+                            <li>Real-time data processing</li>
+                            <li>Batch analytics pipelines</li>
+                            <li>Machine learning workflows</li>
+                            <li>Configurable business rules</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3>🔧 Developer Tools</h3>
+                    </div>
+                    <div class="card-content">
+                        <h4>SDKs & Libraries</h4>
+                        <ul>
+                            <li>Python research library</li>
+                            <li>R statistical package</li>
+                            <li>JavaScript web components</li>
+                            <li>CLI tools for automation</li>
+                        </ul>
+                        
+                        <h4>Development Environment</h4>
+                        <ul>
+                            <li>Docker containerization</li>
+                            <li>Sandbox environments</li>
+                            <li>Testing frameworks</li>
+                            <li>CI/CD pipelines</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <h2>Open Source Ecosystem</h2>
+            <p>Building tools that benefit the entire neuromuscular disease research community:</p>
+
+            <div class="grid-2" style="margin-top: var(--spacing-lg);">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>🛠️ Core Platform Tools</h3>
+                    </div>
+                    <div class="card-content">
+                        <h4>movr-python (2026)</h4>
+                        <p>Pip installable Python library for MOVR data access and analysis</p>
+                        <ul>
+                            <li>Data access and querying</li>
+                            <li>Statistical analysis helpers</li>
+                            <li>Visualization templates</li>
+                            <li>Export and reporting tools</li>
+                        </ul>
+                        
+                        <h4>movr-api</h4>
+                        <p>RESTful API server and comprehensive documentation</p>
+                        <ul>
+                            <li>Authentication and authorization</li>
+                            <li>Rate limiting and quotas</li>
+                            <li>Interactive API explorer</li>
+                            <li>SDK code generation</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3>🧠 Advanced Analytics</h3>
+                    </div>
+                    <div class="card-content">
+                        <h4>movr-ml (Timeline TBD)</h4>
+                        <p>Machine learning toolkit for neuromuscular disease research</p>
+                        <ul>
+                            <li>Disease progression models</li>
+                            <li>Outcome prediction algorithms</li>
+                            <li>Clinical trial optimization</li>
+                            <li>Biomarker discovery tools</li>
+                        </ul>
+                        
+                        <h4>movr-viz</h4>
+                        <p>Interactive visualization components and dashboards</p>
+                        <ul>
+                            <li>Patient journey visualization</li>
+                            <li>Population analytics dashboards</li>
+                            <li>Real-time monitoring tools</li>
+                            <li>Custom report generation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <h2>Implementation Timeline</h2>
+            <p>Phased approach to building next-generation registry platform:</p>
+
+            <div class="timeline-list" style="margin-top: var(--spacing-lg);">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>2024-2025: Foundation Phase</h3>
+                        <span class="badge badge-info">Current Phase</span>
+                    </div>
+                    <div class="card-content">
+                        <h4>Vendor Selection & Proof of Concept</h4>
+                        <ul>
+                            <li>Evaluate EMR integration vendors</li>
+                            <li>Build proof-of-concept systems</li>
+                            <li>Test FHIR data transformation</li>
+                            <li>Establish development partnerships</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>2025-2026: Development Phase</h3>
+                        <span class="badge badge-warning">Q1 2026 Target</span>
+                    </div>
+                    <div class="card-content">
+                        <h4>Pilot Development with Founding Partners</h4>
+                        <ul>
+                            <li>Build automated EMR integration</li>
+                            <li>Develop core platform APIs</li>
+                            <li>Create initial developer tools</li>
+                            <li>Test with select clinical sites</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>March 2026: Go/No-Go Decision</h3>
+                        <span class="badge badge-secondary">Decision Point</span>
+                    </div>
+                    <div class="card-content">
+                        <h4>Evaluate Pilot Results</h4>
+                        <ul>
+                            <li>Assess technical feasibility</li>
+                            <li>Evaluate data quality outcomes</li>
+                            <li>Review site adoption and satisfaction</li>
+                            <li>Determine full platform development</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>2026+: Community Platform</h3>
+                        <span class="badge badge-success">Dependent on Pilot</span>
+                    </div>
+                    <div class="card-content">
+                        <h4>Open Source Tools & Community Access</h4>
+                        <ul>
+                            <li>Launch pip installable Python library</li>
+                            <li>Open source developer ecosystem</li>
+                            <li>Expanded research community access</li>
+                            <li>Global registry network</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <h2>Expected Impact</h2>
+            <p>How this platform will transform neuromuscular disease research:</p>
+
+            <div class="grid-3" style="margin-top: var(--spacing-lg);">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>🏥 For Clinical Sites</h3>
+                    </div>
+                    <div class="card-content">
+                        <ul>
+                            <li><strong>Reduced Burden:</strong> Automated data capture eliminates manual entry</li>
+                            <li><strong>Real-time Feedback:</strong> Immediate data quality validation and insights</li>
+                            <li><strong>Workflow Integration:</strong> Seamless integration with existing EMR systems</li>
+                            <li><strong>Enhanced Value:</strong> Participation becomes easier and more valuable</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3>🔬 For Researchers</h3>
+                    </div>
+                    <div class="card-content">
+                        <ul>
+                            <li><strong>Faster Access:</strong> Streamlined data access and approval processes</li>
+                            <li><strong>Better Tools:</strong> Comprehensive APIs, SDKs, and analysis libraries</li>
+                            <li><strong>Real-time Data:</strong> Access to continuously updated registry data</li>
+                            <li><strong>Collaborative Platform:</strong> Tools for multi-site and cross-study research</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3>👥 For Patients & Families</h3>
+                    </div>
+                    <div class="card-content">
+                        <ul>
+                            <li><strong>Accelerated Research:</strong> Faster data collection enables quicker insights</li>
+                            <li><strong>Broader Participation:</strong> More sites can participate with reduced burden</li>
+                            <li><strong>Transparent Impact:</strong> Real-time visibility into research contributions</li>
+                            <li><strong>Global Network:</strong> Connection to worldwide research community</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="message-box" style="margin-top: var(--spacing-2xl);">
+                <h3>Be Part of the Future</h3>
+                <p>Join us in building the next generation of neuromuscular disease research tools. Contact our team at <a href="mailto:mdamovr@mdausa.org"><strong>mdamovr@mdausa.org</strong></a> to learn about partnership opportunities.</p>
+                <p><em>This is a mission-driven project that goes above and beyond our day jobs to make research more accessible.</em></p>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/docs.js"></script>
+</body>
+</html>

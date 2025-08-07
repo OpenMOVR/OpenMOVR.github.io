@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About MOVR - OpenMOVR | 12 Years of Neuromuscular Disease Research</title>
+    <meta name="description" content="The story of MOVR: from USNDR pilot to national registry platform. 12+ years of neuromuscular disease research enabling 25+ studies and supporting 5,895+ participants.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" type="image/x-icon" href="assets/movr_square_img.jpg">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .stat-sublabel {
+            font-size: 0.8rem;
+            color: var(--medium-gray);
+            margin-top: 0.25rem;
+        }
+        
+        .study-breakdown {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-lg);
+        }
+        
+        .study-item {
+            padding: var(--spacing-md);
+            border-radius: 0.5rem;
+            background: var(--white);
+            border: 1px solid #e2e8f0;
+        }
+        
+        .study-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .study-header h4 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        
+        .study-years {
+            font-size: 0.9rem;
+            color: var(--medium-gray);
+            font-weight: 500;
+        }
+        
+        .study-stats {
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .study-number {
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="assets/movr_logo_clean.jpg" alt="OpenMOVR Logo">
+                    <div class="logo-text">
+                        <div class="logo-main">OpenMOVR</div>
+                        <div class="logo-sub">MDA MOVR Open Source Extension</div>
+                    </div>
+                </div>
+                
+                <nav class="nav">
+                    <!-- Navigation will be populated by JavaScript from config.js -->
+                </nav>
+                
+                <div class="header-actions">
+                    <a href="mailto:mdamovr@mdausa.org" class="btn btn-outline">Contact Team</a>
+                    <button class="mobile-menu-toggle">☰</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-background"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1>The MOVR Journey</h1>
+                <p class="hero-subtitle">From manual data entry to AI-powered insights</p>
+                <p>12 years of learning, building, and transforming neuromuscular disease research</p>
+                
+                <div class="btn-group justify-center">
+                    <a href="#impact" class="btn btn-primary btn-large">View Research Impact</a>
+                    <a href="#timeline" class="btn btn-outline btn-large">Explore the Journey</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact at a Glance -->
+    <section class="section" id="impact" style="background: var(--light-gray);">
+        <div class="container">
+            <div class="text-center">
+                <h2>Our Research Impact</h2>
+                <p>Real numbers from 12 years of dedicated data collection across America's leading neuromuscular centers</p>
+                <p><em>Note: Final enrollment reached approximately 6,100 participants by study end (April 1, 2025)</em></p>
+            </div>
+            
+            <div class="impact-stats">
+                <div class="stat-box">
+                    <span class="stat-number">5,895</span>
+                    <div class="stat-label">Total Data Hub Enrollments</div>
+                    <div class="stat-sublabel">Across both studies combined</div>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">20,152</span>
+                    <div class="stat-label">Clinical Encounters Captured</div>
+                    <div class="stat-sublabel">Longitudinal data points</div>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">73</span>
+                    <div class="stat-label">Research Sites</div>
+                    <div class="stat-sublabel">Combined across both studies</div>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">7</span>
+                    <div class="stat-label">Neuromuscular Diseases</div>
+                    <div class="stat-sublabel">ALS, DMD, SMA, BMD, LGMD, FSHD, Pompe</div>
+                </div>
+            </div>
+
+            <!-- MOVR Data Hub Breakdown -->
+            <div class="grid-2" style="margin-top: var(--spacing-xl);">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>MOVR Data Hub Composition</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="study-breakdown">
+                            <div class="study-item">
+                                <div class="study-header">
+                                    <h4>🟢 MOVR Study (Active)</h4>
+                                    <span class="study-years">2019-2025</span>
+                                </div>
+                                <div class="study-stats">
+                                    <span class="study-number">3,408</span> enrollments across <span class="study-number">60</span> sites<br>
+                                    <span class="study-number">9,094</span> clinical encounters
+                                </div>
+                            </div>
+                            
+                            <div class="study-item">
+                                <div class="study-header">
+                                    <h4>🔵 USNDR Study (Legacy)</h4>
+                                    <span class="study-years">2013-2018</span>
+                                </div>
+                                <div class="study-stats">
+                                    <span class="study-number">2,477</span> enrollments across <span class="study-number">26</span> sites<br>
+                                    <span class="study-number">9,859</span> clinical encounters
+                                </div>
+                            </div>
+                        </div>
+                        <p style="margin-top: var(--spacing-md); font-size: 0.9rem; color: var(--medium-gray);">
+                            <em>(*) Legacy USNDR data available upon request</em>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Participant Distribution Chart -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Enrollment by Disease Type</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="chart-container">
+                            <canvas id="participantChart"></canvas>
+                        </div>
+                        <p><strong>Data Hub Total:</strong> Combined USNDR (legacy) + MOVR (active) studies</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Evolution Timeline -->
+    <section class="section" id="timeline">
+        <div class="container">
+            <div class="text-center">
+                <h2>Evolution Through Learning</h2>
+                <p>How we built, failed, learned, and evolved over 12 years of registry development</p>
+            </div>
+
+            <div class="timeline-modern">
+                <div class="timeline-item-modern">
+                    <div class="timeline-marker-modern"></div>
+                    <div class="timeline-content-modern">
+                        <h3>2013-2018: The USNDR Foundation</h3>
+                        <p><strong>The Beginning:</strong> Launched as the United States Neuromuscular Disease Registry (USNDR) across 4 diseases at 26 sites</p>
+                        <p><strong>What We Built:</strong> Manual eCRF system, foundational data collection protocols</p>
+                        <p><strong>Impact:</strong> 2,477 enrollments, 9,859 encounters - proving longitudinal tracking was possible</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item-modern">
+                    <div class="timeline-marker-modern"></div>
+                    <div class="timeline-content-modern">
+                        <h3>2019-2024: Scaling to MOVR</h3>
+                        <p><strong>The Growth:</strong> Expanded to 7 diseases, 60+ sites, with 3,408 new enrollments</p>
+                        <p><strong>What We Learned:</strong> Manual data entry doesn't scale sustainably</p>
+                        <div class="quote-box">
+                            "We entered this field to help people pass away gracefully, but now we have unexpected treatments and are navigating new territory... despite the challenges, we are committed to doing right by these families."
+                            <br><em>— MOVR Principal Investigator</em>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item-modern">
+                    <div class="timeline-marker-modern timeline-marker-active"></div>
+                    <div class="timeline-content-modern">
+                        <h3>2025+: Building Next Generation</h3>
+                        <p><strong>The Vision:</strong> FHIR-based automated EMR integration, open source development</p>
+                        <p><strong>Current Status:</strong> Vendor selection and proof-of-concept phase</p>
+                        <div class="current-status-badge">Current Phase</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Voices from Our Network -->
+    <section class="section" style="background: var(--light-gray);">
+        <div class="container">
+            <div class="text-center">
+                <h2>Voices from Our Network</h2>
+                <p>What our 54 active sites told us during comprehensive interviews (representing 100% participation from all active sites)</p>
+            </div>
+
+            <div class="grid grid-2" style="margin-top: var(--spacing-xl);">
+                <div class="card">
+                    <div class="card-header" style="background: var(--success-green); color: white;">
+                        <h3>💬 What Sites Value Most</h3>
+                    </div>
+                    <div class="card-content">
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="margin-bottom: var(--spacing-sm);">✅ <strong>Appreciation for MOVR's uniqueness:</strong> "Captures data across wide range of neuromuscular diseases"</li>
+                            <li style="margin-bottom: var(--spacing-sm);">✅ <strong>Patient engagement value:</strong> "Patients appreciate the opportunity to participate in research"</li>
+                            <li style="margin-bottom: var(--spacing-sm);">✅ <strong>Collaborative potential:</strong> "Desire for data sharing and benchmarking with other sites"</li>
+                            <li style="margin-bottom: var(--spacing-sm);">✅ <strong>Research foundation:</strong> "Addresses gaps in natural history and real-world treatment outcomes"</li>
+                        </ul>
+                        
+                        <div class="quote-box">
+                            "Overall, a desire for MOVR to succeed and make a difference - despite the challenges, many sites expressed desire for MOVR to contribute to improving lives"
+                            <br><em>— From comprehensive site interviews (38/54 sites)</em>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" style="background: var(--warning-orange); color: white;">
+                        <h3>⚠️ Critical Challenges Identified</h3>
+                    </div>
+                    <div class="card-content">
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="margin-bottom: var(--spacing-sm);">⚠️ <strong>Data entry burden:</strong> "Time-intensive nature of comprehensive data capture"</li>
+                            <li style="margin-bottom: var(--spacing-sm);">⚠️ <strong>Resource constraints:</strong> "Need for adequate staffing and funding"</li>
+                            <li style="margin-bottom: var(--spacing-sm);">⚠️ <strong>Data quality concerns:</strong> "Clarity of outcome measures and representativeness"</li>
+                            <li style="margin-bottom: var(--spacing-sm);">⚠️ <strong>Limited communication:</strong> "Desire for more regular updates and collaboration"</li>
+                        </ul>
+
+                        <div class="quote-box">
+                            "More is not always better – narrow in on what is relevant and potentially can be helpful"
+                            <br><em>— Site Principal Investigator feedback</em>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- From Problems to Solutions -->
+    <section class="section">
+        <div class="container">
+            <div class="text-center">
+                <h2>From Problems to Solutions</h2>
+                <p>The specific data challenges we identified and how next-gen technology addresses them</p>
+            </div>
+
+            <div class="grid grid-3" style="margin-top: var(--spacing-xl);">
+                <div class="card">
+                    <div class="card-content">
+                        <h3 style="color: #dc2626;">🚨 Challenge: Manual Data Entry</h3>
+                        <div class="challenge-box">
+                            <strong>The Problem:</strong>
+                            <ul>
+                                <li>58% of hospitalizations marked as 'other' - unclear safety signals</li>
+                                <li>35-50% missing gross motor milestone data</li>
+                                <li>47% unknown SMN2 copy data in legacy MOVR</li>
+                                <li>Data entry burden limiting site participation</li>
+                            </ul>
+                        </div>
+                        <div class="solution-box">
+                            <strong>Next-Gen Approach:</strong>
+                            <ul>
+                                <li>FHIR-based automated EMR extraction</li>
+                                <li>Custom ontology for hospitalization classification</li>
+                                <li>EMR-derived genetic correlation analysis</li>
+                                <li>Reduced coordinator burden through automation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-content">
+                        <h3 style="color: #dc2626;">🚨 Challenge: Limited Scope</h3>
+                        <div class="challenge-box">
+                            <strong>The Problem:</strong>
+                            <ul>
+                                <li>Static eCRF fields limiting adaptability</li>
+                                <li>120+ sites on waiting list due to capacity</li>
+                                <li>Single institution health data silos</li>
+                                <li>Indication expansion roadblocks</li>
+                            </ul>
+                        </div>
+                        <div class="solution-box">
+                            <strong>Next-Gen Approach:</strong>
+                            <ul>
+                                <li>Scalable multi-health system integration</li>
+                                <li>Flexible data models for new indications</li>
+                                <li>Cross-institutional data harmonization</li>
+                                <li>Open source community development</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-content">
+                        <h3 style="color: #dc2626;">🚨 Challenge: Industry Demands</h3>
+                        <div class="challenge-box">
+                            <strong>The Problem:</strong>
+                            <ul>
+                                <li>Regulatory agencies demand more robust real-world evidence</li>
+                                <li>Comparative effectiveness requires multi-year, multi-site design</li>
+                                <li>Missing patient voice in registry value</li>
+                                <li>Limited industry partnership integration</li>
+                            </ul>
+                        </div>
+                        <div class="solution-box">
+                            <strong>Next-Gen Approach:</strong>
+                            <ul>
+                                <li>Enhanced biomarker discovery capabilities</li>
+                                <li>Head-to-head treatment comparisons</li>
+                                <li>Patient-centered design principles</li>
+                                <li>Strategic industry co-development model</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Next Chapter -->
+    <section class="section call-to-action" style="background: linear-gradient(135deg, var(--success-green) 0%, #059669 100%); color: var(--white);">
+        <div class="container text-center">
+            <h2 style="color: var(--white);">Building the Next Generation</h2>
+            <p style="font-size: 1.2rem; margin-bottom: var(--spacing-xl); color: var(--white);">We're not just fixing problems - we're reimagining what's possible when research infrastructure serves both patients and science</p>
+            
+            <div class="grid grid-2" style="margin: var(--spacing-xl) 0;">
+                <div>
+                    <h3 style="color: var(--white);">🏗️ Current Focus</h3>
+                    <ul style="text-align: left; max-width: 400px; margin: 0 auto; color: var(--white);">
+                        <li>Vendor selection & proof of concept</li>
+                        <li>FHIR data transformation testing</li>
+                        <li>Patient consent 2.0 development</li>
+                        <li>Open source community building</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="color: var(--white);">🎯 Our Goal</h3>
+                    <p style="text-align: left; max-width: 400px; margin: 0 auto; color: var(--white);">Transform from manual data entry to automated EMR integration while maintaining gold standard data quality and expanding research accessibility for the entire neuromuscular community.</p>
+                </div>
+            </div>
+
+            <div style="margin-top: var(--spacing-2xl);">
+                <a href="building.html" class="btn btn-outline" style="margin-right: var(--spacing-md);">Explore Our Technical Vision</a>
+                <a href="team.html" class="btn btn-primary">Join Our Development</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Our Journey</h4>
+                    <p>12 years of learning, building, and growing in neuromuscular disease research. Honest about our mistakes, excited about our future.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Research Impact</h4>
+                    <a href="#impact">Our Numbers</a>
+                    <a href="#publications">Publications</a>
+                    <a href="#trials">Clinical Trials</a>
+                    <a href="participants.html">For Participants</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Next Steps</h4>
+                    <a href="building.html">Building MOVR 2.0</a>
+                    <a href="partner.html">Partnership</a>
+                    <a href="open-science.html">Open Science</a>
+                    <a href="team.html">Meet Our Team</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>📧 movr-team@movr.org</p>
+                    <p>👥 Andre Daniel Paredes</p>
+                    <p>👥 Jessica Waits</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 MOVR Registry Team - Open Source Project. Learning and building together.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Participant Distribution Chart
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('participantChart');
+            if (ctx) {
+                new Chart(ctx.getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['ALS', 'DMD', 'SMA', 'BMD', 'LGMD', 'FSHD', 'Pompe'],
+                        datasets: [{
+                            label: 'Total Participants (Data Hub)',
+                            data: [3031, 1372, 782, 289, 202, 174, 35],
+                            backgroundColor: [
+                                '#1e40af',
+                                '#3b82f6',
+                                '#60a5fa',
+                                '#93c5fd',
+                                '#dbeafe',
+                                '#059669',
+                                '#34d399'
+                            ],
+                            borderColor: '#1e40af',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            title: {
+                                display: true,
+                                text: 'MOVR Data Hub: Total Enrollments by Disease'
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Number of Participants'
+                                }
+                            },
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Disease Type'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenMOVR | Open Science Platform for Neuromuscular Disease Research</title>
+    <meta name="description" content="Building the next generation of neuromuscular disease research through open collaboration. 5,895+ participants, 20,000+ visits, transparent data governance.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" type="image/x-icon" href="assets/movr_square_img.jpg">
+    
+    <style>
+        /* Enhanced styles for the new design */
+        .impact-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: var(--spacing-lg);
+            margin: var(--spacing-xl) 0;
+            background: rgba(255, 255, 255, 0.1);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            backdrop-filter: blur(10px);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            display: block;
+            color: var(--white);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .mission-statement {
+            background: linear-gradient(135deg, var(--light-gray) 0%, #e5e7eb 100%);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            text-align: center;
+            margin: var(--spacing-xl) 0;
+        }
+
+        .mission-statement h3 {
+            font-family: var(--font-secondary);
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-md);
+            color: var(--dark-gray);
+        }
+
+        .tech-highlight {
+            background: var(--dark-gray);
+            color: var(--white);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-md);
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9rem;
+            margin: var(--spacing-sm) 0;
+            overflow-x: auto;
+        }
+
+        .progress-indicator {
+            background: var(--light-gray);
+            border-radius: 10px;
+            overflow: hidden;
+            margin: var(--spacing-sm) 0;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, var(--primary-blue), var(--success-green));
+            height: 8px;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        .timeline-container {
+            background: var(--white);
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .timeline-steps {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--spacing-lg);
+        }
+
+        .timeline-step {
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .timeline-badge {
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-sm);
+            color: white;
+            font-weight: 600;
+        }
+
+        .timeline-arrow {
+            font-size: 2rem;
+            color: var(--primary-blue);
+        }
+
+        @media (max-width: 768px) {
+            .timeline-arrow {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="assets/movr_logo_clean.jpg" alt="OpenMOVR Logo">
+                    <div class="logo-text">
+                        <div class="logo-main">OpenMOVR</div>
+                        <div class="logo-sub">MDA MOVR Open Source Extension</div>
+                    </div>
+                </div>
+                
+                <nav class="nav">
+                    <!-- Navigation will be populated by JavaScript from config.js -->
+                </nav>
+                
+                <div class="header-actions">
+                    <a href="mailto:mdamovr@mdausa.org" class="btn btn-outline">Contact Team</a>
+                    <button class="mobile-menu-toggle">☰</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-background"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1>OpenMOVR</h1>
+                <p class="hero-subtitle">Open Science Platform for Neuromuscular Disease Research</p>
+                <p>Building the next generation of clinical data infrastructure through transparent collaboration and open source development.</p>
+                
+                <div class="impact-stats">
+                    <div class="stat">
+                        <span class="stat-number">5,895+</span>
+                        <span class="stat-label">Participants</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">20K+</span>
+                        <span class="stat-label">Clinical Visits</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">63</span>
+                        <span class="stat-label">Active Sites</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">12</span>
+                        <span class="stat-label">Years Experience</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">7</span>
+                        <span class="stat-label">Indications</span>
+                    </div>
+                </div>
+                
+                <div class="btn-group justify-center">
+                    <a href="#technical" class="btn btn-primary btn-large">Explore Architecture</a>
+                    <a href="#collaborate" class="btn btn-outline btn-large">Join Open Science</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MOVR Updates Alert -->
+    <section class="section" style="background: linear-gradient(135deg, var(--warning-orange), #f97316); color: var(--white); text-align: center;">
+        <div class="container">
+            <div style="max-width: 800px; margin: 0 auto;">
+                <h2 style="color: var(--white); font-size: 2rem; margin-bottom: var(--spacing-md);">🚨 MOVR 2.0 Update: Important Information</h2>
+                <p style="font-size: 1.2rem; margin-bottom: var(--spacing-lg); color: var(--white); opacity: 0.95;">The original MOVR Data Hub has officially closed. We're launching MOVR 2.0 - a new generation platform!</p>
+                
+                <div class="btn-group justify-center">
+                    <a href="docs/index.html" class="btn" style="background: var(--white); color: var(--warning-orange); font-weight: 700; box-shadow: var(--shadow-lg);">📋 Read Full Update</a>
+                    <a href="https://www.mda.org/science/movr" class="btn btn-outline" style="border-color: var(--white); color: var(--white);" target="_blank">Official MDA MOVR ↗</a>
+                </div>
+                
+                <p style="font-size: 0.9rem; margin-top: var(--spacing-md); opacity: 0.8;">Previous participants: your data is safe and your participation has concluded</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="mission-statement">
+                <h3>Every decision starts with: Will this help patients?</h3>
+                <p>MOVR bridges the critical gap in real-world neuromuscular disease data through transparent, patient-centered research. We're building the next generation platform through open collaboration—from manual eCRFs to AI-powered FHIR integration—while maintaining the highest standards of data governance and patient advocacy.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Dashboard -->
+    <section class="section" id="impact" style="background: var(--light-gray);">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>Research Impact & Evolution</h2>
+                <p>From USNDR pilot (2013) to OpenMOVR's open science future</p>
+            </div>
+            
+            <div class="grid grid-3">
+                <div class="card">
+                    <div class="card-header" style="background: linear-gradient(135deg, #6b7280 0%, var(--dark-gray) 100%);">
+                        <h3>📊 Legacy Foundation</h3>
+                    </div>
+                    <div class="card-content">
+                        <h4>USNDR & MOVR Data (2013-2024)</h4>
+                        <ul>
+                            <li><strong>20,152 clinical encounters</strong> across 7 indications</li>
+                            <li><strong>12+ years</strong> of longitudinal data collection</li>
+                            <li><strong>63 clinical sites</strong> across the United States</li>
+                            <li><strong>70-75 required fields</strong> per indication eCRF</li>
+                        </ul>
+                        
+                        <div class="tech-highlight">
+                            ALS: 3,031 participants | DMD: 1,372 | SMA: 782
+                            BMD: 440 | LGMD: 195 | FSHD: 65 | Pompe: 10
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" style="background: linear-gradient(135deg, var(--secondary-blue) 0%, var(--primary-blue) 100%);">
+                        <h3>🔬 Current Research</h3>
+                    </div>
+                    <div class="card-content">
+                        <h4>Active Research Collaborations</h4>
+                        <ul>
+                            <li><strong>25+ studies enabled</strong> through MOVR data</li>
+                            <li><strong>18+ publications supported</strong> in peer review</li>
+                            <li><strong>Multiple partnerships</strong> in development</li>
+                            <li><strong>Real-world evidence</strong> for drug development</li>
+                        </ul>
+                        
+                        <h4>Data Accessibility</h4>
+                        <p><em>"Data should be accessible to all researchers dedicated to moving the needle forward"</em> - MDA MOVR team</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" style="background: linear-gradient(135deg, var(--success-green) 0%, #059669 100%);">
+                        <h3>🚀 OpenMOVR Vision</h3>
+                    </div>
+                    <div class="card-content">
+                        <h4>Next-Gen Platform Features</h4>
+                        <ul>
+                            <li><strong>FHIR-based</strong> automated data capture</li>
+                            <li><strong>EMR integration</strong> reducing manual entry by 70%</li>
+                            <li><strong>Open source</strong> development model</li>
+                            <li><strong>AI-powered</strong> research insights</li>
+                        </ul>
+                        
+                        <h4>Open Science Commitment</h4>
+                        <p>GSoC mentorship, GitHub collaboration, and transparent governance for the research community.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Architecture -->
+    <section class="section" id="technical">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>Technical Architecture</h2>
+                <p>From manual eCRFs to automated FHIR integration</p>
+            </div>
+            
+            <div class="grid grid-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>🏗️ Data Pipeline Evolution</h3>
+                    </div>
+                    <div class="card-content">
+                        <h4>Phase 1: Manual eCRFs (2013-2022)</h4>
+                        <ul>
+                            <li>REDCap-based data collection</li>
+                            <li>Clinical coordinator manual entry</li>
+                            <li>Structured data dictionaries</li>
+                            <li>Site-by-site training and validation</li>
+                        </ul>
+                        
+                        <div class="tech-highlight">
+                            // eCRF Structure Example
+                            Demographics: 14 fields | Diagnosis: 9-17 fields
+                            Encounters: 40-50 fields | Total: 70-75 per indication
+                        </div>
+                        
+                        <h4>Phase 2: FHIR Integration (2025+)</h4>
+                        <ul>
+                            <li><strong>HL7 FHIR R4</strong> standardized data exchange</li>
+                            <li><strong>Structured data:</strong> EMR records, EPIC integration</li>
+                            <li><strong>Unstructured data:</strong> Clinical notes, DICOM</li>
+                            <li><strong>Real-time validation</strong> and quality checks</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>🔐 Security & Compliance</h3>
+                    </div>
+                    <div class="card-content">
+                        <h4>Data Governance Framework</h4>
+                        <ul>
+                            <li><strong>HIPAA Compliance:</strong> End-to-end encryption</li>
+                            <li><strong>IRB Oversight:</strong> Multi-site research protocols</li>
+                            <li><strong>Patient Consent:</strong> Granular permission controls</li>
+                            <li><strong>Access Controls:</strong> Role-based data access</li>
+                        </ul>
+                        
+                        <h4>Open Science Principles</h4>
+                        <ul>
+                            <li><strong>Transparent governance:</strong> Open working groups</li>
+                            <li><strong>Community development:</strong> GitHub collaboration</li>
+                            <li><strong>Research APIs:</strong> Programmatic data access</li>
+                            <li><strong>Publication support:</strong> Co-authorship opportunities</li>
+                        </ul>
+                        
+                        <div class="progress-indicator">
+                            <div class="progress-bar" style="width: 75%;"></div>
+                        </div>
+                        <p><small>Platform Development: Vendor Selection Phase</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collaboration -->
+    <section class="section" id="collaborate">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>Open Collaboration</h2>
+                <p>Multiple pathways for researchers, developers, and industry partners</p>
+            </div>
+            
+            <div class="grid grid-4">
+                <div class="card">
+                    <div class="card-header" style="background: var(--success-green);">
+                        <h3>🎓 Researchers</h3>
+                    </div>
+                    <div class="card-content">
+                        <h4>Academic Collaboration</h4>
+                        <ul>
+                            <li>Data access agreements</li>
+                            <li>Co-authorship opportunities</li>
+                            <li>Research methodology sharing</li>
+                            <li>Cross-institutional studies</li>
+                        </ul>
+                        <p><strong>Get Started:</strong> Data request process takes 2-4 weeks</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" style="background: var(--warning-orange);">
+                        <h3>💻 Developers</h3>
+                    </div>
+                    <div class="card-content">
+                        <h4>Open Source Development</h4>
+                        <ul>
+                            <li>GSoC mentorship program</li>
+                            <li>GitHub contribution workflow</li>
+                            <li>Python library development</li>
+                            <li>API documentation projects</li>
+                        </ul>
+                        <p><strong>Get Started:</strong> Fork our repositories and join the community</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" style="background: var(--accent-blue);">
+                        <h3>🏭 Industry</h3>
+                    </div>
+                    <div class="card-content">
+                        <h4>Strategic Partnerships</h4>
+                        <ul>
+                            <li>Co-development opportunities</li>
+                            <li>Revenue-sharing models</li>
+                            <li>Technology infrastructure</li>
+                            <li>Mission-aligned partnerships</li>
+                        </ul>
+                        <p><strong>"We're not selling data—we're building solutions together"</strong></p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" style="background: #8b5cf6;">
+                        <h3>🤝 Participants</h3>
+                    </div>
+                    <div class="card-content">
+                        <h4>Patient-Centered Approach</h4>
+                        <ul>
+                            <li>Transparent data use policies</li>
+                            <li>Regular community updates</li>
+                            <li>Research outcome sharing</li>
+                            <li>Privacy protection guarantees</li>
+                        </ul>
+                        <p><strong>Your data drives discoveries that help others like you</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Governance -->
+    <section class="section" id="governance" style="background: var(--light-gray);">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>Open Governance Model</h2>
+                <p>Transparent committees and working groups driving OpenMOVR development</p>
+            </div>
+            
+            <div class="grid grid-2">
+                <div class="card">
+                    <div class="card-content">
+                        <h3>🏛️ Governance Structure</h3>
+                        <h4>Research Advisory Committee (RAC)</h4>
+                        <ul>
+                            <li>Expert community guidance</li>
+                            <li>Quarterly reviews and recommendations</li>
+                            <li>Publication and research prioritization</li>
+                            <li>Data quality and methodology oversight</li>
+                        </ul>
+                        
+                        <h4>Technical Working Groups</h4>
+                        <ul>
+                            <li>FHIR integration standards</li>
+                            <li>Data ontology development</li>
+                            <li>API design and documentation</li>
+                            <li>Security and compliance protocols</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-content">
+                        <h3>📈 Continuous Improvement</h3>
+                        <h4>Development Process</h4>
+                        <ul>
+                            <li><strong>Vendor selection</strong> currently in progress</li>
+                            <li><strong>Site feedback integration</strong> driving platform improvements</li>
+                            <li><strong>Data utilization priorities</strong> based on researcher needs</li>
+                            <li><strong>Transparent reporting</strong> of challenges and solutions</li>
+                        </ul>
+                        
+                        <h4>Open Development Process</h4>
+                        <ul>
+                            <li>Public roadmaps and progress tracking</li>
+                            <li>Community input on feature prioritization</li>
+                            <li>Regular stakeholder feedback sessions</li>
+                            <li>Open source code review processes</li>
+                        </ul>
+                        
+                        <div class="tech-highlight">
+                            "Views expressed are driven by the registry team and 
+                            separate from organizational positions" - MOVR Team
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platform Architecture -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>Platform Transformation</h2>
+                <p>Technical evolution from manual processes to automated intelligence</p>
+            </div>
+            
+            <div class="timeline-container">
+                <h3 style="text-align: center; margin-bottom: var(--spacing-lg); font-family: var(--font-secondary);">The MOVR Evolution Timeline</h3>
+                
+                <div class="timeline-steps">
+                    <div class="timeline-step">
+                        <div class="timeline-badge" style="background: var(--medium-gray);">
+                            <strong>2013-2018</strong><br>USNDR Pilot
+                        </div>
+                        <p>Manual eCRFs<br>4 indications<br>Foundation building</p>
+                    </div>
+                    
+                    <div class="timeline-arrow">→</div>
+                    
+                    <div class="timeline-step">
+                        <div class="timeline-badge" style="background: var(--primary-blue);">
+                            <strong>2019-2024</strong><br>MOVR Data Hub
+                        </div>
+                        <p>Scale to 7 indications<br>5,895+ participants<br>National network</p>
+                    </div>
+                    
+                    <div class="timeline-arrow">→</div>
+                    
+                    <div class="timeline-step">
+                        <div class="timeline-badge" style="background: var(--success-green);">
+                            <strong>2025+</strong><br>OpenMOVR
+                        </div>
+                        <p>FHIR automation<br>Open source<br>AI-powered insights</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>⚙️ Technical Infrastructure</h3>
+                    </div>
+                    <div class="card-content">
+                        <h4>Data Integration Architecture</h4>
+                        <div class="tech-highlight">
+                            // FHIR Resource Pipeline
+                            EMR Sources → FHIR R4 → Data Validation → 
+                            Research Database → API Access
+                        </div>
+                        
+                        <h4>Supported Data Types</h4>
+                        <ul>
+                            <li><strong>Structured FHIR:</strong> Patient records, diagnostic reports</li>
+                            <li><strong>Unstructured FHIR:</strong> Clinical notes, DICOM images</li>
+                            <li><strong>Longitudinal data:</strong> Disease progression tracking</li>
+                            <li><strong>Real-world evidence:</strong> Treatment outcomes</li>
+                        </ul>
+                        
+                        <h4>Development Standards</h4>
+                        <ul>
+                            <li>SNOMED CT, LOINC, HL7 FHIR ontologies</li>
+                            <li>Automated quality checks and validation</li>
+                            <li>Cloud-native, scalable architecture</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>🔧 Development Approach</h3>
+                    </div>
+                    <div class="card-content">
+                        <h4>Open Source Philosophy</h4>
+                        <ul>
+                            <li><strong>Collaborative development:</strong> Community-driven features</li>
+                            <li><strong>Transparent roadmap:</strong> Public progress tracking</li>
+                            <li><strong>Code accessibility:</strong> GitHub repositories</li>
+                            <li><strong>Documentation first:</strong> Developer-friendly APIs</li>
+                        </ul>
+                        
+                        <h4>Quality Assurance</h4>
+                        <div class="tech-highlight">
+                            Patient Trust → Data Governance → Technical Excellence
+                        </div>
+                        
+                        <p><strong>Key Metrics:</strong></p>
+                        <ul>
+                            <li>70% reduction in manual data entry effort</li>
+                            <li>Real-time data validation and error checking</li>
+                            <li>Cross-site data standardization</li>
+                            <li>Automated research-ready dataset generation</li>
+                        </ul>
+                        
+                        <p><em>"Patient trust is sacred to us, and we need a technology partner who understands that every decision must honor that trust."</em></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="section call-to-action" style="background: linear-gradient(135deg, var(--dark-gray) 0%, var(--accent-blue) 100%); color: var(--white);">
+        <div class="container">
+            <div style="text-align: center;">
+                <h2 style="color: var(--white) !important; margin-bottom: var(--spacing-md);">Join the OpenMOVR Mission</h2>
+                <p style="font-size: 1.2rem; margin-bottom: var(--spacing-xl); opacity: 0.9; color: var(--white) !important;">Whether you're a researcher, developer, industry partner, or participant—there's a place for you in building the future of neuromuscular disease research.</p>
+                
+                <div class="btn-group justify-center">
+                    <a href="mailto:mdamovr@mdausa.org?subject=OpenMOVR%20Collaboration" class="btn btn-primary">Start Collaboration</a>
+                    <a href="https://github.com/openmovr" class="btn btn-outline">View on GitHub</a>
+                </div>
+                
+                <div style="margin-top: var(--spacing-xl); padding: var(--spacing-lg); background: rgba(255, 255, 255, 0.1); border-radius: var(--radius-lg); backdrop-filter: blur(10px); color: var(--white);">
+                    <h4 style="margin-bottom: var(--spacing-sm); color: var(--white) !important;">Ready to Contribute?</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-md); text-align: left; color: var(--white);">
+                        <div style="color: var(--white);">
+                            <strong style="color: var(--white);">🔬 Researchers:</strong><br>
+                            <small style="color: rgba(255, 255, 255, 0.9);">Data access • Publications • Collaboration</small>
+                        </div>
+                        <div style="color: var(--white);">
+                            <strong style="color: var(--white);">💻 Developers:</strong><br>
+                            <small style="color: rgba(255, 255, 255, 0.9);">GSoC • Open source • API development</small>
+                        </div>
+                        <div style="color: var(--white);">
+                            <strong style="color: var(--white);">🏭 Industry:</strong><br>
+                            <small style="color: rgba(255, 255, 255, 0.9);">Co-development • Strategic partnerships</small>
+                        </div>
+                        <div style="color: var(--white);">
+                            <strong style="color: var(--white);">🤝 Participants:</strong><br>
+                            <small style="color: rgba(255, 255, 255, 0.9);">Clinical sites • Patient advocacy</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h4>OpenMOVR</h4>
+                    <p>Open science platform for neuromuscular disease research. Building transparent, patient-centered tools through collaborative development.</p>
+                    <p style="margin-top: var(--spacing-md);"><strong>Contact:</strong> mdamovr@mdausa.org</p>
+                </div>
+                
+                <div>
+                    <h4>Quick Links</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li><a href="https://www.mda.org/science/movr" target="_blank">Official MDA MOVR Page</a></li>
+                        <li><a href="#technical">Technical Documentation</a></li>
+                        <li><a href="#collaborate">Collaboration Opportunities</a></li>
+                        <li><a href="mailto:mdamovr@mdausa.org">Research Inquiries</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4>Open Science</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li><a href="https://github.com/openmovr" target="_blank">GitHub Organization</a></li>
+                        <li><a href="#governance">Governance Model</a></li>
+                        <li><a href="mailto:mdamovr@mdausa.org?subject=GSoC">GSoC Mentorship</a></li>
+                        <li><a href="#collaborate">Developer Community</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4>Research Impact</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li>5,895+ Participants</li>
+                        <li>20,152+ Clinical Visits</li>
+                        <li>63 Active Sites</li>
+                        <li>7 Disease Indications</li>
+                    </ul>
+                    <p style="margin-top: var(--spacing-sm); font-size: 0.9rem; opacity: 0.8;">Views expressed by registry team, separate from organizational positions.</p>
+                </div>
+            </div>
+            
+            <div style="border-top: 1px solid rgba(255, 255, 255, 0.2); margin-top: var(--spacing-xl); padding-top: var(--spacing-lg); text-align: center; opacity: 0.8;">
+                <p>&copy; 2025 OpenMOVR Open Science Initiative. Built with transparency and patient advocacy at heart.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

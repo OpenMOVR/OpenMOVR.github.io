@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Moved - Now in About Section | OpenMOVR</title>
+    <meta name="description" content="This content has been moved to our comprehensive About section with better organization and more detailed information.">
+    <meta http-equiv="refresh" content="5;url=about/for-participants.html">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" type="image/x-icon" href="assets/movr_square_img.jpg">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="assets/movr_logo_clean.jpg" alt="OpenMOVR Logo">
+                    <div class="logo-text">
+                        <div class="logo-main">OpenMOVR</div>
+                        <div class="logo-sub">MDA MOVR Open Source Extension</div>
+                    </div>
+                </div>
+                
+                <nav class="nav">
+                    <!-- Navigation will be populated by JavaScript from config.js -->
+                </nav>
+                
+                <div class="header-actions">
+                    <a href="mailto:mdamovr@mdausa.org" class="btn btn-outline">Contact Team</a>
+                    <button class="mobile-menu-toggle">☰</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Redirect Notice -->
+    <section class="section" style="min-height: 60vh; display: flex; align-items: center;">
+        <div class="container">
+            <div class="text-center">
+                <h1 style="font-size: 3rem; margin-bottom: var(--spacing-lg);">📍 Content Moved</h1>
+                <p style="font-size: 1.3rem; margin-bottom: var(--spacing-xl); color: var(--medium-gray);">We've reorganized our content for better navigation</p>
+                
+                <div style="background: var(--background-blue); padding: var(--spacing-2xl); border-radius: var(--radius-lg); margin: var(--spacing-2xl) auto; max-width: 600px;">
+                    <h2 style="color: var(--primary-blue); margin-bottom: var(--spacing-lg);">✨ New About Section</h2>
+                    <p style="margin-bottom: var(--spacing-lg);">This page has been moved to our comprehensive <strong>About</strong> section with better organization and more detailed information.</p>
+                    
+                    <div class="btn-group justify-center" style="margin-bottom: var(--spacing-lg);">
+                        <a href="about/for-participants.html" class="btn btn-primary btn-large">For Participants</a>
+                        <a href="about/index.html" class="btn btn-outline btn-large">About Overview</a>
+                    </div>
+                    
+                    <p style="font-size: 0.9rem; color: var(--medium-gray);">You'll be automatically redirected in 5 seconds...</p>
+                </div>
+                
+                <h3 style="margin-top: var(--spacing-2xl); margin-bottom: var(--spacing-lg);">🗂️ Explore Our New About Section</h3>
+                <div class="grid-3" style="margin-top: var(--spacing-xl);">
+                    <div class="card">
+                        <div class="card-content text-center">
+                            <h4><a href="about/our-story.html" style="color: var(--primary-blue); text-decoration: none;">📖 Our Story</a></h4>
+                            <p>12-year journey from startup to global registry</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-content text-center">
+                            <h4><a href="about/platform-vision.html" style="color: var(--primary-blue); text-decoration: none;">🚀 Platform Vision</a></h4>
+                            <p>Next generation EMR integration & tools</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-content text-center">
+                            <h4><a href="about/current-status.html" style="color: var(--primary-blue); text-decoration: none;">⚡ Current Status</a></h4>
+                            <p>Real-time development progress</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/main.js"></script>
+    
+    <script>
+        // Countdown timer
+        let countdown = 5;
+        const countdownElement = document.querySelector('.btn-group + p');
+        
+        const timer = setInterval(() => {
+            countdown--;
+            if (countdownElement) {
+                countdownElement.textContent = `You'll be automatically redirected in ${countdown} seconds...`;
+            }
+            
+            if (countdown <= 0) {
+                clearInterval(timer);
+                window.location.href = 'about/for-participants.html';
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOVR Data Hub Documentation - OpenMOVR</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../assets/movr_square_img.jpg">
+    
+    <!-- External Links -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/main.css">
+    
+    <style>
+        .docs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: var(--spacing-lg) 0;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        
+        .docs-table th,
+        .docs-table td {
+            padding: var(--spacing-md);
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .docs-table th {
+            background: var(--light-gray);
+            font-weight: 600;
+            color: var(--dark-gray);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        .docs-table tbody tr:hover {
+            background: #f8fafc;
+        }
+        
+        .docs-table .total-row {
+            background: var(--light-gray);
+            font-weight: 600;
+        }
+        
+        .highlight-number {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+        
+        .study-tag {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .study-tag.active {
+            background: var(--success-green);
+            color: white;
+        }
+        
+        .study-tag.legacy {
+            background: var(--medium-gray);
+            color: white;
+        }
+        
+        .registry-overview {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            padding: var(--spacing-xl);
+            border-radius: 0.75rem;
+            margin: var(--spacing-xl) 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="../assets/movr_logo_clean.jpg" alt="OpenMOVR Logo">
+                    <div class="logo-text">
+                        <div class="logo-main">OpenMOVR</div>
+                        <div class="logo-sub">MDA MOVR Open Source Extension</div>
+                    </div>
+                </div>
+                
+                <nav class="nav">
+                    <!-- Navigation will be populated by JavaScript from config.js -->
+                </nav>
+                
+                <div class="header-actions">
+                    <a href="../index.html" class="btn btn-outline">← Back to Main Site</a>
+                    <button class="mobile-menu-toggle">☰</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-background"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1>MOVR Data Hub Documentation</h1>
+                <p class="hero-subtitle">Comprehensive Registry Metrics & Study Composition</p>
+                <p>Understanding the MOVR Data Hub: combined legacy USNDR + active MOVR studies</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registry Overview -->
+    <section class="section">
+        <div class="container">
+            <div class="registry-overview">
+                <div class="text-center">
+                    <h2>What is the MOVR Data Hub?</h2>
+                    <p style="font-size: 1.1rem; max-width: 800px; margin: 0 auto;">
+                        The MOVR Data Hub represents <strong>12+ years of neuromuscular disease research</strong> combining data from two major longitudinal studies. This unified registry provides researchers with the largest comprehensive dataset for understanding disease progression, treatment outcomes, and patient experiences across seven neuromuscular conditions.
+                    </p>
+                </div>
+                
+                <div class="grid-3" style="margin-top: var(--spacing-xl);">
+                    <div class="card text-center">
+                        <div class="card-content">
+                            <div style="font-size: 2.5rem; font-weight: bold; color: var(--success-green); margin-bottom: var(--spacing-sm);">5,895</div>
+                            <h4>Total Enrollments</h4>
+                            <p>Combined across both studies<br><em>~6,100 by study end (April 2025)</em></p>
+                        </div>
+                    </div>
+                    
+                    <div class="card text-center">
+                        <div class="card-content">
+                            <div style="font-size: 2.5rem; font-weight: bold; color: var(--primary-blue); margin-bottom: var(--spacing-sm);">20,152</div>
+                            <h4>Clinical Encounters</h4>
+                            <p>Longitudinal data points captured across all participants</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card text-center">
+                        <div class="card-content">
+                            <div style="font-size: 2.5rem; font-weight: bold; color: var(--warning-orange); margin-bottom: var(--spacing-sm);">73</div>
+                            <h4>Research Sites</h4>
+                            <p>Leading neuromuscular centers across the United States</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-2" style="margin-top: var(--spacing-xl);">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>🔵 USNDR Study (Legacy)</h3>
+                        <span class="study-tag legacy">2013-2018</span>
+                    </div>
+                    <div class="card-content">
+                        <h4>United States Neuromuscular Disease Registry</h4>
+                        <p>The foundational study that established our longitudinal data collection protocols and proved the value of registry-based research.</p>
+                        
+                        <div class="stat-grid">
+                            <div class="stat-item">
+                                <div class="highlight-number">2,477</div>
+                                <div>Enrollments</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="highlight-number">26</div>
+                                <div>Sites</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="highlight-number">9,859</div>
+                                <div>Encounters</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="highlight-number">4</div>
+                                <div>Diseases</div>
+                            </div>
+                        </div>
+                        
+                        <p><strong>Covered Diseases:</strong> ALS, DMD, SMA, BMD</p>
+                        <p style="font-size: 0.9rem; color: var(--medium-gray);"><em>(*) Legacy data available upon request</em></p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h3>🟢 MOVR Study (Active)</h3>
+                        <span class="study-tag active">2019-2025</span>
+                    </div>
+                    <div class="card-content">
+                        <h4>Muscular Dystrophy Association Registry</h4>
+                        <p>The expanded registry that scaled to 7 diseases and demonstrated the challenges of manual data entry at scale.</p>
+                        
+                        <div class="stat-grid">
+                            <div class="stat-item">
+                                <div class="highlight-number">3,408</div>
+                                <div>Enrollments</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="highlight-number">60</div>
+                                <div>Sites</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="highlight-number">9,094</div>
+                                <div>Encounters</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="highlight-number">7</div>
+                                <div>Diseases</div>
+                            </div>
+                        </div>
+                        
+                        <p><strong>Covered Diseases:</strong> ALS, DMD, SMA, BMD, LGMD, FSHD, Pompe</p>
+                        <p style="font-size: 0.9rem; color: var(--success-green);"><em>This data represents the most recent MOVR study numbers</em></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Enrollment Data -->
+    <section class="section" style="background: var(--light-gray);">
+        <div class="container">
+            <div class="text-center">
+                <h2>Detailed Enrollment Breakdown</h2>
+                <p>Comprehensive enrollment numbers by disease type across both registry studies</p>
+            </div>
+
+            <div class="card" style="margin-top: var(--spacing-xl);">
+                <div class="card-header">
+                    <h3>MOVR Data Hub: Total Enrollments by Disease</h3>
+                </div>
+                <div class="card-content">
+                    <table class="docs-table">
+                        <thead>
+                            <tr>
+                                <th>Disease Type</th>
+                                <th>Data Hub Total</th>
+                                <th>MOVR Study<br>(Active 2019-2025)</th>
+                                <th>USNDR Study<br>(Legacy 2013-2018)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>ALS</strong><br><small>Amyotrophic Lateral Sclerosis</small></td>
+                                <td class="highlight-number">3,031</td>
+                                <td>1,664</td>
+                                <td>1,367</td>
+                            </tr>
+                            <tr>
+                                <td><strong>DMD</strong><br><small>Duchenne Muscular Dystrophy</small></td>
+                                <td class="highlight-number">1,372</td>
+                                <td>676</td>
+                                <td>696</td>
+                            </tr>
+                            <tr>
+                                <td><strong>SMA</strong><br><small>Spinal Muscular Atrophy</small></td>
+                                <td class="highlight-number">782</td>
+                                <td>517</td>
+                                <td>265</td>
+                            </tr>
+                            <tr>
+                                <td><strong>BMD</strong><br><small>Becker Muscular Dystrophy</small></td>
+                                <td class="highlight-number">289</td>
+                                <td>140</td>
+                                <td>149</td>
+                            </tr>
+                            <tr>
+                                <td><strong>LGMD</strong><br><small>Limb-Girdle Muscular Dystrophy</small></td>
+                                <td class="highlight-number">202</td>
+                                <td>202</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td><strong>FSHD</strong><br><small>Facioscapulohumeral Dystrophy</small></td>
+                                <td class="highlight-number">174</td>
+                                <td>174</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Pompe</strong><br><small>Pompe Disease</small></td>
+                                <td class="highlight-number">35</td>
+                                <td>35</td>
+                                <td>-</td>
+                            </tr>
+                            <tr class="total-row">
+                                <td><strong>TOTAL</strong></td>
+                                <td class="highlight-number">5,895</td>
+                                <td class="highlight-number">3,408</td>
+                                <td class="highlight-number">2,477</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clinical Encounters Data -->
+    <section class="section">
+        <div class="container">
+            <div class="text-center">
+                <h2>Clinical Encounters (Longitudinal Data)</h2>
+                <p>Number of clinical visits and data collection points captured for each disease type</p>
+            </div>
+
+            <div class="card" style="margin-top: var(--spacing-xl);">
+                <div class="card-header">
+                    <h3>MOVR Data Hub: Total Clinical Encounters by Disease</h3>
+                </div>
+                <div class="card-content">
+                    <table class="docs-table">
+                        <thead>
+                            <tr>
+                                <th>Disease Type</th>
+                                <th>Data Hub Total</th>
+                                <th>MOVR Study<br>Encounters</th>
+                                <th>USNDR Study<br>Encounters</th>
+                                <th>Avg Encounters<br>per Participant</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>ALS</strong></td>
+                                <td class="highlight-number">10,608</td>
+                                <td>5,051</td>
+                                <td>5,557</td>
+                                <td>3.5</td>
+                            </tr>
+                            <tr>
+                                <td><strong>DMD</strong></td>
+                                <td class="highlight-number">5,101</td>
+                                <td>2,259</td>
+                                <td>2,842</td>
+                                <td>3.7</td>
+                            </tr>
+                            <tr>
+                                <td><strong>SMA</strong></td>
+                                <td class="highlight-number">2,691</td>
+                                <td>1,731</td>
+                                <td>960</td>
+                                <td>3.4</td>
+                            </tr>
+                            <tr>
+                                <td><strong>BMD</strong></td>
+                                <td class="highlight-number">839</td>
+                                <td>339</td>
+                                <td>500</td>
+                                <td>2.9</td>
+                            </tr>
+                            <tr>
+                                <td><strong>LGMD</strong></td>
+                                <td class="highlight-number">466</td>
+                                <td>466</td>
+                                <td>-</td>
+                                <td>2.3</td>
+                            </tr>
+                            <tr>
+                                <td><strong>FSHD</strong></td>
+                                <td class="highlight-number">360</td>
+                                <td>360</td>
+                                <td>-</td>
+                                <td>2.1</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Pompe</strong></td>
+                                <td class="highlight-number">87</td>
+                                <td>87</td>
+                                <td>-</td>
+                                <td>2.5</td>
+                            </tr>
+                            <tr class="total-row">
+                                <td><strong>TOTAL</strong></td>
+                                <td class="highlight-number">20,152</td>
+                                <td class="highlight-number">9,094</td>
+                                <td class="highlight-number">9,859</td>
+                                <td class="highlight-number">3.4</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div style="margin-top: var(--spacing-lg); padding: var(--spacing-md); background: #f8fafc; border-radius: 0.5rem;">
+                        <h4>Understanding the Data</h4>
+                        <ul style="margin: 0; padding-left: var(--spacing-lg);">
+                            <li><strong>Data Hub Total:</strong> Combined enrollments from both USNDR (legacy) and MOVR (active) studies</li>
+                            <li><strong>Clinical Encounters:</strong> Each visit where data was collected (baseline + follow-up visits)</li>
+                            <li><strong>Average Encounters:</strong> Indicates longitudinal data depth per participant</li>
+                            <li><strong>Legacy Data:</strong> USNDR study data (2013-2018) available upon request</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registry Value & Usage -->
+    <section class="section" style="background: var(--background-blue);">
+        <div class="container">
+            <div class="text-center">
+                <h2 style="color: white;">Registry Impact & Value</h2>
+                <p style="color: rgba(255,255,255,0.9);">How the MOVR Data Hub enables neuromuscular disease research and patient care improvements</p>
+            </div>
+
+            <div class="grid-3" style="margin-top: var(--spacing-xl);">
+                <div class="card">
+                    <div class="card-content text-center">
+                        <div style="font-size: 3rem; margin-bottom: var(--spacing-md);">🔬</div>
+                        <h3>Research Studies</h3>
+                        <div class="highlight-number">25+</div>
+                        <p>Clinical studies enabled by registry data</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-content text-center">
+                        <div style="font-size: 3rem; margin-bottom: var(--spacing-md);">📊</div>
+                        <h3>Publications</h3>
+                        <div class="highlight-number">18+</div>
+                        <p>Peer-reviewed publications supported</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-content text-center">
+                        <div style="font-size: 3rem; margin-bottom: var(--spacing-md);">🌍</div>
+                        <h3>Global Impact</h3>
+                        <div class="highlight-number">12</div>
+                        <p>Years of continuous longitudinal data</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: var(--spacing-2xl); text-align: center;">
+                <a href="../journey.html" class="btn btn-white btn-large" style="margin-right: var(--spacing-md);">View Our Journey</a>
+                <a href="../building.html" class="btn btn-outline-white btn-large">Future Vision</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>MOVR Data Hub</h4>
+                    <p>Comprehensive documentation of registry metrics, study composition, and research impact across neuromuscular disease research.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="../journey.html">Our Journey</a>
+                    <a href="../building.html">Technical Vision</a>
+                    <a href="../team.html">GSoC Program</a>
+                    <a href="../open-science.html">Data Governance</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Data Access</h4>
+                    <a href="#">Registry Metrics</a>
+                    <a href="#">Legacy Data Request</a>
+                    <a href="#">Research Collaboration</a>
+                    <a href="../building.html">Partner With Us</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>📧 mdamovr@mdausa.org</p>
+                    <p>📊 Registry Inquiries</p>
+                    <p>🤝 Research Partnerships</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 MOVR Registry Team. Registry metrics documented for research transparency.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../js/config.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>
