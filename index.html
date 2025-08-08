@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OpenMOVR | Open Science Platform for Neuromuscular Disease Research</title>
+    <title>OpenMOVR | Open Science Initiative for Neuromuscular Disease Research</title>
     <meta name="description" content="Building the next generation of neuromuscular disease research through open collaboration. 5,895+ participants, 20,000+ visits, transparent data governance.">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="css/main.css">
-    <link rel="icon" type="image/x-icon" href="assets/movr_square_img.jpg">
+    <link rel="icon" type="image/png" href="assets/movr_logo_clean_nobackground.png">
     
     <style>
         /* Enhanced styles for the new design */
@@ -122,6 +122,14 @@
                 display: none;
             }
         }
+
+        /* Hero background cycling */
+        .hero-background {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: background-image 1s ease-in-out;
+        }
     </style>
 </head>
 <body>
@@ -156,7 +164,7 @@
         <div class="container">
             <div class="hero-content">
                 <h1>OpenMOVR</h1>
-                <p class="hero-subtitle">Open Science Platform for Neuromuscular Disease Research</p>
+                <p class="hero-subtitle">Open Science Initiative for Neuromuscular Disease Research</p>
                 <p>Building the next generation of clinical data infrastructure through <strong>transparent collaboration</strong>, <strong>open source development</strong>, and <strong>community-driven innovation</strong>.</p>
                 
                 <div class="btn-group justify-center">
@@ -560,7 +568,7 @@
             <div class="footer-content">
                 <div>
                     <h4>OpenMOVR</h4>
-                    <p>Open science platform for neuromuscular disease research. Building the future through transparent collaboration and community-driven innovation.</p>
+                    <p>Open science initiative for neuromuscular disease research. Building the future through transparent collaboration and community-driven innovation.</p>
                     <p style="margin-top: var(--spacing-md);"><strong>Contact:</strong> mdamovr@mdausa.org</p>
                 </div>
                 
@@ -604,5 +612,29 @@
     <!-- Scripts -->
     <script src="js/config.js"></script>
     <script src="js/main.js"></script>
+    
+    <!-- Hero Banner Cycling Script -->
+    <script>
+        // Hero banner image cycling
+        const heroBackground = document.querySelector('.hero-background');
+        const bannerImages = [
+            'assets/movr_hero_banner_1.jpg',
+            'assets/movr_hero_banner_2.jpg',
+            'assets/movr_hero_banner_3.jpg'
+        ];
+        
+        let currentImageIndex = 0;
+        
+        function cycleBannerImage() {
+            heroBackground.style.backgroundImage = `url('${bannerImages[currentImageIndex]}')`;
+            currentImageIndex = (currentImageIndex + 1) % bannerImages.length;
+        }
+        
+        // Set initial image
+        cycleBannerImage();
+        
+        // Cycle every 5 seconds
+        setInterval(cycleBannerImage, 5000);
+    </script>
 </body>
 </html>
