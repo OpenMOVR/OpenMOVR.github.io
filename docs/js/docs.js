@@ -1,8 +1,19 @@
 // MOVR Documentation JavaScript
 document.addEventListener('DOMContentLoaded', function() {
+    loadAllContent();
     initializeNavigation();
     initializeMobileMenu();
 });
+
+function loadAllContent() {
+    // Load content for legacy, next-gen, and faq sections
+    Object.keys(contentData).forEach(page => {
+        const existingSection = document.getElementById(`content-${page}`);
+        if (existingSection) {
+            existingSection.innerHTML = contentData[page].content;
+        }
+    });
+}
 
 function initializeNavigation() {
     // Handle sidebar navigation
@@ -14,24 +25,11 @@ function initializeNavigation() {
             e.preventDefault();
             
             const targetPage = this.dataset.page;
-            
-            // Update active nav link
-            navLinks.forEach(nav => nav.classList.remove('active'));
-            this.classList.add('active');
-            
-            // Show target content section
-            contentSections.forEach(section => section.classList.remove('active'));
-            const targetSection = document.getElementById(`content-${targetPage}`);
-            if (targetSection) {
-                targetSection.classList.add('active');
-            }
+            loadPage(targetPage);
             
             // Update URL without refresh
             const newUrl = targetPage === 'home' ? '#' : `#${targetPage}`;
             history.pushState({page: targetPage}, '', newUrl);
-            
-            // Scroll to top of content
-            document.querySelector('.docs-content').scrollTop = 0;
         });
     });
     
@@ -51,30 +49,15 @@ function initializeNavigation() {
             e.preventDefault();
             
             const targetPage = this.dataset.page;
+            loadPage(targetPage);
             
-            // Update active nav link
-            navLinks.forEach(nav => nav.classList.remove('active'));
-            const targetNavLink = document.querySelector(`[data-page="${targetPage}"]`);
-            if (targetNavLink) {
-                targetNavLink.classList.add('active');
-            }
-            
-            // Show target content section
-            contentSections.forEach(section => section.classList.remove('active'));
-            const targetSection = document.getElementById(`content-${targetPage}`);
-            if (targetSection) {
-                targetSection.classList.add('active');
-            }
-            
-            // Update URL
-            history.pushState({page: targetPage}, '', `#${targetPage}`);
-            
-            // Scroll to top of content
-            document.querySelector('.docs-content').scrollTop = 0;
+            // Update URL without refresh
+            const newUrl = targetPage === 'home' ? '#' : `#${targetPage}`;
+            history.pushState({page: targetPage}, '', newUrl);
         });
     });
     
-    // Handle browser back/forward
+    // Handle browser navigation
     window.addEventListener('popstate', function(e) {
         if (e.state && e.state.page) {
             loadPage(e.state.page);
@@ -107,6 +90,9 @@ function loadPage(page) {
     if (targetSection) {
         targetSection.classList.add('active');
     }
+    
+    // Scroll to top of content
+    document.querySelector('.docs-content').scrollTop = 0;
 }
 
 function initializeMobileMenu() {
@@ -150,39 +136,53 @@ const contentData = {
             <p>The Neuromuscular Observational Research (MOVR) Data Hub was created as part of MDA's commitment to empowering individuals living with neuromuscular diseases. Launched over a decade ago, MOVR addressed a critical data gap by pioneering strategies to accelerate data collection and accessibility for researchers, clinicians, and drug developers.</p>
             
             <div class="alert alert-info">
-                <h3>Legacy Impact</h3>
+                <h3>🏆 Legacy Impact</h3>
                 <p>MOVR leveraged the strength of the MDA Care Center Network, providing valuable insights into disease progression and serving as a rich source of real-world evidence.</p>
             </div>
             
             <h2>Disease Coverage</h2>
             <p>MOVR focused on seven neuromuscular diseases with high research activity:</p>
             
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-sm); margin: var(--spacing-lg) 0;">
-                <div class="stat-card">
-                    <span class="stat-number">7</span>
-                    <span class="stat-label">Disease Indications</span>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-md); margin: var(--spacing-lg) 0;">
+                <div class="card text-center">
+                    <div class="card-content">
+                        <div style="font-size: 2rem; font-weight: bold; color: var(--primary-blue);">7</div>
+                        <div>Disease Indications</div>
+                    </div>
                 </div>
-                <div class="stat-card">
-                    <span class="stat-number">31</span>
-                    <span class="stat-label">Core Data Elements</span>
+                <div class="card text-center">
+                    <div class="card-content">
+                        <div style="font-size: 2rem; font-weight: bold; color: var(--success-green);">31</div>
+                        <div>Core Data Elements</div>
+                    </div>
                 </div>
-                <div class="stat-card">
-                    <span class="stat-number">4</span>
-                    <span class="stat-label">Electronic Forms</span>
+                <div class="card text-center">
+                    <div class="card-content">
+                        <div style="font-size: 2rem; font-weight: bold; color: var(--warning-orange);">4</div>
+                        <div>Electronic Forms</div>
+                    </div>
                 </div>
             </div>
             
             <div class="card">
-                <h3>Diseases Studied</h3>
-                <p><strong>ALS</strong> • <strong>BMD</strong> • <strong>DMD</strong> • <strong>FSHD</strong> • <strong>LGMD</strong> • <strong>Pompe Disease</strong> • <strong>SMA</strong></p>
-                <p><em>Selected for multiple investigational therapies, standardized data elements, and established care standards.</em></p>
+                <div class="card-header">
+                    <h3>Diseases Studied</h3>
+                </div>
+                <div class="card-content">
+                    <p><strong>ALS</strong> • <strong>BMD</strong> • <strong>DMD</strong> • <strong>FSHD</strong> • <strong>LGMD</strong> • <strong>Pompe Disease</strong> • <strong>SMA</strong></p>
+                    <p><em>Selected for multiple investigational therapies, standardized data elements, and established care standards.</em></p>
+                </div>
             </div>
             
             <h2>Data Collection Framework</h2>
             <div class="card">
-                <h3>Core eCRFs</h3>
-                <p><strong>Demographics</strong> • <strong>Diagnosis</strong> • <strong>Encounter</strong> • <strong>Discontinuation</strong></p>
-                <p><em>Data entered by clinical research staff directly from electronic health records at participating MDA Care Centers.</em></p>
+                <div class="card-header">
+                    <h3>Core eCRFs</h3>
+                </div>
+                <div class="card-content">
+                    <p><strong>Demographics</strong> • <strong>Diagnosis</strong> • <strong>Encounter</strong> • <strong>Discontinuation</strong></p>
+                    <p><em>Data entered by clinical research staff directly from electronic health records at participating MDA Care Centers.</em></p>
+                </div>
             </div>
             
             <h2>Research Impact</h2>
@@ -194,146 +194,266 @@ const contentData = {
                 <li>Real-world data source evaluation</li>
             </ul>
             
-            <div class="cta-box">
-                <h4>MOVR's Legacy</h4>
+            <div class="message-box">
+                <h4>🏆 MOVR's Legacy</h4>
                 <p>Years of successful data collection continue to inform MOVR 2.0 development</p>
             </div>
         `
     },
-    
     'next-gen': {
-        title: 'MOVR 2.0 – The Next Chapter',
+        title: 'What is MOVR Currently Working on?',
         content: `
             <div class="content-header">
-                <h1>Help Shape the Future of Neuromuscular Research</h1>
-                <div class="badge badge-info">Join MOVR 2.0</div>
+                <h1>What is MOVR Currently Working on?</h1>
+                <div class="badge badge-success">Active Development</div>
             </div>
             
-            <p>Building on the foundation of the original MOVR Data Hub, the Muscular Dystrophy Association (MDA) is now launching the next evolution of its national patient data platform: <strong>MOVR 2.0</strong>.</p>
-            
-            <div class="card">
-                <h3>🚀 A New Generation Platform</h3>
-                <p><strong>MOVR 2.0</strong> is a secure, research-driven data platform designed to reflect what matters most to people living with neuromuscular disease. By sharing your medical history, you'll help advance research, improve care, and accelerate the development of new treatments.</p>
+            <div class="alert alert-success">
+                <h3>� The Quick Answer</h3>
+                <p><strong>We're running a small precursor pilot program leading to a Q2 2026 go-live decision.</strong> This is about operationally validating the safest and most effective approach to registry modernization. Technology is rapidly evolving, and we're at the right place at the right time to explore and stand up new processes that will have great impact.</p>
             </div>
-            
-            <h2>Early Testing Phase</h2>
-            <p>The Muscular Dystrophy Association (MDA) is launching a <strong>six-month early testing phase</strong> of MOVR 2.0, focused exclusively on individuals living with <strong>spinal muscular atrophy (SMA)</strong>. This thoughtful rollout ensures the platform meets real-world needs and functions seamlessly.</p>
-            
-            <div class="alert alert-info">
-                <h3>Community-Driven Development</h3>
-                <p>This pilot was developed with input from individuals living with neuromuscular disease. Your voice makes it stronger, smarter, and more impactful.</p>
-            </div>
-            
-            <h2>Why Join MOVR 2.0?</h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--spacing-md); margin: var(--spacing-lg) 0;">
+
+            <h2>Current Phase: Operational Validation</h2>
+            <p>We're not rushing into full deployment. Instead, we're taking a careful, methodical approach to ensure MOVR 2.0 is both sustainable and transformational.</p>
+
+            <div class="grid-2" style="margin-top: var(--spacing-lg);">
                 <div class="card">
-                    <h4>📊 Visualize Your Health</h4>
-                    <p>Track trends and changes in your condition with easy-to-understand dashboards.</p>
+                    <div class="card-content">
+                        <h3>🔬 What We're Testing</h3>
+                        <ul>
+                            <li><strong>Technology feasibility:</strong> Can automated EMR integration work reliably?</li>
+                            <li><strong>Data quality validation:</strong> Does automated collection maintain gold standards?</li>
+                            <li><strong>Site adoption:</strong> How do clinical sites respond to the new approach?</li>
+                            <li><strong>Sustainability models:</strong> What makes this financially viable long-term?</li>
+                        </ul>
+                    </div>
                 </div>
+                
                 <div class="card">
-                    <h4>📢 Stay Informed</h4>
-                    <p>Receive updates from MDA's research team, including opportunities to participate in new studies.</p>
-                </div>
-                <div class="card">
-                    <h4>🔬 Drive Progress</h4>
-                    <p>Your real-world experience helps researchers understand neuromuscular diseases better.</p>
+                    <div class="card-content">
+                        <h3>⚖️ Why This Approach</h3>
+                        <ul>
+                            <li><strong>Registries are expensive:</strong> We need sustainable funding models</li>
+                            <li><strong>Technology evolves rapidly:</strong> We must validate before scaling</li>
+                            <li><strong>Research continuity:</strong> Can't afford to get this wrong</li>
+                            <li><strong>Community impact:</strong> This affects the entire research ecosystem</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-            
-            <h2>Eligibility</h2>
-            <p>During the pilot phase, we're accepting a limited number of families who:</p>
-            <ul class="checklist">
-                <li>✅ Live in the United States</li>
-                <li>✅ Are diagnosed with spinal muscular atrophy (SMA)</li>
-                <li>✅ Any age or gender</li>
-            </ul>
-            
-            <div class="cta-box">
-                <h4>Ready to participate?</h4>
-                <p>MOVR 2.0 aims to launch enrollment towards the end of 2025. Contact us at <a href="mailto:MDAMOVR@mdausa.org">MDAMOVR@mdausa.org</a> to express your interest!</p>
+
+            <h2>Capped Enrollment Program</h2>
+            <p>Yes, we are actively enrolling participants! But we're being strategic about it.</p>
+
+            <div class="card" style="margin-top: var(--spacing-lg);">
+                <div class="card-content">
+                    <h3>🎯 Pilot Enrollment Details</h3>
+                    <ul>
+                        <li><strong>Limited capacity:</strong> Capped enrollment to ensure quality validation</li>
+                        <li><strong>Active recruitment:</strong> Working with select MDA Care Centers</li>
+                        <li><strong>Real participants:</strong> Contributing to both validation and real research</li>
+                        <li><strong>Full engagement:</strong> Participants get the complete MOVR experience</li>
+                    </ul>
+                    
+                    <div style="margin-top: var(--spacing-md); padding: var(--spacing-md); background: #f0f9ff; border-radius: 0.5rem;">
+                        <h4>💬 Want to Participate?</h4>
+                        <p>Email us at <a href="mailto:MDAMOVR@mdausa.org"><strong>MDAMOVR@mdausa.org</strong></a> to express interest. We'll let you know if there's availability in your area.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h2>The Q2 2026 Decision Point</h2>
+            <p>Everything we're doing now leads to a critical go/no-go decision in Q2 2026:</p>
+
+            <div class="grid-2" style="margin-top: var(--spacing-lg);">
+                <div class="card">
+                    <div class="card-content">
+                        <h3>✅ Success Criteria</h3>
+                        <ul>
+                            <li><strong>Technical validation:</strong> Automated systems work reliably</li>
+                            <li><strong>Data quality maintained:</strong> Meets research standards</li>
+                            <li><strong>Site satisfaction:</strong> Clinics find value in participation</li>
+                            <li><strong>Financial sustainability:</strong> Long-term funding model proven</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-content">
+                        <h3>🚀 If We Say "Go"</h3>
+                        <ul>
+                            <li><strong>Full platform launch:</strong> National rollout begins</li>
+                            <li><strong>Open enrollment:</strong> Broad patient participation</li>
+                            <li><strong>Community tools:</strong> Open source developer ecosystem</li>
+                            <li><strong>Global expansion:</strong> International registry network</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <h2>Building Sustainable Innovation</h2>
+            <p>This isn't just about technology—it's about creating a model that can evolve and grow for decades:</p>
+
+            <div class="grid-3" style="margin-top: var(--spacing-lg);">
+                <div class="card">
+                    <div class="card-content text-center">
+                        <div style="font-size: 3rem; margin-bottom: var(--spacing-md);">💡</div>
+                        <h3>Smart Technology</h3>
+                        <p>Leveraging AI and automation where it adds real value, not just because we can</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-content text-center">
+                        <div style="font-size: 3rem; margin-bottom: var(--spacing-md);">🤝</div>
+                        <h3>Community Collaboration</h3>
+                        <p>Building with patient advocacy groups, researchers, and clinics from day one</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-content text-center">
+                        <div style="font-size: 3rem; margin-bottom: var(--spacing-md);">📈</div>
+                        <h3>Sustainable Growth</h3>
+                        <p>Creating funding models that support long-term research impact</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="message-box" style="margin-top: var(--spacing-2xl);">
+                <h3>What MOVR is Currently Working on</h3>
+                <p>We're in an exciting validation phase that will determine the future of neuromuscular disease research infrastructure. We're being methodical, responsible, and ambitious—exactly what the research community deserves.</p>
+                <p><strong>Questions about our current work?</strong> Contact us at <a href="mailto:mdamovr@mdausa.org"><strong>mdamovr@mdausa.org</strong></a></p>
             </div>
         `
     },
-    
     faq: {
         title: 'Frequently Asked Questions',
         content: `
             <div class="content-header">
                 <h1>Frequently Asked Questions</h1>
-                <div class="badge badge-info">Get Answers</div>
+                <div class="badge badge-secondary">Common Questions</div>
+            </div>
+            
+            <div class="alert alert-info">
+                <h3>❓ Common Questions About MOVR Transition</h3>
+                <p>Find answers to the most frequently asked questions about MOVR's evolution from the legacy platform to MOVR 2.0.</p>
+            </div>
+            
+            <h2>About MOVR 2.0</h2>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h3>What is MOVR 2.0?</h3>
+                </div>
+                <div class="card-content">
+                    <p>MOVR 2.0 is the next generation neuromuscular disease registry platform that moves from manual data entry to automated EMR integration while maintaining gold standard data quality and building open source tools for the entire research community.</p>
+                </div>
             </div>
             
             <div class="card">
-                <h3>❓ What was the purpose of MOVR?</h3>
-                <p>MDA launched MOVR to address a significant data shortage in neuromuscular disease research. The platform leveraged the MDA Care Center Network to accelerate data collection for researchers, clinicians, and drug developers, ultimately enhancing disease understanding and optimizing health outcomes.</p>
+                <div class="card-header">
+                    <h3>How is MOVR 2.0 different from the original MOVR?</h3>
+                </div>
+                <div class="card-content">
+                    <p>While the original MOVR required manual data entry from clinical staff, MOVR 2.0 features:</p>
+                    <ul>
+                        <li><strong>Automated data collection</strong> through EMR integration</li>
+                        <li><strong>Real-time processing</strong> and validation</li>
+                        <li><strong>Open source tools</strong> for the research community</li>
+                        <li><strong>Reduced site burden</strong> while maintaining data quality</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h2>For Previous MOVR Participants</h2>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h3>I was enrolled in the original MOVR. What happened to my data?</h3>
+                </div>
+                <div class="card-content">
+                    <p>Your participation in the original MOVR has concluded, and your consent has been withdrawn as planned. However, the data you contributed continues to support important neuromuscular disease research through approved studies and publications.</p>
+                </div>
             </div>
             
             <div class="card">
-                <h3>🔄 Why did we close the original MOVR?</h3>
-                <p>We closed MOVR to take advantage of advancing medical technologies and transition to a more effective platform that better engages the patient community.</p>
+                <div class="card-header">
+                    <h3>Can I get a copy of my MOVR data?</h3>
+                </div>
+                <div class="card-content">
+                    <p>Yes! You can request your historical MOVR data through our <a href="https://mdausa.tfaforms.net/389761" target="_blank">Legacy Data Request Form</a>. We'll provide you with a summary of the data you contributed to the registry.</p>
+                </div>
             </div>
             
             <div class="card">
-                <h3>🗄️ What happens to my data?</h3>
-                <p>Your enrollment has been deactivated and data collection has stopped. Previously collected data remains with MDA and your Care Center for research purposes as outlined in your original consent form.</p>
+                <div class="card-header">
+                    <h3>Can I participate in MOVR 2.0?</h3>
+                </div>
+                <div class="card-content">
+                    <p>Absolutely! We'd love to have you join us in the next chapter. MOVR 2.0 enrollment will be opening soon. Send us an email at <a href="mailto:MDAMOVR@mdausa.org">MDAMOVR@mdausa.org</a> to express your interest, and we'll keep you posted as soon as registration opens.</p>
+                </div>
+            </div>
+            
+            <h2>For Researchers</h2>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h3>Can I still access original MOVR data for research?</h3>
+                </div>
+                <div class="card-content">
+                    <p>Legacy MOVR data (USNDR 2013-2018 and MOVR 2019-2025) remains available for approved research studies. Contact us at <a href="mailto:MDAMOVR@mdausa.org">MDAMOVR@mdausa.org</a> to discuss data access for your research project.</p>
+                </div>
             </div>
             
             <div class="card">
-                <h3>📋 Can I request my data?</h3>
-                <p><strong>Yes!</strong> Email <a href="mailto:MDAMOVR@mdausa.org">MDAMOVR@mdausa.org</a> to request your MOVR data in an encrypted Excel file.</p>
+                <div class="card-header">
+                    <h3>How can I get involved with MOVR 2.0 development?</h3>
+                </div>
+                <div class="card-content">
+                    <p>We're building MOVR 2.0 with the research community. You can:</p>
+                    <ul>
+                        <li><strong>Join our beta program</strong> to test new tools</li>
+                        <li><strong>Contribute to open source development</strong></li>
+                        <li><strong>Partner with us</strong> for EMR integration pilots</li>
+                        <li><strong>Provide feedback</strong> on platform features</li>
+                    </ul>
+                    <p>Contact us at <a href="mailto:MDAMOVR@mdausa.org">MDAMOVR@mdausa.org</a> to learn more.</p>
+                </div>
+            </div>
+            
+            <h2>Technical Questions</h2>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h3>What EMR systems will MOVR 2.0 support?</h3>
+                </div>
+                <div class="card-content">
+                    <p>MOVR 2.0 is being built with FHIR (Fast Healthcare Interoperability Resources) standards to support integration with major EMR systems including Epic, Cerner, and others. We're starting with pilot programs at select sites and expanding based on demand.</p>
+                </div>
             </div>
             
             <div class="card">
-                <h3>🚀 What makes MOVR 2.0 different?</h3>
-                <p>MOVR 2.0 uses AI technologies for automated medical record import, reducing hospital staff burden while providing participants with customized dashboards and greater involvement in research.</p>
+                <div class="card-header">
+                    <h3>How will data privacy and security be maintained?</h3>
+                </div>
+                <div class="card-content">
+                    <p>MOVR 2.0 maintains the highest standards of data protection:</p>
+                    <ul>
+                        <li><strong>HIPAA compliance</strong> with enhanced security measures</li>
+                        <li><strong>Data encryption</strong> at rest and in transit</li>
+                        <li><strong>Role-based access controls</strong> for research data</li>
+                        <li><strong>Regular security audits</strong> and monitoring</li>
+                    </ul>
+                </div>
             </div>
             
-            <div class="card">
-                <h3>📅 When will MOVR 2.0 launch?</h3>
-                <p>The pilot program aims to launch in <strong>2025</strong>. Contact <a href="mailto:MDAMOVR@mdausa.org">MDAMOVR@mdausa.org</a> for participation information.</p>
-            </div>
-            
-            <div class="card">
-                <h3>💡 How will MOVR 2.0 benefit patients?</h3>
-                <p>Participants can enroll directly and access a secure dashboard with their medical records, data reports, and various analysis tools. This patient-centered approach provides valuable insights while contributing to research.</p>
-            </div>
+            <h2>Still Have Questions?</h2>
             
             <div class="cta-box">
-                <h4>More Questions?</h4>
-                <p>Email us at <a href="mailto:MDAMOVR@mdausa.org">MDAMOVR@mdausa.org</a> - we're happy to help!</p>
+                <h4>Contact the MOVR Team</h4>
+                <p>If you don't see your question answered here, please reach out to us directly at <a href="mailto:MDAMOVR@mdausa.org"><strong>MDAMOVR@mdausa.org</strong></a>. We're here to help!</p>
             </div>
         `
     }
 };
-
-
-
-// Load all content when page loads
-document.addEventListener('DOMContentLoaded', function() {
-    // Create content sections first
-    Object.keys(contentData).forEach(page => {
-        const existingSection = document.getElementById(`content-${page}`);
-        if (!existingSection) {
-            const mainContent = document.querySelector('.docs-content');
-            const newSection = document.createElement('div');
-            newSection.id = `content-${page}`;
-            newSection.className = 'content-section';
-            newSection.innerHTML = contentData[page].content;
-            mainContent.appendChild(newSection);
-        } else {
-            existingSection.innerHTML = contentData[page].content;
-        }
-    });
-    
-    // Initialize navigation after content is loaded
-    setTimeout(() => {
-        initializeNavigation();
-        initializeMobileMenu();
-        
-        // Load initial page based on hash
-        const hash = window.location.hash.substring(1);
-        if (hash && document.getElementById(`content-${hash}`)) {
-            loadPage(hash);
-        }
-    }, 100);
-});

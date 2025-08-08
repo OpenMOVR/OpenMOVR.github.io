@@ -73,22 +73,9 @@ const movrConfig = {
     // Site Navigation (strategic tab organization)
     navigation: [
         { label: "Home", href: "index.html" },
-        { 
-            label: "About", 
-            href: "about/index.html",
-            dropdown: [
-                { label: "Overview", href: "about/index.html", description: "Mission, values & key achievements" },
-                { label: "Our Story", href: "about/our-story.html", description: "12-year journey from startup to global registry" },
-                { label: "Platform Vision", href: "about/platform-vision.html", description: "Next generation EMR integration & tools" },
-                { label: "Current Status", href: "about/current-status.html", description: "Real-time development progress" },
-                { label: "Team & Leadership", href: "about/team-leadership.html", description: "Registry experts building the future" },
-                { label: "For Participants", href: "about/for-participants.html", description: "Information & updates for participants" }
-            ]
-        },
-        { label: "Building Next Gen", href: "building.html" },
-        { label: "Data Governance", href: "open-science.html" },
-        { label: "GSoC", href: "team.html" },
-        { label: "MOVR Updates", href: "docs/index.html", external: true, description: "Official MOVR documentation & updates" }
+        { label: "What's Next?", href: "docs/platform-vision.html", external: true, description: "MOVR 2.0 technology vision & roadmap" },
+        { label: "GSoC", href: "gsoc.html", description: "Google Summer of Code mentorship program" },
+        { label: "Current Updates", href: "docs/index.html", external: true, description: "Official MOVR documentation & updates", highlight: true }
     ],
 
     // Key Messages
@@ -115,30 +102,39 @@ const movrConfig = {
 
     // Open Source Development Plans
     openSource: {
-        timeline: "Starting pip installable library in 2026",
-        dataFields: "300+ fields across 7 indications",
+        timeline: "MOVR Legacy Datahub library - 2025, Full platform integration - 2026+",
+        dataFields: "300+ fields across 7 indications from legacy MOVR (2013-2025)",
+        currentFocus: "Making 12 years of MOVR data easily accessible to researchers",
         plannedProjects: [
             {
-                name: "Python Library 1.0",
-                status: "Timeline TBD",
-                description: "Pip installable library for MOVR data access and analysis"
+                name: "MOVR Datahub Library",
+                status: "Priority Development 2025",
+                description: "Pip installable Python library for easy access to legacy MOVR datasets (2013-2025). Free for academic researchers, designed for universities and data scientists.",
+                features: [
+                    "Easy data loading: `import movr; data = movr.load_dataset('ALS')`",
+                    "Pre-built analysis functions and visualization tools", 
+                    "Jupyter notebook examples and tutorials",
+                    "Integration with pandas, scikit-learn, and popular ML frameworks",
+                    "Longitudinal analysis utilities for disease progression studies"
+                ]
             },
             {
                 name: "Research APIs & SDK",
-                status: "Timeline TBD", 
-                description: "Developer tools for integrating with MOVR platform"
+                status: "Timeline 2026", 
+                description: "Developer tools for integrating with next-generation MOVR platform"
             },
             {
-                name: "ML/AI Toolkit",
-                status: "Timeline TBD",
-                description: "Machine learning tools for neuromuscular disease research"
+                name: "ML/AI Research Toolkit",
+                status: "Timeline 2026+",
+                description: "Advanced machine learning tools for neuromuscular disease research built on FHIR data"
             }
         ],
         gsoc: {
-            organization: "Planning GSoC application",
+            organization: "Planning GSoC application for 2025",
             mentor: "Andre Daniel Paredes, PhD",
-            admin: "Jessica Waits",
-            focus: "Open source development for neuromuscular disease research"
+            admin: "Jessica Waits", 
+            priority: "MOVR Legacy Datahub library development",
+            focus: "Making 12 years of clinical research data easily accessible to the global research community"
         }
     },
 
