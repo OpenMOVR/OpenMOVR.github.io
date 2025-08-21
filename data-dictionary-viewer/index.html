@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MDA MOVR Data Dictionary Tools</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 40px;
+            max-width: 800px;
+            width: 90%;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            color: #2c5aa0;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+        
+        .header p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .tool-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .tool-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .tool-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2c5aa0;
+            margin-bottom: 15px;
+        }
+        
+        .tool-description {
+            color: #666;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        
+        .tool-features {
+            list-style: none;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+        
+        .tool-features li {
+            color: #555;
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .tool-features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #28a745;
+            font-weight: bold;
+        }
+        
+        .tool-button {
+            display: inline-block;
+            background: #2c5aa0;
+            color: white;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+        
+        .tool-button:hover {
+            background: #1e3f73;
+        }
+        
+        .secondary-button {
+            background: #6c757d;
+        }
+        
+        .secondary-button:hover {
+            background: #545b62;
+        }
+        
+        .stats-section {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 40px;
+        }
+        
+        .stats-title {
+            text-align: center;
+            color: #2c5aa0;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2c5aa0;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>MDA MOVR Data Dictionary Tools</h1>
+            <p>Comprehensive clinical research data management and analysis platform</p>
+        </div>
+        
+        <div class="tools-grid">
+            <div class="tool-card">
+                <div class="tool-icon">📊</div>
+                <h2 class="tool-title">Data Dictionary Viewer</h2>
+                <p class="tool-description">
+                    Interactive review tool for clinical case report forms with priority management for medical advisory meetings.
+                </p>
+                <ul class="tool-features">
+                    <li>1,024+ clinical data fields</li>
+                    <li>Priority management system</li>
+                    <li>DMD/SMA study filtering</li>
+                    <li>Required field detection</li>
+                    <li>Save/load session data</li>
+                </ul>
+                <a href="data_dictionary_viewer.html" class="tool-button">Open Dictionary Viewer</a>
+            </div>
+            
+            <div class="tool-card">
+                <div class="tool-icon">🔗</div>
+                <h2 class="tool-title">Vendor Mapping Viewer</h2>
+                <p class="tool-description">
+                    Analyze vendor coverage and implementation effort for MDA data variables with comprehensive filtering and navigation.
+                </p>
+                <ul class="tool-features">
+                    <li>557 vendor mappings</li>
+                    <li>Coverage status analysis</li>
+                    <li>Implementation effort tracking</li>
+                    <li>Resource categorization</li>
+                    <li>MDA input identification</li>
+                </ul>
+                <a href="vendor_mapping_viewer.html" class="tool-button secondary-button">Open Mapping Viewer</a>
+            </div>
+        </div>
+        
+        <div class="stats-section">
+            <h3 class="stats-title">Data Overview</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">1,024</div>
+                    <div class="stat-label">Dictionary Fields</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">557</div>
+                    <div class="stat-label">Vendor Variables</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">326</div>
+                    <div class="stat-label">Variables Covered</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">149</div>
+                    <div class="stat-label">Not Covered</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">112</div>
+                    <div class="stat-label">Potential Adds</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">103</div>
+                    <div class="stat-label">Need MDA Input</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

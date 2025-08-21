@@ -376,6 +376,10 @@
 <body>
     <div class="container">
         <div class="header">
+            <div class="nav-links" style="margin-bottom: 15px;">
+                <a href="vendor_mapping_viewer.html" style="color: #2c5aa0; text-decoration: none; margin-right: 20px; font-weight: 500; padding: 8px 16px; border-radius: 4px; border: 1px solid #2c5aa0;">Vendor Mapping →</a>
+                <a href="index.html" style="color: #2c5aa0; text-decoration: none; margin-right: 20px; font-weight: 500; padding: 8px 16px; border-radius: 4px; border: 1px solid #2c5aa0;">Home</a>
+            </div>
             <h1>MDA MOVR Data Dictionary</h1>
             <p>Medical Advisory Review - Case Report Forms</p>
             
@@ -447,6 +451,12 @@
         
         <div class="main-content">
             <div class="submit-section">
+                <div style="margin-bottom: 15px;">
+                    <label for="customFileName" style="display: block; margin-bottom: 5px; font-weight: 500;">Custom Filename (optional):</label>
+                    <input type="text" id="customFileName" placeholder="e.g., gene_therapy_review, advisory_meeting_1" 
+                           style="padding: 8px 12px; border: 1px solid #ddd; border-radius: 4px; width: 300px; font-size: 14px;">
+                    <small style="display: block; color: #666; margin-top: 3px;">Leave blank for default "noname". Timestamp always included.</small>
+                </div>
                 <button class="load-btn" onclick="loadPriorities()">Load Existing Priorities</button>
                 <button class="submit-btn" onclick="savePriorities()">Save Field Priorities</button>
                 <div id="statusMessage" class="status-message"></div>
@@ -713,8 +723,17 @@
         function savePriorities() {
             const today = new Date();
             const dateStr = today.toISOString().split('T')[0]; // YYYY-MM-DD format
+            const timeStr = today.toISOString().replace(/[:.]/g, '-').slice(0, -5); // Clean timestamp for filename
+            
+            // Get custom filename or use default
+            const customName = document.getElementById('customFileName').value.trim();
+            const baseName = customName || 'noname';
+            
+            // Clean the custom name for filename use
+            const cleanName = baseName.replace(/[^a-zA-Z0-9_-]/g, '_');
             
             const priorityData = {
+                session_name: customName || 'Default Session',
                 session_date: dateStr,
                 session_timestamp: today.toISOString(),
                 total_fields_prioritized: Object.keys(fieldPriorities).length,
@@ -725,15 +744,17 @@
             const blob = new Blob([dataStr], { type: 'application/json' });
             const url = URL.createObjectURL(blob);
             
+            const filename = `${dateStr}_${timeStr}_${cleanName}_field_priorities.json`;
+            
             const a = document.createElement('a');
             a.href = url;
-            a.download = `${dateStr}_field_priorities.json`;
+            a.download = filename;
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
             
-            showStatus(`Saved ${Object.keys(fieldPriorities).length} field priorities to ${dateStr}_field_priorities.json`, 'success');
+            showStatus(`Saved ${Object.keys(fieldPriorities).length} field priorities to ${filename}`, 'success');
         }
 
         function loadPriorities() {
