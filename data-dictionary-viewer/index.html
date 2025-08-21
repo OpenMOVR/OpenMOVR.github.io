@@ -8,10 +8,6 @@
         body {
             background: #fff;
             font-family: 'Segoe UI', Arial, sans-serif;
-            font-size: 0.95rem;
-            color: #222;
-            margin: 0;
-            padding: 0;
         }
         .container {
             max-width: 700px;
@@ -50,6 +46,24 @@
         .footer-note {
             margin-top: 2em;
         }
+        .button {
+            display: inline-block;
+            padding: 8px 18px;
+            background: #2c5aa0;
+            color: #fff;
+            border: 1px solid #2c5aa0;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.95rem;
+            margin: 0.5em 0;
+        }
+        .button:disabled {
+            background: #eee;
+            color: #888;
+            border-color: #ccc;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
     </style>
 </head>
 <body>
@@ -75,17 +89,30 @@
                 <td style="vertical-align:top; width:50%;">
                     <h2 style="font-size:1rem; margin-bottom:0.5em;">Dictionary Viewer</h2>
                     <p style="margin-bottom:1em;">Browse and search MOVR Data Dictionary fields for DMD and SMA. Filter by disease and view field details.</p>
-                    <a href="data_dictionary_viewer.html" style="display:inline-block; padding:8px 18px; background:#2c5aa0; color:#fff; border-radius:4px; text-decoration:none; font-size:0.95rem;">Open Dictionary Viewer</a>
+                    <a href="data_dictionary_viewer.html" class="button">Open Dictionary Viewer</a>
                 </td>
                 <td style="vertical-align:top; width:50%;">
                     <h2 style="font-size:1rem; margin-bottom:0.5em;">Vendor Mapping Viewer</h2>
                     <p style="margin-bottom:1em;">Review vendor mapping coverage for MOVR variables. See which fields are mapped and coverage status.</p>
-                    <a href="vendor_mapping_viewer.html" style="display:inline-block; padding:8px 18px; background:#2c5aa0; color:#fff; border-radius:4px; text-decoration:none; font-size:0.95rem;">Open Mapping Viewer</a>
+                    <a href="vendor_mapping_viewer.html" class="button">Open Mapping Viewer</a>
                 </td>
+            </tr>
+        </table>
+
+        <div style="margin-top:2em; text-align:center;">
+            <h2 style="font-size:1rem; margin-bottom:0.5em;">De-identified Data Viewers (Upcoming)</h2>
+            <button disabled class="button">DMD Data Viewer (coming soon)</button>
+            <button disabled class="button">SMA Data Viewer (coming soon)</button>
+            <div style="margin-top:1.5em; background:#f6f8fa; border-left:4px solid #2c5aa0; padding:1em 1.2em; max-width:480px; margin-left:auto; margin-right:auto; font-size:0.95rem; color:#222;">
+                <strong>Developer Opportunity:</strong> We're seeking 1–2 open source contributors to help build the de-identified DMD/SMA data viewers.<br>
+                <span style="color:#2c5aa0;">Requirements:</span> Experience with web apps, basic data privacy, and Python or JavaScript. Ideal for GSoC or similar projects.
+            </div>
+        </div>
+
         <p class="footer-note">
             This app is intended for quick reference and basic review only.
-            Created by Andre Paredes (contact - <a href="mailto:andre.paredes@example.com" title="Email Andre Paredes">not-putting-my-real-email.com</a>)
-
+            Created by Andre D Paredes (<a href="https://www.linkedin.com/in/andre-daniel-paredes" title="LinkedIn Profile" target="_blank">LinkedIn</a>)
+        </p>
     </div>
 </body>
 </html>
