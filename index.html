@@ -97,6 +97,111 @@
             flex-wrap: wrap;
             gap: var(--spacing-lg);
         }
+        
+        /* Session Management & Access Control Styles */
+        .session-section {
+            margin-right: var(--spacing-md);
+        }
+        
+        .access-denied {
+            opacity: 0.4;
+            cursor: not-allowed !important;
+            pointer-events: none;
+            position: relative;
+        }
+        
+        .access-denied::after {
+            content: "🔒 Login Required";
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #f44336;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.7em;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+            z-index: 100;
+        }
+        
+        .access-denied:hover::after {
+            opacity: 1;
+        }
+        
+        .access-limited {
+            opacity: 0.6;
+            cursor: not-allowed !important;
+            pointer-events: none;
+            position: relative;
+        }
+        
+        .access-limited::after {
+            content: "🚫 Insufficient Access";
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ff9800;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.7em;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+            z-index: 100;
+        }
+        
+        .access-limited:hover::after {
+            opacity: 1;
+        }
+        
+        .access-notice {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            margin: var(--spacing-md) 0;
+            text-align: center;
+            font-size: 0.9em;
+        }
+        
+        .access-notice.guest {
+            background: #e3f2fd;
+            border-color: #90caf9;
+            color: #1565c0;
+        }
+        
+        .access-notice.no-access {
+            background: #ffebee;
+            border-color: #ffcdd2;
+            color: #c62828;
+        }
+        
+        /* Enhanced access notice states */
+        .access-notice.basic-access {
+            background: #fffbeb;
+            border-color: #fed7aa;
+            color: #d97706;
+        }
+        
+        .access-notice.partial-access {
+            background: #f0f9ff;
+            border-color: #a5b4fc;
+            color: #2563eb;
+        }
+        
+        .access-notice.full-access {
+            background: #f0fdf4;
+            border-color: #86efac;
+            color: #059669;
+        }
 
         .timeline-step {
             text-align: center;
@@ -150,7 +255,26 @@
                 </nav>
                 
                 <div class="header-actions">
-                    <!-- <a href="data-dictionary-viewer/data_dictionary_viewer.html" class="btn btn-outline" style="font-size:0.95em; padding: 0.4em 0.9em;">📖 Data Dictionary</a> -->
+                    <!-- Session Management Section -->
+                    <div id="session-section" class="session-section">
+                        <!-- Login button when not logged in -->
+                        <div id="login-prompt" style="display: none;">
+                            <button onclick="showMainLoginPrompt()" class="btn btn-outline" style="font-size:0.9em; padding: 0.4em 0.9em; background: #4caf50; border-color: #4caf50; color: white;">
+                                � Login for Enhanced Access
+                            </button>
+                        </div>
+                        
+                        <!-- Session info when logged in -->
+                        <div id="session-info" style="display: none;">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <div id="session-indicator" style="padding: 6px 12px; border-radius: 20px; font-size: 0.8em; font-weight: 600;"></div>
+                                <button onclick="logout()" style="padding: 4px 8px; background: #f44336; color: white; border: none; border-radius: 4px; font-size: 0.7em; cursor: pointer;">
+                                    Logout
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <a href="https://www.mda.org/science/movr" class="btn btn-outline" target="_blank">Official MDA MOVR ↗</a>
                     <a href="mailto:mdamovr@mdausa.org" class="btn btn-outline">Contact Team</a>
                     <button class="mobile-menu-toggle">☰</button>
@@ -316,6 +440,107 @@
                                 <p>Supporting MOVR 2.0's operational validation phase through Q2 2026, while building the open science foundation for the future of neuromuscular disease research.</p>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MOVR Data Hub Access -->
+    <section class="section" style="background: var(--light-gray);">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>🏥 MOVR Data Hub Tools</h2>
+                <p>Access comprehensive data tools and analytics for neuromuscular disease research</p>
+            </div>
+            
+            <!-- Access Notice -->
+            <div id="access-notice" class="access-notice no-access">
+                <strong>⚠️ Authentication Required:</strong> These tools require login credentials. Please visit the <a href="data-dictionary-viewer/index.html" style="color: inherit; text-decoration: underline;">MOVR Data Hub Portal</a> to log in.
+            </div>
+            
+            <div class="grid grid-3" style="gap: var(--spacing-lg); margin-top: var(--spacing-xl);">
+                <!-- Data Dictionary Viewer -->
+                <div class="card">
+                    <div class="card-content">
+                        <h4 style="margin-bottom: var(--spacing-md);">📊 Data Dictionary Viewer</h4>
+                        <p style="margin-bottom: var(--spacing-md);">Explore the comprehensive data dictionary with field definitions, validation rules, and study-specific requirements.</p>
+                        <div style="margin-bottom: var(--spacing-sm);">
+                            <span style="font-size: 0.8em; color: #666;">🔓 <strong>Public Access:</strong> Always available</span>
+                        </div>
+                        <a href="data-dictionary-viewer/data_dictionary_viewer.html" class="btn btn-primary" id="data-dict-btn">
+                            View Data Dictionary
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Vendor Mapping Viewer -->
+                <div class="card">
+                    <div class="card-content">
+                        <h4 style="margin-bottom: var(--spacing-md);">🔗 Vendor Mapping Viewer</h4>
+                        <p style="margin-bottom: var(--spacing-md);">Access vendor-specific data mappings and transformations to understand integration patterns.</p>
+                        <div style="margin-bottom: var(--spacing-sm);">
+                            <span style="font-size: 0.8em; color: #666;">🔐 <strong>Hub Access:</strong> Login required</span>
+                        </div>
+                        <a href="data-dictionary-viewer/vendor_mapping_viewer.html" class="btn btn-primary" id="vendor-mapping-btn">
+                            View Vendor Mapping
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- MOVR Data Hub Viewer -->
+                <div class="card">
+                    <div class="card-content">
+                        <h4 style="margin-bottom: var(--spacing-md);">🏥 MOVR Data Hub Viewer</h4>
+                        <p style="margin-bottom: var(--spacing-md);">Comprehensive data access portal with advanced tools and export capabilities.</p>
+                        <div style="margin-bottom: var(--spacing-sm);">
+                            <span style="font-size: 0.8em; color: #666;">🔐 <strong>Hub Access:</strong> Login required</span>
+                        </div>
+                        <a href="data-dictionary-viewer/movr_data_hub_viewer.html" class="btn btn-primary" id="hub-viewer-btn">
+                            Access Data Hub
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- NEW: Diagnosis Analytics -->
+                <div class="card">
+                    <div class="card-content">
+                        <h4 style="margin-bottom: var(--spacing-md);">📈 Diagnosis Analytics</h4>
+                        <p style="margin-bottom: var(--spacing-md);">Summary statistics and analytics for DMD, SMA, and LGMD across multiple research centers.</p>
+                        <div style="margin-bottom: var(--spacing-sm);">
+                            <span style="font-size: 0.8em; color: #666;">🔐 <strong>Admin Access:</strong> Elevated permissions required</span>
+                        </div>
+                        <a href="#" class="btn btn-primary" id="diagnosis-analytics-btn" onclick="showComingSoon('Diagnosis Analytics')">
+                            View Analytics (Coming Soon)
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Data Export Tools -->
+                <div class="card">
+                    <div class="card-content">
+                        <h4 style="margin-bottom: var(--spacing-md);">📋 Data Export Tools</h4>
+                        <p style="margin-bottom: var(--spacing-md);">Generate custom data exports with configurable field selection and filtering.</p>
+                        <div style="margin-bottom: var(--spacing-sm);">
+                            <span style="font-size: 0.8em; color: #666;">🔐 <strong>Admin Access:</strong> Elevated permissions required</span>
+                        </div>
+                        <a href="#" class="btn btn-primary" id="export-tools-btn" onclick="showComingSoon('Data Export Tools')">
+                            Export Tools (Coming Soon)
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Advanced Search -->
+                <div class="card">
+                    <div class="card-content">
+                        <h4 style="margin-bottom: var(--spacing-md);">🔍 Advanced Search</h4>
+                        <p style="margin-bottom: var(--spacing-md);">Perform complex queries across the MOVR dataset with advanced filtering options.</p>
+                        <div style="margin-bottom: var(--spacing-sm);">
+                            <span style="font-size: 0.8em; color: #666;">🔐 <strong>Hub Access:</strong> Login required</span>
+                        </div>
+                        <a href="#" class="btn btn-primary" id="advanced-search-btn" onclick="showComingSoon('Advanced Search')">
+                            Advanced Search (Coming Soon)
+                        </a>
                     </div>
                 </div>
             </div>
@@ -636,6 +861,44 @@
         
         // Cycle every 5 seconds
         setInterval(cycleBannerImage, 5000);
+    </script>
+
+    <!-- Simple Data Hub Integration -->
+    <script>
+        // Show coming soon modal
+        window.showComingSoon = function(feature) {
+            alert(`${feature} is coming soon! This feature is currently in development. Contact movr@mdausa.org for early access or to request priority development.`);
+        };
+        
+        // Direct users to login portal for all data hub tools
+        document.addEventListener('DOMContentLoaded', () => {
+            // Update all data hub tool buttons to redirect to login portal
+            const dataHubButtons = [
+                'data-dict-btn',
+                'vendor-mapping-btn', 
+                'hub-viewer-btn',
+                'diagnosis-analytics-btn',
+                'export-tools-btn',
+                'advanced-search-btn'
+            ];
+            
+            dataHubButtons.forEach(buttonId => {
+                const button = document.getElementById(buttonId);
+                if (button && !button.onclick) {
+                    // Redirect to login portal instead of direct tool access
+                    if (buttonId === 'data-dict-btn') {
+                        // Data dictionary goes directly to login portal
+                        button.href = 'data-dictionary-viewer/index.html';
+                    } else {
+                        // Other tools also go to login portal first
+                        button.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            window.location.href = 'data-dictionary-viewer/index.html';
+                        });
+                    }
+                }
+            });
+        });
     </script>
 </body>
 </html>

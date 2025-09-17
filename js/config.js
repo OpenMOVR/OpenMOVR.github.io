@@ -74,6 +74,7 @@ const movrConfig = {
     navigation: [
         { label: "Home", href: "index.html" },
         { label: "What's Next?", href: "docs/platform-vision.html", external: true, description: "MOVR 2.0 technology vision & roadmap" },
+        { label: "MOVR DATA HUB Viewer App", href: "data-dictionary-viewer/index.html", external: true, description: "Access MOVR data tools and viewers" },
         { label: "GSoC", href: "gsoc.html", description: "Google Summer of Code mentorship program" },
         { label: "Current Updates", href: "docs/index.html", external: true, description: "Official MOVR documentation & updates", highlight: true }
     ],
@@ -88,7 +89,7 @@ const movrConfig = {
 
     // Partnership Philosophy
     partnership: {
-        lookingFor: "Co-development and co-founding partners",
+        lookingFor: "Co-development and founding partners",
         approach: "Building MOVR 2.0 together through collaborative development",
         currentStatus: "Open source mission-driven project",
         values: [
@@ -144,7 +145,7 @@ const movrConfig = {
             phase: "MOVR Legacy",
             period: "2013-2024",
             description: "Manual registry data collection across 63 clinical sites",
-            achievements: "5,895+ participants, 20,152+ encounters, 25+ studies enabled",
+            achievements: "6,100+ participants, 20,152+ encounters, 25+ studies enabled",
             status: "proven"
         },
         {

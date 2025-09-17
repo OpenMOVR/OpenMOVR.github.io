@@ -311,7 +311,48 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <!-- Login Wall -->
+    <div id="login-wall" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:10000; display:flex; align-items:center; justify-content:center;">
+        <div style="background:white; padding:2rem; border-radius:12px; max-width:500px; margin:20px; text-align:center; box-shadow:0 20px 40px rgba(0,0,0,0.3);">
+            <div style="font-size:3rem; margin-bottom:1rem;">🔒</div>
+            <h2 style="color:#dc2626; margin-bottom:1rem;">Hub Access Required</h2>
+            <p style="margin-bottom:1.5rem; color:#64748b;">
+                The Vendor Mapping Viewer requires Hub-level access or higher. Please log in through the MOVR Data Hub portal first.
+            </p>
+            <div style="background:#f8fafc; padding:1rem; border-radius:6px; margin-bottom:1.5rem; text-align:left;">
+                <strong style="color:#1e293b;">To access this tool:</strong><br>
+                1. Go to the <a href="index.html" style="color:#2563eb;">MOVR Data Hub Portal</a><br>
+                2. Log in with Hub or Admin credentials<br>
+                3. Return to this page
+            </div>
+            <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+                <a href="index.html" style="background:#2563eb; color:white; padding:12px 24px; border-radius:6px; text-decoration:none; font-weight:600;">
+                    🔑 Go to Login Portal
+                </a>
+                <button onclick="checkAuthAgain()" style="background:transparent; color:#2563eb; border:2px solid #2563eb; padding:10px 22px; border-radius:6px; cursor:pointer; font-weight:600;">
+                    🔄 Check Again
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="password-lock" style="display:none; max-width:450px; margin:60px auto; background:#fff; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08); padding:32px 24px; text-align:center;">
+        <h2 style="color:#2c5aa0;">Protected Viewer</h2>
+        <p id="lock-message">Enter password to access the Mapping Viewer.</p>
+        
+        <div style="margin: 20px 0; padding: 15px; background: #f8f9fa; border-radius: 6px; font-size: 14px; text-align: left;">
+            <strong>💡 Quick Access:</strong><br>
+            <span style="color: #666;">Guest Password:</span> <code style="background: #e9ecef; padding: 2px 6px; border-radius: 3px;">map_guest</code><br>
+            <small style="color: #888;">For demo/evaluation purposes (limited access)</small>
+        </div>
+        
+        <input type="password" id="viewer-password" placeholder="Password" style="padding:8px 12px; border:1px solid #ccc; border-radius:4px; width:80%; margin-bottom:1em; font-size:14px;">
+        <br>
+        <button id="unlock-btn" style="padding:12px 24px; background:#2c5aa0; color:#fff; border:none; border-radius:4px; cursor:pointer; font-size:14px; font-weight:bold; transition:background 0.2s; min-width:100px;">Unlock</button>
+        <div id="password-error" style="color:#d32f2f; margin-top:1em; font-weight:500;"></div>
+        <div id="debug-info" style="margin-top:1em; font-size:12px; color:#666;"></div>
+    </div>
+    <div class="container" id="main-content" style="display:none;">
         <div class="header">
             <div class="nav-links">
                 <a href="data_dictionary_viewer.html">← Data Dictionary</a>
@@ -398,8 +439,42 @@
         </div>
     </div>
 
+    <script src="../js/session-manager.js"></script>
     <script>
+        // Password protection logic
         let data = [];
+
+        // Import the new session management system
+        import('../js/session-manager.js').then(module => {
+            window.sessionManager = module;
+        }).catch(e => {
+            console.error('Failed to load session manager:', e);
+        });
+
+        // Function to show main content after authentication
+        function showMainContent() {
+            document.getElementById('password-lock').style.display = 'none';
+            document.getElementById('main-content').style.display = 'block';
+        }
+
+        // Handle Enter key in password input
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Wait for session manager to load
+            setTimeout(() => {
+                if (window.sessionManager && window.sessionManager.initializePageAccess) {
+                    window.sessionManager.initializePageAccess('hub', loadData);
+                } else if (window.initializePageAccess) {
+                    // Set global callback for loadData
+                    window.loadDataCallback = loadData;
+                    window.initializePageAccess();
+                } else {
+                    // Fallback: show login prompt
+                    console.warn('Session manager not available, showing login prompt');
+                    window.loadDataCallback = loadData;
+                    showLoginPrompt(window.location.pathname, 'Access to Vendor Mapping Viewer requires authentication.');
+                }
+            }, 200);
+        });
         let filteredData = [];
         let mappingData = null;
 
@@ -588,9 +663,58 @@
         document.getElementById('effortFilter').addEventListener('change', applyFilters);
         document.getElementById('inputNeededFilter').addEventListener('change', applyFilters);
         document.getElementById('searchFilter').addEventListener('input', applyFilters);
+    </script>
 
-        // Load data on page load
-        loadData();
+    <!-- Session Authentication Check -->
+    <script type="module">
+        // Import session management
+        import { SessionManager } from '../js/session-manager.js';
+        
+        // Initialize session manager
+        const sessionManager = new SessionManager();
+        
+        // Check authentication on page load
+        function checkAuthentication() {
+            const user = sessionManager.getCurrentUser();
+            const loginWall = document.getElementById('login-wall');
+            const mainContent = document.querySelector('.container');
+            
+            if (!user || !sessionManager.checkAccess('hub')) {
+                // Not logged in or insufficient access - show login wall
+                loginWall.style.display = 'flex';
+                if (mainContent) {
+                    mainContent.style.display = 'none';
+                }
+            } else {
+                // Logged in with sufficient access - hide login wall and show content
+                loginWall.style.display = 'none';
+                if (mainContent) {
+                    mainContent.style.display = 'block';
+                }
+                
+                // Show main content
+                if (window.showMainContent) {
+                    window.showMainContent();
+                }
+            }
+        }
+        
+        // Function to recheck authentication (called by button)
+        window.checkAuthAgain = function() {
+            checkAuthentication();
+        };
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            checkAuthentication();
+        });
+        
+        // Update when session changes (e.g., from other tabs)
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'movr_session') {
+                checkAuthentication();
+            }
+        });
     </script>
 </body>
 </html>

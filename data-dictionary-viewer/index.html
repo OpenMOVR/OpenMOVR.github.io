@@ -3,116 +3,559 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MOVR DATA HUB Viewer App (alpha)</title>
+    <title>MOVR Data Hub - Authentication Portal</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+        }
+        
+        .auth-container {
+            max-width: 800px;
             background: #fff;
-            font-family: 'Segoe UI', Arial, sans-serif;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin: 20px;
         }
-        .container {
-            max-width: 700px;
-            margin: 40px auto;
-            background: #fff;
-            padding: 32px 24px;
-            border-radius: 4px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        
+        .header {
+            background: linear-gradient(135deg, #2c5aa0 0%, #1e3d72 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
         }
-        h1 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 0.5em;
+        
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
         }
-        h2 {
-            font-size: 1.05rem;
-            font-weight: 500;
-            margin-top: 2em;
-            margin-bottom: 0.5em;
+        
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
         }
-        p, ul {
-            font-size: 0.95rem;
-            margin-bottom: 1em;
+        
+        .content {
+            padding: 2rem;
         }
-        ul {
-            padding-left: 1.2em;
+        
+        .login-section {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
         }
-        .metrics {
-            margin-top: 2em;
-            margin-bottom: 2em;
+        
+        .login-section.authenticated {
+            background: #f0fdf4;
+            border-color: #86efac;
         }
-        .metrics-list {
-            list-style: disc;
-            margin-left: 1.2em;
+        
+        .login-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1e293b;
         }
-        .footer-note {
-            margin-top: 2em;
+        
+        .session-info {
+            display: none;
+            background: #f0fdf4;
+            border: 1px solid #86efac;
+            border-radius: 6px;
+            padding: 1rem;
+            margin-bottom: 1rem;
         }
-        .button {
+        
+        .session-info.active {
+            display: block;
+        }
+        
+        .login-prompt {
+            display: block;
+        }
+        
+        .login-prompt.hidden {
+            display: none;
+        }
+        
+        .btn {
             display: inline-block;
-            padding: 8px 18px;
-            background: #2c5aa0;
-            color: #fff;
-            border: 1px solid #2c5aa0;
-            border-radius: 4px;
+            padding: 12px 24px;
+            border-radius: 6px;
             text-decoration: none;
-            font-size: 0.95rem;
-            margin: 0.5em 0;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+            margin: 0.5rem;
         }
-        .button:disabled {
-            background: #eee;
-            color: #888;
-            border-color: #ccc;
+        
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+        
+        .btn-success {
+            background: #059669;
+            color: white;
+        }
+        
+        .btn-danger {
+            background: #dc2626;
+            color: white;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            color: #2563eb;
+            border: 2px solid #2563eb;
+        }
+        
+        .btn-outline:hover {
+            background: #2563eb;
+            color: white;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .tool-card {
+            background: #fff;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.2s;
+            position: relative;
+        }
+        
+        .tool-card:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+        }
+        
+        .tool-card.locked {
+            opacity: 0.5;
             cursor: not-allowed;
-            opacity: 0.6;
+        }
+        
+        .tool-card.locked:hover {
+            border-color: #e2e8f0;
+            box-shadow: none;
+        }
+        
+        .tool-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #1e293b;
+        }
+        
+        .tool-card p {
+            color: #64748b;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+        
+        .access-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .access-public {
+            background: #dcfce7;
+            color: #166534;
+        }
+        
+        .access-hub {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+        
+        .access-admin {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        
+        .lock-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            font-size: 2rem;
+        }
+        
+        .tool-card.locked .lock-overlay {
+            display: flex;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .stat {
+            text-align: center;
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 6px;
+        }
+        
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2563eb;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-top: 0.25rem;
+        }
+        
+        .info-box {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .info-box h4 {
+            color: #1e40af;
+            margin-bottom: 0.5rem;
+        }
+        
+        .contact-info {
+            background: #f1f5f9;
+            border-left: 4px solid #3b82f6;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .auth-container {
+                margin: 10px;
+            }
+            
+            .header, .content {
+                padding: 1.5rem;
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>MOVR DATA HUB Viewer App <span style="font-weight:400;">(alpha testing)</span></h1>
-        <p>
-            This tool provides a simple way to view the MOVR Data Dictionary for clinical research. It is designed for both laypersons and open source developers to quickly review the available data fields for Duchenne Muscular Dystrophy (DMD) and Spinal Muscular Atrophy (SMA).
-        </p>
-        <h2>Functionality</h2>
-        <p>
-            The viewer allows you to browse and search the MOVR Data Dictionary. You can filter by disease (DMD or SMA) and see the total number of fields available for each. No advanced features or customization are included in this alpha version.
-        </p>
-        <div class="metrics">
-            <h2>Basic Metrics</h2>
-            <ul class="metrics-list">
-                <li>DMD Dictionary Fields: <strong>512</strong></li>
-                <li>SMA Dictionary Fields: <strong>412</strong></li>
-            </ul>
+    <div class="auth-container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🏥 MOVR Data Hub</h1>
+            <p>Authentication Portal for Neuromuscular Disease Research Tools</p>
         </div>
-
-        <table style="width:100%; margin-top:2em; border-collapse:separate; border-spacing:24px 0;">
-            <tr>
-                <td style="vertical-align:top; width:50%;">
-                    <h2 style="font-size:1rem; margin-bottom:0.5em;">Dictionary Viewer</h2>
-                    <p style="margin-bottom:1em;">Browse and search MOVR Data Dictionary fields for DMD and SMA. Filter by disease and view field details.</p>
-                    <a href="data_dictionary_viewer.html" class="button">Open Dictionary Viewer</a>
-                </td>
-                <td style="vertical-align:top; width:50%;">
-                    <h2 style="font-size:1rem; margin-bottom:0.5em;">Vendor Mapping Viewer</h2>
-                    <p style="margin-bottom:1em;">Review vendor mapping coverage for MOVR variables. See which fields are mapped and coverage status.</p>
-                    <a href="vendor_mapping_viewer.html" class="button">Open Mapping Viewer</a>
-                </td>
-            </tr>
-        </table>
-
-        <div style="margin-top:2em; text-align:center;">
-            <h2 style="font-size:1rem; margin-bottom:0.5em;">De-identified Data Viewers (Upcoming)</h2>
-            <button disabled class="button">DMD Data Viewer (coming soon)</button>
-            <button disabled class="button">SMA Data Viewer (coming soon)</button>
-            <div style="margin-top:1.5em; background:#f6f8fa; border-left:4px solid #2c5aa0; padding:1em 1.2em; max-width:480px; margin-left:auto; margin-right:auto; font-size:0.95rem; color:#222;">
-                <strong>Developer Opportunity:</strong> We're seeking 1–2 open source contributors to help build the de-identified DMD/SMA data viewers.<br>
-                <span style="color:#2c5aa0;">Requirements:</span> Experience with web apps, basic data privacy, and Python or JavaScript. Ideal for GSoC or similar projects.
+        
+        <!-- Content -->
+        <div class="content">
+            <!-- Session Management Section -->
+            <div class="login-section" id="login-section">
+                <h2 id="section-title">🔐 Login Required</h2>
+                
+                <!-- Login Prompt (shown when not logged in) -->
+                <div id="login-prompt" class="login-prompt">
+                    <p style="margin-bottom: 1.5rem; color: #64748b;">
+                        Access to MOVR data tools requires authentication. Click below to log in with your credentials.
+                    </p>
+                    <button onclick="showLogin()" class="btn btn-primary">
+                        🔑 Login to MOVR Data Hub
+                    </button>
+                    <div class="info-box" style="margin-top: 1.5rem;">
+                        <h4>Need Access?</h4>
+                        <p style="margin-bottom: 0.5rem;">Contact the MOVR team to request access credentials:</p>
+                        <a href="mailto:movr@mdausa.org" style="color: #2563eb; text-decoration: none; font-weight: 600;">movr@mdausa.org</a>
+                    </div>
+                </div>
+                
+                <!-- Session Info (shown when logged in) -->
+                <div id="session-info" class="session-info">
+                    <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                        <div id="session-indicator" style="font-weight: 600;"></div>
+                        <button onclick="logout()" class="btn btn-danger">
+                            🚪 Logout
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Data Hub Statistics -->
+            <div class="stats-grid">
+                <div class="stat">
+                    <span class="stat-number">5,895</span>
+                    <span class="stat-label">Participants</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">20,152</span>
+                    <span class="stat-label">Clinical Visits</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">512</span>
+                    <span class="stat-label">DMD Fields</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">412</span>
+                    <span class="stat-label">SMA Fields</span>
+                </div>
+            </div>
+            
+            <!-- Tools Grid -->
+            <div class="tools-grid">
+                <!-- Data Dictionary Viewer -->
+                <div class="tool-card" id="data-dict-card">
+                    <div class="access-badge access-public">🔓 Public Access</div>
+                    <h3>📊 Data Dictionary Viewer</h3>
+                    <p>Browse and search MOVR Data Dictionary fields for DMD and SMA. View field definitions, validation rules, and study requirements.</p>
+                    <a href="data_dictionary_viewer.html" class="btn btn-primary" id="data-dict-btn">
+                        Open Dictionary Viewer
+                    </a>
+                    <div class="lock-overlay">
+                        <div>🔒</div>
+                        <div style="font-size: 1rem; margin-top: 0.5rem;">Login Required</div>
+                    </div>
+                </div>
+                
+                <!-- Vendor Mapping Viewer -->
+                <div class="tool-card locked" id="vendor-mapping-card">
+                    <div class="access-badge access-hub">🔐 Hub Access</div>
+                    <h3>🔗 Vendor Mapping Viewer</h3>
+                    <p>Review vendor mapping coverage for MOVR variables. See which fields are mapped and coverage status across different data sources.</p>
+                    <a href="vendor_mapping_viewer.html" class="btn btn-outline" id="vendor-mapping-btn">
+                        Open Mapping Viewer
+                    </a>
+                    <div class="lock-overlay">
+                        <div>🔒</div>
+                        <div style="font-size: 1rem; margin-top: 0.5rem;">Hub Access Required</div>
+                    </div>
+                </div>
+                
+                <!-- MOVR Data Hub Viewer -->
+                <div class="tool-card locked" id="hub-viewer-card">
+                    <div class="access-badge access-hub">🔐 Hub Access</div>
+                    <h3>🏥 MOVR Data Hub Viewer</h3>
+                    <p>Comprehensive data access portal with advanced tools, export capabilities, and enhanced research features.</p>
+                    <a href="movr_data_hub_viewer.html" class="btn btn-outline" id="hub-viewer-btn">
+                        Access Data Hub
+                    </a>
+                    <div class="lock-overlay">
+                        <div>🔒</div>
+                        <div style="font-size: 1rem; margin-top: 0.5rem;">Hub Access Required</div>
+                    </div>
+                </div>
+                
+                <!-- Diagnosis Analytics -->
+                <div class="tool-card locked" id="diagnosis-analytics-card">
+                    <div class="access-badge access-admin">🔐 Admin Access</div>
+                    <h3>📈 Diagnosis Analytics</h3>
+                    <p>Summary statistics and analytics for DMD, SMA, and LGMD across multiple research centers with detailed reporting.</p>
+                    <a href="#" class="btn btn-outline" id="diagnosis-analytics-btn" onclick="showComingSoon('Diagnosis Analytics')">
+                        View Analytics (Coming Soon)
+                    </a>
+                    <div class="lock-overlay">
+                        <div>🔒</div>
+                        <div style="font-size: 1rem; margin-top: 0.5rem;">Admin Access Required</div>
+                    </div>
+                </div>
+                
+                <!-- Data Export Tools -->
+                <div class="tool-card locked" id="export-tools-card">
+                    <div class="access-badge access-admin">🔐 Admin Access</div>
+                    <h3>📋 Data Export Tools</h3>
+                    <p>Generate custom data exports with configurable field selection, filtering, and format options for research purposes.</p>
+                    <a href="#" class="btn btn-outline" id="export-tools-btn" onclick="showComingSoon('Data Export Tools')">
+                        Export Tools (Coming Soon)
+                    </a>
+                    <div class="lock-overlay">
+                        <div>🔒</div>
+                        <div style="font-size: 1rem; margin-top: 0.5rem;">Admin Access Required</div>
+                    </div>
+                </div>
+                
+                <!-- Advanced Search -->
+                <div class="tool-card locked" id="advanced-search-card">
+                    <div class="access-badge access-hub">🔐 Hub Access</div>
+                    <h3>🔍 Advanced Search</h3>
+                    <p>Perform complex queries across the MOVR dataset with advanced filtering options and search capabilities.</p>
+                    <a href="#" class="btn btn-outline" id="advanced-search-btn" onclick="showComingSoon('Advanced Search')">
+                        Advanced Search (Coming Soon)
+                    </a>
+                    <div class="lock-overlay">
+                        <div>🔒</div>
+                        <div style="font-size: 1rem; margin-top: 0.5rem;">Hub Access Required</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contact Information -->
+            <div class="contact-info">
+                <h4>🤝 Need Help or Access?</h4>
+                <p style="margin-bottom: 0.5rem;">
+                    <strong>Contact the MOVR Team:</strong> 
+                    <a href="mailto:movr@mdausa.org" style="color: #2563eb; text-decoration: none;">movr@mdausa.org</a>
+                </p>
+                <p style="margin-bottom: 0;">
+                    <strong>Main Site:</strong> 
+                    <a href="../index.html" style="color: #2563eb; text-decoration: none;">OpenMOVR.org</a>
+                </p>
             </div>
         </div>
-
-        <p class="footer-note">
-            This app is intended for quick reference and basic review only.
-            Created by Andre D Paredes (<a href="https://www.linkedin.com/in/andre-daniel-paredes" title="LinkedIn Profile" target="_blank">LinkedIn</a>)
-        </p>
     </div>
+
+    <!-- Session Management Script -->
+    <script type="module">
+        // Import session management
+        import { SessionManager } from '../js/session-manager.js';
+        
+        // Initialize session manager
+        const sessionManager = new SessionManager();
+        
+        // Show login prompt
+        window.showLogin = async function() {
+            await sessionManager.showLoginPrompt();
+            updateUI();
+        };
+        
+        // Logout function
+        window.logout = function() {
+            sessionManager.logout();
+            updateUI();
+        };
+        
+        // Show coming soon modal
+        window.showComingSoon = function(feature) {
+            alert(`${feature} is coming soon! This feature is currently in development. Contact movr@mdausa.org for early access or to request priority development.`);
+        };
+        
+        // Update UI based on session state
+        function updateUI() {
+            const user = sessionManager.getCurrentUser();
+            const loginSection = document.getElementById('login-section');
+            const sectionTitle = document.getElementById('section-title');
+            const loginPrompt = document.getElementById('login-prompt');
+            const sessionInfo = document.getElementById('session-info');
+            const sessionIndicator = document.getElementById('session-indicator');
+            
+            if (user) {
+                // User is logged in
+                sectionTitle.textContent = '✅ Authenticated';
+                loginSection.classList.add('authenticated');
+                loginPrompt.classList.add('hidden');
+                sessionInfo.classList.add('active');
+                
+                sessionIndicator.innerHTML = `
+                    <span style="color: #059669;">
+                        Logged in as <strong>${user.level.toUpperCase()}</strong> 
+                        <span style="font-size: 0.9em; opacity: 0.8;">(${user.username})</span>
+                    </span>
+                `;
+                
+                // Update tool cards based on access level
+                updateToolAccess(user);
+            } else {
+                // User is not logged in
+                sectionTitle.textContent = '🔐 Login Required';
+                loginSection.classList.remove('authenticated');
+                loginPrompt.classList.remove('hidden');
+                sessionInfo.classList.remove('active');
+                
+                // Lock all tools except public ones
+                updateToolAccess(null);
+            }
+        }
+        
+        // Update tool access based on user level
+        function updateToolAccess(user) {
+            const tools = [
+                { id: 'data-dict', required: null },
+                { id: 'vendor-mapping', required: 'hub' },
+                { id: 'hub-viewer', required: 'hub' },
+                { id: 'diagnosis-analytics', required: 'admin' },
+                { id: 'export-tools', required: 'admin' },
+                { id: 'advanced-search', required: 'hub' }
+            ];
+            
+            tools.forEach(tool => {
+                const card = document.getElementById(`${tool.id}-card`);
+                const btn = document.getElementById(`${tool.id}-btn`);
+                
+                if (!card || !btn) return;
+                
+                const hasAccess = sessionManager.checkAccess(tool.required);
+                
+                if (hasAccess) {
+                    card.classList.remove('locked');
+                    btn.style.pointerEvents = 'auto';
+                } else {
+                    card.classList.add('locked');
+                    btn.style.pointerEvents = 'none';
+                    
+                    // Add click handler for feedback
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        if (tool.required) {
+                            sessionManager.showAccessDeniedMessage(tool.required);
+                        }
+                    });
+                }
+            });
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            updateUI();
+        });
+        
+        // Update when session changes (e.g., from other tabs)
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'movr_session') {
+                updateUI();
+            }
+        });
+    </script>
 </body>
 </html>

@@ -374,11 +374,66 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <!-- Login Wall -->
+    <div id="login-wall" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:10000; display:flex; align-items:center; justify-content:center;">
+        <div style="background:white; padding:2rem; border-radius:12px; max-width:500px; margin:20px; text-align:center; box-shadow:0 20px 40px rgba(0,0,0,0.3);">
+            <div style="font-size:3rem; margin-bottom:1rem;">🔒</div>
+            <h2 style="color:#dc2626; margin-bottom:1rem;">Authentication Required</h2>
+            <p style="margin-bottom:1.5rem; color:#64748b;">
+                This tool requires authentication. Please log in through the MOVR Data Hub portal first.
+            </p>
+            <div style="background:#f8fafc; padding:1rem; border-radius:6px; margin-bottom:1.5rem; text-align:left;">
+                <strong style="color:#1e293b;">To access this tool:</strong><br>
+                1. Go to the <a href="index.html" style="color:#2563eb;">MOVR Data Hub Portal</a><br>
+                2. Log in with your credentials<br>
+                3. Return to this page
+            </div>
+            <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+                <a href="index.html" style="background:#2563eb; color:white; padding:12px 24px; border-radius:6px; text-decoration:none; font-weight:600;">
+                    🔑 Go to Login Portal
+                </a>
+                <button onclick="checkAuthAgain()" style="background:transparent; color:#2563eb; border:2px solid #2563eb; padding:10px 22px; border-radius:6px; cursor:pointer; font-weight:600;">
+                    🔄 Check Again
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="password-lock" style="display:none; max-width:450px; margin:60px auto; background:#fff; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08); padding:32px 24px; text-align:center;">
+        <h2 style="color:#2c5aa0;">Enhanced Access Available</h2>
+        <p id="lock-message">While the Data Dictionary is viewable by everyone, enhanced features and additional viewers require authentication.</p>
+        
+        <div style="margin: 20px 0; padding: 15px; background: #f0f7ff; border-radius: 6px; font-size: 14px; text-align: left; border-left: 4px solid #2c5aa0;">
+            <strong>� Enhanced Access Includes:</strong><br>
+            • Vendor Mapping Viewer<br>
+            • MOVR Data Hub Tools<br>
+            • Priority Setting & Saving<br>
+            • Advanced Export Options<br><br>
+            <strong>Need access?</strong> Contact <a href="mailto:movr@mdausa.org" style="color: #2c5aa0;">movr@mdausa.org</a>
+        </div>
+        
+        <input type="text" id="viewer-password" placeholder="Enter password for enhanced access" style="padding:8px 12px; border:1px solid #ccc; border-radius:4px; width:100%; margin-bottom:1em; font-size:14px;">
+        <div style="display: flex; gap: 10px; justify-content: center;">
+            <button id="unlock-btn" style="padding:12px 24px; background:#2c5aa0; color:#fff; border:none; border-radius:4px; cursor:pointer; font-size:14px; font-weight:bold; transition:background 0.2s;">
+                Login
+            </button>
+            <button onclick="goBackToIndex()" style="padding:12px 24px; background:#666; color:#fff; border:none; border-radius:4px; cursor:pointer; font-size:14px; font-weight:bold; transition:background 0.2s;">
+                Back to Home
+            </button>
+        </div>
+        <div id="password-error" style="color:#d32f2f; margin-top:1em; font-weight:500;"></div>
+        <div id="debug-info" style="margin-top:1em; font-size:12px; color:#666;"></div>
+    </div>
+    <div class="container" id="main-content">
         <div class="header">
             <div class="nav-links" style="margin-bottom: 15px;">
                 <a href="vendor_mapping_viewer.html" style="color: #2c5aa0; text-decoration: none; margin-right: 20px; font-weight: 500; padding: 8px 16px; border-radius: 4px; border: 1px solid #2c5aa0;">Vendor Mapping →</a>
                 <a href="index.html" style="color: #2c5aa0; text-decoration: none; margin-right: 20px; font-weight: 500; padding: 8px 16px; border-radius: 4px; border: 1px solid #2c5aa0;">Home</a>
+                <div id="login-prompt-btn" style="float: right;">
+                    <button onclick="showLoginOptions()" style="padding: 8px 16px; background: #4caf50; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: 500;">
+                        🔐 Login for Enhanced Access
+                    </button>
+                </div>
             </div>
             <h1>MDA MOVR Data Dictionary</h1>
             <p>Medical Advisory Review - Case Report Forms</p>
@@ -468,7 +523,73 @@
         </div>
     </div>
 
-    <script>
+    <script type="module">
+        // Import session management
+        import('../js/session-manager.js').then(module => {
+            window.sessionManager = module;
+            initializePage();
+        }).catch(e => {
+            console.error('Failed to load session manager:', e);
+            // Still show page content 
+            initializePage();
+        });
+
+        // Initialize page access control
+        function initializePage() {
+            // Data dictionary is always accessible, but show login prompt for enhanced features
+            const session = window.getActiveSession ? window.getActiveSession() : null;
+            if (session) {
+                // User is logged in, show session indicator and hide login prompt
+                if (window.addSessionIndicator) {
+                    window.addSessionIndicator(session);
+                }
+                // Hide the login prompt button and show enhanced features
+                document.getElementById('login-prompt-btn').style.display = 'none';
+                showEnhancedFeatures();
+            } else {
+                // User not logged in, show basic features only
+                hideEnhancedFeatures();
+            }
+            
+            // Always load the data dictionary (no authentication required)
+            loadData();
+        }
+
+        function showLoginOptions() {
+            if (window.showLoginPrompt) {
+                window.showLoginPrompt(window.location.pathname, 'Login to access enhanced features and additional MOVR viewers.');
+            } else {
+                // Fallback
+                document.getElementById('password-lock').style.display = 'block';
+            }
+        }
+
+        function goBackToIndex() {
+            window.location.href = '../index.html';
+        }
+
+        function showEnhancedFeatures() {
+            // Show enhanced features for logged-in users
+            const submitSection = document.querySelector('.submit-section');
+            if (submitSection) {
+                submitSection.style.display = 'block';
+            }
+        }
+
+        function hideEnhancedFeatures() {
+            // Hide enhanced features for non-logged-in users
+            const submitSection = document.querySelector('.submit-section');
+            if (submitSection) {
+                submitSection.style.display = 'none';
+            }
+        }
+
+        // Make functions globally available
+        window.showLoginOptions = showLoginOptions;
+        window.goBackToIndex = goBackToIndex;
+        window.showEnhancedFeatures = showEnhancedFeatures;
+        window.hideEnhancedFeatures = hideEnhancedFeatures;
+
         let data = [];
         let filteredData = [];
         let fieldPriorities = {}; // Store priority selections
@@ -796,8 +917,72 @@
             }, 3000);
         }
 
-        // Load data on page load
-        loadData();
+        // Load data on page load if unlocked
+        function tryLoadData() {
+            if (passwordChecked && !passwordExpired) {
+                loadData();
+            }
+        }
+        
+        // Backup global function (keep for compatibility)
+        window.handleUnlock = function() {
+            console.log('Global handleUnlock called!');
+            document.getElementById('debug-info').textContent = 'Global function called...';
+            checkPassword('dictionary');
+            tryLoadData();
+        };
+    </script>
+
+    <!-- Session Authentication Check -->
+    <script type="module">
+        // Import session management
+        import { SessionManager } from '../js/session-manager.js';
+        
+        // Initialize session manager
+        const sessionManager = new SessionManager();
+        
+        // Check authentication on page load
+        function checkAuthentication() {
+            const user = sessionManager.getCurrentUser();
+            const loginWall = document.getElementById('login-wall');
+            const mainContent = document.querySelector('.container');
+            
+            if (!user) {
+                // Not logged in - show login wall
+                loginWall.style.display = 'flex';
+                if (mainContent) {
+                    mainContent.style.display = 'none';
+                }
+            } else {
+                // Logged in - hide login wall and show content
+                loginWall.style.display = 'none';
+                if (mainContent) {
+                    mainContent.style.display = 'block';
+                }
+                
+                // Try to load data if user has sufficient access
+                if (window.tryLoadData) {
+                    window.tryLoadData();
+                }
+            }
+        }
+        
+        // Function to recheck authentication (called by button)
+        window.checkAuthAgain = function() {
+            checkAuthentication();
+        };
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            checkAuthentication();
+        });
+        
+        // Update when session changes (e.g., from other tabs)
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'movr_session') {
+                checkAuthentication();
+            }
+        });
     </script>
 </body>
 </html>

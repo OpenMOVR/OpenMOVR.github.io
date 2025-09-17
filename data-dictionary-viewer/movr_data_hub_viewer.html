@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOVR Data Hub Viewer - MDA OpenMOVR Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .hub-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .hub-header {
+            background: linear-gradient(135deg, #2c5aa0, #1e3f73);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .hub-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .hub-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .hub-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+        
+        .hub-card h3 {
+            color: #2c5aa0;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .hub-icon {
+            font-size: 1.5em;
+        }
+        
+        .hub-link {
+            display: inline-block;
+            background: #2c5aa0;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 15px;
+            transition: background 0.2s;
+        }
+        
+        .hub-link:hover {
+            background: #1e3f73;
+        }
+        
+        .stats-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border-radius: 6px;
+        }
+        
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #2c5aa0;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+        
+        .access-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4caf50;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            z-index: 1000;
+        }
+        
+        .navigation-bar {
+            background: white;
+            padding: 15px 0;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-link {
+            color: #2c5aa0;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        
+        .nav-link:hover {
+            background-color: #f0f7ff;
+        }
+        
+        .nav-link.active {
+            background-color: #2c5aa0;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Wall -->
+    <div id="login-wall" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:10000; display:flex; align-items:center; justify-content:center;">
+        <div style="background:white; padding:2rem; border-radius:12px; max-width:500px; margin:20px; text-align:center; box-shadow:0 20px 40px rgba(0,0,0,0.3);">
+            <div style="font-size:3rem; margin-bottom:1rem;">🔒</div>
+            <h2 style="color:#dc2626; margin-bottom:1rem;">Hub Access Required</h2>
+            <p style="margin-bottom:1.5rem; color:#64748b;">
+                The MOVR Data Hub Viewer requires Hub-level access or higher. Please log in through the MOVR Data Hub portal first.
+            </p>
+            <div style="background:#f8fafc; padding:1rem; border-radius:6px; margin-bottom:1.5rem; text-align:left;">
+                <strong style="color:#1e293b;">To access this tool:</strong><br>
+                1. Go to the <a href="index.html" style="color:#2563eb;">MOVR Data Hub Portal</a><br>
+                2. Log in with Hub or Admin credentials<br>
+                3. Return to this page
+            </div>
+            <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+                <a href="index.html" style="background:#2563eb; color:white; padding:12px 24px; border-radius:6px; text-decoration:none; font-weight:600;">
+                    🔑 Go to Login Portal
+                </a>
+                <button onclick="checkAuthAgain()" style="background:transparent; color:#2563eb; border:2px solid #2563eb; padding:10px 22px; border-radius:6px; cursor:pointer; font-weight:600;">
+                    🔄 Check Again
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Access Level Indicator -->
+    <div id="accessIndicator" class="access-indicator" style="display: none;">
+        <span id="accessText">Hub Access</span>
+    </div>
+
+    <div class="hub-container">
+        <!-- Navigation Bar -->
+        <nav class="navigation-bar">
+            <div class="nav-links">
+                <a href="../index.html" class="nav-link">🏠 Home</a>
+                <a href="data_dictionary_viewer.html" class="nav-link">📊 Data Dictionary</a>
+                <a href="vendor_mapping_viewer.html" class="nav-link">🔗 Vendor Mapping</a>
+                <a href="movr_data_hub_viewer.html" class="nav-link active">🏥 Data Hub</a>
+                <a href="../docs/index.html" class="nav-link">📚 Documentation</a>
+            </div>
+        </nav>
+
+        <header class="hub-header">
+            <h1>🏥 MOVR Data Hub Viewer</h1>
+            <p>Comprehensive data access and management portal for MDA OpenMOVR Platform</p>
+        </header>
+
+        <section class="stats-section">
+            <h2>Platform Statistics</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">2,847</div>
+                    <div class="stat-label">Total Records</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">156</div>
+                    <div class="stat-label">Data Fields</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">23</div>
+                    <div class="stat-label">Research Centers</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">98.7%</div>
+                    <div class="stat-label">Data Quality</div>
+                </div>
+            </div>
+        </section>
+
+        <div class="hub-grid">
+            <div class="hub-card">
+                <h3><span class="hub-icon">📊</span>Data Dictionary Viewer</h3>
+                <p>Explore the comprehensive data dictionary with field definitions, validation rules, and study-specific requirements for DMD and SMA research.</p>
+                <a href="data_dictionary_viewer.html" class="hub-link">View Dictionary</a>
+            </div>
+
+            <div class="hub-card">
+                <h3><span class="hub-icon">🔗</span>Vendor Mapping Viewer</h3>
+                <p>Access vendor-specific data mappings and transformations to understand how external data sources integrate with MOVR standards.</p>
+                <a href="vendor_mapping_viewer.html" class="hub-link">View Mappings</a>
+            </div>
+
+            <div class="hub-card">
+                <h3><span class="hub-icon">📈</span>Data Quality Dashboard</h3>
+                <p>Monitor data quality metrics, validation reports, and compliance statistics across all participating research centers.</p>
+                <a href="#" class="hub-link" onclick="showComingSoon('Data Quality Dashboard')">Coming Soon</a>
+            </div>
+
+            <div class="hub-card">
+                <h3><span class="hub-icon">🔍</span>Advanced Search</h3>
+                <p>Perform complex queries across the MOVR dataset with advanced filtering, sorting, and export capabilities.</p>
+                <a href="#" class="hub-link" onclick="showComingSoon('Advanced Search')">Coming Soon</a>
+            </div>
+
+            <div class="hub-card">
+                <h3><span class="hub-icon">📋</span>Data Export Tools</h3>
+                <p>Generate custom data exports in various formats (CSV, JSON, XML) with configurable field selection and filtering options.</p>
+                <a href="#" class="hub-link" onclick="showComingSoon('Data Export Tools')">Coming Soon</a>
+            </div>
+
+            <div class="hub-card">
+                <h3><span class="hub-icon">⚙️</span>System Administration</h3>
+                <p>Administrative tools for user management, system configuration, and data maintenance (Admin access required).</p>
+                <a href="#" class="hub-link" onclick="checkAdminAccess()">Admin Panel</a>
+            </div>
+        </div>
+
+        <section style="margin-top: 40px; padding: 20px; background: #f0f7ff; border-radius: 8px; border-left: 4px solid #2c5aa0;">
+            <h3>🔐 Access Levels</h3>
+            <ul style="margin: 10px 0; padding-left: 20px;">
+                <li><strong>Hub Access:</strong> Access to this data hub viewer and vendor mapping tools</li>
+                <li><strong>Dictionary Access:</strong> Access to data dictionary viewer only</li>
+                <li><strong>Admin Access:</strong> Full system access including administrative functions</li>
+            </ul>
+            <p style="margin-top: 15px; font-size: 0.9em; color: #666;">
+                <em>Your current access level determines which tools and features are available to you.</em>
+            </p>
+        </section>
+    </div>
+
+    <script type="module">
+        // Import session management
+        import('../js/session-manager.js').then(module => {
+            window.sessionManager = module;
+            initializePage();
+        }).catch(e => {
+            console.error('Failed to load session manager:', e);
+            // Still show page content but with limited functionality
+            showAccessIndicator('Guest');
+        });
+
+        function initializePage() {
+            // Initialize page access for hub level
+            if (window.sessionManager && window.sessionManager.initializePageAccess) {
+                window.sessionManager.initializePageAccess('hub', () => {
+                    console.log('MOVR Data Hub initialized');
+                    updateAccessIndicator();
+                });
+            } else {
+                // Fallback behavior
+                const currentAccess = sessionStorage.getItem('userAccessLevel');
+                if (currentAccess === 'admin' || currentAccess === 'hub') {
+                    showAccessIndicator(currentAccess === 'admin' ? 'Admin' : 'Hub');
+                } else {
+                    showAccessIndicator('Guest');
+                }
+            }
+        }
+
+        function updateAccessIndicator() {
+            const accessLevel = sessionStorage.getItem('userAccessLevel');
+            if (accessLevel === 'admin') {
+                showAccessIndicator('Admin Access');
+            } else if (accessLevel === 'hub') {
+                showAccessIndicator('Hub Access');
+            } else if (accessLevel === 'dictionary') {
+                showAccessIndicator('Dictionary Access');
+            } else {
+                showAccessIndicator('Guest Access');
+            }
+        }
+
+        function showAccessIndicator(text) {
+            const indicator = document.getElementById('accessIndicator');
+            const textEl = document.getElementById('accessText');
+            textEl.textContent = text;
+            indicator.style.display = 'block';
+            
+            // Color coding based on access level
+            if (text.includes('Admin')) {
+                indicator.style.background = '#ff9800';
+            } else if (text.includes('Hub')) {
+                indicator.style.background = '#2196f3';
+            } else if (text.includes('Dictionary')) {
+                indicator.style.background = '#4caf50';
+            } else {
+                indicator.style.background = '#9e9e9e';
+            }
+        }
+
+        function showComingSoon(feature) {
+            alert(`${feature} is coming soon! This feature is currently under development and will be available in a future release.`);
+        }
+
+        function checkAdminAccess() {
+            const accessLevel = sessionStorage.getItem('userAccessLevel');
+            if (accessLevel === 'admin') {
+                alert('Admin Panel access granted! This feature is currently under development.');
+            } else {
+                alert('⚠️ Admin access required. Please contact your system administrator for elevated permissions.');
+            }
+        }
+
+        // Global functions for navigation
+        window.showComingSoon = showComingSoon;
+        window.checkAdminAccess = checkAdminAccess;
+    </script>
+
+    <!-- Session Authentication Check -->
+    <script type="module">
+        // Import session management
+        import { SessionManager } from '../js/session-manager.js';
+        
+        // Initialize session manager
+        const sessionManager = new SessionManager();
+        
+        // Check authentication on page load
+        function checkAuthentication() {
+            const user = sessionManager.getCurrentUser();
+            const loginWall = document.getElementById('login-wall');
+            const mainContent = document.querySelector('.hub-container');
+            const accessIndicator = document.getElementById('accessIndicator');
+            
+            if (!user || !sessionManager.checkAccess('hub')) {
+                // Not logged in or insufficient access - show login wall
+                loginWall.style.display = 'flex';
+                if (mainContent) {
+                    mainContent.style.display = 'none';
+                }
+                if (accessIndicator) {
+                    accessIndicator.style.display = 'none';
+                }
+            } else {
+                // Logged in with sufficient access - hide login wall and show content
+                loginWall.style.display = 'none';
+                if (mainContent) {
+                    mainContent.style.display = 'block';
+                }
+                if (accessIndicator) {
+                    accessIndicator.style.display = 'block';
+                    document.getElementById('accessText').textContent = `${user.level.toUpperCase()} Access`;
+                }
+            }
+        }
+        
+        // Function to recheck authentication (called by button)
+        window.checkAuthAgain = function() {
+            checkAuthentication();
+        };
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            checkAuthentication();
+        });
+        
+        // Update when session changes (e.g., from other tabs)
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'movr_session') {
+                checkAuthentication();
+            }
+        });
+    </script>
+</body>
+</html>
