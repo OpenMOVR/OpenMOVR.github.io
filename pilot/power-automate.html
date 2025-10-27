@@ -1,0 +1,88 @@
+<form id="pilot-form" onsubmit="submitForm(event)">
+  <input type="text" name="name" required placeholder="Full Name">
+  <input type="email" name="email" required placeholder="Email Address">
+  
+  <select name="disease" required>
+    <option value="">Select Disease Type</option>
+    <option value="DMD">Duchenne Muscular Dystrophy (DMD)</option>
+    <option value="SMA">Spinal Muscular Atrophy (SMA)</option>
+    <option value="LGMD">Limb-Girdle Muscular Dystrophy (LGMD)</option>
+  </select>
+  
+  <select name="relationship" required>
+    <option value="">Your Relationship</option>
+    <option value="Patient">I am the patient</option>
+    <option value="Parent/Caregiver">I am a parent/caregiver</option>
+    <option value="Other">Other family member</option>
+  </select>
+  
+  <select name="howHeard">
+    <option value="">How did you hear about this?</option>
+    <option value="Email">MDA Email</option>
+    <option value="Social">Social Media</option>
+    <option value="Event">MDA Event</option>
+    <option value="Provider">Healthcare Provider</option>
+    <option value="Friend">Friend/Family</option>
+    <option value="Other">Other</option>
+  </select>
+  
+  <label>
+    <input type="checkbox" name="multiPlatform" value="true">
+    I'm interested in exploring all three platforms
+  </label>
+  
+  <label>
+    <input type="checkbox" required name="attestation">
+    I consent to participate and understand data will be used for research
+  </label>
+  
+  <button type="submit">Submit My Information</button>
+</form>
+
+<div id="confirmation" style="display:none;">
+  <h2>Thank you!</h2>
+  <p>Check your email for next steps. You should receive an email within the next few minutes with your enrollment link.</p>
+</div>
+
+<div id="error" style="display:none;">
+  <p>There was an error submitting your information. Please try again or email pilothelp@mda.org</p>
+</div>
+
+<script>
+function submitForm(e) {
+  e.preventDefault();
+  
+  var form = document.getElementById('pilot-form');
+  var formData = new FormData(form);
+  
+  // Convert FormData to JSON
+  var data = {};
+  formData.forEach((value, key) => {
+    if (key === 'multiPlatform') {
+      data[key] = value; // Will be "true" if checked
+    } else if (key !== 'attestation') { // Don't send attestation, just validate it's checked
+      data[key] = value;
+    }
+  });
+  
+  // Your Power Automate HTTP trigger URL
+  var flowURL = 'YOUR_POWER_AUTOMATE_HTTP_TRIGGER_URL_HERE';
+  
+  fetch(flowURL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+  .then(response => response.json())
+  .then(data => {
+    form.style.display = 'none';
+    document.getElementById('confirmation').style.display = 'block';
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    document.getElementById('error').style.display = 'block';
+  });
+}
+</script>

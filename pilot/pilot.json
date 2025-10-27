@@ -1,0 +1,100 @@
+{
+    "type": "object",
+    "properties": {
+        "name": {"type": "string"},
+        "email": {"type": "string"},
+        "disease": {"type": "string"},
+        "relationship": {"type": "string"},
+        "multiPlatform": {"type": "string"},
+        "howHeard": {"type": "string"}
+    }
+}
+```
+**Step 2: Get Current Vendor Counts**
+
+Action: "List rows present in a table" (Excel Online)
+- Location: OneDrive for Business
+- Document Library: OneDrive
+- File: MOVR_Pilot_Participants.xlsx
+- Table: VendorQuotasTable
+
+This reads your vendor quotas sheet to see current enrollment numbers.
+
+**Step 3: Initialize Variables**
+
+Create three integer variables to store remaining slots:
+
+Variable 1:
+- Name: UniteRemaining
+- Type: Integer
+- Value: (use expression to get value from Sheet 2, Row 2, Column D)
+
+Variable 2:
+- Name: CitizenRemaining
+- Type: Integer
+- Value: (from Row 3, Column D)
+
+Variable 3:
+- Name: VibrentRemaining
+- Type: Integer
+- Value: (from Row 4, Column D)
+
+**Step 4: Assign Vendor Logic (Condition Actions)**
+
+**Condition 1:** Check which vendor has most remaining slots
+
+If UniteRemaining >= CitizenRemaining AND UniteRemaining >= VibrentRemaining:
+- Set variable "AssignedVendor" to "Unite Genomics"
+- Set variable "VendorURL" to value from VendorQuotasTable Row 2 Column E
+
+Else If CitizenRemaining >= VibrentRemaining:
+- Set variable "AssignedVendor" to "Citizen Health"
+- Set variable "VendorURL" to value from Row 3 Column E
+
+Else:
+- Set variable "AssignedVendor" to "Vibrent Health"
+- Set variable "VendorURL" to value from Row 4 Column E
+
+**Step 5: Add Row to Participants Table**
+
+Action: "Add a row into a table" (Excel Online)
+- Location: OneDrive for Business
+- Document Library: OneDrive
+- File: MOVR_Pilot_Participants.xlsx
+- Table: ParticipantsTable
+
+Map the fields:
+- Timestamp: utcNow() [use expression]
+- Name: triggerBody()?['name']
+- Email: triggerBody()?['email']
+- Disease Type: triggerBody()?['disease']
+- Relationship: triggerBody()?['relationship']
+- Multi-Platform: triggerBody()?['multiPlatform']
+- How Heard: triggerBody()?['howHeard']
+- Assigned Vendor: variables('AssignedVendor')
+- Email Sent: FALSE
+- Vendor Link: variables('VendorURL')
+
+**Step 6: Compose Email Body**
+
+Action: "Compose"
+
+Create the email body text. You can use expressions and variables:
+```
+Hi @{triggerBody()?['name']},
+
+Thank you for joining the MOVR pilot! You're helping shape how we support families managing neuromuscular diseases.
+
+Your next step: Get started with @{variables('AssignedVendor')}
+
+Click here to begin: @{variables('VendorURL')}
+
+What to expect:
+- Create your account (5 minutes)
+- Explore the platform and add information at your own pace (30-45 minutes)
+- We'll send a brief feedback survey in 1-2 weeks
+
+Questions? Reply to this email or contact pilothelp@mda.org
+
+Thanks for being part of this!
+The MDA MOVR Team
