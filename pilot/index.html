@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join the MOVR Pilot | MDA</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <img src="mda-logo.jpg" alt="MDA Logo" class="logo">
+            <a href="mailto:movr@mdausa.org" class="contact-button">Questions? Email Us</a>
+        </div>
+    </header>
+
+    <!-- OPTIONAL STICKY NAV -->
+    <nav class="sticky-nav">
+        <a href="#how-it-works">How It Works</a>
+        <a href="#join">Join Now</a>
+        <a href="#faq">FAQ</a>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container">
+            <h1>Help Shape the Future of MOVR: Join Our Pilot Program</h1>
+            <p class="subtitle">Be among the first to explore new tools designed by families, for families</p>
+            <p>MDA is reimagining MOVR—our national platform that helps families manage medical information for neuromuscular diseases—and we need your input. If you're living with DMD, SMA, or LGMD, you know what it takes to keep track of complex care and coordinate with multiple providers.</p>
+            <p>By joining this pilot, you'll explore new tools designed to make managing your health information easier and more intuitive. Your feedback will directly shape how MOVR serves the neuromuscular community.</p>
+            <a href="#join" class="cta-button">Join the MOVR Pilot</a>
+        </div>
+    </section>
+
+    <!-- WHAT YOU'LL DO & ELIGIBILITY -->
+    <section class="benefits">
+        <div class="container">
+            <h2>What You'll Do & Who Can Join</h2>
+            
+            <h3 style="color: var(--mda-blue); margin-bottom: 20px;">Who Can Join</h3>
+            <p><strong>You're eligible if you or your family member has:</strong></p>
+            <ul style="margin-top: 10px; margin-bottom: 30px; color: var(--text-color);">
+                <li><strong>DMD</strong> (Duchenne Muscular Dystrophy)</li>
+                <li><strong>SMA</strong> (Spinal Muscular Atrophy)</li>
+                <li><strong>LGMD</strong> (Limb-Girdle Muscular Dystrophy)</li>
+            </ul>
+
+            <h3 style="color: var(--mda-blue); margin-bottom: 20px;">What You'll Do</h3>
+            <ul style="margin-bottom: 30px;">
+                <li>Test new platforms designed for families</li>
+                <li>Share feedback to guide MOVR's development</li>
+                <li>Help determine the future direction</li>
+                <li>Support research for your disease community</li>
+            </ul>
+            
+            <p class="privacy-note">⚠️ <strong>Limited spots available.</strong> This is Phase 1 pilot testing with capped enrollment as we determine the right approach for MOVR's future. Your information remains private and secure. You control what's shared and with whom.</p>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2>How It Works</h2>
+            
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Sign Up</h3>
+                <p>Fill out a quick form to join the pilot (5 minutes)</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Explore a Platform</h3>
+                <p>We're testing three different technology platforms to see which works best for families: Unite Genomics, Citizen Health, and Vibrent Health. After you sign up, we'll send you a link to get started with one of them.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Share Your Experience</h3>
+                <p>Use the platform at your own pace—most participants spend 30-45 minutes on initial setup. Then tell us what worked well and what could be better.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>Help Shape MOVR's Future</h3>
+                <p>Your feedback will guide which tools become part of the new MOVR experience for all families.</p>
+            </div>
+
+            <p class="vendor-note">Why three platforms? By testing different approaches, we can learn what families need most and build the best possible MOVR experience. You don't need to choose—we'll help you get started. If you'd like to explore multiple platforms, you can let us know during sign-up.</p>
+        </div>
+    </section>
+
+    <!-- ENROLLMENT FORM -->
+    <section id="join" class="enrollment-form">
+        <div class="container">
+            <h2>Join the MOVR Pilot</h2>
+            
+            <form id="pilot-form">
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="disease">Disease Type *</label>
+                    <select id="disease" name="disease" required>
+                        <option value="">Select Disease Type</option>
+                        <option value="DMD">Duchenne Muscular Dystrophy (DMD)</option>
+                        <option value="SMA">Spinal Muscular Atrophy (SMA)</option>
+                        <option value="LGMD">Limb-Girdle Muscular Dystrophy (LGMD)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="relationship">Your Relationship *</label>
+                    <select id="relationship" name="relationship" required>
+                        <option value="">Select Your Relationship</option>
+                        <option value="Patient">I am the patient</option>
+                        <option value="Parent/Caregiver">I am a parent/caregiver</option>
+                        <option value="Other">Other family member</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="howHeard">How did you hear about this?</label>
+                    <select id="howHeard" name="howHeard">
+                        <option value="">Select one</option>
+                        <option value="Email">MDA Email</option>
+                        <option value="Social">Social Media</option>
+                        <option value="Event">MDA Event</option>
+                        <option value="Provider">Healthcare Provider</option>
+                        <option value="Friend">Friend/Family</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group checkbox">
+                    <label>
+                        <input type="checkbox" name="multiPlatform" value="true">
+                        I'm interested in exploring all three platforms
+                    </label>
+                </div>
+
+                <div class="form-group checkbox">
+                    <label>
+                        <input type="checkbox" name="attestation" required>
+                        I consent to participate and understand my medical information may be used for research purposes. I understand MDA's privacy practices. *
+                    </label>
+                </div>
+
+                <button type="submit" class="submit-button">Submit My Information</button>
+            </form>
+
+            <div id="confirmation" class="confirmation-message">
+                <h3>Thank you!</h3>
+                <p>Check your email for next steps. You should receive an email within the next few minutes with your enrollment link.</p>
+            </div>
+
+            <div id="error" class="error-message">
+                <p>There was an error submitting your information. Please try again or email <a href="mailto:movr@mdausa.org">movr@mdausa.org</a></p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="faq">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <h3 class="faq-question">What is MOVR?</h3>
+                <div class="faq-answer">
+                    <p>MOVR is MDA's secure platform that helps people with neuromuscular diseases organize their medical information. It makes tracking your health easier while helping researchers understand these conditions and develop new treatments.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">Why is MDA running this pilot?</h3>
+                <div class="faq-answer">
+                    <p>We're improving MOVR to better serve families. This pilot helps us learn what tools work best and what features matter most. Your feedback will directly shape the new MOVR experience. We're testing three different technology platforms to see which best meets the needs of the neuromuscular community.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">Who can participate?</h3>
+                <div class="faq-answer">
+                    <p>Families living with Duchenne muscular dystrophy (DMD), spinal muscular atrophy (SMA), or limb-girdle muscular dystrophy (LGMD). Participants can be patients themselves or parents/caregivers.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">What will I be asked to do?</h3>
+                <div class="faq-answer">
+                    <p>You'll receive a link to one of three platforms (Unite Genomics, Citizen Health, or Vibrent Health). You'll create an account, explore how it works, enter some medical information (as much as you're comfortable with), and complete a brief feedback survey. Work at your own pace. Most participants spend about 30-45 minutes on initial setup.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">Which platform will I use?</h3>
+                <div class="faq-answer">
+                    <p>After you sign up, we'll send you a link to one of the three platforms. We're balancing participation across all three so we can fairly evaluate each one. Want to try more than one? During sign-up you can indicate interest in exploring multiple platforms and we'll send you all three links.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">How will my information be protected?</h3>
+                <div class="faq-answer">
+                    <p>Your data is stored securely on HIPAA-compliant platforms. We follow strict privacy guidelines, and no personally identifying information is shared without your explicit consent. You're always in control—you decide what to share and can remove your data anytime.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">Is there a cost?</h3>
+                <div class="faq-answer">
+                    <p>No. There is no cost to you or your family.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">How long does it take?</h3>
+                <div class="faq-answer">
+                    <p>Initial setup takes about 30-45 minutes. After using the platform, we'll send a brief feedback survey (about 10 minutes). Some participants may be invited to optional focus groups.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">What if I need help?</h3>
+                <div class="faq-answer">
+                    <p>Email <a href="mailto:movr@mdausa.org">movr@mdausa.org</a> anytime. We'll provide helpful guides and support throughout.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p>Questions or need support? Email <a href="mailto:movr@mdausa.org">movr@mdausa.org</a></p>
+            <p>&copy; 2025 Muscular Dystrophy Association. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
