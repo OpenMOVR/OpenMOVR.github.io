@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join the MOVR Pilot | MDA</title>
     <link rel="stylesheet" href="style.css">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
 </head>
 <body>
     
@@ -98,14 +107,25 @@
             <h2>Join the MOVR Pilot</h2>
             
             <form id="pilot-form">
+                <!-- CSRF Protection -->
+                <input type="hidden" name="csrf_token" id="csrf_token">
+                
                 <div class="form-group">
                     <label for="name">Full Name *</label>
-                    <input type="text" id="name" name="name" required>
+                    <input type="text" id="name" name="name" required 
+                           placeholder="Enter your full name"
+                           pattern="[A-Za-z\s\-']+" 
+                           title="Please enter a valid name (letters, spaces, hyphens, apostrophes only)"
+                           maxlength="100">
+                    <div class="error-message" id="name-error"></div>
                 </div>
 
                 <div class="form-group">
                     <label for="email">Email Address *</label>
-                    <input type="email" id="email" name="email" required>
+                    <input type="email" id="email" name="email" required 
+                           placeholder="your.email@example.com"
+                           maxlength="100">
+                    <div class="error-message" id="email-error"></div>
                 </div>
 
                 <div class="form-group">
@@ -116,6 +136,7 @@
                         <option value="SMA">Spinal Muscular Atrophy (SMA)</option>
                         <option value="LGMD">Limb-Girdle Muscular Dystrophy (LGMD)</option>
                     </select>
+                    <div class="error-message" id="disease-error"></div>
                 </div>
 
                 <div class="form-group">
@@ -126,12 +147,13 @@
                         <option value="Parent/Caregiver">I am a parent/caregiver</option>
                         <option value="Other">Other family member</option>
                     </select>
+                    <div class="error-message" id="relationship-error"></div>
                 </div>
 
                 <div class="form-group">
                     <label for="howHeard">How did you hear about this?</label>
                     <select id="howHeard" name="howHeard">
-                        <option value="">Select one</option>
+                        <option value="">Select an option</option>
                         <option value="Email">MDA Email</option>
                         <option value="Social">Social Media</option>
                         <option value="Event">MDA Event</option>
@@ -144,27 +166,43 @@
                 <div class="form-group checkbox">
                     <label>
                         <input type="checkbox" name="multiPlatform" value="true">
-                        I'm interested in exploring all three platforms
+                        <span class="checkmark"></span>
+                        I'm interested in exploring all three platforms (optional)
                     </label>
                 </div>
 
                 <div class="form-group checkbox">
                     <label>
                         <input type="checkbox" name="attestation" required>
-                        I consent to participate and understand my medical information may be used for research purposes. I understand MDA's privacy practices. *
+                        <span class="checkmark"></span>
+                        I consent to participate and understand my data will be used for research purposes *
                     </label>
+                    <div class="error-message" id="attestation-error"></div>
                 </div>
 
-                <button type="submit" class="submit-button">Submit My Information</button>
+                <button type="submit" id="submit-btn" class="submit-button">
+                    <span id="submit-text">Submit My Information</span>
+                    <span id="submit-spinner" class="spinner" style="display:none;">⏳ Submitting...</span>
+                </button>
             </form>
 
-            <div id="confirmation" class="confirmation-message">
-                <h3>Thank you!</h3>
+            <!-- Success Message -->
+            <div id="confirmation" class="message success-message" style="display:none;">
+                <h2>✅ Thank you!</h2>
                 <p>Check your email for next steps. You should receive an email within the next few minutes with your enrollment link.</p>
             </div>
 
-            <div id="error" class="error-message">
-                <p>There was an error submitting your information. Please try again or email <a href="mailto:movr@mdausa.org">movr@mdausa.org</a></p>
+            <!-- Waitlist Message -->
+            <div id="waitlist" class="message waitlist-message" style="display:none;">
+                <h2>📋 Added to Waitlist</h2>
+                <p>Thank you for your interest! We're currently at capacity for your disease type, but you've been added to our waitlist. We'll contact you if a spot opens up.</p>
+            </div>
+
+            <!-- Error Message -->
+            <div id="error" class="message error-message" style="display:none;">
+                <h2>❌ Submission Error</h2>
+                <p>There was an error submitting your information. Please check your connection and try again, or email <a href="mailto:movr@mdausa.org">movr@mdausa.org</a> for assistance.</p>
+                <button onclick="resetForm()" class="retry-button">Try Again</button>
             </div>
 
         </div>
