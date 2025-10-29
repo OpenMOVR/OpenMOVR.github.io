@@ -154,7 +154,7 @@ document.getElementById('pilot-form').addEventListener('submit', function(e) {
     data.referrer = document.referrer;
     
     // Your Power Automate URL here
-    const flowURL = 'YOUR_POWER_AUTOMATE_URL_HERE';
+    const flowURL = 'https://default69c088185c17449a9790b60a3c7e52.22.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/03bd50749cff45f2bdf7c90d8c070479/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=OwjDRaXYA81v0Agvx7HrlcsyJVF0ar0TNNrcrLaUYHY';
     
     // Submit with retry logic
     submitWithRetry(flowURL, data, 3)
@@ -164,11 +164,33 @@ document.getElementById('pilot-form').addEventListener('submit', function(e) {
             form.style.display = 'none';
             
             if (data.status === 'success') {
+                // Populate vendor information
+                if (data.vendor) {
+                    document.getElementById('assigned-vendor').textContent = data.vendor;
+                }
+                if (data.enrollmentUrl) {
+                    const enrollmentLink = document.getElementById('enrollment-link');
+                    enrollmentLink.href = data.enrollmentUrl;
+                    enrollmentLink.textContent = data.enrollmentUrl;
+                }
+                
+                // Show multi-platform note if they selected that option
+                const multiPlatformCheckbox = document.querySelector('input[name="multiPlatform"]');
+                if (multiPlatformCheckbox && multiPlatformCheckbox.checked) {
+                    document.getElementById('multi-platform-note').style.display = 'block';
+                }
+                
                 document.getElementById('confirmation').style.display = 'block';
                 trackEvent('form_submitted_success');
                 // Scroll to confirmation
                 document.getElementById('confirmation').scrollIntoView({ behavior: 'smooth' });
             } else if (data.status === 'waitlist') {
+                // Populate disease type for waitlist message
+                const diseaseField = document.getElementById('disease');
+                if (diseaseField && diseaseField.value) {
+                    document.getElementById('waitlist-disease').textContent = diseaseField.value;
+                }
+                
                 document.getElementById('waitlist').style.display = 'block';
                 trackEvent('form_submitted_waitlist');
                 // Scroll to waitlist message

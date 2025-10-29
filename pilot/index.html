@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="style.css">
     
     <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-85RSP2VHG6"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'GA_MEASUREMENT_ID');
+      gtag('config', 'G-85RSP2VHG6');
     </script>
 </head>
 <body>
@@ -21,7 +21,7 @@
     <header>
         <div class="container">
             <img src="mda-logo.jpg" alt="MDA Logo" class="logo">
-            <a href="mailto:movr@mdausa.org" class="contact-button">Questions? Email Us</a>
+            <a href="mailto:mdamovr@mdausa.org" class="contact-button">Questions? Email Us</a>
         </div>
     </header>
 
@@ -189,19 +189,26 @@
             <!-- Success Message -->
             <div id="confirmation" class="message success-message" style="display:none;">
                 <h2>✅ Thank you!</h2>
-                <p>Check your email for next steps. You should receive an email within the next few minutes with your enrollment link.</p>
+                <p>Check your email for next steps. You should receive an email within the next few minutes.</p>
+                <div class="enrollment-details">
+                    <p><strong>Your assigned platform:</strong> <span id="assigned-vendor"></span></p>
+                    <p><strong>Start here:</strong> <a id="enrollment-link" href="#" target="_blank" class="enrollment-url">Begin Enrollment</a></p>
+                    <p id="multi-platform-note" style="display:none; margin-top: 15px; font-style: italic; color: #155724;">
+                        Since you indicated interest in exploring all platforms, your email will include enrollment links for all three vendors.
+                    </p>
+                </div>
             </div>
 
             <!-- Waitlist Message -->
             <div id="waitlist" class="message waitlist-message" style="display:none;">
                 <h2>📋 Added to Waitlist</h2>
-                <p>Thank you for your interest! We're currently at capacity for your disease type, but you've been added to our waitlist. We'll contact you if a spot opens up.</p>
+                <p>Thank you for your interest! We're currently at capacity for <span id="waitlist-disease"></span> participants, but you've been added to our waitlist. We'll contact you if a spot opens up.</p>
             </div>
 
             <!-- Error Message -->
             <div id="error" class="message error-message" style="display:none;">
                 <h2>❌ Submission Error</h2>
-                <p>There was an error submitting your information. Please check your connection and try again, or email <a href="mailto:movr@mdausa.org">movr@mdausa.org</a> for assistance.</p>
+                <p>There was an error submitting your information. Please check your connection and try again, or email <a href="mailto:mdamovr@mdausa.org">mdamovr@mdausa.org</a> for assistance.</p>
                 <button onclick="resetForm()" class="retry-button">Try Again</button>
             </div>
 
@@ -272,7 +279,7 @@
             <div class="faq-item">
                 <h3 class="faq-question">What if I need help?</h3>
                 <div class="faq-answer">
-                    <p>Email <a href="mailto:movr@mdausa.org">movr@mdausa.org</a> anytime. We'll provide helpful guides and support throughout.</p>
+                    <p>Email <a href="mailto:mdamovr@mdausa.org">mdamovr@mdausa.org</a> anytime. We'll provide helpful guides and support throughout.</p>
                 </div>
             </div>
 
@@ -282,7 +289,7 @@
     <!-- FOOTER -->
     <footer>
         <div class="container">
-            <p>Questions or need support? Email <a href="mailto:movr@mdausa.org">movr@mdausa.org</a></p>
+            <p>Questions or need support? Email <a href="mailto:mdamovr@mdausa.org">mdamovr@mdausa.org</a></p>
             <p>&copy; 2025 Muscular Dystrophy Association. All rights reserved.</p>
         </div>
     </footer>

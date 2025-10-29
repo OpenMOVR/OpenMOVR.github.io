@@ -1,0 +1,46 @@
+success
+
+Hi @{triggerBody()?['name']},
+
+Thank you for joining the MOVR Pilot! You're helping shape how we support families managing neuromuscular diseases. 
+
+ Your next step: Get started with @{variables('AssignedVendor')}
+
+  Click here to begin: @{variables('VendorURL')}
+
+  Assignment Reason: @{variables('AssignmentReason')}
+
+  What to expect:
+  - Create your account (5 minutes)
+  - Explore the platform and add information at your own pace (30-45 minutes)
+  - We'll send a brief feedback survey in 1-2 weeks
+
+  @{if(equals(triggerBody()?['multiPlatform'], 'true'),
+  'You indicated interest in exploring all platforms. Here are the other
+  enrollment links:
+  - Unite Genomics: https://unitegenomics.com/enroll/movr
+  - Citizen Health: https://citizenhealth.com/join/mda
+  - Vibrent Health: https://vibrenthealth.com/mda/pilot',
+  '')}
+
+  Questions? Reply to this email or contact mdamovr@mdausa.org
+
+  Sincerely,
+
+  The MDA MOVR Team
+
+
+
+Waitlist 
+
+Hi @{triggerBody()?['name']},
+
+Thank you for your interest in the MOVR pilot!
+
+We're currently at capacity for @{triggerBody()?['disease']} participants, but you've been added to our waitlist. We'll contact you immediately if a spot opens up.
+
+In the meantime, feel free to reach out with any questions at mdamovr@mdausa.org
+
+Sincerely,
+
+The MDA MOVR Team

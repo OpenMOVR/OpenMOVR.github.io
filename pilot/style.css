@@ -280,8 +280,7 @@ header .container {
     opacity: 0.9;
 }
 
-.confirmation-message,
-.error-message {
+.message {
     display: none;
     padding: 30px;
     border-radius: 5px;
@@ -289,16 +288,51 @@ header .container {
     margin-top: 30px;
 }
 
-.confirmation-message {
+.success-message {
     background: #d4edda;
     border: 1px solid #c3e6cb;
     color: #155724;
+}
+
+.waitlist-message {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    color: #856404;
 }
 
 .error-message {
     background: #f8d7da;
     border: 1px solid #f5c6cb;
     color: #721c24;
+}
+
+.enrollment-details {
+    margin-top: 20px;
+    padding: 20px;
+    background: rgba(21, 87, 36, 0.1);
+    border-radius: 5px;
+    border: 1px solid #c3e6cb;
+}
+
+.enrollment-details p {
+    margin: 10px 0;
+}
+
+.enrollment-url {
+    color: #155724;
+    font-weight: 600;
+    text-decoration: none;
+    word-break: break-all;
+}
+
+.enrollment-url:hover {
+    text-decoration: underline;
+}
+
+.confirmation-message {
+    background: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
 }
 
 /* FAQ */
