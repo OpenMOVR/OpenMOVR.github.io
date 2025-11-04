@@ -327,22 +327,32 @@ This system ensures **fairness during startup** (everyone gets minimums) while *
 **Overview:** Add age demographics collection to participant data.
 
 **Excel Updates Required:**
+
 1. **Add new column to ParticipantsTable:** "Age Group"
-2. **Column position:** After "Relationship" column
+2. **Column position:** Before "Timeout Date" column (minimal formula disruption)
 3. **Data type:** Text (dropdown values)
-4. **Possible values:** "0-4", "5-17", "18+"
+4. **Possible values:** "6-younger", "7-13", "14-17", "18-older"
+
+**Attestation Field Addition:**
+
+1. **Add new column to ParticipantsTable:** "Attestation"
+2. **Column position:** Before "Timeout Date" column (after Age Group)
+3. **Data type:** Boolean (TRUE/FALSE)
+4. **Purpose:** Compliance and consent documentation
 
 **Power Automate Updates Required:**
-1. **Update HTTP trigger schema:** Add "ageGroup" field to request_body_schema.json
-2. **Update "Add a row" action:** Include Age Group mapping
-   - Column: "Age Group"
-   - Value: `triggerBody()?['ageGroup']`
 
-**HTML Updates Required (Future):**
-- Add dropdown field to enrollment form
-- Options: "0-4 years", "5-17 years", "18+ years"
-- Form validation for required field
-- Update form submission JavaScript
+1. **Update HTTP trigger schema:** Add "ageGroup" and "attestation" fields to request_body_schema.json
+2. **Update "Add a row" action:** Include both new field mappings
+   - Column: "Age Group" - Value: `triggerBody()?['ageGroup']`
+   - Column: "Attestation" - Value: `triggerBody()?['attestation']`
+
+**HTML Updates Required (Completed):**
+
+- Age group dropdown field already in enrollment form ✅
+- Attestation checkbox already in enrollment form ✅
+- Form validation for required fields already implemented ✅
+- Form submission JavaScript already includes both fields ✅
 
 **Data Collection Purpose:** Demographic analysis and age-appropriate vendor assignment (if needed in future).
 

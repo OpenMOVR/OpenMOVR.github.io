@@ -31,11 +31,11 @@
 
 2. **Sheet 1: Participants**
     - Columns:  
-      `Participant ID | Timestamp | Name | Email | Disease Type | Relationship | Multi-Platform | How Heard | Assigned Vendor | Email Sent | Vendor Link | Enrollment Status | Enrollment Date | Days Since Form | Timeout Date`
+      `Participant ID | Timestamp | Name | Email | Disease Type | Relationship | Multi-Platform | How Heard | Assigned Vendor | Email Sent | Vendor Link | Enrollment Status | Enrollment Date | Days Since Form | Age Group | Attestation | Timeout Date`
     - Additional formula columns:
       - Participant ID: `=ROW()-1` (auto-incrementing)
       - Days Since Form: `=TODAY()-B2`
-      - Timeout Date: `=B2+14` (2 weeks from form submission)
+      - Timeout Date: `=B2+14` (2 weeks from form submission) - **Column Q after adding Age Group & Attestation**
       - Enrollment Status: Manual update or "Pending" by default
     - Format as Table: `ParticipantsTable`
 
