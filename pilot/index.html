@@ -20,7 +20,10 @@
     <!-- HEADER -->
     <header>
         <div class="container">
-            <img src="mda-logo.jpg" alt="MDA Logo" class="logo">
+            <div class="logo-section">
+                <img src="mda-logo.jpg" alt="MDA Logo" class="logo">
+                <span class="pilot-label">MOVR 2.0 Pilot Sign Up</span>
+            </div>
             <a href="mailto:mdamovr@mdausa.org" class="contact-button">Questions? Email Us</a>
         </div>
     </header>
@@ -28,7 +31,7 @@
     <!-- OPTIONAL STICKY NAV -->
     <nav class="sticky-nav">
         <a href="#how-it-works">How It Works</a>
-        <a href="#join">Join Now</a>
+        <a href="#join">Sign Up</a>
         <a href="#faq">FAQ</a>
     </nav>
 
@@ -38,8 +41,8 @@
             <h1>Help Shape the Future of Rare Disease Research with MOVR 2.0</h1>
             <p class="subtitle">We're building something transformative—and we want you to be part of it.</p>
             <p>The Muscular Dystrophy Association (MDA) is launching a limited-time pilot to co-create MOVR 2.0, our next-generation data platform designed with families at the center. This is your opportunity to directly influence how data is collected, visualized, and used to accelerate research and improve care for individuals living with Duchenne Muscular Dystrophy (DMD), Spinal Muscular Atrophy (SMA), or Limb-Girdle Muscular Dystrophy (LGMD).</p>
-            <p>With the power of artificial intelligence and your lived experience, we're reimagining what a research platform can be—intuitive, insightful, and deeply connected to the needs of our community.</p>
-            <a href="#join" class="cta-button">Join the MOVR Pilot</a>
+            <p>Using powerful technology platforms and your lived experience, we're reimagining what a research platform can be—making it easier to share data, visualize your care journey, and connect with the research that matters most to our community.</p>
+            <a href="#join" class="cta-button">Sign Up for MOVR 2.0 Pilot</a>
         </div>
     </section>
 
@@ -56,9 +59,8 @@
                         <div class="photo-placeholder">AP</div>
                     </div>
                     <div class="bio-info">
-                        <h3>Andre D. Paredes</h3>
+                        <h3>Andre D. Paredes, PhD</h3>
                         <p class="bio-title"><em>Sr. Director of Strategy & Informatics – Clinical Data Science</em></p>
-                        <p class="bio-text">I'll send your first enrollment email and lead the informatics evaluation—ensuring each vendor platform is held accountable and delivers on its promise to support families managing complex medical data.</p>
                     </div>
                 </div>
 
@@ -70,13 +72,12 @@
                     <div class="bio-info">
                         <h3>Jessica Waits</h3>
                         <p class="bio-title"><em>Director of Clinical Operations</em></p>
-                        <p class="bio-text">I'll track your progress throughout the pilot, ensuring your data remains secure, vendors are held accountable, and all study protocols are properly in place to protect participants.</p>
                     </div>
                 </div>
             </div>
 
             <div class="team-footer">
-                <p>Together, we'll keep you updated every step of the way.</p>
+                <p>We'll track your progress throughout the pilot and ensure your data remains safe, vendors are held accountable, and all study protocols are properly in place to protect participants for this limited pilot. Afterward, we'll give you our recommendation on how to move forward.</p>
                 <p class="signature">— Andre & Jessica</p>
             </div>
         </div>
@@ -90,19 +91,18 @@
             <div class="step">
                 <div class="step-number">1</div>
                 <div class="step-content">
-                    <h3>Enroll & Create Your Account</h3>
-                    <p>Begin by signing up through our secure enrollment form.</p>
-                    <p>You'll create a personal account and provide consent to share your medical data for research purposes.</p>
+                    <h3>Submit Info & Get Assigned</h3>
+                    <p>Submit your information here on the MOVR 2.0 Pilot Sign Up page.</p>
+                    <p>You'll be assigned to one or more platforms to explore and receive an email with your platform assignment and enrollment link.</p>
                 </div>
             </div>
 
             <div class="step">
                 <div class="step-number">2</div>
                 <div class="step-content">
-                    <h3>Explore the Platform</h3>
-                    <p>Once enrolled, you'll gain access to one or more data platforms.</p>
-                    <p>These platforms are designed to help you view, organize, and understand your medical records—all in one place.</p>
-                    <p>You'll see visualizations, insights, and tools that reflect your care journey.</p>
+                    <h3>Create Account & Enroll in Study</h3>
+                    <p>On the platform(s) you're assigned, create a personal account, enroll in the study, and consent to share your medical data for research purposes.</p>
+                    <p>The platforms are designed to help you view, organize, and understand your medical records—all in one place with visualizations, insights, and tools that reflect your care journey.</p>
                 </div>
             </div>
 
@@ -166,8 +166,6 @@
             <p><strong>Time commitment:</strong> 6-month pilot, opt out anytime</p>
             <p><strong>What you'll gain:</strong> See your medical data visualized, connect with MDA's research team, and accelerate discovery</p>
             <p><strong>Your choice:</strong> Test one platform or explore all three to compare experiences</p>
-
-            <p class="privacy-note" style="margin-top: 30px; text-align: center;"><strong>Enrollment is limited.</strong> Spots are offered first-come, first-served. Once at capacity, we'll begin a waitlist for the full launch.</p>
         </div>
     </section>
 
@@ -175,16 +173,21 @@
     <section id="join" class="enrollment-form">
         <div class="container">
             <h2>Join the MOVR Pilot</h2>
-            
+
+            <div class="form-warning-box">
+                <p><strong>⚠️ Enrollment is limited — First-come, first-served</strong></p>
+                <p>Please submit only 1 form. Questions or want to join all 3 platforms after submitting? Email <a href="mailto:mdamovr@mdausa.org">mdamovr@mdausa.org</a></p>
+            </div>
+
             <form id="pilot-form">
                 <!-- CSRF Protection -->
                 <input type="hidden" name="csrf_token" id="csrf_token">
                 
                 <div class="form-group">
-                    <label for="name">Full Name *</label>
-                    <input type="text" id="name" name="name" required 
-                           placeholder="Enter your full name"
-                           pattern="[A-Za-z\s\-']+" 
+                    <label for="name">Participant First and Last Name *</label>
+                    <input type="text" id="name" name="name" required
+                           placeholder="Enter participant's first and last name"
+                           pattern="[A-Za-z\s\-']+"
                            title="Please enter a valid name (letters, spaces, hyphens, apostrophes only)"
                            maxlength="100">
                     <div class="error-message" id="name-error"></div>
@@ -221,8 +224,20 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="howHeard">How did you hear about this?</label>
-                    <select id="howHeard" name="howHeard">
+                    <label for="ageGroup">Participant is: *</label>
+                    <select id="ageGroup" name="ageGroup" required>
+                        <option value="">Select Age Group</option>
+                        <option value="6-younger">6 or younger</option>
+                        <option value="7-13">7-13</option>
+                        <option value="14-17">14-17</option>
+                        <option value="18-older">18 or older</option>
+                    </select>
+                    <div class="error-message" id="ageGroup-error"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="howHeard">How did you hear about this? *</label>
+                    <select id="howHeard" name="howHeard" required>
                         <option value="">Select an option</option>
                         <option value="Email">MDA Email</option>
                         <option value="Social">Social Media</option>
@@ -231,6 +246,7 @@
                         <option value="Friend">Friend/Family</option>
                         <option value="Other">Other</option>
                     </select>
+                    <div class="error-message" id="howHeard-error"></div>
                 </div>
 
                 <div class="form-group checkbox">
@@ -245,7 +261,7 @@
                     <label>
                         <input type="checkbox" name="attestation" required>
                         <span class="checkmark"></span>
-                        I consent to participate and understand my data will be used for research purposes *
+                        I grant permission for the MOVR team to contact me about this pilot, including enrollment support, feedback requests, and invitations to future phases *
                     </label>
                     <div class="error-message" id="attestation-error"></div>
                 </div>
@@ -254,19 +270,34 @@
                     <span id="submit-text">Submit My Information</span>
                     <span id="submit-spinner" class="spinner" style="display:none;">⏳ Submitting...</span>
                 </button>
+
+                <div id="loading-message" class="loading-message" style="display:none;">
+                    <p class="loading-text">We're personalizing your experience...</p>
+                    <p class="loading-subtext">Randomizing your platform assignment and composing your email with instructions for enrollment. This may take up to 45 seconds. <strong>Please don't close this window.</strong></p>
+                </div>
             </form>
 
             <!-- Success Message -->
             <div id="confirmation" class="message success-message" style="display:none;">
-                <h2>✅ Thank you!</h2>
-                <p>Check your email for next steps. You should receive an email within the next few minutes.</p>
+                <h2>Thank you for joining us!</h2>
+                <p class="personal-message"><em>We're excited to have you as part of the MOVR 2.0 pilot. You'll receive an email from Andre shortly with all the details, but here's your assignment to get started:</em></p>
+
                 <div class="enrollment-details">
                     <p><strong>Your assigned platform:</strong> <span id="assigned-vendor"></span></p>
-                    <p><strong>Start here:</strong> <a id="enrollment-link" href="#" target="_blank" class="enrollment-url">Begin Enrollment</a></p>
+                    <p><strong>Start here:</strong></p>
+                    <p class="enrollment-url-display"><a id="enrollment-link" href="#" target="_blank" class="enrollment-url"></a></p>
                     <p id="multi-platform-note" style="display:none; margin-top: 15px; font-style: italic; color: #155724;">
                         Since you indicated interest in exploring all platforms, your email will include enrollment links for all three vendors.
                     </p>
                 </div>
+
+                <p class="personal-message" style="margin-top: 25px;"><em>We'll be with you every step of the way.</em></p>
+
+                <p class="message-signature">
+                    Sincerely,<br>
+                    <strong>Andre & Jessica</strong><br>
+                    <span class="team-label">MOVR Team</span>
+                </p>
             </div>
 
             <!-- Waitlist Message -->
@@ -314,13 +345,8 @@
             <div class="faq-item">
                 <h3 class="faq-question">Who will contact me after I sign up?</h3>
                 <div class="faq-answer">
-                    <p>You'll first receive an automated email from <strong>Andre D. Paredes</strong> (Sr. Director of Strategy & Informatics) with your platform assignment and enrollment link.</p>
-                    <p>Within a few days, <strong>Jessica Waits</strong> (Director of Clinical Operations) will personally reach out to guide you through two important steps:</p>
-                    <ol>
-                        <li>Setting up your account on the assigned platform</li>
-                        <li>Completing MDA's research study consent</li>
-                    </ol>
-                    <p>Jessica will be your primary contact throughout the pilot, sending friendly reminders and checking in to ensure you're fully enrolled and your experience counts toward shaping MOVR 2.0's future. She's here to help with any questions or technical issues along the way!</p>
+                    <p><strong>Andre</strong> will send you an initial email with your platform assignment and enrollment link.</p>
+                    <p><strong>Jessica</strong> will follow up to ensure you complete the MDA research study consent, ask for your feedback as you explore the platform, and respond to any questions you have along the way.</p>
                 </div>
             </div>
 
@@ -335,6 +361,13 @@
                 <h3 class="faq-question">Which platform will I use?</h3>
                 <div class="faq-answer">
                     <p>After you sign up, we'll send you a link to one of the three platforms. We're balancing participation across all three so we can fairly evaluate each one. Want to try more than one? During sign-up you can indicate interest in exploring multiple platforms and we'll send you all three links.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <h3 class="faq-question">Can I enroll in all three platforms after I submit the form?</h3>
+                <div class="faq-answer">
+                    <p>Yes! If you've already submitted the form and would like to participate in all three platforms to compare experiences, simply email <a href="mailto:mdamovr@mdausa.org">mdamovr@mdausa.org</a> and we'll reach out to you with instructions and enrollment links for the additional platforms.</p>
                 </div>
             </div>
 

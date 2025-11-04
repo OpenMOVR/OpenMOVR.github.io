@@ -74,7 +74,7 @@ function validateForm() {
     }
 
     // Required field validation
-    const requiredFields = ['disease', 'relationship'];
+    const requiredFields = ['disease', 'relationship', 'ageGroup', 'howHeard'];
     requiredFields.forEach(field => {
         if (!document.getElementById(field).value) {
             showError(field + '-error', 'This field is required');
@@ -131,19 +131,25 @@ document.getElementById('pilot-form').addEventListener('submit', function(e) {
     const submitBtn = document.getElementById('submit-btn');
     const submitText = document.getElementById('submit-text');
     const submitSpinner = document.getElementById('submit-spinner');
-    
+    const loadingMessage = document.getElementById('loading-message');
+
     if (submitBtn && submitText && submitSpinner) {
         submitBtn.disabled = true;
         submitText.style.display = 'none';
         submitSpinner.style.display = 'inline';
     }
+
+    // Show personalized loading message
+    if (loadingMessage) {
+        loadingMessage.style.display = 'block';
+    }
     
     // Convert to JSON with enhanced data
     const data = {};
     formData.forEach((value, key) => {
-        if (key === 'multiPlatform') {
+        if (key === 'multiPlatform' || key === 'attestation') {
             data[key] = value;
-        } else if (key !== 'attestation' && key !== 'csrf_token') {
+        } else if (key !== 'csrf_token') {
             data[key] = value.trim();
         }
     });
@@ -162,6 +168,11 @@ document.getElementById('pilot-form').addEventListener('submit', function(e) {
         .then(data => {
             lastSubmission = now;
             form.style.display = 'none';
+
+            // Hide loading message
+            if (loadingMessage) {
+                loadingMessage.style.display = 'none';
+            }
             
             if (data.status === 'success') {
                 // Populate vendor information
@@ -170,8 +181,10 @@ document.getElementById('pilot-form').addEventListener('submit', function(e) {
                 }
                 if (data.enrollmentUrl) {
                     const enrollmentLink = document.getElementById('enrollment-link');
-                    enrollmentLink.href = data.enrollmentUrl;
-                    enrollmentLink.textContent = data.enrollmentUrl;
+                    // URLs now come with full https:// from Power Automate
+                    const fullUrl = data.enrollmentUrl.trim();
+                    enrollmentLink.href = fullUrl;
+                    enrollmentLink.textContent = fullUrl;
                 }
                 
                 // Show multi-platform note if they selected that option
@@ -234,7 +247,13 @@ function resetSubmitButton() {
     const submitBtn = document.getElementById('submit-btn');
     const submitText = document.getElementById('submit-text');
     const submitSpinner = document.getElementById('submit-spinner');
-    
+    const loadingMessage = document.getElementById('loading-message');
+
+    // Hide loading message
+    if (loadingMessage) {
+        loadingMessage.style.display = 'none';
+    }
+
     if (submitBtn && submitText && submitSpinner) {
         submitBtn.disabled = false;
         submitText.style.display = 'inline';
