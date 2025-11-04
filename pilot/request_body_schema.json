@@ -12,13 +12,35 @@
         },
         "disease": {
             "type": "string",
-            "enum": ["DMD", "SMA", "LGMD"],
+            "enum": [
+                "DMD",
+                "SMA",
+                "LGMD"
+            ],
             "description": "Disease type: DMD, SMA, or LGMD"
         },
         "relationship": {
             "type": "string",
-            "enum": ["Patient", "Parent/Caregiver", "Other"],
+            "enum": [
+                "Patient",
+                "Parent/Caregiver",
+                "Other"
+            ],
             "description": "Participant's relationship to patient"
+        },
+        "ageGroup": {
+            "type": "string",
+            "enum": [
+                "6-younger",
+                "7-13",
+                "14-17",
+                "18-older"
+            ],
+            "description": "Participant's age group"
+        },
+        "attestation": {
+            "type": "string",
+            "description": "Consent checkbox value (true when checked)"
         },
         "multiPlatform": {
             "type": "string",
@@ -26,8 +48,15 @@
         },
         "howHeard": {
             "type": "string",
-            "enum": ["Email", "Social", "Event", "Provider", "Friend", "Other"],
-            "description": "How participant heard about pilot (optional)"
+            "enum": [
+                "Email",
+                "Social",
+                "Event",
+                "Provider",
+                "Friend",
+                "Other"
+            ],
+            "description": "How participant heard about pilot"
         },
         "submissionTime": {
             "type": "string",
@@ -43,5 +72,13 @@
             "description": "Page referrer URL"
         }
     },
-    "required": ["name", "email", "disease", "relationship"]
+    "required": [
+        "name",
+        "email",
+        "disease",
+        "relationship",
+        "ageGroup",
+        "howHeard",
+        "attestation"
+    ]
 }

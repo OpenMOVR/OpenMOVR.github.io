@@ -280,6 +280,32 @@ header .container {
     margin-top: 8px;
 }
 
+/* PILOT DETAILS BOX */
+.pilot-details {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.pilot-details p {
+    font-size: 0.9em !important;
+    margin-bottom: 8px !important;
+    line-height: 1.4;
+    color: #495057;
+}
+
+.pilot-details p:last-child {
+    margin-bottom: 0 !important;
+}
+
+.pilot-details strong {
+    color: var(--mda-blue);
+    font-weight: 600;
+}
+
 /* BENEFITS SECTION */
 .benefits {
     padding: 60px 0;
@@ -786,8 +812,12 @@ footer a {
     }
 
     .pilot-details {
-        flex-direction: column;
-        gap: 15px;
-        text-align: center;
+        padding: 15px;
+        margin: 15px 0;
+    }
+
+    .pilot-details p {
+        font-size: 0.85em !important;
+        margin-bottom: 6px !important;
     }
 }
