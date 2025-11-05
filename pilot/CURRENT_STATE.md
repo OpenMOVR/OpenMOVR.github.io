@@ -1,8 +1,15 @@
 # MOVR Pilot - Current State Documentation
 
-**Last Updated:** 2025-10-31  
+**Last Updated:** 2025-11-05  
 **Status:** LIVE and operational  
 **Live URL:** https://openmovr.github.io/pilot
+
+## Issue Log
+
+| Date | Issue | Status | Description |
+|------|-------|--------|-------------|
+| 2025-11-05 | **CRITICAL: Global Minimum Logic Flaw** | 🔴 DETECTED | Condition 2 main logic uses global "All Minimums Met" check instead of disease-specific minimums. When SMA quotas are met but DMD quotas are not, DMD participants incorrectly enter TRUE branch (post-minimum priority) instead of continuing minimum quota filling for DMD. Requires disease-specific minimum checking logic. |
+| 2025-11-05 | **ERROR: No Remaining Slots in FALSE Branch** | 🔴 DETECTED | When disease (e.g., DMD) is forced back into FALSE branch (minimum quota mode) but has no remaining slots available, the system errors instead of gracefully handling the waitlist scenario. |
 
 ## Project Overview
 
@@ -130,6 +137,93 @@ Once all minimums achieved:
 2. Multiple test runs have been conducted
 3. Live Excel file has been copied with current participant data
 4. System is actively processing real participant submissions
+
+## Critical Issues Identified
+
+### 🔴 CRITICAL: Global Minimum Logic Flaw (Detected 2025-11-05)
+
+**Problem:** The current Power Automate Condition 2 logic uses a global "All Minimums Met" check from the MilestonesTable instead of disease-specific minimum validation.
+
+**Impact:** 
+- When SMA minimum quotas are achieved but DMD quotas are not met
+- DMD participants incorrectly trigger the TRUE branch (post-minimum priority logic)
+- This bypasses the minimum quota filling rotation for DMD
+- DMD vendors may not receive their guaranteed minimum participants
+- Violates the two-phase assignment system design
+
+**Current Flawed Logic:**
+```
+IF MilestonesTable "All Minimums Met" = "ACHIEVED"
+  THEN: Use priority-based assignment (TRUE branch)
+  ELSE: Use minimum quota rotation (FALSE branch)
+```
+
+**Required Fix:**
+```
+IF Disease-specific minimums are met for [participant's disease]
+  THEN: Use priority-based assignment (TRUE branch)
+  ELSE: Use minimum quota rotation (FALSE branch)
+```
+
+**Technical Solution Needed:**
+1. Replace global milestone check with disease-specific logic
+2. Check if ALL vendors for the participant's disease have "Min Met" = "YES"
+3. Only enter TRUE branch when the specific disease has completed minimum quotas
+4. Each disease type (DMD/SMA/LGMD) should independently determine phase transition
+
+**SIMPLEST POWER AUTOMATE FIX:**
+
+**Step 1: Add New Action Before Condition 2**
+- **Action:** "Get a row" (Excel Online)
+- **Name:** "Get disease milestone status" 
+- **Table:** MilestonesTable
+- **Key Column:** Milestone
+- **Key Value:** `concat(triggerBody()?['disease'], ' Minimums Met')`
+
+**Step 2: Add New Variable Setting Action**
+- **Action:** "Set variable"
+- **Name:** "Set disease minimums achieved"
+- **Variable:** AllMinimumsAchieved
+- **Value:** `equals(outputs('Get_disease_milestone_status')?['Status'], 'ACHIEVED')`
+
+**Step 3: Add Error Handling in FALSE Branch**
+After `Filter_eligible_vendors_for_minimum_quota`, add:
+- **Action:** "Condition" 
+- **Name:** "Check if vendors available for minimum"
+- **Expression:** `length(body('Filter_eligible_vendors_for_minimum_quota')) equals 0`
+- **IF TRUE:** Set AssignedVendor to empty (triggers waitlist)
+- **IF FALSE:** Continue with existing logic
+
+**BETTER APPROACH: Disease-Specific Variables**
+
+**Why this is cleaner:**
+- No complex branch modifications needed
+- Clear separation of disease logic
+- Condition 2 stays simple
+- Easy to debug and maintain
+
+**EVEN BETTER: Single Variable with String Detection**
+
+**Step 1: Initialize One Variable**
+- **ParticipantDiseaseMinimumAchieved** (Boolean, default: false)
+
+**Step 2: Single Smart Condition in Apply to each Loop**
+Replace all conditions with one condition using `contains()`:
+```
+contains(items('Apply_to_each')?['Milestone'], triggerBody()?['disease'])
+```
+
+**Step 3: Keep Condition 2 Simple**
+Use the single variable: `variables('ParticipantDiseaseMinimumAchieved')`
+
+**How it works:**
+- DMD participant → looks for milestone containing "DMD" → finds "DMD Minimums Met"
+- SMA participant → looks for milestone containing "SMA" → finds "SMA Minimums Met"  
+- LGMD participant → looks for milestone containing "LGMD" → finds "LGMD Minimums Met"
+
+**Result:** Much cleaner! One variable, one condition, automatic disease detection!
+
+**Business Risk:** Medium-High - Could result in vendor quota imbalances and contractual issues if DMD vendors don't receive minimum guaranteed participants.
 
 ## Monitoring & Management
 

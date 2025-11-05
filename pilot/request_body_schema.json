@@ -51,7 +51,7 @@
             "enum": [
                 "Email",
                 "Social",
-                "Event",
+                "Call",
                 "Provider",
                 "Friend",
                 "Other"
