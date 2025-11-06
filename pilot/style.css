@@ -160,6 +160,7 @@ header .container {
     max-width: 100%;
     overflow-wrap: break-word;
     word-wrap: break-word;
+    hyphens: auto;
 }
 
 .hero .pilot-details p {
@@ -169,6 +170,7 @@ header .container {
     color: #495057;
     overflow-wrap: break-word;
     word-wrap: break-word;
+    hyphens: auto;
 }
 
 .hero .pilot-details p:last-child {
@@ -830,16 +832,22 @@ footer a {
 
     /* Hero section pilot-details */
     .hero .pilot-details {
-        padding: 10px;
+        padding: 8px;
         margin: 15px 0;
         font-size: 0.85em;
         border-radius: 6px;
     }
 
     .hero .pilot-details p {
-        font-size: 0.75em !important;
+        font-size: 0.7em !important;
         margin-bottom: 5px !important;
-        line-height: 1.35;
+        line-height: 1.4;
+        word-break: break-word;
+    }
+    
+    .hero .pilot-details strong {
+        display: inline;
+        word-break: break-word;
     }
     
     /* How it works section pilot-details */
