@@ -149,6 +149,37 @@ header .container {
     transition: all 0.3s;
 }
 
+/* PILOT DETAILS BOX (in hero section) */
+.hero .pilot-details {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
+.hero .pilot-details p {
+    font-size: 0.9em !important;
+    margin-bottom: 8px !important;
+    line-height: 1.4;
+    color: #495057;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
+.hero .pilot-details p:last-child {
+    margin-bottom: 0 !important;
+}
+
+.hero .pilot-details strong {
+    color: var(--mda-blue);
+    font-weight: 600;
+}
+
 /* MESSAGE FROM TEAM SECTION - LEADERSHIP BIO STYLE */
 .message-from-team {
     padding: 40px 0;
@@ -290,37 +321,6 @@ header .container {
     font-size: 1.05em;
     font-weight: 600;
     margin-top: 8px;
-}
-
-/* PILOT DETAILS BOX */
-.pilot-details {
-    background: #f8f9fa;
-    border: 1px solid #e9ecef;
-    border-radius: 8px;
-    padding: 20px;
-    margin: 20px 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    max-width: 100%;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-}
-
-.pilot-details p {
-    font-size: 0.9em !important;
-    margin-bottom: 8px !important;
-    line-height: 1.4;
-    color: #495057;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-}
-
-.pilot-details p:last-child {
-    margin-bottom: 0 !important;
-}
-
-.pilot-details strong {
-    color: var(--mda-blue);
-    font-weight: 600;
 }
 
 /* BENEFITS SECTION */
@@ -828,17 +828,30 @@ footer a {
         font-size: 1em;
     }
 
-    .pilot-details {
+    /* Hero section pilot-details */
+    .hero .pilot-details {
         padding: 10px;
         margin: 15px 0;
         font-size: 0.85em;
         border-radius: 6px;
     }
 
-    .pilot-details p {
+    .hero .pilot-details p {
         font-size: 0.75em !important;
         margin-bottom: 5px !important;
         line-height: 1.35;
+    }
+    
+    /* How it works section pilot-details */
+    .how-it-works .pilot-details {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+        margin-top: 30px;
+    }
+    
+    .how-it-works .pilot-details p {
+        font-size: 0.9em !important;
     }
     
     .container {
