@@ -1,16 +1,16 @@
 # OpenMOVR Community Initiative
 
-Community-driven neuromuscular disease research platform featuring comprehensive documentation, Google Summer of Code 2026 program, and the MOVR Legacy Datahub - a pip-installable Python library providing immediate access to established research datasets.
+Open science initiative for neuromuscular disease research featuring streamlined design, Google Summer of Code 2026 program, and comprehensive documentation. Building the future through transparent collaboration.
 
-**Founded by ADPAREDES • Andre • OpenMOVR Founder & Architect**
+**Founded by Andre Daniel Paredes, PhD • OpenMOVR Founder & Architect**
 
 ## 🌟 Overview
 
-OpenMOVR is a comprehensive research community initiative that transforms neuromuscular disease research through:
-- **Legacy Data Access**: MOVR Datahub Python library with pip installation for immediate dataset access
-- **Google Summer of Code 2026**: Mentorship program developing the MOVR Legacy Datahub Library
-- **Interactive Documentation**: Comprehensive FAQ and platform guides with question-based navigation
-- **Research Impact**: Advanced pharmacovigilance and real-world evidence applications
+OpenMOVR is an open science initiative that advances neuromuscular disease research through:
+- **Simplified Experience**: Clean, focused landing page with key information and clear calls-to-action
+- **Google Summer of Code 2026**: Mentorship program developing the MOVR Legacy Datahub Library (priority project)
+- **Real Research Impact**: 6,021+ participants, 20,883+ clinical visits, 12 years of neuromuscular disease data
+- **Comprehensive Documentation**: Interactive FAQ and platform guides with question-based navigation
 - **Community Building**: Open collaboration between researchers, developers, and data scientists
 
 ## 🏗️ Website Architecture
@@ -18,16 +18,16 @@ OpenMOVR is a comprehensive research community initiative that transforms neurom
 The OpenMOVR website features a comprehensive structure designed for community engagement and research collaboration:
 
 ### Core Pages
-- **Homepage (`index.html`)**: Community landing page with Research Impact showcase and GSoC integration
+- **Homepage (`index.html`)**: Clean, streamlined landing page with configurable stats and clear messaging
 - **Documentation System (`docs/`)**: Interactive guides and comprehensive FAQ with collapsible navigation
-- **GSoC 2026 Program (`gsoc.html`)**: Complete mentorship program page with team profiles and project focus
-- **MOVR Legacy Datahub**: Pip-installable Python library for immediate dataset access
+- **GSoC 2026 Program (`gsoc.html`)**: Complete mentorship program page with colorful design and team profiles
+- **Pilot Program (`pilot/`)**: MOVR 2.0 enrollment landing page with email automation
 
 ### Documentation Structure
 - **`docs/faq.html`**: Interactive FAQ with collapsible question-based navigation
 - **`docs/current-work.html`**: Development status and active projects
 - **`docs/platform-vision.html`**: Future roadmap and technical vision
-- **`docs/movr-data-hub.html`**: Comprehensive data access documentation
+- **`docs/movr-data-hub.html`**: MOVR Legacy data documentation
 
 ### Technical Stack
 - **Frontend**: Modern HTML5 with responsive CSS3 and interactive JavaScript
@@ -38,40 +38,37 @@ The OpenMOVR website features a comprehensive structure designed for community e
 
 ## 🎨 Design Philosophy
 
-- **Community-Focused**: Clean, welcoming design that encourages collaboration
-- **Research-Forward**: Data-driven aesthetic supporting scientific communication
-- **Accessibility-First**: High contrast buttons, clear typography, semantic HTML
-- **Interactive Navigation**: Question-based documentation with smooth animations
+- **Simplified & Focused**: Clean design with clear messaging and reduced information density
+- **Research-Forward**: Data-driven aesthetic supporting scientific communication with configurable stats
+- **Accessibility-First**: High contrast, clear typography, semantic HTML, MDA brand colors
+- **Interactive Navigation**: Question-based documentation with smooth animations and user-friendly FAQ
 
 ## 📊 Key Features
 
-### MOVR Legacy Datahub Library
-- **Pip Installation**: `pip install movr-datahub` for immediate dataset access
-- **Python Integration**: Seamless data loading for research workflows
-- **Legacy Datasets**: Access to established neuromuscular disease research data
-- **Documentation**: Comprehensive guides for researchers and data scientists
+### Streamlined Homepage (index.html)
+- **Configurable Stats**: JavaScript object for easy updates (participants: 6,021, visits: 20,883, years: 12)
+- **Three Core Sections**: What We're Building, Vision & Impact, Get Involved
+- **Hero Banner Cycling**: Rotating background images every 5 seconds
+- **MDA Brand Colors**: Professional palette aligned with official MDA design
 
-### Google Summer of Code 2026 Program
-- **Team Leadership**: Andre Daniel Paredes (GSoC Mentor & Technical Lead) and Jessica Waits (GSoC Administrator & Project Lead)
-- **Project Focus**: Priority development of MOVR Legacy Datahub Library
+### Google Summer of Code 2026 Program (gsoc.html)
+- **Team Leadership**: Andre Daniel Paredes, PhD (GSoC Mentor & Technical Lead) and Jessica Waits (GSoC Administrator)
+- **Priority Project**: MOVR Legacy Datahub Python Library (pip-installable for researchers)
 - **Student Capacity**: 1 student for focused, mentored development
-- **Community Impact**: Open source contribution to neuromuscular disease research
+- **Colorful Design**: Google gradient styling with enhanced CTA sections
+- **Compact Fonts**: Smaller base font (0.9rem) for scannable content
 
 ### Interactive Documentation System
 - **FAQ Navigation**: Collapsible question-based interface with smooth animations
 - **Comprehensive Guides**: Platform vision, current work status, and data hub documentation
 - **Cross-Linking**: Integrated navigation between documentation sections
+- **Question-First Approach**: User-friendly FAQ with expandable answers
 
-### Research Impact Showcase
-- **Pharmacovigilance Applications**: Advanced signal detection and drug safety monitoring
-- **Real-World Evidence**: Post-market surveillance and comparative effectiveness research
-- **Clinical Decision Support**: Evidence-based treatment recommendations
-
-### Audience-Specific Content
-- **Researchers**: MOVR Datahub Python library access and GSoC mentorship opportunities
-- **Data Scientists**: Legacy dataset integration and analysis workflows
-- **Students**: Google Summer of Code 2026 program with expert mentorship
-- **Community**: Open collaboration and contribution opportunities
+### Pilot Program (pilot/)
+- **Email Automation**: Power Automate integration for success/waitlist emails
+- **Form Integration**: "Call" field (formerly Event) for meeting scheduling
+- **FAQ Integration**: Links to comprehensive FAQ with anchor navigation
+- **Disease-Specific URLs**: Conditional logic for vendor platform assignments
 
 ## 🚀 Quick Start
 
@@ -154,30 +151,19 @@ openmovr.github.io/
 
 ### Easy Updates
 Content can be updated through:
-1. **Configuration File** (`js/config.js`): Site navigation, project priorities, team information
+1. **Configuration Script** (`index.html` head): Update STATS object for participant/visit counts
 2. **Documentation System**: Interactive FAQ and comprehensive guides in `docs/` folder
 3. **GSoC Program**: Team profiles, project focus, and program details in `gsoc.html`
 4. **Asset Updates**: Replace images in `assets/` folder for visual content
 
-### MOVR Datahub Configuration
+### Stats Configuration (index.html)
 ```javascript
-// js/config.js - Priority project focus
-const siteConfig = {
-  projects: [
-    {
-      title: "MOVR Legacy Datahub Library",
-      description: "Pip-installable Python library for legacy dataset access",
-      priority: "2025 Development Focus",
-      installation: "pip install movr-datahub"
-    }
-  ],
-  gsoc: {
-    year: 2026,
-    capacity: "1 student",
-    mentor: "Andre Daniel Paredes",
-    administrator: "Jessica Waits"
-  }
-}
+// Configurable stats at top of index.html
+const STATS = {
+    participants: 6021,
+    clinicalVisits: 20883,
+    yearsExperience: 12
+};
 ```
 
 ### Documentation Updates
@@ -223,44 +209,45 @@ const siteConfig = {
 ## 📞 Contact & Support
 
 ### Team Leadership
-- **Andre Daniel Paredes**: GSoC Mentor & Technical Lead, OpenMOVR Founder & Architect
-- **Jessica Waits**: GSoC Administrator & Project Lead
+- **Andre Daniel Paredes, PhD**: GSoC Mentor & Technical Lead, OpenMOVR Founder & Architect
+- **Jessica Waits**: GSoC Administrator & Project Lead, Director of Clinical Operations
 
 ### Program Information
-- **Google Summer of Code 2026**: Applications opening soon for 1 student position
-- **MOVR Legacy Datahub**: `pip install movr-datahub` for immediate access
+- **Google Summer of Code 2026**: Applications through official GSoC website for 1 student position
+- **Priority Project**: MOVR Legacy Datahub Library - pip-installable Python library for researchers
 - **Documentation**: Comprehensive guides available in `docs/` section
 - **Community**: Open collaboration and contribution opportunities
 
+### Contact
+- **Email**: mdamovr@mdausa.org
+- **GSoC Inquiries**: mdamovr@mdausa.org?subject=GSoC%202026%20Interest
+- **GitHub**: https://github.com/openmovr
+
 ## 🚀 Getting Started
 
-### For Researchers
-```bash
-# Install MOVR Datahub Library
-pip install movr-datahub
-
-# Import and start analyzing
-import movr_datahub as movr
-data = movr.load_dataset('neuromuscular_registry')
-```
+### For Researchers & Data Scientists
+1. Visit the homepage to see research impact (6,021+ participants, 20,883+ visits)
+2. Review comprehensive documentation in `docs/`
+3. Learn about MOVR Legacy Datahub Library (priority GSoC 2026 project)
+4. Explore pilot program for MOVR 2.0 participation
 
 ### For GSoC 2026 Students
-1. Review the comprehensive documentation in `docs/`
-2. Explore the MOVR Legacy Datahub Library project focus
-3. Connect with mentors Andre and Jessica for program details
-4. Prepare for application when program opens
+1. Read the Google Summer of Code program page at `gsoc.html`
+2. Review the priority project: MOVR Legacy Datahub Python Library
+3. Connect with mentors Andre Daniel Paredes, PhD and Jessica Waits
+4. Prepare project proposal when GSoC applications open
 
 ### For Contributors
-1. Clone the repository and explore the interactive documentation
+1. Clone the repository and explore the streamlined homepage
 2. Review current work status in `docs/current-work.html`
 3. Understand platform vision in `docs/platform-vision.html`
 4. Engage with the community through collaborative development
 
 ## 📄 License
 
-Copyright © 2025 OpenMOVR Community Initiative. 
-Founded by ADPAREDES • Andre • OpenMOVR Founder & Architect.
+Copyright © 2025 OpenMOVR Open Science Initiative  
+Founded by Andre Daniel Paredes, PhD • OpenMOVR Founder & Architect
 
 ---
 
-**OpenMOVR** - Advancing neuromuscular disease research through community collaboration, legacy data access, and open science initiatives.
+**OpenMOVR** - Building the future of neuromuscular disease research through open science, community collaboration, and transparent data sharing.
