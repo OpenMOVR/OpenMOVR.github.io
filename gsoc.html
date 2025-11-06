@@ -3,8 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GSoC | OpenMOVR - Google Summer of Code</title>
+    <title>GSoC 2026 | OpenMOVR - Google Summer of Code</title>
+    
+    <!-- Meta Description -->
     <meta name="description" content="Join OpenMOVR's Google Summer of Code program. Contribute to open source neuromuscular disease research tools through mentored development projects.">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://openmovr.github.io/gsoc.html">
+    <meta property="og:title" content="GSoC 2026 | OpenMOVR - Google Summer of Code">
+    <meta property="og:description" content="Join OpenMOVR's Google Summer of Code program. Build open source tools for neuromuscular disease research with expert mentorship.">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:url" content="https://openmovr.github.io/gsoc.html">
+    <meta property="twitter:title" content="GSoC 2026 | OpenMOVR - Google Summer of Code">
+    <meta property="twitter:description" content="Join OpenMOVR's Google Summer of Code program. Build open source tools for neuromuscular disease research with expert mentorship.">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,10 +27,36 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="icon" type="image/png" href="assets/movr_logo_clean_nobackground.png">
     
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-85RSP2VHG6"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-85RSP2VHG6');
+    </script>
+    
     <style>
+        /* Compact, smaller font styling */
+        body {
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        h1 { font-size: 2.5rem; }
+        h2 { font-size: 1.8rem; }
+        h3 { font-size: 1.3rem; }
+        h4 { font-size: 1.1rem; }
+        h5 { font-size: 1rem; }
+        
+        p, li { font-size: 0.9rem; }
+        
+        .section { padding: 2rem 0; }
+        .card-content { padding: 1rem; }
+        
         .hero-gsoc {
             background: linear-gradient(135deg, #4285f4 0%, #34a853 50%, #fbbc04 75%, #ea4335 100%);
-            padding: var(--spacing-2xl) 0;
+            padding: 2.5rem 0;
             color: var(--white);
             text-align: center;
         }
@@ -24,7 +64,7 @@
         .project-card {
             border-left: 4px solid var(--primary-blue);
             background: var(--white);
-            margin-bottom: var(--spacing-lg);
+            margin-bottom: 1rem;
             transition: all 0.3s ease;
         }
 
@@ -35,9 +75,9 @@
 
         .difficulty-badge {
             display: inline-block;
-            padding: var(--spacing-xs) var(--spacing-sm);
+            padding: 0.15rem 0.5rem;
             border-radius: var(--radius);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 600;
             text-transform: uppercase;
         }
@@ -56,42 +96,53 @@
             background: #fecaca;
             color: #991b1b;
         }
+        
+        /* Proper bullet point indentation in cards */
+        .card ul, .card ol {
+            padding-left: 1.5rem;
+            margin-left: 0;
+        }
+        
+        .card li {
+            margin-bottom: 0.4rem;
+        }
 
         .timeline-item {
             display: flex;
             align-items: flex-start;
-            margin-bottom: var(--spacing-lg);
+            margin-bottom: 1rem;
         }
 
         .timeline-date {
-            min-width: 120px;
+            min-width: 100px;
             font-weight: 600;
+            font-size: 0.85rem;
             color: var(--primary-blue);
         }
 
         .mentor-card {
             text-align: center;
-            padding: var(--spacing-lg);
+            padding: 1rem;
         }
 
         .mentor-avatar {
-            width: 80px;
-            height: 80px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--primary-blue), var(--success-green));
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
-            margin: 0 auto var(--spacing-md);
+            font-size: 1.5rem;
+            margin: 0 auto 0.75rem;
             color: var(--white);
         }
 
         .tech-stack {
             display: flex;
             flex-wrap: wrap;
-            gap: var(--spacing-xs);
-            margin-top: var(--spacing-sm);
+            gap: 0.3rem;
+            margin-top: 0.5rem;
         }
 
         .tech-tag {
@@ -146,13 +197,13 @@
     <!-- Hero Section -->
     <section class="hero-gsoc">
         <div class="container">
-            <div style="max-width: 800px; margin: 0 auto;">
-                <h1 style="font-size: 3rem; margin-bottom: var(--spacing-md); color: var(--white);">Google Summer of Code</h1>
-                <p style="font-size: 1.3rem; margin-bottom: var(--spacing-xl); opacity: 0.95;">Join OpenMOVR's mentorship program and contribute to next-generation neuromuscular disease research tools</p>
+            <div style="max-width: 700px; margin: 0 auto;">
+                <h1 style="font-size: 2.5rem; margin-bottom: 0.75rem; color: var(--white);">Google Summer of Code 2026</h1>
+                <p style="font-size: 1.1rem; margin-bottom: 1.5rem; opacity: 0.95;">Build open source tools for neuromuscular disease research</p>
                 
                 <div class="btn-group justify-center">
-                    <a href="#projects" class="btn btn-primary btn-large" style="background: var(--white); color: #4285f4; font-weight: 700; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">🚀 View Projects</a>
-                    <a href="#apply" class="btn btn-outline btn-large" style="border-color: var(--white); color: var(--white); border-width: 2px; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px);">📝 How to Apply</a>
+                    <a href="#projects" class="btn btn-primary btn-large" style="background: var(--white); color: #4285f4; font-weight: 700; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">View Projects</a>
+                    <a href="#apply" class="btn btn-outline btn-large" style="border-color: var(--white); color: var(--white); border-width: 2px; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px);">Apply</a>
                 </div>
             </div>
         </div>
@@ -162,32 +213,32 @@
     <section class="section" style="background: var(--white);">
         <div class="container">
             <div class="section-header text-center">
-                <h2>Why Contribute to OpenMOVR?</h2>
-                <p>Make a meaningful impact on healthcare while building your open source portfolio</p>
+                <h2>Why OpenMOVR?</h2>
+                <p style="font-size: 0.9rem;">Real healthcare impact with expert mentorship</p>
             </div>
             
             <div class="grid grid-3">
                 <div class="card" style="text-align: center;">
                     <div class="card-content">
-                        <div style="font-size: 3rem; margin-bottom: var(--spacing-md);">🏥</div>
-                        <h3>Real Healthcare Impact</h3>
-                        <p>Your code will directly support research for ALS, SMA, DMD, and other neuromuscular diseases affecting thousands of patients worldwide.</p>
+                        <div style="font-size: 2.5rem; margin-bottom: 0.75rem;"></div>
+                        <h3>Healthcare Impact</h3>
+                        <p>Support research for ALS, SMA, DMD, and other neuromuscular diseases affecting thousands worldwide.</p>
                     </div>
                 </div>
                 
                 <div class="card" style="text-align: center;">
                     <div class="card-content">
-                        <div style="font-size: 3rem; margin-bottom: var(--spacing-md);">🧠</div>
+                        <div style="font-size: 2.5rem; margin-bottom: 0.75rem;"></div>
                         <h3>Expert Mentorship</h3>
-                        <p>Work directly with experienced researchers, data scientists, and software engineers from the MOVR team and partner institutions.</p>
+                        <p>Work with experienced researchers, data scientists, and software engineers from the MOVR team.</p>
                     </div>
                 </div>
                 
                 <div class="card" style="text-align: center;">
                     <div class="card-content">
-                        <div style="font-size: 3rem; margin-bottom: var(--spacing-md);">🔬</div>
-                        <h3>Cutting-Edge Technology</h3>
-                        <p>Gain hands-on experience with FHIR standards, healthcare APIs, machine learning pipelines, and modern data processing frameworks.</p>
+                        <div style="font-size: 2.5rem; margin-bottom: 0.75rem;"></div>
+                        <h3>Modern Tech Stack</h3>
+                        <p>FHIR standards, healthcare APIs, ML pipelines, and modern data processing frameworks.</p>
                     </div>
                 </div>
             </div>
@@ -213,14 +264,14 @@
             <div class="project-card card" style="border-left: 4px solid #34a853;">
                 <div class="card-content">
                     <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--spacing-md);">
-                        <h3>🏗️ MOVR Legacy Datahub Python Library</h3>
+                        <h3>MOVR Legacy Datahub Python Library</h3>
                         <span class="difficulty-badge difficulty-intermediate">Intermediate</span>
                     </div>
                     
                     <p><strong>Mission:</strong> Create a pip-installable Python library that makes 12 years of MOVR legacy data (5,895+ participants, 20,152+ encounters) easily accessible to researchers, universities, and data scientists worldwide.</p>
                     
                     <div style="background: #f0f9ff; padding: var(--spacing-md); border-radius: var(--radius); margin: var(--spacing-md) 0;">
-                        <h4 style="color: #1e40af;">🎯 Vision: Democratizing Neuromuscular Disease Data</h4>
+                        <h4 style="color: #1e40af;">Vision: Democratizing Neuromuscular Disease Data</h4>
                         <p style="margin-bottom: 0;">Enable any researcher to access and analyze comprehensive longitudinal data with just <code>pip install movr-datahub</code></p>
                     </div>
                     
@@ -573,63 +624,6 @@ movr.plot_progression(progression, save='my_analysis.png')
         </div>
     </section>
 
-    <!-- Application Process -->
-    <section class="section" id="apply" style="background: var(--white);">
-        <div class="container">
-            <div class="section-header text-center">
-                <h2>How to Apply</h2>
-                <p>Steps to join our GSoC program</p>
-            </div>
-            
-            <div class="grid grid-2" style="gap: var(--spacing-xl);">
-                <div>
-                    <div class="card">
-                        <div class="card-header">
-                            <h3>📋 Application Steps</h3>
-                        </div>
-                        <div class="card-content">
-                            <ol>
-                                <li><strong>Get Familiar:</strong> Review our project ideas and codebase</li>
-                                <li><strong>Join Community:</strong> Introduce yourself on our communication channels</li>
-                                <li><strong>Make a Contribution:</strong> Submit a small PR or fix to show your skills</li>
-                                <li><strong>Write Proposal:</strong> Create a detailed project proposal</li>
-                                <li><strong>Submit Application:</strong> Apply through the official GSoC website</li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-                
-                <div>
-                    <div class="card">
-                        <div class="card-header">
-                            <h3>💡 Tips for Success</h3>
-                        </div>
-                        <div class="card-content">
-                            <ul>
-                                <li><strong>Start Early:</strong> Begin engaging with the community before applications open</li>
-                                <li><strong>Show Initiative:</strong> Propose improvements or ask thoughtful questions</li>
-                                <li><strong>Understand the Domain:</strong> Learn about neuromuscular diseases and healthcare data</li>
-                                <li><strong>Be Specific:</strong> Include detailed timelines and deliverables in your proposal</li>
-                                <li><strong>Communicate:</strong> Stay active in discussions and respond promptly</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div style="text-align: center; margin-top: var(--spacing-xl);">
-                <div class="alert alert-info" style="display: inline-block; max-width: 600px;">
-                    <h4>📧 Ready to Get Started?</h4>
-                    <p>Contact our mentorship team to discuss project ideas and get guidance on your application.</p>
-                    <div class="btn-group" style="margin-top: var(--spacing-md);">
-                        <a href="mailto:mdamovr@mdausa.org?subject=GSoC%202026%20Interest" class="btn btn-primary">Contact Mentors</a>
-                        <a href="https://github.com/openmovr" class="btn btn-outline" target="_blank">View GitHub</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Prerequisites -->
     <section class="section" style="background: var(--light-gray);">
         <div class="container">
@@ -664,7 +658,7 @@ movr.plot_progression(progression, save='my_analysis.png')
                 
                 <div class="card">
                     <div class="card-header">
-                        <h3>🧠 Soft Skills</h3>
+                        <h3>Soft Skills</h3>
                     </div>
                     <div class="card-content">
                         <h4>Essential Qualities:</h4>
@@ -687,21 +681,59 @@ movr.plot_progression(progression, save='my_analysis.png')
         </div>
     </section>
 
-    <!-- Call to Action -->
-    <section class="section call-to-action" style="background: linear-gradient(135deg, #4285f4 0%, #34a853 100%); color: var(--white);">
+    <!-- Application Process -->
+    <section class="section" id="apply" style="background: var(--white);">
         <div class="container">
-            <div style="text-align: center;">
-                <h2 style="color: var(--white) !important; margin-bottom: var(--spacing-md);">Join the OpenMOVR GSoC Community</h2>
-                <p style="font-size: 1.2rem; margin-bottom: var(--spacing-xl); opacity: 0.95; color: var(--white) !important;">Be part of building the next generation of neuromuscular disease research tools. Your contribution will directly impact patients and advance medical research.</p>
-                
-                <div class="btn-group justify-center">
-                    <a href="mailto:mdamovr@mdausa.org?subject=GSoC%202026%20Application" class="btn btn-primary" style="background: var(--white); color: #4285f4; font-weight: 700; box-shadow: 0 8px 20px rgba(0,0,0,0.25); border: 2px solid #4285f4;">📧 Start Your Application</a>
-                    <a href="docs/current-work.html" class="btn btn-outline" style="border: 3px solid var(--white); color: var(--white); background: rgba(255,255,255,0.15); backdrop-filter: blur(15px); font-weight: 600;">📋 Learn About Current Work</a>
+            <div class="section-header text-center">
+                <h2>How to Apply</h2>
+                <p>Steps to join our GSoC program</p>
+            </div>
+            
+            <div class="grid grid-2" style="gap: var(--spacing-xl);">
+                <div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Application Steps</h3>
+                        </div>
+                        <div class="card-content">
+                            <ol>
+                                <li><strong>Get Familiar:</strong> Review our project ideas and codebase</li>
+                                <li><strong>Join Community:</strong> Introduce yourself on our communication channels</li>
+                                <li><strong>Make a Contribution:</strong> Submit a small PR or fix to show your skills</li>
+                                <li><strong>Write Proposal:</strong> Create a detailed project proposal</li>
+                                <li><strong>Submit Application:</strong> Apply through the official GSoC website</li>
+                            </ol>
+                        </div>
+                    </div>
                 </div>
                 
-                <div style="margin-top: var(--spacing-xl); opacity: 0.9;">
-                    <p><strong>Application Timeline:</strong> Student applications typically open in March-April 2026</p>
-                    <p><small>Stay tuned for official GSoC 2026 announcements!</small></p>
+                <div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Tips for Success</h3>
+                        </div>
+                        <div class="card-content">
+                            <ul>
+                                <li><strong>Start Early:</strong> Begin engaging with the community before applications open</li>
+                                <li><strong>Show Initiative:</strong> Propose improvements or ask thoughtful questions</li>
+                                <li><strong>Understand the Domain:</strong> Learn about neuromuscular diseases and healthcare data</li>
+                                <li><strong>Be Specific:</strong> Include detailed timelines and deliverables in your proposal</li>
+                                <li><strong>Communicate:</strong> Stay active in discussions and respond promptly</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: var(--spacing-xl);">
+                <div class="alert alert-info" style="display: inline-block; max-width: 700px;">
+                    <h2>Ready to Apply?</h2>
+                    <p style="margin-bottom: 1rem;">Applications open through the official Google Summer of Code website. Connect with our mentors first to discuss your project proposal.</p>
+                    <div class="btn-group" style="margin-top: var(--spacing-md);">
+                        <a href="https://summerofcode.withgoogle.com/" class="btn btn-primary" target="_blank" style="background: #4285f4; border-color: #4285f4;">Apply on GSoC Website →</a>
+                        <a href="mailto:mdamovr@mdausa.org?subject=GSoC%202026%20Interest" class="btn btn-outline">Contact Mentors</a>
+                        <a href="https://github.com/openmovr" class="btn btn-outline" target="_blank">View GitHub</a>
+                    </div>
                 </div>
             </div>
         </div>
