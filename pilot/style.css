@@ -300,6 +300,9 @@ header .container {
     padding: 20px;
     margin: 20px 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
 .pilot-details p {
@@ -307,6 +310,8 @@ header .container {
     margin-bottom: 8px !important;
     line-height: 1.4;
     color: #495057;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
 .pilot-details p:last-child {
@@ -824,12 +829,14 @@ footer a {
     }
 
     .pilot-details {
-        padding: 15px;
-        margin: 15px 0;
+        padding: 12px;
+        margin: 15px -5px;
+        font-size: 0.85em;
     }
 
     .pilot-details p {
-        font-size: 0.85em !important;
+        font-size: 0.8em !important;
         margin-bottom: 6px !important;
+        line-height: 1.3;
     }
 }
