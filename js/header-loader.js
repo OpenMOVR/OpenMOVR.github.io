@@ -46,6 +46,11 @@
                     if (headerImg) {
                         headerImg.src = '../assets/movr_logo_clean.jpg';
                     }
+                    // Update logo link to use correct relative path
+                    const logoLink = headerPlaceholder.querySelector('a.logo');
+                    if (logoLink) {
+                        logoLink.href = '../index.html';
+                    }
                 }
 
                 // After header is loaded, initialize navigation and mobile menu

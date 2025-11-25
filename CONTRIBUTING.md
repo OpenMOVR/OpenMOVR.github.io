@@ -10,20 +10,33 @@ Thank you for your interest in contributing to OpenMOVR! This project is an open
    git clone git@github.com:YOUR-USERNAME/OpenMOVR.github.io.git
    cd OpenMOVR.github.io
    ```
-3. **Create a feature branch**:
+3. **Choose the right branch** (see table below)
+4. **Create a feature branch**:
    ```bash
    git checkout -b feature/your-feature-name
    ```
-4. **Make your changes** and test locally
-5. **Commit with clear messages**:
+5. **Make your changes** and test locally
+6. **Commit with clear messages**:
    ```bash
    git commit -m "component: Description of what you changed"
    ```
-6. **Push to your fork**:
+7. **Push to your fork**:
    ```bash
    git push origin feature/your-feature-name
    ```
-7. **Open a Pull Request** on GitHub
+8. **Open a Pull Request** targeting the correct branch
+
+## Which Branch Do I Use?
+
+| Working on... | Branch from | PR target |
+|---------------|-------------|-----------|
+| Homepage, shared CSS/JS | `main` | `main` |
+| Pilot enrollment (`pilot/`) | `pilot-landing-page` | `pilot-landing-page` |
+| Documentation (`docs/`) | `openmovr-docs` | `openmovr-docs` |
+| MOVR Viewer (`movr-viewer/`) | `movr-viewer` | `movr-viewer` |
+| GSoC page (`gsoc.html`) | `gsoc` | `gsoc` |
+
+See [BRANCH_STRATEGY.md](./BRANCH_STRATEGY.md) for complete details.
 
 ## Code of Conduct
 
@@ -41,75 +54,16 @@ This is a community-driven project serving patients, families, and researchers. 
 - Improvements to documentation
 - Accessibility enhancements
 - Mobile responsiveness fixes
-- Performance optimizations
 
 ### For Researchers & Domain Experts
 - Documentation improvements
-- FAQ content
 - Data dictionary enhancements
 - User experience feedback
-- Use case examples
 
 ### For Designers
 - UI/UX improvements
 - Accessibility audits
 - Mobile design enhancements
-- Branding consistency
-
-## Branch Strategy
-
-We use a streamlined branch strategy. Please read [BRANCH_STRATEGY.md](./BRANCH_STRATEGY.md) for details.
-
-**Quick summary**:
-- `main` - Production website (homepage, docs, pilot)
-- `viewer-apps` - MOVR Viewer and research tools
-- `feature/*` - Your feature branches
-
-**Where to branch from**:
-- Working on website/docs/pilot? → Branch from `main`
-- Working on MOVR Viewer tools? → Branch from `viewer-apps`
-
-## Pull Request Guidelines
-
-### Before Submitting
-
-- [ ] Test your changes locally (run `./launch.sh` and check http://localhost:8000)
-- [ ] Test on mobile (or use browser dev tools)
-- [ ] Update documentation if you changed functionality
-- [ ] Keep PRs focused (one feature/fix per PR)
-- [ ] Write clear commit messages
-
-### PR Title Format
-
-Use clear, descriptive titles:
-- ✅ `pilot: Add age group field to enrollment form`
-- ✅ `viewer: Fix session save/load on Safari`
-- ✅ `docs: Update FAQ with MOVR 2.0 timeline`
-- ❌ `updates`
-- ❌ `fix stuff`
-
-### PR Description Template
-
-```markdown
-## What does this PR do?
-Brief description of the changes.
-
-## Why are we making this change?
-Explain the problem you're solving or feature you're adding.
-
-## How to test
-1. Step-by-step instructions to verify the changes
-2. Include any edge cases to check
-
-## Screenshots (if UI changes)
-Before/after screenshots for visual changes.
-
-## Checklist
-- [ ] Tested locally
-- [ ] Tested on mobile (or responsive view)
-- [ ] Documentation updated (if needed)
-- [ ] No sensitive data committed (API keys, emails, etc.)
-```
 
 ## Development Setup
 
@@ -129,143 +83,139 @@ python3 -m http.server 8000
 
 ```
 OpenMOVR.github.io/
-├── index.html              # Homepage
-├── gsoc.html               # Google Summer of Code
-├── docs/                   # Documentation system
-├── pilot/                  # MOVR 2.0 Pilot enrollment
-├── movr-viewer/            # MOVR Viewer tools (research applications)
-├── css/                    # Shared styles
-├── js/                     # Shared JavaScript
-├── assets/                 # Images, logos
-└── components/             # Reusable HTML components
+├── index.html              # Homepage (main branch)
+├── gsoc.html               # GSoC program (gsoc branch)
+├── docs/                   # Documentation (openmovr-docs branch)
+│   ├── index.html          # MOVR 2.0 page
+│   ├── developer.html      # Developer docs
+│   └── movr-datahub-analytics.html
+├── pilot/                  # Pilot enrollment (pilot-landing-page branch)
+│   ├── index.html
+│   └── script.js
+├── movr-viewer/            # MOVR Viewer (movr-viewer branch)
+│   ├── index.html
+│   └── data_dictionary_viewer.html
+├── css/                    # Shared styles (main branch)
+├── js/                     # Shared JavaScript (main branch)
+├── assets/                 # Images, logos (main branch)
+└── components/             # Reusable components (main branch)
+```
+
+## Pull Request Guidelines
+
+### Before Submitting
+
+- [ ] Test your changes locally (`./launch.sh`)
+- [ ] Test on mobile (or use browser dev tools)
+- [ ] Update documentation if you changed functionality
+- [ ] Keep PRs focused (one feature/fix per PR)
+- [ ] Target the correct branch (see table above)
+
+### PR Title Format
+
+Use clear, descriptive titles:
+- `docs: Add FAQ section for MOVR 2.0 timeline`
+- `viewer: Fix search filter on mobile`
+- `gsoc: Update 2026 project descriptions`
+
+### PR Description Template
+
+```markdown
+## What does this PR do?
+Brief description of the changes.
+
+## Why are we making this change?
+Explain the problem or feature.
+
+## How to test
+1. Step-by-step instructions
+2. Include edge cases
+
+## Screenshots (if UI changes)
+Before/after screenshots.
+
+## Checklist
+- [ ] Tested locally
+- [ ] Tested on mobile
+- [ ] Documentation updated (if needed)
+- [ ] Targeting correct branch
 ```
 
 ## Commit Message Guidelines
-
-Good commit messages help us maintain a clean history and understand changes.
 
 ### Format
 
 ```
 component: Short description (50 chars or less)
 
-Longer explanation if needed (wrap at 72 characters).
-Explain WHY you made the change, not WHAT (code shows what).
-```
-
-### Examples
-
-```
-pilot: Add age group field to enrollment form
-
-Required for demographic analysis and IRB compliance.
-Field captures age ranges to support research stratification.
-```
-
-```
-viewer: Implement session save/load functionality
-
-Researchers can now save their review progress and resume later,
-addressing feedback from medical advisory board about long sessions.
+Longer explanation if needed.
 ```
 
 ### Component Prefixes
 
-- `pilot:` - Pilot enrollment system
-- `viewer:` - MOVR Viewer applications
 - `docs:` - Documentation pages
+- `viewer:` - MOVR Viewer tools
 - `gsoc:` - GSoC program page
+- `pilot:` - Pilot enrollment
 - `home:` - Homepage changes
-- `config:` - Configuration updates
-- `style:` - CSS/styling changes
+- `style:` - CSS/styling
 - `fix:` - Bug fixes
-- `chore:` - Maintenance tasks
+- `chore:` - Maintenance
 
-## Code Review Process
+## Contribution Areas
 
-1. **Automated checks**: PR must pass any CI/CD checks (if configured)
-2. **Code owner review**: A CODEOWNER will review your PR (see `.github/CODEOWNERS`)
-3. **Feedback**: Address any requested changes
-4. **Approval**: Once approved, a maintainer will merge
+### Documentation (`openmovr-docs` branch)
 
-### What Reviewers Look For
+The docs use a tabbed interface:
+- `docs/index.html` - MOVR 2.0 (Updates, Vision, History, FAQ tabs)
+- `docs/developer.html` - Developer Docs (repos, MOVR Viewer tabs)
+- `docs/movr-datahub-analytics.html` - Python library docs
 
-- Does the change match the PR description?
-- Are there any security concerns (API keys, sensitive data)?
-- Is it mobile-responsive (if UI change)?
-- Are commit messages clear?
-- Is documentation updated?
+### MOVR Viewer (`movr-viewer` branch)
 
-## Specific Contribution Areas
+Research tools for data exploration:
+- `movr-viewer/index.html` - Viewer home page
+- `movr-viewer/data_dictionary_viewer.html` - Dictionary explorer
+- `*.json` - Data files (be careful editing)
 
-### Working with MOVR Viewer
+### GSoC Page (`gsoc` branch)
 
-The MOVR Viewer (`movr-viewer/`) is a research tool. Changes here should:
-- Preserve existing functionality
-- Maintain backward compatibility with saved sessions
-- Update the README if you change features
-- Consider regulatory compliance (audit trails, timestamps)
+Google Summer of Code program:
+- `gsoc.html` - Program details, projects, mentors
 
-**Key files**:
-- `data_dictionary_viewer.html` - Medical advisory review interface
-- `vendor_mapping_viewer.html` - Vendor coverage analysis
-- `*.json` - Data files (be careful editing these)
+### Pilot Enrollment (`pilot-landing-page` branch)
 
-### Working with Pilot Enrollment
+MOVR 2.0 enrollment system:
+- `pilot/index.html` - Enrollment landing page
+- `pilot/script.js` - Form handling
+- Handles PII - never commit real patient data
 
-The pilot enrollment system handles potential PHI/PII. Please:
-- Never commit actual patient data
-- Test form validation thoroughly
-- Maintain CSRF protection
-- Update edge case documentation if needed
+### Homepage (`main` branch)
 
-**Key files**:
-- `pilot/index.html` - Main enrollment page
-- `pilot/script.js` - Form validation and submission
-- `pilot/EDGE_CASE_ANALYSIS.md` - Document any new edge cases
-
-### Working with Documentation
-
-Documentation is in `docs/`. Keep in mind:
-- Audience: Patients, families, researchers, developers
-- Tone: Clear, accessible, professional
-- Accuracy: Double-check facts and timelines
-- Navigation: Update sidebar if adding new pages
+- `index.html` - Homepage
+- `css/`, `js/`, `assets/`, `components/` - Shared resources
 
 ## Style Guidelines
 
 ### HTML
 - Use semantic HTML5 elements
 - Include ARIA labels for accessibility
-- Keep markup clean and indented (2 spaces)
+- 2-space indentation
 
 ### CSS
-- Use CSS variables (defined in `css/main.css`)
+- Use CSS variables (see `css/main.css`, `docs/css/docs.css`)
 - Mobile-first responsive design
-- Follow existing naming conventions
-- Add comments for complex styles
 
 ### JavaScript
-- Use vanilla JavaScript (no frameworks)
+- Vanilla JavaScript (no frameworks)
 - Add comments for complex logic
-- Handle errors gracefully
-- Test on different browsers if possible
 
-## Questions or Need Help?
+## Questions?
 
-- **Technical/Development Questions**: andre.paredes@ymail.com
-- **MDA Organization Questions**: mdamovr@mdausa.org
-- **GitHub Discussions**: Open a discussion for questions
-- **Issues**: Check existing issues or open a new one
-
-## License
-
-By contributing, you agree that your contributions will be licensed under the same license as the project (see LICENSE file).
-
-## Recognition
-
-Contributors will be acknowledged in our documentation. Thank you for helping advance rare disease research!
+- **Technical**: andre.paredes@ymail.com
+- **MDA/General**: mdamovr@mdausa.org
+- **GitHub Issues**: Open an issue for bugs or questions
 
 ---
 
-**New to open source?** That's great! We welcome first-time contributors. Don't hesitate to ask questions.
+**New to open source?** Welcome! Don't hesitate to ask questions.

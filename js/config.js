@@ -73,9 +73,17 @@ const movrConfig = {
     // Site Navigation (strategic tab organization)
     navigation: [
         { label: "Home", href: "index.html" },
-        { label: "What's Next?", href: "docs/platform-vision.html", external: true, description: "MOVR 2.0 technology vision & roadmap" },
         { label: "GSoC", href: "gsoc.html", description: "Google Summer of Code mentorship program" },
-        { label: "Current Updates", href: "docs/index.html", external: true, description: "Official MOVR documentation & updates", highlight: true }
+        {
+            label: "OpenMOVR Docs",
+            href: "docs/index.html",
+            dropdown: [
+                { label: "MOVR 2.0", href: "docs/index.html", description: "Updates, vision, history, and FAQ" },
+                { label: "Developer Docs", href: "docs/developer.html", description: "Technical documentation" },
+                { label: "DataHub Analytics", href: "docs/movr-datahub-analytics.html", description: "Python analytics library" },
+                { label: "MOVR 2.0 Pilot", href: "pilot/", description: "Join the pilot program" }
+            ]
+        }
     ],
 
     // Key Messages

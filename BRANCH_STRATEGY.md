@@ -2,178 +2,225 @@
 
 ## Overview
 
-OpenMOVR uses a simplified branch strategy designed for a community-driven website with modular web applications. Our approach balances collaboration with stability.
+OpenMOVR uses a modular branch strategy designed for community contributions. Each major section of the site has its own branch, allowing focused development and clear ownership.
 
 ## Branch Structure
 
 ### Protected Branches
 
 #### `main`
-- **Purpose**: Production website (homepage, documentation, pilot program, GSoC)
-- **Protection**: Requires PR + 1 approval
+- **Purpose**: Production website - homepage, shared assets
+- **Protection**: CODEOWNERS can push; others require PR + approval
 - **Contents**:
   - Homepage (`index.html`)
-  - Documentation system (`docs/`)
-  - Pilot enrollment (`pilot/`)
-  - GSoC program page (`gsoc.html`)
   - Shared assets (`css/`, `js/`, `assets/`, `components/`)
-  - Configuration (`config.js`, `README.md`)
+  - Configuration files
 - **Deployment**: Auto-deploys to GitHub Pages
-- **Updates**: Content changes, documentation updates, design improvements
 
-#### `viewer-apps`
-- **Purpose**: Modular data analysis and research web applications
-- **Protection**: Requires PR + 1 approval
+#### `pilot-landing-page`
+- **Purpose**: MOVR 2.0 Pilot enrollment system
+- **Protection**: CODEOWNERS can push; others require PR + approval
 - **Contents**:
-  - MOVR Viewer (Data Dictionary Viewer)
-  - Vendor Mapping Viewer
-  - Future analytical tools
-- **Independence**: Does not need to pull all homepage/marketing changes
-- **Merge Pattern**: Merges into `main` when viewer updates are production-ready
+  - `pilot/index.html` - Enrollment landing page
+  - `pilot/script.js` - Form handling
+  - `pilot/*.txt` - Email templates
+- **Merge Pattern**: Merges into `main` when pilot updates are ready
+
+#### `openmovr-docs`
+- **Purpose**: Documentation system
+- **Protection**: CODEOWNERS can push; others require PR + approval
+- **Contents**:
+  - `docs/index.html` - MOVR 2.0 (Updates, Vision, History, FAQ)
+  - `docs/developer.html` - Developer documentation
+  - `docs/movr-datahub-analytics.html` - Python library docs
+  - `docs/css/docs.css` - Documentation styles
+- **Merge Pattern**: Merges into `main` when docs are production-ready
+
+#### `movr-viewer`
+- **Purpose**: MOVR Viewer research tools
+- **Protection**: CODEOWNERS can push; others require PR + approval
+- **Contents**:
+  - `movr-viewer/index.html` - Viewer home page
+  - `movr-viewer/data_dictionary_viewer.html` - Dictionary explorer
+  - `movr-viewer/*.json` - Data files
+- **Merge Pattern**: Merges into `main` when viewer updates are stable
+
+#### `gsoc`
+- **Purpose**: Google Summer of Code program page
+- **Protection**: CODEOWNERS can push; others require PR + approval
+- **Contents**:
+  - `gsoc.html` - GSoC program page
+  - Related GSoC assets
+- **Merge Pattern**: Merges into `main` when GSoC updates are ready
 
 ### Development Branches
 
 #### Feature Branches (`feature/*`)
-- **Naming**: `feature/short-description` (e.g., `feature/update-pilot-form`, `feature/add-faq-section`)
+- **Naming**: `feature/short-description`
+- **Examples**:
+  - `feature/update-faq-content`
+  - `feature/add-dictionary-filter`
+  - `feature/gsoc-2026-projects`
 - **Lifespan**: Created for specific features, deleted after merge
-- **Base**: Branch from `main` or `viewer-apps` depending on what you're working on
+- **Base**: Branch from the appropriate protected branch
 - **Merge Target**: Back to the branch you started from
 
 #### Hotfix Branches (`hotfix/*`)
-- **Naming**: `hotfix/issue-description` (e.g., `hotfix/mobile-navigation`)
+- **Naming**: `hotfix/issue-description`
 - **Purpose**: Urgent fixes for production issues
 - **Base**: `main`
 - **Merge**: Direct to `main` after quick review
 
 ## Workflow
 
-### Contributing to Website (Main Branch)
+### Which Branch Do I Use?
 
-1. **Create feature branch**:
-   ```bash
-   git checkout main
-   git pull origin main
-   git checkout -b feature/your-feature-name
-   ```
+| Working on... | Branch from | PR target |
+|---------------|-------------|-----------|
+| Homepage, shared CSS/JS | `main` | `main` |
+| Pilot enrollment (`pilot/`) | `pilot-landing-page` | `pilot-landing-page` |
+| Documentation (`docs/`) | `openmovr-docs` | `openmovr-docs` |
+| MOVR Viewer (`movr-viewer/`) | `movr-viewer` | `movr-viewer` |
+| GSoC page (`gsoc.html`) | `gsoc` | `gsoc` |
 
-2. **Make changes and commit**:
-   ```bash
-   git add .
-   git commit -m "Clear description of changes"
-   ```
-
-3. **Push and create PR**:
-   ```bash
-   git push origin feature/your-feature-name
-   ```
-   Then open a Pull Request on GitHub targeting `main`
-
-4. **Code review**: Wait for approval from a CODEOWNER
-
-5. **Merge**: Once approved, merge using "Squash and merge" to keep history clean
-
-### Contributing to Viewer Apps
-
-1. **Create feature branch**:
-   ```bash
-   git checkout viewer-apps
-   git pull origin viewer-apps
-   git checkout -b feature/viewer-enhancement
-   ```
-
-2. **Follow same process as above**, but target `viewer-apps` in your PR
-
-3. **When ready for production**: Create a PR from `viewer-apps` → `main`
-
-### Syncing Viewer Apps to Main
-
-Viewer apps should merge into main periodically when updates are stable:
+### Contributing to Pilot Enrollment
 
 ```bash
+git checkout pilot-landing-page
+git pull origin pilot-landing-page
+git checkout -b feature/update-enrollment-form
+
+# Make changes to pilot/
+git add .
+git commit -m "pilot: Add new form field"
+git push origin feature/update-enrollment-form
+
+# Open PR targeting pilot-landing-page
+```
+
+### Contributing to Documentation
+
+```bash
+git checkout openmovr-docs
+git pull origin openmovr-docs
+git checkout -b feature/update-faq
+
+# Make changes to docs/
+git add .
+git commit -m "docs: Update FAQ with new questions"
+git push origin feature/update-faq
+
+# Open PR targeting openmovr-docs
+```
+
+### Contributing to MOVR Viewer
+
+```bash
+git checkout movr-viewer
+git pull origin movr-viewer
+git checkout -b feature/add-search-filter
+
+# Make changes to movr-viewer/
+git add .
+git commit -m "viewer: Add field search filter"
+git push origin feature/add-search-filter
+
+# Open PR targeting movr-viewer
+```
+
+### Contributing to GSoC Page
+
+```bash
+git checkout gsoc
+git pull origin gsoc
+git checkout -b feature/update-project-list
+
+# Make changes to gsoc.html
+git add .
+git commit -m "gsoc: Update 2026 project ideas"
+git push origin feature/update-project-list
+
+# Open PR targeting gsoc
+```
+
+### Syncing Feature Branches to Main
+
+When changes are production-ready, merge the feature branch into `main`:
+
+```bash
+# Example: Sync docs to main
 git checkout main
 git pull origin main
-git checkout -b feature/sync-viewer-updates
-git merge origin/viewer-apps
-# Resolve any conflicts
-git push origin feature/sync-viewer-updates
-# Create PR: feature/sync-viewer-updates → main
+git merge origin/openmovr-docs
+git push origin main
 ```
+
+Or create a PR from `openmovr-docs` → `main` for review.
 
 ## Branch Protection Rules
 
-Configure these settings in GitHub:
+### For All Protected Branches (`main`, `pilot-landing-page`, `openmovr-docs`, `movr-viewer`, `gsoc`):
 
-### For `main` and `viewer-apps`:
-- ✅ Require pull request before merging
-- ✅ Require 1 approval
-- ✅ Require status checks to pass (if CI/CD is added later)
-- ✅ Require conversation resolution before merging
-- ✅ Do not allow bypassing the above settings
-- ❌ Allow force pushes (disabled)
-- ❌ Allow deletions (disabled)
+**CODEOWNERS** (maintainers):
+- Can push directly to protected branches
+- Can merge PRs without additional approval
+
+**Contributors**:
+- Must create feature branches
+- Must submit Pull Requests
+- Require 1 approval from CODEOWNER before merge
+
+See GitHub setup instructions in README for configuration details.
 
 ## Commit Message Guidelines
 
-Use clear, descriptive commit messages:
-
-**Good**:
-- `Add FAQ section to pilot enrollment page`
-- `Fix mobile navigation overflow on iOS`
-- `Update vendor mapping viewer with new data`
-
-**Bad**:
-- `updates`
-- `fix stuff`
-- `wip`
-
 ### Format
 ```
-[Component] Short description
+component: Short description
 
 Longer explanation if needed.
-Explain WHY, not WHAT (code shows what).
 ```
 
-**Examples**:
-```
-pilot: Add age group field to enrollment form
+### Component Prefixes
 
-Required for demographic analysis and IRB compliance.
+- `docs:` - Documentation changes
+- `viewer:` - MOVR Viewer changes
+- `gsoc:` - GSoC page changes
+- `pilot:` - Pilot enrollment changes
+- `home:` - Homepage changes
+- `style:` - CSS/styling changes
+- `fix:` - Bug fixes
+- `chore:` - Maintenance tasks
+
+### Examples
+
+```
+docs: Add MOVR 2.0 timeline to FAQ
+
+Addresses common question about launch dates.
 ```
 
 ```
-viewer: Implement session save/load functionality
+viewer: Implement field search functionality
 
-Researchers can now save their review progress and resume later,
-addressing feedback from medical advisory board.
+Allows researchers to quickly find specific fields
+in the data dictionary.
 ```
 
 ## Code Review Guidelines
 
-### For Reviewers
-- Check that changes match the PR description
-- Verify no sensitive data (API keys, emails, etc.) is committed
-- Ensure mobile responsiveness if UI changes
-- Test locally if possible
-- Approve if looks good, or request changes with specific feedback
+### For CODEOWNERS
+- Review PRs promptly
+- Provide constructive feedback
+- Ensure changes align with project goals
+- Verify no sensitive data is committed
 
 ### For Contributors
 - Keep PRs focused (one feature/fix per PR)
-- Update README or docs if you change functionality
-- Test on mobile and desktop before submitting
-- Respond to review feedback promptly
-- Don't force-push after review starts (makes tracking changes hard)
-
-## Release Process
-
-Since this is a static site on GitHub Pages:
-- **Merging to `main`** = immediate deployment
-- Tag releases for significant milestones:
-  ```bash
-  git tag -a v1.0.0 -m "Initial clean baseline"
-  git push origin v1.0.0
-  ```
+- Test locally before submitting
+- Respond to feedback promptly
+- Update documentation if needed
 
 ## Questions?
 
-Contact: mdamovr@mdausa.org or open a discussion on GitHub.
+Contact: mdamovr@mdausa.org or andre.paredes@ymail.com

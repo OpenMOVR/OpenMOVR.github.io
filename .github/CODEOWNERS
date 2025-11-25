@@ -1,40 +1,25 @@
-# CODEOWNERS
-#
-# This file defines who should review pull requests for different parts of the repository.
-# Code owners are automatically requested for review when someone opens a pull request.
-#
-# Learn more: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+# CODEOWNERS for OpenMOVR
+# These users can push directly to protected branches and approve PRs
+# Replace @ADParedes with your GitHub username
 
-# Default owners for everything in the repo
-# These users will be requested for review when someone opens a pull request.
-* @ADParedes @OpenMOVR/maintainers
+# Default owner for everything
+* @ADParedes
 
-# Documentation
+# Documentation (openmovr-docs branch)
 /docs/ @ADParedes
-/README.md @ADParedes
-/BRANCH_STRATEGY.md @ADParedes
-/CONTRIBUTING.md @ADParedes
 
-# MOVR Viewer Applications (Data Dictionary, Vendor Mapping)
-# These are research tools requiring domain knowledge
-/movr-viewer/ @ADParedes @OpenMOVR/data-team
+# MOVR Viewer (movr-viewer branch)
+/movr-viewer/ @ADParedes
 
-# Pilot Program (enrollment, forms, integrations)
-# Requires careful review due to PHI/PII handling
-/pilot/ @ADParedes @OpenMOVR/maintainers
-
-# Core Website (Homepage, GSoC)
-/index.html @ADParedes
+# GSoC (gsoc branch)
 /gsoc.html @ADParedes
 
-# Configuration and Shared Resources
-/js/config.js @ADParedes
-/css/ @ADParedes @OpenMOVR/maintainers
-/js/ @ADParedes @OpenMOVR/maintainers
-/components/ @ADParedes @OpenMOVR/maintainers
+# Pilot enrollment (pilot-landing-page branch)
+/pilot/ @ADParedes
 
-# Assets (images, logos, branding)
+# Core site files (main branch)
+/index.html @ADParedes
+/css/ @ADParedes
+/js/ @ADParedes
+/components/ @ADParedes
 /assets/ @ADParedes
-
-# CI/CD and GitHub Actions
-/.github/ @ADParedes

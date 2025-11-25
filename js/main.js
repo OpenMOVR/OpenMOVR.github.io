@@ -26,23 +26,28 @@ function loadHeaderNavigation() {
         setTimeout(loadHeaderNavigation, 100);
         return;
     }
-    
+
     let navHTML = '';
-    
+
     // Determine if we're in a subdirectory and need to adjust paths
-    const isInAboutDirectory = window.location.pathname.includes('/about/');
-    const pathPrefix = isInAboutDirectory ? '../' : '';
-    
-    // Check if we're on the index page
-    const isIndexPage = window.location.pathname === '/' || 
-                       window.location.pathname.endsWith('index.html') ||
-                       window.location.pathname === '';
-    
-    if (isIndexPage) {
-        // For index page, ONLY show other pages (no homepage sections)
+    const pathname = window.location.pathname;
+    const isInSubdirectory = pathname.includes('/about/') ||
+                            pathname.includes('/docs/') ||
+                            pathname.includes('/pilot/') ||
+                            pathname.includes('/movr-viewer/');
+    const pathPrefix = isInSubdirectory ? '../' : '';
+
+    // Check if we're on the root index page (not subdirectory index pages)
+    const isRootIndexPage = (pathname === '/' ||
+                            pathname.endsWith('/index.html') ||
+                            pathname === '') &&
+                            !isInSubdirectory;
+
+    if (isRootIndexPage) {
+        // For root index page, ONLY show other pages (no homepage sections)
         window.movrConfig.navigation.slice(1).forEach(item => {
             if (item.dropdown) {
-                navHTML += createDropdownNavigation(item);
+                navHTML += createDropdownNavigation(item, false, pathPrefix);
             } else {
                 const externalAttr = item.external ? ' target="_blank"' : '';
                 const externalIcon = item.external ? ' ↗' : '';
@@ -53,11 +58,11 @@ function loadHeaderNavigation() {
         // For other pages, show all navigation including Home
         window.movrConfig.navigation.forEach(item => {
             if (item.dropdown) {
-                const isActive = item.dropdown.some(subItem => window.location.pathname.includes(subItem.href));
-                navHTML += createDropdownNavigation(item, isActive);
+                const isActive = item.dropdown.some(subItem => pathname.includes(subItem.href));
+                navHTML += createDropdownNavigation(item, isActive, pathPrefix);
             } else {
-                const isActive = window.location.pathname.includes(item.href) || 
-                               (item.href === 'index.html' && window.location.pathname === '/');
+                const isActive = pathname.includes(item.href) ||
+                               (item.href === 'index.html' && pathname === '/');
                 const linkHref = item.external ? item.href : pathPrefix + item.href;
                 const externalAttr = item.external ? ' target="_blank"' : '';
                 const externalIcon = item.external ? ' ↗' : '';
@@ -65,29 +70,24 @@ function loadHeaderNavigation() {
             }
         });
     }
-    
+
     navElement.innerHTML = navHTML;
-    
+
     // Setup dropdown functionality
     setupDropdownNavigation();
 }
 
 // Create dropdown navigation HTML
-function createDropdownNavigation(item, isActive = false) {
+function createDropdownNavigation(item, isActive = false, pathPrefix = '') {
     const activeClass = isActive ? 'nav-active' : '';
-    
-    // Determine if we're in a subdirectory and need to adjust paths
-    const isInAboutDirectory = window.location.pathname.includes('/about/');
-    const pathPrefix = isInAboutDirectory ? '../' : '';
-    
+
     let dropdownHTML = `
         <div class="nav-dropdown ${activeClass}">
             <a href="${pathPrefix}${item.href}" class="nav-link nav-dropdown-toggle">${item.label} <span class="dropdown-arrow">▼</span></a>
             <div class="nav-dropdown-content">`;
-    
+
     item.dropdown.forEach(subItem => {
-        // For about section links, use appropriate relative path
-        const linkHref = isInAboutDirectory ? subItem.href.replace('about/', '') : subItem.href;
+        const linkHref = pathPrefix + subItem.href;
         const subIsActive = window.location.pathname.includes(subItem.href);
         dropdownHTML += `
             <a href="${linkHref}" class="nav-dropdown-link ${subIsActive ? 'active' : ''}">
@@ -95,7 +95,7 @@ function createDropdownNavigation(item, isActive = false) {
                 ${subItem.description ? `<small>${subItem.description}</small>` : ''}
             </a>`;
     });
-    
+
     dropdownHTML += `</div></div>`;
     return dropdownHTML;
 }

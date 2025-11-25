@@ -39,24 +39,24 @@
     <style>
         /* Compact, smaller font styling */
         body {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             line-height: 1.5;
         }
-        
-        h1 { font-size: 2.5rem; }
-        h2 { font-size: 1.8rem; }
-        h3 { font-size: 1.3rem; }
-        h4 { font-size: 1.1rem; }
-        h5 { font-size: 1rem; }
-        
-        p, li { font-size: 0.9rem; }
-        
-        .section { padding: 2rem 0; }
-        .card-content { padding: 1rem; }
-        
+
+        h1 { font-size: 1.75rem; }
+        h2 { font-size: 1.4rem; }
+        h3 { font-size: 1.1rem; }
+        h4 { font-size: 1rem; }
+        h5 { font-size: 0.9rem; }
+
+        p, li { font-size: 0.85rem; }
+
+        .section { padding: 1.5rem 0; }
+        .card-content { padding: 0.875rem; }
+
         .hero-gsoc {
             background: linear-gradient(135deg, #4285f4 0%, #34a853 50%, #fbbc04 75%, #ea4335 100%);
-            padding: 2.5rem 0;
+            padding: 2rem 0;
             color: var(--white);
             text-align: center;
         }
@@ -178,13 +178,13 @@
     <!-- Hero Section -->
     <section class="hero-gsoc">
         <div class="container">
-            <div style="max-width: 700px; margin: 0 auto;">
-                <h1 style="font-size: 2.5rem; margin-bottom: 0.75rem; color: var(--white);">Google Summer of Code 2026</h1>
-                <p style="font-size: 1.1rem; margin-bottom: 1.5rem; opacity: 0.95;">Build open source tools for neuromuscular disease research</p>
-                
+            <div style="max-width: 600px; margin: 0 auto;">
+                <h1 style="margin-bottom: 0.5rem; color: var(--white);">Google Summer of Code 2026</h1>
+                <p style="margin-bottom: 1rem; opacity: 0.95;">Build open source tools for neuromuscular disease research</p>
+
                 <div class="btn-group justify-center">
-                    <a href="#projects" class="btn btn-primary btn-large" style="background: var(--white); color: #4285f4; font-weight: 700; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">View Projects</a>
-                    <a href="#apply" class="btn btn-outline btn-large" style="border-color: var(--white); color: var(--white); border-width: 2px; background: rgba(255,255,255,0.1); backdrop-filter: blur(10px);">Apply</a>
+                    <a href="#projects" class="btn btn-primary" style="background: var(--white); color: #4285f4; font-weight: 700;">View Projects</a>
+                    <a href="#apply" class="btn btn-outline" style="border-color: var(--white); color: var(--white); border-width: 2px; background: rgba(255,255,255,0.1);">Apply</a>
                 </div>
             </div>
         </div>
@@ -248,8 +248,13 @@
                         <h3>MOVR Legacy Datahub Python Library</h3>
                         <span class="difficulty-badge difficulty-intermediate">Intermediate</span>
                     </div>
-                    
-                    <p><strong>Mission:</strong> Create a pip-installable Python library that makes 12 years of MOVR legacy data (5,895+ participants, 20,152+ encounters) easily accessible to researchers, universities, and data scientists worldwide.</p>
+
+                    <div style="margin-bottom: var(--spacing-md);">
+                        <a href="https://github.com/OpenMOVR/movr-datahub-analytics" target="_blank" style="display: inline-block; background: var(--primary-blue); color: white; padding: 0.5rem 1rem; border-radius: var(--radius); text-decoration: none; margin-right: 0.5rem;">📂 GitHub Repository</a>
+                        <a href="docs/movr-datahub-analytics.html" style="display: inline-block; background: var(--success-green); color: white; padding: 0.5rem 1rem; border-radius: var(--radius); text-decoration: none;">📚 Developer Docs</a>
+                    </div>
+
+                    <p><strong>Repository:</strong> <code>movr-datahub-analytics</code> | <strong>Mission:</strong> Create a pip-installable Python library that makes 12 years of MOVR legacy data (5,895+ participants, 20,152+ encounters) easily accessible to researchers, universities, and data scientists worldwide.</p>
                     
                     <div style="background: #f0f9ff; padding: var(--spacing-md); border-radius: var(--radius); margin: var(--spacing-md) 0;">
                         <h4 style="color: #1e40af;">Vision: Democratizing Neuromuscular Disease Data</h4>
@@ -770,8 +775,6 @@ movr.plot_progression(progression, save='my_analysis.png')
             </div>
         </div>
     </section>
-        </div>
-    </section>
 
     <!-- Footer -->
     <footer class="footer">
@@ -779,43 +782,42 @@ movr.plot_progression(progression, save='my_analysis.png')
             <div class="footer-content">
                 <div>
                     <h4>OpenMOVR GSoC</h4>
-                    <p>Google Summer of Code mentorship program for neuromuscular disease research. Building open source tools that make a real difference in healthcare.</p>
-                    <p style="margin-top: var(--spacing-md);"><strong>Contact:</strong> mdamovr@mdausa.org</p>
+                    <p>Google Summer of Code mentorship program for neuromuscular disease research.</p>
+                    <p style="margin-top: var(--spacing-sm);"><strong>Contact:</strong> mdamovr@mdausa.org</p>
                 </div>
-                
+
                 <div>
-                    <h4>Quick Links</h4>
+                    <h4>Documentation</h4>
                     <ul style="list-style: none; padding: 0;">
                         <li><a href="index.html">OpenMOVR Home</a></li>
-                        <li><a href="docs/platform-vision.html">Platform Vision</a></li>
-                        <li><a href="docs/current-work.html">Current Work</a></li>
-                        <li><a href="docs/faq.html">FAQ</a></li>
+                        <li><a href="docs/index.html">MOVR 2.0</a></li>
+                        <li><a href="docs/developer.html">Developer Docs</a></li>
+                        <li><a href="docs/movr-datahub-analytics.html">DataHub Analytics</a></li>
                     </ul>
                 </div>
-                
+
                 <div>
                     <h4>Development</h4>
                     <ul style="list-style: none; padding: 0;">
-                        <li><a href="https://github.com/openmovr" target="_blank">GitHub Organization</a></li>
+                        <li><a href="https://github.com/openmovr" target="_blank">GitHub</a></li>
                         <li><a href="#projects">Project Ideas</a></li>
-                        <li><a href="mailto:mdamovr@mdausa.org">Mentor Contact</a></li>
+                        <li><a href="mailto:mdamovr@mdausa.org">Contact Mentors</a></li>
                     </ul>
                 </div>
-                
+
                 <div>
-                    <h4>Community</h4>
+                    <h4>Resources</h4>
                     <ul style="list-style: none; padding: 0;">
-                        <li><a href="https://www.mda.org/science/movr" target="_blank">Official MDA MOVR</a></li>
-                        <li><a href="https://summerofcode.withgoogle.com/" target="_blank">Google Summer of Code</a></li>
-                        <li><a href="mailto:mdamovr@mdausa.org?subject=GSoC%20Interest">Join Discussion</a></li>
+                        <li><a href="https://www.mda.org/science/movr" target="_blank">MDA MOVR</a></li>
+                        <li><a href="https://summerofcode.withgoogle.com/" target="_blank">GSoC Website</a></li>
+                        <li><a href="pilot/">MOVR 2.0 Pilot</a></li>
                     </ul>
                 </div>
             </div>
-            
-            <div style="border-top: 1px solid rgba(255, 255, 255, 0.2); margin-top: var(--spacing-xl); padding-top: var(--spacing-lg); text-align: center; opacity: 0.8;">
+
+            <div style="border-top: 1px solid rgba(255, 255, 255, 0.2); margin-top: var(--spacing-md); padding-top: var(--spacing-sm); text-align: center; opacity: 0.8;">
                 <p>2025 OpenMOVR Open Science Initiative</p>
-                <p style="margin-top: 0.5rem; font-size: 0.9rem;">Founded by Andre Daniel Paredes • ADParedes • OpenMOVR Founder & Architect</p>
-                <p style="margin-top: 0.5rem;">GSoC is a trademark of Google LLC</p>
+                <p style="margin-top: 0.25rem;">Founded by Andre Daniel Paredes | GSoC is a trademark of Google LLC</p>
             </div>
         </div>
     </footer>

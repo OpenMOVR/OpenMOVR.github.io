@@ -3,132 +3,239 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MOVR DATA HUB Viewer App (alpha)</title>
-    <style>
-        body {
-            background: #fff;
-            font-family: 'Segoe UI', Arial, sans-serif;
-        }
-        .container {
-            max-width: 700px;
-            margin: 40px auto;
-            background: #fff;
-            padding: 32px 24px;
-            border-radius: 4px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        }
-        h1 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 0.5em;
-        }
-        h2 {
-            font-size: 1.05rem;
-            font-weight: 500;
-            margin-top: 2em;
-            margin-bottom: 0.5em;
-        }
-        p, ul {
-            font-size: 0.95rem;
-            margin-bottom: 1em;
-        }
-        ul {
-            padding-left: 1.2em;
-        }
-        .metrics {
-            margin-top: 2em;
-            margin-bottom: 2em;
-        }
-        .metrics-list {
-            list-style: disc;
-            margin-left: 1.2em;
-        }
-        .footer-note {
-            margin-top: 2em;
-        }
-        .button {
-            display: inline-block;
-            padding: 8px 18px;
-            background: #2c5aa0;
-            color: #fff;
-            border: 1px solid #2c5aa0;
-            border-radius: 4px;
-            text-decoration: none;
-            font-size: 0.95rem;
-            margin: 0.5em 0;
-        }
-        .button:disabled {
-            background: #eee;
-            color: #888;
-            border-color: #ccc;
-            cursor: not-allowed;
-            opacity: 0.6;
-        }
-    </style>
-
-    <!-- Load header component -->
+    <title>MOVR Viewer | OpenMOVR</title>
+    <meta name="description" content="MOVR Data Dictionary and Vendor Mapping viewer tools for neuromuscular disease research.">
     <link rel="stylesheet" href="../css/main.css">
-    <script src="../js/config.js"></script>
-    <script src="../js/header-loader.js"></script>
-    <script src="../js/main.js"></script>
+    <link rel="icon" type="image/png" href="../assets/movr_logo_clean_nobackground.png">
 
     <style>
-        /* Prevent header overlap with page content */
-        #header-placeholder {
-            margin-bottom: 20px;
+        .viewer-container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .viewer-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .viewer-header h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .viewer-header .subtitle {
+            font-size: 0.875rem;
+            color: var(--medium-gray);
+            margin-bottom: 0.5rem;
+        }
+
+        .viewer-header .status {
+            display: inline-block;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--medium-gray);
+            border: 1px solid var(--medium-gray);
+            padding: 2px 8px;
+            border-radius: 2px;
+        }
+
+        .viewer-description {
+            text-align: center;
+            color: var(--medium-gray);
+            font-size: 0.875rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .viewer-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .viewer-stat {
+            text-align: center;
+        }
+
+        .viewer-stat-value {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .viewer-stat-label {
+            font-size: 0.75rem;
+            color: var(--medium-gray);
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .viewer-tools {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .viewer-tool {
+            padding: 1rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            background: #fff;
+        }
+
+        .viewer-tool h2 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .viewer-tool p {
+            font-size: 0.8rem;
+            color: var(--medium-gray);
+            margin-bottom: 0.75rem;
+            line-height: 1.5;
+        }
+
+        .viewer-tool-link {
+            display: inline-block;
+            font-size: 0.8rem;
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+
+        .viewer-tool-link:hover {
+            text-decoration: underline;
+        }
+
+        .viewer-tool-disabled {
+            color: var(--medium-gray);
+            font-size: 0.75rem;
+            font-style: italic;
+        }
+
+        .viewer-upcoming {
+            background: #f9fafb;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
+        }
+
+        .viewer-upcoming h3 {
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .viewer-upcoming-items {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .viewer-upcoming-item {
+            font-size: 0.75rem;
+            color: var(--medium-gray);
+            padding: 4px 10px;
+            background: #e5e7eb;
+            border-radius: 3px;
+        }
+
+        .viewer-upcoming-note {
+            font-size: 0.75rem;
+            color: var(--medium-gray);
+            text-align: center;
+        }
+
+        .viewer-footer {
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--medium-gray);
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        @media (max-width: 480px) {
+            .viewer-tools {
+                grid-template-columns: 1fr;
+            }
+            .viewer-stats {
+                gap: 2rem;
+            }
+            .viewer-upcoming-items {
+                flex-direction: column;
+                align-items: center;
+            }
         }
     </style>
+
+    <script src="../js/header-loader.js"></script>
 </head>
 <body>
     <!-- Header Component Placeholder -->
     <div id="header-placeholder"></div>
 
-    <div class="container">
-        <h1>MOVR DATA HUB Viewer App <span style="font-weight:400;">(alpha testing)</span></h1>
-        <p>
-            This tool provides a simple way to view the MOVR Data Dictionary for clinical research. It is designed for both laypersons and open source developers to quickly review the available data fields for Duchenne Muscular Dystrophy (DMD) and Spinal Muscular Atrophy (SMA).
-        </p>
-        <h2>Functionality</h2>
-        <p>
-            The viewer allows you to browse and search the MOVR Data Dictionary. You can filter by disease (DMD or SMA) and see the total number of fields available for each. No advanced features or customization are included in this alpha version.
-        </p>
-        <div class="metrics">
-            <h2>Basic Metrics</h2>
-            <ul class="metrics-list">
-                <li>DMD Dictionary Fields: <strong>512</strong></li>
-                <li>SMA Dictionary Fields: <strong>412</strong></li>
-            </ul>
-        </div>
+    <div class="viewer-container">
+        <header class="viewer-header">
+            <h1>MOVR Viewer</h1>
+            <p class="subtitle">Data Dictionary and Mapping Tools</p>
+            <span class="status">Alpha</span>
+        </header>
 
-        <table style="width:100%; margin-top:2em; border-collapse:separate; border-spacing:24px 0;">
-            <tr>
-                <td style="vertical-align:top; width:50%;">
-                    <h2 style="font-size:1rem; margin-bottom:0.5em;">Dictionary Viewer</h2>
-                    <p style="margin-bottom:1em;">Browse and search MOVR Data Dictionary fields for DMD and SMA. Filter by disease and view field details.</p>
-                    <a href="data_dictionary_viewer.html" class="button">Open Dictionary Viewer</a>
-                </td>
-                <td style="vertical-align:top; width:50%;">
-                    <h2 style="font-size:1rem; margin-bottom:0.5em;">Vendor Mapping Viewer</h2>
-                    <p style="margin-bottom:1em;">Review vendor mapping coverage for MOVR variables. See which fields are mapped and coverage status.</p>
-                    <a href="vendor_mapping_viewer.html" class="button">Open Mapping Viewer</a>
-                </td>
-            </tr>
-        </table>
+        <p class="viewer-description">
+            Reference tools for exploring MOVR Data Dictionary fields for DMD and SMA clinical research.
+            Designed for researchers and developers working with neuromuscular disease registry data.
+        </p>
 
-        <div style="margin-top:2em; text-align:center;">
-            <h2 style="font-size:1rem; margin-bottom:0.5em;">De-identified Data Viewers (Upcoming)</h2>
-            <button disabled class="button">DMD Data Viewer (coming soon)</button>
-            <button disabled class="button">SMA Data Viewer (coming soon)</button>
-            <div style="margin-top:1.5em; background:#f6f8fa; border-left:4px solid #2c5aa0; padding:1em 1.2em; max-width:480px; margin-left:auto; margin-right:auto; font-size:0.95rem; color:#222;">
-                <strong>Developer Opportunity:</strong> We're seeking 1–2 open source contributors to help build the de-identified DMD/SMA data viewers.<br>
-                <span style="color:#2c5aa0;">Requirements:</span> Experience with web apps, basic data privacy, and Python or JavaScript. Ideal for GSoC or similar projects.
+        <div class="viewer-stats">
+            <div class="viewer-stat">
+                <div class="viewer-stat-value">512</div>
+                <div class="viewer-stat-label">DMD Fields</div>
+            </div>
+            <div class="viewer-stat">
+                <div class="viewer-stat-value">412</div>
+                <div class="viewer-stat-label">SMA Fields</div>
             </div>
         </div>
 
-        <p class="footer-note">
-            This app is intended for quick reference and basic review only.
-            Created by Andre D Paredes (<a href="https://www.linkedin.com/in/andre-daniel-paredes" title="LinkedIn Profile" target="_blank">LinkedIn</a>)
-        </p>
+        <div class="viewer-tools">
+            <div class="viewer-tool">
+                <h2>Dictionary Viewer</h2>
+                <p>Browse and search MOVR Data Dictionary fields. Filter by disease and view field metadata.</p>
+                <a href="data_dictionary_viewer.html" class="viewer-tool-link">Open Dictionary</a>
+            </div>
+            <div class="viewer-tool">
+                <h2>Vendor Mapping</h2>
+                <p>Review vendor mapping coverage for MOVR variables and field mapping status.</p>
+                <span class="viewer-tool-disabled">Coming soon</span>
+            </div>
+        </div>
+
+        <div class="viewer-upcoming">
+            <h3>Upcoming</h3>
+            <div class="viewer-upcoming-items">
+                <span class="viewer-upcoming-item">DMD Data Viewer</span>
+                <span class="viewer-upcoming-item">SMA Data Viewer</span>
+            </div>
+            <p class="viewer-upcoming-note">Contributors needed. See <a href="../docs/developer.html#viewer">Developer Docs</a>.</p>
+        </div>
+
+        <footer class="viewer-footer">
+            <p>Created by Andre D Paredes</p>
+        </footer>
     </div>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/main.js"></script>
 </body>
 </html>
