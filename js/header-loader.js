@@ -35,6 +35,19 @@
             .then(html => {
                 headerPlaceholder.innerHTML = html;
 
+                // Fix asset paths for subdirectories
+                const isSubdirectory = currentPath.includes('/docs/') ||
+                                     currentPath.includes('/pilot/') ||
+                                     currentPath.includes('/movr-viewer/');
+
+                if (isSubdirectory) {
+                    // Update image src to use correct relative path
+                    const headerImg = headerPlaceholder.querySelector('.logo img');
+                    if (headerImg) {
+                        headerImg.src = '../assets/movr_logo_clean.jpg';
+                    }
+                }
+
                 // After header is loaded, initialize navigation and mobile menu
                 if (typeof loadHeaderNavigation === 'function') {
                     loadHeaderNavigation();
