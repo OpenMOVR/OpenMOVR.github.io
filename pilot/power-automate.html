@@ -1,0 +1,305 @@
+<!-- Enhanced HTML Form for Power Automate Copy/Paste -->
+<div id="form-container">
+  <form id="pilot-form" onsubmit="submitForm(event)">
+    <!-- CSRF Protection -->
+    <input type="hidden" name="csrf_token" id="csrf_token">
+    
+    <!-- Enhanced form fields with validation -->
+    <div class="form-group">
+      <label for="name">Full Name *</label>
+      <input type="text" id="name" name="name" required 
+             placeholder="Enter your full name"
+             pattern="[A-Za-z\s\-']+" 
+             title="Please enter a valid name (letters, spaces, hyphens, apostrophes only)"
+             maxlength="100">
+      <div class="error-message" id="name-error"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email Address *</label>
+      <input type="email" id="email" name="email" required 
+             placeholder="your.email@example.com"
+             maxlength="100">
+      <div class="error-message" id="email-error"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="disease">Disease Type *</label>
+      <select id="disease" name="disease" required>
+         <option value="">Select Disease Type</option>
+         <option value="DMD">Duchenne Muscular Dystrophy (DMD)</option>
+         <option value="SMA">Spinal Muscular Atrophy (SMA)</option>
+         <option value="LGMD">Limb-Girdle Muscular Dystrophy (LGMD)</option>
+      </select>
+      <div class="error-message" id="disease-error"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="relationship">Your Relationship *</label>
+      <select id="relationship" name="relationship" required>
+         <option value="">Select Your Relationship</option>
+         <option value="Patient">I am the patient</option>
+         <option value="Parent/Caregiver">I am a parent/caregiver</option>
+         <option value="Other">Other family member</option>
+      </select>
+      <div class="error-message" id="relationship-error"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="howHeard">How did you hear about this?</label>
+      <select id="howHeard" name="howHeard">
+         <option value="">Select an option</option>
+         <option value="Email">MDA Email</option>
+         <option value="Social">Social Media</option>
+         <option value="Call">MDA Call</option>
+         <option value="Provider">Healthcare Provider</option>
+         <option value="Friend">Friend/Family</option>
+         <option value="Other">Other</option>
+      </select>
+    </div>
+
+    <div class="form-group checkbox-group">
+      <label>
+         <input type="checkbox" name="multiPlatform" value="true">
+         <span class="checkmark"></span>
+         I'm interested in exploring all three platforms (optional)
+      </label>
+    </div>
+
+    <div class="form-group checkbox-group">
+      <label>
+         <input type="checkbox" required name="attestation">
+         <span class="checkmark"></span>
+         I consent to participate and understand my data will be used for research purposes *
+      </label>
+      <div class="error-message" id="attestation-error"></div>
+    </div>
+
+    <button type="submit" id="submit-btn" class="submit-button">
+      <span id="submit-text">Submit My Information</span>
+      <span id="submit-spinner" class="spinner" style="display:none;">⏳ Submitting...</span>
+    </button>
+  </form>
+
+  <!-- Success Message -->
+  <div id="confirmation" class="message success-message" style="display:none;">
+    <h2>✅ Thank you!</h2>
+    <p>Check your email for next steps. You should receive an email within the next few minutes with your enrollment link.</p>
+  </div>
+
+  <!-- Waitlist Message -->
+  <div id="waitlist" class="message waitlist-message" style="display:none;">
+    <h2>📋 Added to Waitlist</h2>
+    <p>Thank you for your interest! We're currently at capacity for your disease type, but you've been added to our waitlist. We'll contact you if a spot opens up.</p>
+  </div>
+
+  <!-- Error Message -->
+  <div id="error" class="message error-message" style="display:none;">
+    <h2>❌ Submission Error</h2>
+    <p>There was an error submitting your information. Please check your connection and try again, or email <a href="mailto:pilothelp@mda.org">pilothelp@mda.org</a> for assistance.</p>
+    <button onclick="resetForm()" class="retry-button">Try Again</button>
+  </div>
+</div>
+
+<script>
+// Rate limiting
+let lastSubmission = 0;
+const RATE_LIMIT_MS = 5000; // 5 seconds between submissions
+
+// Generate CSRF token on page load
+document.addEventListener('DOMContentLoaded', function() {
+  generateCSRFToken();
+});
+
+function generateCSRFToken() {
+  const token = Math.random().toString(36).substr(2) + Date.now().toString(36);
+  document.getElementById('csrf_token').value = token;
+}
+
+function validateEmail(email) {
+  // Enhanced email validation
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const disposableEmailDomains = ['tempmail.org', '10minutemail.com', 'guerrillamail.com'];
+  
+  if (!emailRegex.test(email)) return false;
+  
+  const domain = email.split('@')[1].toLowerCase();
+  return !disposableEmailDomains.includes(domain);
+}
+
+function validateForm() {
+  clearErrors();
+  let isValid = true;
+
+  // Name validation
+  const name = document.getElementById('name').value.trim();
+  if (name.length < 2) {
+    showError('name-error', 'Name must be at least 2 characters long');
+    isValid = false;
+  }
+
+  // Email validation
+  const email = document.getElementById('email').value.trim();
+  if (!validateEmail(email)) {
+    showError('email-error', 'Please enter a valid email address');
+    isValid = false;
+  }
+
+  // Required field validation
+  const requiredFields = ['disease', 'relationship'];
+  requiredFields.forEach(field => {
+    if (!document.getElementById(field).value) {
+      showError(field + '-error', 'This field is required');
+      isValid = false;
+    }
+  });
+
+  // Attestation validation
+  if (!document.querySelector('input[name="attestation"]').checked) {
+    showError('attestation-error', 'You must consent to participate');
+    isValid = false;
+  }
+
+  return isValid;
+}
+
+function showError(elementId, message) {
+  document.getElementById(elementId).textContent = message;
+  document.getElementById(elementId).style.display = 'block';
+}
+
+function clearErrors() {
+  const errorElements = document.querySelectorAll('.error-message');
+  errorElements.forEach(el => {
+    el.textContent = '';
+    el.style.display = 'none';
+  });
+}
+
+function submitForm(e) {
+  e.preventDefault();
+  
+  // Rate limiting check
+  const now = Date.now();
+  if (now - lastSubmission < RATE_LIMIT_MS) {
+    showError('email-error', 'Please wait before submitting again');
+    return;
+  }
+
+  // Validate form
+  if (!validateForm()) {
+    return;
+  }
+
+  // Update UI to show loading state
+  const submitBtn = document.getElementById('submit-btn');
+  const submitText = document.getElementById('submit-text');
+  const submitSpinner = document.getElementById('submit-spinner');
+  
+  submitBtn.disabled = true;
+  submitText.style.display = 'none';
+  submitSpinner.style.display = 'inline';
+
+  // Prepare form data
+  const form = document.getElementById('pilot-form');
+  const formData = new FormData(form);
+  const data = {};
+  
+  formData.forEach((value, key) => {
+     if (key === 'multiPlatform') {
+        data[key] = value;
+     } else if (key !== 'attestation' && key !== 'csrf_token') {
+        data[key] = value.trim();
+     }
+  });
+
+  // Add submission metadata
+  data.submissionTime = new Date().toISOString();
+  data.userAgent = navigator.userAgent;
+  data.referrer = document.referrer;
+
+  // <!-- const flowURL = 'https://default69c088185c17449a9790b60a3c7e52.22.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/03bd50749cff45f2bdf7c90d8c070479/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=OwjDRaXYA81v0Agvx7HrlcsyJVF0ar0TNNrcrLaUYHY'; -->
+  const flowURL = 'https://default69c088185c17449a9790b60a3c7e52.22.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/c64f32a22bef417f9aa828f0c41be05f/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=rCyRki4yDPAUflWaSQY3WYgHFVP1zw1yhgOic-M2fsU';
+   
+  // Submit with retry logic
+  submitWithRetry(flowURL, data, 3)
+    .then(response => response.json())
+    .then(data => {
+      lastSubmission = now;
+      form.style.display = 'none';
+      
+      if (data.status === 'success') {
+        document.getElementById('confirmation').style.display = 'block';
+      } else if (data.status === 'waitlist') {
+        document.getElementById('waitlist').style.display = 'block';
+      } else {
+        throw new Error('Unknown response status');
+      }
+    })
+    .catch(error => {
+      console.error('Submission error:', error);
+      document.getElementById('error').style.display = 'block';
+      resetSubmitButton();
+    });
+}
+
+async function submitWithRetry(url, data, maxRetries) {
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest'
+        },
+        body: JSON.stringify(data)
+      });
+      
+      if (response.ok) {
+        return response;
+      }
+      throw new Error(`HTTP ${response.status}`);
+    } catch (error) {
+      if (i === maxRetries - 1) throw error;
+      await new Promise(resolve => setTimeout(resolve, 1000 * (i + 1))); // Exponential backoff
+    }
+  }
+}
+
+function resetSubmitButton() {
+  const submitBtn = document.getElementById('submit-btn');
+  const submitText = document.getElementById('submit-text');
+  const submitSpinner = document.getElementById('submit-spinner');
+  
+  submitBtn.disabled = false;
+  submitText.style.display = 'inline';
+  submitSpinner.style.display = 'none';
+}
+
+function resetForm() {
+  document.getElementById('pilot-form').style.display = 'block';
+  document.getElementById('error').style.display = 'none';
+  resetSubmitButton();
+  clearErrors();
+}
+</script>
+
+<!-- 
+POWER AUTOMATE FLOW CONFIGURATION:
+Copy the JSON schema from pilot.json into your HTTP trigger
+Then follow the enhanced flow steps from feature-doc.md:
+
+1. Get Vendor Disease Quotas (Excel Online)
+2. Get Milestones Status (Excel Online) 
+3. Initialize Variables
+4. Check Minimums Status
+5. Disease-Specific Assignment Logic
+6. Add Row to Participants Table
+7. Send appropriate email based on assignment result
+8. Return appropriate JSON response
+
+Key responses to return:
+- Success: {"status": "success", "message": "Thank you for joining! Check your email for next steps."}
+- Waitlist: {"status": "waitlist", "message": "Thank you for your interest. You've been added to our waitlist."}
+- Error: {"status": "error", "message": "Please try again or contact support."}
+-->

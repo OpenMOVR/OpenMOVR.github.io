@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MDA MOVR Vendor Mapping Processor</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .header h1 {
+            color: #2c5aa0;
+            margin-bottom: 10px;
+        }
+        
+        .nav-links {
+            margin-bottom: 15px;
+        }
+        
+        .nav-links a {
+            color: #2c5aa0;
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 4px;
+            border: 1px solid #2c5aa0;
+        }
+        
+        .nav-links a:hover {
+            background-color: #2c5aa0;
+            color: white;
+        }
+        
+        .filters {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .filter-group label {
+            font-weight: 500;
+            color: #555;
+        }
+        
+        select, input {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .sidebar {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-height: 60vh;
+            overflow-y: auto;
+            width: 200px;
+            z-index: 100;
+        }
+        
+        .sidebar h3 {
+            margin-bottom: 10px;
+            color: #2c5aa0;
+            font-size: 14px;
+        }
+        
+        .resource-nav {
+            list-style: none;
+        }
+        
+        .resource-nav li {
+            margin-bottom: 5px;
+        }
+        
+        .resource-nav a {
+            color: #666;
+            text-decoration: none;
+            font-size: 12px;
+            display: block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        
+        .resource-nav a:hover {
+            background-color: #e8f0fe;
+            color: #2c5aa0;
+        }
+        
+        .main-content {
+            margin-left: 240px;
+        }
+        
+        .stats {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            background: white;
+            padding: 12px 20px;
+            border-radius: 6px;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            min-width: 120px;
+        }
+        
+        .stat-number {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2c5aa0;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .resource-section {
+            background: white;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .resource-header {
+            background: #2c5aa0;
+            color: white;
+            padding: 15px 20px;
+            font-weight: 600;
+        }
+        
+        .variable-item {
+            border-bottom: 1px solid #e0e0e0;
+            padding: 16px 20px;
+            transition: background-color 0.2s;
+        }
+        
+        .variable-item:last-child {
+            border-bottom: none;
+        }
+        
+        .variable-item:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .variable-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        
+        .variable-name {
+            font-weight: 500;
+            color: #333;
+            flex: 1;
+            margin-right: 15px;
+        }
+        
+        .status-badges {
+            display: flex;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+        
+        .badge {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+        
+        .badge.covered {
+            background: #e8f5e8;
+            color: #2e7d2e;
+            border: 1px solid #c8e6c9;
+        }
+        
+        .badge.not-covered {
+            background: #ffebee;
+            color: #d32f2f;
+            border: 1px solid #ffcdd2;
+        }
+        
+        .badge.potential-add {
+            background: #fff3e0;
+            color: #f57c00;
+            border: 1px solid #ffcc02;
+        }
+        
+        .badge.effort-high {
+            background: #ffebee;
+            color: #d32f2f;
+            border: 1px solid #ffcdd2;
+        }
+        
+        .badge.effort-moderate {
+            background: #fff3e0;
+            color: #f57c00;
+            border: 1px solid #ffcc02;
+        }
+        
+        .badge.effort-low {
+            background: #e8f5e8;
+            color: #2e7d2e;
+            border: 1px solid #c8e6c9;
+        }
+        
+        .badge.effort-uncertain {
+            background: #f5f5f5;
+            color: #757575;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .variable-details {
+            font-size: 13px;
+            color: #666;
+        }
+        
+        .detail-row {
+            margin-bottom: 6px;
+        }
+        
+        .detail-label {
+            font-weight: 500;
+            display: inline-block;
+            width: 140px;
+        }
+        
+        .comments-section {
+            background: #f8f9fa;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 4px;
+            border-left: 4px solid #2c5aa0;
+        }
+        
+        .mda-input-section {
+            background: #fff3e0;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 4px;
+            border-left: 4px solid #f57c00;
+        }
+        
+        /* Priority System Styles */
+        .priority-control {
+            margin-top: 12px;
+            padding: 8px 0;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .priority-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: #555;
+            margin-bottom: 4px;
+        }
+        
+        .priority-select {
+            width: 100%;
+            padding: 4px 8px;
+            font-size: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: white;
+        }
+        
+        .priority-select option[value="high"] {
+            background-color: #ffebee;
+            color: #d32f2f;
+            font-weight: bold;
+        }
+        
+        .priority-select option[value="medium"] {
+            background-color: #fff3e0;
+            color: #f57c00;
+            font-weight: bold;
+        }
+        
+        .priority-select option[value="low"] {
+            background-color: #e8f5e8;
+            color: #388e3c;
+            font-weight: bold;
+        }
+        
+        .priority-select option[value="irrelevant"] {
+            background-color: #f5f5f5;
+            color: #757575;
+            font-weight: bold;
+        }
+        
+        .priority-select option[value="test"] {
+            background-color: #ffffff;
+            color: #9c27b0;
+            font-weight: bold;
+        }
+        
+        /* Priority Visual Indicators */
+        .priority-high { 
+            border-left: 4px solid #d32f2f; 
+            background-color: #ffebee;
+        }
+        .priority-medium { 
+            border-left: 4px solid #f57c00; 
+            background-color: #fff3e0;
+        }
+        .priority-low { 
+            border-left: 4px solid #388e3c; 
+            background-color: #e8f5e8;
+        }
+        .priority-irrelevant { 
+            border-left: 4px solid #757575; 
+            background-color: #f5f5f5;
+        }
+        .priority-test { 
+            border-left: 4px solid #9c27b0; 
+            background-color: #ffffff;
+        }
+        
+        .submit-section {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .submit-btn {
+            background: #2c5aa0;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        
+        .submit-btn:hover {
+            background: #1e3f73;
+        }
+        
+        .load-btn {
+            background: #388e3c;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        
+        .load-btn:hover {
+            background: #2e7d32;
+        }
+        
+        .status-message {
+            margin-top: 10px;
+            padding: 8px 16px;
+            border-radius: 4px;
+            display: none;
+        }
+        
+        .status-success {
+            background: #e8f5e8;
+            color: #2e7d2e;
+            border: 1px solid #c8e6c9;
+        }
+        
+        .status-error {
+            background: #ffebee;
+            color: #d32f2f;
+            border: 1px solid #ffcdd2;
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="nav-links">
+                <a href="data_dictionary_viewer.html">← Data Dictionary</a>
+                <a href="vendor_mapping_viewer.html">Vendor Mapping →</a>
+                <a href="index.html">Home</a>
+            </div>
+            <h1>MDA MOVR Vendor Mapping Processor</h1>
+            <p>Alpha Testing - Process vendor mapping with priority levels for implementation planning</p>
+            
+            <div class="filters">
+                <div class="filter-group">
+                    <label for="resourceFilter">Filter by Resource:</label>
+                    <select id="resourceFilter">
+                        <option value="">All Resources</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="coverageFilter">Coverage Status:</label>
+                    <select id="coverageFilter">
+                        <option value="">All</option>
+                        <option value="covered">Covered</option>
+                        <option value="not covered">Not Covered</option>
+                        <option value="potential add">Potential Add</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="effortFilter">Effort Level:</label>
+                    <select id="effortFilter">
+                        <option value="">All</option>
+                        <option value="low">Low</option>
+                        <option value="moderate">Moderate</option>
+                        <option value="high">High</option>
+                        <option value="uncertain">Uncertain</option>
+                        <option value="TBD">TBD</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="inputNeededFilter">MDA Input:</label>
+                    <select id="inputNeededFilter">
+                        <option value="">All</option>
+                        <option value="needed">Input Needed</option>
+                        <option value="not-needed">No Input Needed</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="searchFilter">Search:</label>
+                    <input type="text" id="searchFilter" placeholder="Search variables...">
+                </div>
+            </div>
+        </div>
+        
+        <div class="sidebar">
+            <h3>Quick Navigation</h3>
+            <ul class="resource-nav" id="resourceNav">
+            </ul>
+        </div>
+        
+        <div class="main-content">
+            <div class="submit-section" style="position: relative; z-index: 10;">
+                <h3 style="color: #2c5aa0; margin-bottom: 15px;">Priority Management</h3>
+                <div style="margin-bottom: 15px;">
+                    <label for="customFileName" style="display: block; margin-bottom: 5px; font-weight: 500; color: #333;">Custom Filename (optional):</label>
+                    <input type="text" id="customFileName" placeholder="e.g., gene_therapy_vendor_mapping, q3_priority_review" 
+                           style="padding: 10px 15px; border: 2px solid #ddd; border-radius: 6px; width: 400px; font-size: 14px; background: white;">
+                    <small style="display: block; color: #666; margin-top: 5px;">Leave blank for default "vendor_mapping". Timestamp always included.</small>
+                </div>
+                <div style="margin-bottom: 10px;">
+                    <button class="load-btn" onclick="loadPriorities()">Load Existing Priorities</button>
+                    <button class="submit-btn" onclick="savePriorities()">Save Vendor Mapping Priorities</button>
+                </div>
+                <div id="statusMessage" class="status-message"></div>
+            </div>
+            
+            <div class="stats" id="stats">
+                <div class="stat-item">
+                    <div class="stat-number" id="totalVariables">0</div>
+                    <div class="stat-label">Total Variables</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="coveredCount">0</div>
+                    <div class="stat-label">Covered</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="notCoveredCount">0</div>
+                    <div class="stat-label">Not Covered</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="potentialAddCount">0</div>
+                    <div class="stat-label">Potential Add</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="inputNeededCount">0</div>
+                    <div class="stat-label">Need MDA Input</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="prioritizedCount">0</div>
+                    <div class="stat-label">Prioritized</div>
+                </div>
+            </div>
+            
+            <div id="dataContainer">
+                Loading vendor mapping data...
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let data = [];
+        let filteredData = [];
+        let mappingData = null;
+        let vendorPriorities = {}; // Store priority selections
+
+        // Load the vendor mapping data
+        async function loadData() {
+            try {
+                console.log('Attempting to load vendor_mapping.json...');
+                const response = await fetch('./vendor_mapping.json');
+                console.log('Fetch response status:', response.status);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                mappingData = await response.json();
+                console.log('JSON parsed successfully. Records found:', mappingData.data?.length || 0);
+                
+                data = mappingData.data || [];
+                if (data.length === 0) {
+                    throw new Error('No data found in JSON file');
+                }
+                
+                processData();
+                renderData();
+                updateStats();
+                console.log('Data loaded successfully');
+            } catch (error) {
+                console.error('Detailed error:', error);
+                document.getElementById('dataContainer').innerHTML = 
+                    `<div style="padding: 20px; background: #ffebee; border-radius: 8px; border: 1px solid #ffcdd2;">
+                        <h3 style="color: #d32f2f; margin-bottom: 10px;">Loading Error</h3>
+                        <p><strong>Error:</strong> ${error.message}</p>
+                        <p><strong>Troubleshooting:</strong></p>
+                        <ul style="margin: 10px 0; padding-left: 20px;">
+                            <li>Ensure you're opening the HTML file via a web server (not file:// protocol)</li>
+                            <li>Check that vendor_mapping.json exists in the same directory</li>
+                            <li>Try refreshing the page</li>
+                            <li>Check browser console for more details</li>
+                        </ul>
+                        <p style="font-family: monospace; background: #f5f5f5; padding: 8px; border-radius: 4px; margin-top: 10px;">
+                            Current URL: ${window.location.href}
+                        </p>
+                    </div>`;
+            }
+        }
+
+        function processData() {
+            // Populate resource filter dropdown
+            const resources = [...new Set(data.map(item => item.citizen_resource).filter(Boolean))].sort();
+            
+            const resourceFilter = document.getElementById('resourceFilter');
+            resources.forEach(resource => {
+                const option = document.createElement('option');
+                option.value = resource;
+                option.textContent = resource;
+                resourceFilter.appendChild(option);
+            });
+            
+            // Build navigation
+            buildNavigation(resources);
+            
+            filteredData = data;
+        }
+
+        function buildNavigation(resources) {
+            const nav = document.getElementById('resourceNav');
+            resources.slice(0, 15).forEach(resource => { // Show top 15 resources
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = `#resource-${resource.replace(/[^a-zA-Z0-9]/g, '-')}`;
+                a.textContent = resource.length > 20 ? resource.substring(0, 17) + '...' : resource;
+                a.title = resource;
+                li.appendChild(a);
+                nav.appendChild(li);
+            });
+        }
+
+        function applyFilters() {
+            const resourceFilter = document.getElementById('resourceFilter').value;
+            const coverageFilter = document.getElementById('coverageFilter').value;
+            const effortFilter = document.getElementById('effortFilter').value;
+            const inputNeededFilter = document.getElementById('inputNeededFilter').value;
+            const searchFilter = document.getElementById('searchFilter').value.toLowerCase();
+            
+            filteredData = data.filter(item => {
+                if (resourceFilter && item.citizen_resource !== resourceFilter) return false;
+                if (coverageFilter && item.citizen_coverage_status !== coverageFilter) return false;
+                if (effortFilter && item.citizen_level_of_effort !== effortFilter) return false;
+                if (searchFilter && !item.mda_variable.toLowerCase().includes(searchFilter)) return false;
+                
+                if (inputNeededFilter === 'needed' && !item['MDA Input Requested']) return false;
+                if (inputNeededFilter === 'not-needed' && item['MDA Input Requested']) return false;
+                
+                return true;
+            });
+            
+            renderData();
+            updateStats();
+        }
+
+        function renderData() {
+            const container = document.getElementById('dataContainer');
+            
+            // Group by resource category  
+            const grouped = {};
+            filteredData.forEach(item => {
+                // Handle empty/null resource values
+                let resource = item.citizen_resource;
+                if (!resource || resource.trim() === '' || resource === 'NaN') {
+                    resource = 'Unspecified Resource';
+                }
+                if (!grouped[resource]) grouped[resource] = [];
+                grouped[resource].push(item);
+            });
+            
+            let html = '';
+            Object.keys(grouped).sort().forEach(resource => {
+                const variables = grouped[resource];
+                html += `
+                    <div class="resource-section" id="resource-${resource.replace(/[^a-zA-Z0-9]/g, '-')}">
+                        <div class="resource-header">${resource} (${variables.length} variables)</div>
+                `;
+                
+                variables.forEach(variable => {
+                    const coverage = variable.citizen_coverage_status || '';
+                    const effort = variable.citizen_level_of_effort || '';
+                    
+                    // Generate unique key for this vendor mapping item
+                    const vendorKey = `${variable.mda_variable}_${variable.citizen_resource || 'unspecified'}`;
+                    const currentPriority = vendorPriorities[vendorKey] || '';
+                    const priorityClass = currentPriority ? `priority-${currentPriority}` : '';
+                    
+                    // Status badges
+                    const badges = [];
+                    if (coverage && coverage.trim()) {
+                        badges.push(`<span class="badge ${coverage.replace(/\s+/g, '-')}">${coverage}</span>`);
+                    }
+                    if (effort && effort.trim() && effort !== 'NaN') {
+                        badges.push(`<span class="badge effort-${effort.replace(/\s+/g, '-')}">${effort} effort</span>`);
+                    }
+                    
+                    // Clean up variable display values
+                    const citizenVar = variable.citizen_variable && variable.citizen_variable !== 'NaN' ? variable.citizen_variable : '';
+                    const citizenCode = variable.citizen_variable_code && variable.citizen_variable_code !== 'NaN' ? variable.citizen_variable_code : '';
+                    
+                    html += `
+                        <div class="variable-item ${priorityClass}">
+                            <div class="variable-header">
+                                <div class="variable-name">${variable.mda_variable}</div>
+                                <div class="status-badges">${badges.join('')}</div>
+                            </div>
+                            <div class="variable-details">
+                                ${citizenVar ? `<div class="detail-row"><span class="detail-label">Vendor Variable:</span> ${citizenVar}</div>` : ''}
+                                ${citizenCode ? `<div class="detail-row"><span class="detail-label">Coding System:</span> ${citizenCode}</div>` : ''}
+                            </div>
+                            ${variable.Comments ? `<div class="comments-section"><strong>Comments:</strong> ${variable.Comments}</div>` : ''}
+                            ${variable['MDA Input Requested'] ? `<div class="mda-input-section"><strong>MDA Input Requested:</strong> ${variable['MDA Input Requested']}</div>` : ''}
+                            
+                            <div class="priority-control">
+                                <div class="priority-label">Implementation Priority:</div>
+                                <select class="priority-select" onchange="updatePriority('${vendorKey}', this.value)" data-vendor-key="${vendorKey}">
+                                    <option value="">Not Set</option>
+                                    <option value="high" ${currentPriority === 'high' ? 'selected' : ''}>High</option>
+                                    <option value="medium" ${currentPriority === 'medium' ? 'selected' : ''}>Medium</option>
+                                    <option value="low" ${currentPriority === 'low' ? 'selected' : ''}>Low</option>
+                                    <option value="irrelevant" ${currentPriority === 'irrelevant' ? 'selected' : ''}>Irrelevant</option>
+                                    <option value="test" ${currentPriority === 'test' ? 'selected' : ''}>Test (White)</option>
+                                </select>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                html += '</div>';
+            });
+            
+            container.innerHTML = html || '<p>No data matches the current filters.</p>';
+        }
+
+        function updateStats() {
+            const total = filteredData.length;
+            const covered = filteredData.filter(item => item.citizen_coverage_status === 'covered').length;
+            const notCovered = filteredData.filter(item => item.citizen_coverage_status === 'not covered').length;
+            const potentialAdd = filteredData.filter(item => item.citizen_coverage_status === 'potential add').length;
+            const inputNeeded = filteredData.filter(item => item['MDA Input Requested'] && item['MDA Input Requested'].trim()).length;
+            const prioritized = Object.keys(vendorPriorities).length;
+            
+            document.getElementById('totalVariables').textContent = total;
+            document.getElementById('coveredCount').textContent = covered;
+            document.getElementById('notCoveredCount').textContent = notCovered;
+            document.getElementById('potentialAddCount').textContent = potentialAdd;
+            document.getElementById('inputNeededCount').textContent = inputNeeded;
+            document.getElementById('prioritizedCount').textContent = prioritized;
+        }
+
+        // Priority management functions
+        function updatePriority(vendorKey, priority) {
+            if (priority) {
+                vendorPriorities[vendorKey] = priority;
+            } else {
+                delete vendorPriorities[vendorKey];
+            }
+            
+            // Update visual indicator by re-rendering
+            renderData();
+            updateStats();
+            showStatus(`Updated priority for ${vendorKey}`, 'success');
+        }
+
+        function savePriorities() {
+            const today = new Date();
+            const dateStr = today.toISOString().split('T')[0]; // YYYY-MM-DD format
+            const timeStr = today.toISOString().replace(/[:.]/g, '-').slice(0, -5); // Clean timestamp for filename
+            
+            // Get custom filename or use default
+            const customName = document.getElementById('customFileName').value.trim();
+            const baseName = customName || 'vendor_mapping';
+            
+            // Clean the custom name for filename use
+            const cleanName = baseName.replace(/[^a-zA-Z0-9_-]/g, '_');
+            
+            // Ensure filename contains vendor_mapping for distinction
+            const finalName = cleanName.includes('vendor_mapping') ? cleanName : `${cleanName}_vendor_mapping`;
+            
+            const priorityData = {
+                session_name: customName || 'Vendor Mapping Priority Session',
+                session_date: dateStr,
+                session_timestamp: today.toISOString(),
+                total_variables_prioritized: Object.keys(vendorPriorities).length,
+                vendor_mapping_priorities: vendorPriorities
+            };
+            
+            const dataStr = JSON.stringify(priorityData, null, 2);
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            
+            const filename = `${dateStr}_${timeStr}_${finalName}_priorities.json`;
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            showStatus(`Saved ${Object.keys(vendorPriorities).length} vendor mapping priorities to ${filename}`, 'success');
+        }
+
+        function loadPriorities() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = function(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        try {
+                            const data = JSON.parse(e.target.result);
+                            if (data.vendor_mapping_priorities) {
+                                vendorPriorities = data.vendor_mapping_priorities;
+                                renderData();
+                                updateStats();
+                                showStatus(`Loaded ${Object.keys(vendorPriorities).length} vendor mapping priorities from ${file.name}`, 'success');
+                            } else if (data.priorities) {
+                                // Fallback for old format
+                                vendorPriorities = data.priorities;
+                                renderData();
+                                updateStats();
+                                showStatus(`Loaded ${Object.keys(vendorPriorities).length} priorities from ${file.name} (legacy format)`, 'success');
+                            } else {
+                                showStatus('Invalid priority file format - expected vendor_mapping_priorities field', 'error');
+                            }
+                        } catch (error) {
+                            showStatus('Error reading priority file: ' + error.message, 'error');
+                        }
+                    };
+                    reader.readAsText(file);
+                }
+            };
+            input.click();
+        }
+
+        function showStatus(message, type) {
+            const statusDiv = document.getElementById('statusMessage');
+            statusDiv.textContent = message;
+            statusDiv.className = `status-message status-${type}`;
+            statusDiv.style.display = 'block';
+            
+            setTimeout(() => {
+                statusDiv.style.display = 'none';
+            }, 3000);
+        }
+
+        // Event listeners
+        document.getElementById('resourceFilter').addEventListener('change', applyFilters);
+        document.getElementById('coverageFilter').addEventListener('change', applyFilters);
+        document.getElementById('effortFilter').addEventListener('change', applyFilters);
+        document.getElementById('inputNeededFilter').addEventListener('change', applyFilters);
+        document.getElementById('searchFilter').addEventListener('input', applyFilters);
+
+        // Load data on page load
+        loadData();
+    </script>
+</body>
+</html>
