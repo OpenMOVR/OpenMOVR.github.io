@@ -133,7 +133,7 @@ OpenMOVR.github.io/
 ├── gsoc.html               # Google Summer of Code
 ├── docs/                   # Documentation system
 ├── pilot/                  # MOVR 2.0 Pilot enrollment
-├── data-dictionary-viewer/ # MOVR Viewer tools (will become movr-viewer/)
+├── movr-viewer/            # MOVR Viewer tools (research applications)
 ├── css/                    # Shared styles
 ├── js/                     # Shared JavaScript
 ├── assets/                 # Images, logos
@@ -200,7 +200,7 @@ addressing feedback from medical advisory board about long sessions.
 
 ### Working with MOVR Viewer
 
-The MOVR Viewer (`data-dictionary-viewer/`, soon to be `movr-viewer/`) is a research tool. Changes here should:
+The MOVR Viewer (`movr-viewer/`) is a research tool. Changes here should:
 - Preserve existing functionality
 - Maintain backward compatibility with saved sessions
 - Update the README if you change features

@@ -2,7 +2,7 @@ import pandas as pd
 import json
 
 # Read the vendor mapping Excel file
-df = pd.read_excel('/home/andre/MDA/MOVR_DATA_HUB_v2/docs/MDA_Mapping_To_Citizen_Health_READ_ONLY.xlsx')
+df = pd.read_excel('MDA_Mapping_To_Citizen_Health_READ_ONLY.xlsx')
 
 # Clean up column names
 df.columns = df.columns.str.strip()
@@ -91,7 +91,7 @@ output_data = {
     'data': data_cleaned
 }
 
-output_path = '/home/andre/MDA/MOVR_DATA_HUB_v2/data-dictionary-viewer/vendor_mapping.json'
+output_path = 'vendor_mapping.json'
 print(f"Saving cleaned data to {output_path}")
 with open(output_path, 'w') as f:
     json.dump(output_data, f, indent=2)

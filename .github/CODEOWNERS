@@ -17,7 +17,7 @@
 
 # MOVR Viewer Applications (Data Dictionary, Vendor Mapping)
 # These are research tools requiring domain knowledge
-/data-dictionary-viewer/ @ADParedes @OpenMOVR/data-team
+/movr-viewer/ @ADParedes @OpenMOVR/data-team
 
 # Pilot Program (enrollment, forms, integrations)
 # Requires careful review due to PHI/PII handling

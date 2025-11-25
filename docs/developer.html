@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Documentation | OpenMOVR</title>
+    <meta name="description" content="Technical documentation and contribution guidelines for OpenMOVR developers.">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="css/docs.css">
+
+    <link rel="icon" type="image/png" href="../assets/movr_logo_clean_nobackground.png">
+</head>
+<body>
+    <div class="docs-container">
+        <!-- Sidebar Navigation -->
+        <nav class="docs-sidebar">
+            <div class="docs-header">
+                <h1><a href="index.html">MOVR Docs</a></h1>
+                <p>Developer Documentation</p>
+                <div style="margin-top: var(--spacing-md); padding-top: var(--spacing-md); border-top: 1px solid var(--border-color);">
+                    <a href="../index.html" style="font-size: 0.85rem; color: var(--primary-blue); text-decoration: none; display: flex; align-items: center; gap: 0.25rem;">
+                        ← Back to OpenMOVR
+                    </a>
+                </div>
+            </div>
+
+            <div class="docs-nav">
+                <ul>
+                    <li><a href="index.html" class="nav-link external">📢 MOVR Update</a></li>
+                    <li><a href="movr-data-hub.html" class="nav-link external">What was the MOVR Datahub?</a></li>
+                    <li><a href="platform-vision.html" class="nav-link external">What is MOVR's Next Step?</a></li>
+                    <li><a href="current-work.html" class="nav-link external">What is MOVR Currently Working on?</a></li>
+                    <li><a href="faq.html" class="nav-link external">FAQ</a></li>
+                    <li><a href="developer.html" class="nav-link external active">👨‍💻 Developer Docs</a></li>
+                    <li><a href="https://mdausa.tfaforms.net/389761" class="nav-link external" target="_blank">📋 Data Request Form</a></li>
+                </ul>
+
+                <div class="docs-footer">
+                    <p><strong>Contact:</strong><br>
+                    Technical: <a href="mailto:andre.paredes@ymail.com">andre.paredes@ymail.com</a><br>
+                    MDA Org: <a href="mailto:MDAMOVR@mdausa.org">MDAMOVR@mdausa.org</a></p>
+
+                    <div style="margin-top: var(--spacing-md); padding-top: var(--spacing-md); border-top: 1px solid var(--border-color);">
+                        <a href="https://www.mda.org/science/movr" style="font-size: 0.85rem; color: var(--primary-blue); text-decoration: none; display: flex; align-items: center; gap: 0.25rem;" target="_blank">
+                            🔗 Official MDA MOVR ↗
+                        </a>
+                        <a href="../movr-viewer/" style="font-size: 0.85rem; color: var(--primary-blue); text-decoration: none; display: flex; align-items: center; gap: 0.25rem; margin-top: 0.5rem;">
+                            📖 MOVR Viewer ↗
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="docs-content">
+            <div class="content-header">
+                <h1>Developer Documentation</h1>
+                <div class="badge badge-info">Technical Guide</div>
+            </div>
+
+            <div class="alert alert-info">
+                <h3>👨‍💻 Welcome Developers!</h3>
+                <p>This page contains technical documentation for contributing to OpenMOVR. Whether you're fixing bugs, adding features, or building new tools, this guide will help you get started.</p>
+            </div>
+
+            <h2>Quick Start</h2>
+            <div class="card">
+                <h3>Getting Started</h3>
+                <ol>
+                    <li><strong>Read the Documentation</strong>
+                        <ul>
+                            <li><a href="../BRANCH_STRATEGY.md">Branch Strategy</a> - Understand our branching model</li>
+                            <li><a href="../CONTRIBUTING.md">Contributing Guidelines</a> - How to submit PRs</li>
+                            <li><a href="../README.md">README</a> - Project overview</li>
+                        </ul>
+                    </li>
+                    <li><strong>Fork and Clone</strong>
+                        <pre style="background: var(--light-gray); padding: 1rem; border-radius: var(--radius); margin: 0.5rem 0;">git clone git@github.com:YOUR-USERNAME/OpenMOVR.github.io.git
+cd OpenMOVR.github.io</pre>
+                    </li>
+                    <li><strong>Run Locally</strong>
+                        <pre style="background: var(--light-gray); padding: 1rem; border-radius: var(--radius); margin: 0.5rem 0;">./launch.sh
+# Or: python3 -m http.server 8000
+# Visit: http://localhost:8000</pre>
+                    </li>
+                    <li><strong>Create a Feature Branch</strong>
+                        <pre style="background: var(--light-gray); padding: 1rem; border-radius: var(--radius); margin: 0.5rem 0;">git checkout -b feature/your-feature-name</pre>
+                    </li>
+                </ol>
+            </div>
+
+            <h2>Repository Structure</h2>
+            <div class="card">
+                <pre style="background: var(--light-gray); padding: 1rem; border-radius: var(--radius); font-size: 0.85rem; overflow-x: auto;">OpenMOVR.github.io/
+├── index.html              # Homepage
+├── gsoc.html               # Google Summer of Code program
+├── docs/                   # Documentation system
+│   ├── index.html         # MOVR updates
+│   ├── platform-vision.html
+│   ├── current-work.html
+│   ├── faq.html
+│   ├── movr-data-hub.html
+│   ├── developer.html     # This page
+│   ├── css/docs.css
+│   └── js/docs.js
+├── pilot/                  # MOVR 2.0 Pilot enrollment
+│   ├── index.html
+│   ├── script.js
+│   └── style.css
+├── movr-viewer/            # Research tools (formerly data-dictionary-viewer)
+│   ├── index.html
+│   ├── data_dictionary_viewer.html
+│   ├── vendor_mapping_viewer.html
+│   └── *.json
+├── css/                    # Shared styles
+│   └── main.css
+├── js/                     # Shared JavaScript
+│   ├── config.js          # Site configuration
+│   ├── main.js            # Main functionality
+│   └── header-loader.js   # Header component loader
+├── components/             # Reusable HTML components
+│   └── header.html        # Shared header
+├── assets/                 # Images, logos
+├── .github/
+│   └── CODEOWNERS         # Code ownership
+├── BRANCH_STRATEGY.md
+├── CONTRIBUTING.md
+└── README.md</pre>
+            </div>
+
+            <h2>Branch Strategy</h2>
+            <div class="card">
+                <h3>Main Branches</h3>
+                <ul>
+                    <li><strong>main</strong> - Production website (homepage, docs, GSoC, pilot)</li>
+                    <li><strong>viewer-apps</strong> - MOVR Viewer applications (research tools)</li>
+                </ul>
+
+                <h3>Development Workflow</h3>
+                <p><strong>For website changes:</strong></p>
+                <pre style="background: var(--light-gray); padding: 1rem; border-radius: var(--radius); margin: 0.5rem 0;">git checkout main
+git pull origin main
+git checkout -b feature/your-feature
+# Make changes
+git commit -m "component: Description"
+git push origin feature/your-feature
+# Open PR to main</pre>
+
+                <p><strong>For MOVR Viewer changes:</strong></p>
+                <pre style="background: var(--light-gray); padding: 1rem; border-radius: var(--radius); margin: 0.5rem 0;">git checkout viewer-apps
+git pull origin viewer-apps
+git checkout -b feature/viewer-enhancement
+# Make changes
+git commit -m "viewer: Description"
+git push origin feature/viewer-enhancement
+# Open PR to viewer-apps</pre>
+            </div>
+
+            <h2>Architecture</h2>
+            <div class="card">
+                <h3>Tech Stack</h3>
+                <ul>
+                    <li><strong>Frontend</strong>: Vanilla HTML5, CSS3, JavaScript (no frameworks)</li>
+                    <li><strong>Hosting</strong>: GitHub Pages (static site)</li>
+                    <li><strong>Analytics</strong>: Google Analytics</li>
+                    <li><strong>Forms</strong>: Power Automate integration (pilot enrollment)</li>
+                </ul>
+
+                <h3>Design System</h3>
+                <p>CSS variables defined in <code>css/main.css</code>:</p>
+                <ul>
+                    <li><strong>Colors</strong>: MDA brand colors (blue, gold, red, green, purple)</li>
+                    <li><strong>Typography</strong>: Inter (primary), Playfair Display (secondary)</li>
+                    <li><strong>Spacing</strong>: Scale from xs to 3xl</li>
+                    <li><strong>Components</strong>: Cards, buttons, forms, navigation</li>
+                </ul>
+
+                <h3>Configuration</h3>
+                <p>Site configuration is centralized in <code>js/config.js</code>:</p>
+                <ul>
+                    <li>Navigation structure</li>
+                    <li>Team information</li>
+                    <li>Legacy stats</li>
+                    <li>Timeline and roadmap</li>
+                    <li>Asset paths</li>
+                </ul>
+            </div>
+
+            <h2>Common Tasks</h2>
+            <div class="card">
+                <h3>Adding a New Page</h3>
+                <ol>
+                    <li>Create HTML file in appropriate directory</li>
+                    <li>Include header component using <code>&lt;div id="header-placeholder"&gt;&lt;/div&gt;</code></li>
+                    <li>Add <code>&lt;script src="js/header-loader.js"&gt;&lt;/script&gt;</code> in <code>&lt;head&gt;</code></li>
+                    <li>Update navigation in <code>js/config.js</code> if needed</li>
+                    <li>Test locally</li>
+                </ol>
+
+                <h3>Updating Statistics</h3>
+                <p>Edit <code>js/config.js</code> and update the <code>legacy</code> object:</p>
+                <pre style="background: var(--light-gray); padding: 1rem; border-radius: var(--radius); margin: 0.5rem 0;">legacy: {
+    participantsTrusted: 5895,
+    encountersLogged: 20152,
+    sitesCollaborating: 63,
+    yearsLearning: 12
+}</pre>
+
+                <h3>Modifying Styles</h3>
+                <ul>
+                    <li><strong>Global styles</strong>: Edit <code>css/main.css</code></li>
+                    <li><strong>Documentation styles</strong>: Edit <code>docs/css/docs.css</code></li>
+                    <li><strong>Pilot styles</strong>: Edit <code>pilot/style.css</code></li>
+                </ul>
+            </div>
+
+            <h2>Code Standards</h2>
+            <div class="card">
+                <h3>HTML</h3>
+                <ul>
+                    <li>Use semantic HTML5 elements</li>
+                    <li>Include ARIA labels for accessibility</li>
+                    <li>2-space indentation</li>
+                    <li>Meaningful class names</li>
+                </ul>
+
+                <h3>CSS</h3>
+                <ul>
+                    <li>Use CSS variables for consistency</li>
+                    <li>Mobile-first responsive design</li>
+                    <li>BEM-like naming convention</li>
+                    <li>Comment complex styles</li>
+                </ul>
+
+                <h3>JavaScript</h3>
+                <ul>
+                    <li>Vanilla JavaScript (no jQuery, React, etc.)</li>
+                    <li>Use <code>const</code> and <code>let</code> (not <code>var</code>)</li>
+                    <li>Comment complex logic</li>
+                    <li>Handle errors gracefully</li>
+                    <li>Test cross-browser if possible</li>
+                </ul>
+
+                <h3>Commit Messages</h3>
+                <pre style="background: var(--light-gray); padding: 1rem; border-radius: var(--radius); margin: 0.5rem 0;">component: Short description
+
+Longer explanation if needed.
+Explain WHY, not WHAT (code shows what).</pre>
+                <p><strong>Example prefixes:</strong> <code>pilot:</code>, <code>viewer:</code>, <code>docs:</code>, <code>gsoc:</code>, <code>home:</code>, <code>config:</code>, <code>style:</code>, <code>fix:</code>, <code>chore:</code></p>
+            </div>
+
+            <h2>Testing</h2>
+            <div class="card">
+                <h3>Before Submitting a PR</h3>
+                <ul class="checklist">
+                    <li>✅ Test locally (<code>./launch.sh</code>)</li>
+                    <li>✅ Test on mobile (or browser dev tools)</li>
+                    <li>✅ Check all links work</li>
+                    <li>✅ Verify no console errors</li>
+                    <li>✅ Test navigation and forms</li>
+                    <li>✅ Update documentation if needed</li>
+                    <li>✅ No sensitive data committed</li>
+                </ul>
+            </div>
+
+            <h2>Resources</h2>
+            <div class="card">
+                <ul>
+                    <li><strong>GitHub Repository</strong>: <a href="https://github.com/OpenMOVR/OpenMOVR.github.io" target="_blank">OpenMOVR/OpenMOVR.github.io</a></li>
+                    <li><strong>Issues</strong>: Report bugs or request features via GitHub Issues</li>
+                    <li><strong>Discussions</strong>: Ask questions on GitHub Discussions</li>
+                    <li><strong>GSoC Program</strong>: <a href="../gsoc.html">Learn about mentorship opportunities</a></li>
+                    <li><strong>MDA MOVR</strong>: <a href="https://www.mda.org/science/movr" target="_blank">Official MDA MOVR page</a></li>
+                </ul>
+            </div>
+
+            <div class="alert alert-info">
+                <h3>Questions?</h3>
+                <p>For technical questions: <a href="mailto:andre.paredes@ymail.com">andre.paredes@ymail.com</a></p>
+                <p>For MDA organization questions: <a href="mailto:mdamovr@mdausa.org">mdamovr@mdausa.org</a></p>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

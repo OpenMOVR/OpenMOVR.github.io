@@ -98,7 +98,7 @@ This comprehensive platform enables research teams to:
 ## 📁 **File Structure**
 
 ```
-data-dictionary-viewer/
+movr-viewer/
 ├── index.html                          # Navigation hub and landing page
 ├── data_dictionary_viewer.html         # MDA data dictionary viewer
 ├── vendor_mapping_viewer.html          # Vendor mapping coverage analyzer

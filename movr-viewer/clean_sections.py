@@ -2,7 +2,7 @@ import pandas as pd
 import json
 
 # Read the Excel file
-df = pd.read_excel('/home/andre/MDA/MOVR_DATA_HUB_v2/docs/MDA MOVR_Data Dictionary_SMA_DMD_ENHANCED_READ-ONLY.xlsx')
+df = pd.read_excel('MDA MOVR_Data Dictionary_SMA_DMD_ENHANCED_READ-ONLY.xlsx')
 
 # Clean up column names
 df.columns = df.columns.str.strip()
@@ -32,7 +32,7 @@ print(cleaned_sections)
 
 # Convert to JSON for the webapp
 data = df.fillna('').to_dict('records')
-with open('/home/andre/MDA/MOVR_DATA_HUB_v2/data-dictionary-viewer/data_dictionary.json', 'w') as f:
+with open('data_dictionary.json', 'w') as f:
     json.dump(data, f, indent=2)
 
 print(f"\nCleaned data exported to data_dictionary.json with {len(data)} records")
