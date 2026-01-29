@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>MOVR Pilot Assignment Flow &ndash; Step-by-Step Hierarchy</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="movr-pilot-assignment-flow--step-by-step-hierarchy">MOVR Pilot Assignment Flow – Step-by-Step Hierarchy</h1>
+<p><strong>Flow Name:</strong> <code>MOVR Pilot - Form Submission Handler</code>
+<strong>Excel File:</strong> <code>MOVR_PILOT_PARICIPANTS.xlsx</code>
+<strong>Last Updated:</strong> 2026-01-03</p>
+<h2 id="1-trigger-form-submission">1. Trigger: Form Submission</h2>
+<ul>
+<li><strong>Action:</strong> When a HTTP request is received</li>
+<li><em>Triggered by HTTP request when participant submits form.</em></li>
+<li><em>Schema includes: name, email, disease, relationship, ageGroup, attestation, multiPlatform, howHeard, submissionTime, userAgent, referrer</em></li>
+</ul>
+<h2 id="2-retrieve-data-from-excel">2. Retrieve Data from Excel</h2>
+<ul>
+<li><strong>Action:</strong> List rows present in VendorDiseaseQuotasTable
+<ul>
+<li><em>Table ID: <code>{61B3D0A9-C6A9-4BEC-8D7A-61DE464F3A12}</code></em></li>
+</ul>
+</li>
+<li><strong>Action:</strong> List rows present in MilestonesTable
+<ul>
+<li><em>Table ID: <code>{EC5F379C-7C93-4061-ACD0-DD9294D44AC3}</code></em></li>
+</ul>
+</li>
+</ul>
+<h2 id="3-initialize-variables">3. Initialize Variables</h2>
+<ul>
+<li><strong>Action:</strong> Init ParticipantDiseaseMinimumAchieved (Boolean, default: false)</li>
+<li><strong>Action:</strong> Init AssignedVendor (String, default: empty)</li>
+<li><strong>Action:</strong> Init VendorURL (String, default: empty)</li>
+<li><strong>Action:</strong> Init AssignmentReason (String, default: empty)</li>
+</ul>
+<h2 id="4-milestone-evaluation-disease-specific">4. Milestone Evaluation (Disease-Specific)</h2>
+<ul>
+<li><strong>Apply to Each:</strong> MilestonesTable rows (<code>Apply_to_each</code>)
+<ul>
+<li><strong>Condition:</strong> Milestone contains participant's disease? (<code>Condition_1</code>)
+<ul>
+<li><em>Expression: <code>contains(items('Apply_to_each')?['Milestone'], triggerBody()?['disease'])</code></em></li>
+<li><strong>If True (<code>Condition_1</code>):</strong>
+<ul>
+<li><strong>Action:</strong> Set ParticipantDiseaseMinimumAchieved</li>
+<li><em>Value: <code>equals(items('Apply_to_each')?['Status'], 'ACHIEVED')</code></em></li>
+<li><em>DMD participant → finds &quot;DMD Minimums Met&quot;</em></li>
+<li><em>SMA participant → finds &quot;SMA Minimums Met&quot;</em></li>
+<li><em>LGMD participant → finds &quot;LGMD Minimums Met&quot;</em></li>
+</ul>
+</li>
+<li><strong>If False (<code>Condition_1</code>):</strong>
+<ul>
+<li><em>No action.</em></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-assignment-logic">5. Assignment Logic</h2>
+<ul>
+<li><strong>Condition:</strong> ParticipantDiseaseMinimumAchieved = true? (<code>Condition_2_-_Main_Assignment_Logic</code>)
+<ul>
+<li><strong>If True (<code>Condition_2_-_Main_Assignment_Logic</code>):</strong> <em>POST-MINIMUM PHASE</em>
+<ul>
+<li><strong>Apply to Each:</strong> VendorDiseaseQuotasTable rows (<code>Apply_to_each_2</code>)
+<ul>
+<li><strong>Condition:</strong> Disease matches AND Remaining Slots &gt; 0? (<code>Condition_4-_disease_and_slot_filter_</code>)
+<ul>
+<li><strong>If True (<code>Condition_4-_disease_and_slot_filter_</code>):</strong>
+<ul>
+<li><strong>Condition:</strong> Vendor Name = &quot;Vibrent Health&quot;? (<code>Condition_5_-_Check_for_Vibrent</code>)
+<ul>
+<li><strong>If True (<code>Condition_5_-_Check_for_Vibrent</code>):</strong>
+<ul>
+<li><strong>Action:</strong> Set AssignedVendor = &quot;Vibrent Health&quot;</li>
+<li><strong>Action:</strong> Set VendorURL = Enrollment URL</li>
+<li><strong>Action:</strong> Set AssignmentReason = &quot;Post-minimum priority: Vibrent Health&quot;</li>
+</ul>
+</li>
+<li><strong>If False (<code>Condition_5_-_Check_for_Vibrent</code>):</strong>
+<ul>
+<li><strong>Condition:</strong> Vendor Name = &quot;Citizen Health&quot;? (<code>Condition_6_-_Check_for_Citizen</code>)
+<ul>
+<li><strong>If True (<code>Condition_6_-_Check_for_Citizen</code>):</strong>
+<ul>
+<li><strong>Action:</strong> Set AssignedVendor = &quot;Citizen Health&quot;</li>
+<li><strong>Action:</strong> Set VendorURL = Enrollment URL</li>
+<li><strong>Action:</strong> Set AssignmentReason = &quot;Post-minimum priority: Citizen Health&quot;</li>
+</ul>
+</li>
+<li><strong>If False (<code>Condition_6_-_Check_for_Citizen</code>):</strong>
+<ul>
+<li><strong>Action:</strong> Set AssignedVendor = &quot;Unite Genomics&quot;</li>
+<li><strong>Action:</strong> Set VendorURL = Enrollment URL</li>
+<li><strong>Action:</strong> Set AssignmentReason = &quot;Post-minimum priority: Unite Genomics&quot;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>If False (<code>Condition_4-_disease_and_slot_filter_</code>):</strong>
+<ul>
+<li><em>No action.</em></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>If False (<code>Condition_2_-_Main_Assignment_Logic</code>):</strong> <em>MINIMUM QUOTA PRIORITY PHASE</em>
+<ul>
+<li><strong>Apply to Each:</strong> VendorDiseaseQuotasTable rows (<code>Apply_to_each_1</code>)
+<ul>
+<li><strong>Condition:</strong> Disease matches AND Min Met = &quot;NO&quot; AND Remaining Slots &gt; 0? (<code>Condition_3_-_Check_for_minimum_quota_assignment</code>)
+<ul>
+<li><strong>If True (<code>Condition_3_-_Check_for_minimum_quota_assignment</code>):</strong>
+<ul>
+<li><strong>Action:</strong> Set AssignedVendor (vendor with lowest form submissions)</li>
+<li><strong>Action:</strong> Set VendorURL</li>
+<li><strong>Action:</strong> Set AssignmentReason = &quot;Minimum quota priority - rotation based on form submissions&quot;</li>
+</ul>
+</li>
+<li><strong>If False (<code>Condition_3_-_Check_for_minimum_quota_assignment</code>):</strong>
+<ul>
+<li><em>No action.</em></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="6-final-assignment-check">6. Final Assignment Check</h2>
+<ul>
+<li><strong>Condition:</strong> length(AssignedVendor) = 0? (<code>Condition_5_-_Check_if_no_assignment</code>)
+<ul>
+<li><strong>If True (<code>Condition_5_-_Check_if_no_assignment</code>):</strong> <em>No vendor available</em>
+<ul>
+<li><strong>Action:</strong> Set AssignedVendor = &quot;WAITLIST&quot;</li>
+<li><strong>Action:</strong> Set AssignmentReason = &quot;All vendors at capacity for this disease&quot;</li>
+</ul>
+</li>
+<li><strong>If False (<code>Condition_5_-_Check_if_no_assignment</code>):</strong>
+<ul>
+<li><em>Assignment was made, continue.</em></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="7-add-participant-to-excel">7. Add Participant to Excel</h2>
+<ul>
+<li><strong>Action:</strong> Add row to ParticipantsTable
+<ul>
+<li><em>Table ID: <code>{748BF5EC-CF2A-4B57-B4A4-3EE5BBE903F0}</code></em></li>
+<li><em>Participant ID: <code>@guid()</code></em></li>
+<li><em>Includes: Name, Email, Disease, Relationship, Age Group, Attestation, How Heard, Multi-Platform Interest</em></li>
+<li><em>Includes: Assigned Vendor, Vendor Link, Assignment Reason, Enrollment Status, Timeout Date</em></li>
+</ul>
+</li>
+</ul>
+<h2 id="8-email-composition-and-sending">8. Email Composition and Sending</h2>
+<ul>
+<li><strong>Condition:</strong> AssignedVendor ≠ &quot;WAITLIST&quot;? (<code>Condition_6_Assignment_Type</code>)
+<ul>
+<li><strong>If True (<code>Condition_6_Assignment_Type</code>):</strong> <em>Success Assignment</em>
+<ul>
+<li><strong>Action:</strong> Compose_Success_Email</li>
+<li><strong>Action:</strong> Send an email (V2)
+<ul>
+<li><em>To: Participant email (from Excel row)</em></li>
+<li><em>Subject: &quot;Welcome to the MOVR 2.0 Pilot for [disease] - Next Steps&quot;</em></li>
+<li><em>Cc: <a href="mailto:MDAMOVR@mdausa.org">MDAMOVR@mdausa.org</a></em></li>
+<li><em>Importance: High</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>If False (<code>Condition_6_Assignment_Type</code>):</strong> <em>Waitlisted</em>
+<ul>
+<li><strong>Action:</strong> Compose_Waitlist_Email</li>
+<li><strong>Action:</strong> Send an email (V2)
+<ul>
+<li><em>To: Participant email (from Excel row)</em></li>
+<li><em>Subject: &quot;MOVR 2.0 Pilot - Currently at Capacity for [disease]&quot;</em></li>
+<li><em>Bcc: <a href="mailto:MDAMOVR@mdausa.org">MDAMOVR@mdausa.org</a></em></li>
+<li><em>Importance: High</em></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="9-update-email-status">9. Update Email Status</h2>
+<ul>
+<li><strong>Action:</strong> Update a row in ParticipantsTable
+<ul>
+<li><em>Key: Participant ID</em></li>
+<li><em>Update: Email Sent = TRUE</em></li>
+</ul>
+</li>
+</ul>
+<h2 id="10-response">10. Response</h2>
+<ul>
+<li><strong>Condition:</strong> AssignedVendor ≠ &quot;WAITLIST&quot;? (<code>Condition_7_-_Response</code>)
+<ul>
+<li><strong>If True (<code>Condition_7_-_Response</code>):</strong>
+<ul>
+<li><strong>Action:</strong> Response Success
+<ul>
+<li><em>Returns: status, message, vendor, enrollmentUrl</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>If False (<code>Condition_7_-_Response</code>):</strong>
+<ul>
+<li><strong>Action:</strong> Response Waitlist
+<ul>
+<li><em>Returns: status, message</em></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+            
+        </body>
+        </html>

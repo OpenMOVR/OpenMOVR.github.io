@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>MOVR 2&period;0 Pilot - Standard Operating Procedures</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="movr-20-pilot---standard-operating-procedures">MOVR 2.0 Pilot - Standard Operating Procedures</h1>
+<h2 id="technical-operations-guide-for-clinical-ops--development-team">Technical Operations Guide for Clinical Ops &amp; Development Team</h2>
+<p><strong>Document Owner:</strong> Andre D. Paredes, PhD
+<strong>Last Updated:</strong> 2026-01-03
+<strong>Review Cycle:</strong> Monthly or after significant system changes
+<strong>Location:</strong> Team OneDrive &gt; MOVR Pilot &gt; Documentation</p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+<li><a href="#1-system-overview">System Overview</a></li>
+<li><a href="#2-daily-operations">Daily Operations</a></li>
+<li><a href="#3-weekly-operations">Weekly Operations</a></li>
+<li><a href="#4-enrollment-status-management">Enrollment Status Management</a></li>
+<li><a href="#5-timeout--waitlist-management">Timeout &amp; Waitlist Management</a></li>
+<li><a href="#6-power-bi-dashboard-maintenance">Power BI Dashboard Maintenance</a></li>
+<li><a href="#7-troubleshooting-guide">Troubleshooting Guide</a></li>
+<li><a href="#8-issue-escalation">Issue Escalation</a></li>
+<li><a href="#9-data-security--privacy">Data Security &amp; Privacy</a></li>
+<li><a href="#10-contact--support">Contact &amp; Support</a></li>
+</ol>
+<h2 id="1-system-overview">1. System Overview</h2>
+<h3 id="architecture-summary">Architecture Summary</h3>
+<pre><code>┌─────────────────┐     ┌──────────────────┐     ┌─────────────────┐
+│  Landing Page   │────▶│  Power Automate  │────▶│  Excel Online   │
+│  (GitHub Pages) │     │  (Webhook Flow)  │     │  (Data Store)   │
+└─────────────────┘     └──────────────────┘     └─────────────────┘
+                                │                        │
+                                ▼                        ▼
+                        ┌──────────────┐         ┌─────────────┐
+                        │   Outlook    │         │  Power BI   │
+                        │  (Emails)    │         │ (Reporting) │
+                        └──────────────┘         └─────────────┘
+</code></pre>
+<h3 id="key-components">Key Components</h3>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Location</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Landing Page</td>
+<td><a href="https://openmovr.github.io/pilot">https://openmovr.github.io/pilot</a></td>
+<td>Public enrollment form</td>
+</tr>
+<tr>
+<td>Power Automate</td>
+<td>Power Platform &gt; Flows</td>
+<td>Processes submissions, assigns vendors</td>
+</tr>
+<tr>
+<td>Excel Workbook</td>
+<td>OneDrive &gt; Power_automate &gt; movr-pilot-landing-page</td>
+<td>Participant data storage</td>
+</tr>
+<tr>
+<td>Power BI</td>
+<td>Power BI Service</td>
+<td>Reporting dashboard</td>
+</tr>
+<tr>
+<td>Email Templates</td>
+<td>Outlook / Power Automate</td>
+<td>Automated communications</td>
+</tr>
+</tbody>
+</table>
+<h3 id="vendor-platforms">Vendor Platforms</h3>
+<table>
+<thead>
+<tr>
+<th>Vendor</th>
+<th>Priority</th>
+<th>Enrollment URL</th>
+<th>Contact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vibrent Health</td>
+<td>1 (Highest)</td>
+<td><a href="http://vibrenthealth.com/mda/pilot">vibrenthealth.com/mda/pilot</a></td>
+<td>[Vendor Contact]</td>
+</tr>
+<tr>
+<td>Citizen Health</td>
+<td>2</td>
+<td><a href="http://citizenhealth.com/join/mda">citizenhealth.com/join/mda</a></td>
+<td>[Vendor Contact]</td>
+</tr>
+<tr>
+<td>Unite Genomics</td>
+<td>3</td>
+<td><a href="http://unitegenomics.com/enroll/movr">unitegenomics.com/enroll/movr</a></td>
+<td>[Vendor Contact]</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-daily-operations">2. Daily Operations</h2>
+<h3 id="morning-check-5-minutes">Morning Check (5 minutes)</h3>
+<p><strong>Responsible:</strong> Clinical Ops Team</p>
+<ol>
+<li>
+<p><strong>Check Power Automate Flow Status</strong></p>
+<ul>
+<li>Navigate to: Power Platform &gt; Flows &gt; &quot;MOVR Pilot - Form Submission Handler&quot;</li>
+<li>Verify status shows &quot;On&quot;</li>
+<li>Check &quot;Run history&quot; for any failed runs in last 24 hours</li>
+<li><strong>If failures found:</strong> See <a href="#7-troubleshooting-guide">Section 7: Troubleshooting</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Review New Submissions</strong></p>
+<ul>
+<li>Open Excel workbook: <code>MOVR_PILOT_PARTICIPANTS.xlsx</code></li>
+<li>Filter ParticipantsTable by today's date</li>
+<li>Verify new submissions have:
+<ul>
+<li>Assigned Vendor populated</li>
+<li>Email Sent = TRUE</li>
+<li>Enrollment Status = &quot;Pending&quot;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Monitor Support Inbox</strong></p>
+<ul>
+<li>Check <a href="mailto:mdamovr@mdausa.org">mdamovr@mdausa.org</a> for:
+<ul>
+<li>Participant questions</li>
+<li>Enrollment issues</li>
+<li>Multi-platform requests</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="response-slas">Response SLAs</h3>
+<table>
+<thead>
+<tr>
+<th>Request Type</th>
+<th>Response Time</th>
+<th>Resolution Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Enrollment questions</td>
+<td>4 business hours</td>
+<td>1 business day</td>
+</tr>
+<tr>
+<td>Technical issues</td>
+<td>2 business hours</td>
+<td>4 business hours</td>
+</tr>
+<tr>
+<td>Multi-platform requests</td>
+<td>1 business day</td>
+<td>2 business days</td>
+</tr>
+<tr>
+<td>Urgent/escalations</td>
+<td>1 hour</td>
+<td>Same day</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-weekly-operations">3. Weekly Operations</h2>
+<h3 id="weekly-review-meeting-30-minutes">Weekly Review Meeting (30 minutes)</h3>
+<p><strong>Schedule:</strong> Every Monday
+<strong>Attendees:</strong> Andre, Jessica, [Clinical Ops Team]
+<strong>Agenda:</strong></p>
+<ol>
+<li>Review enrollment numbers by vendor/disease</li>
+<li>Discuss any participant issues</li>
+<li>Review timeout queue</li>
+<li>Quota progress check</li>
+<li>Action items for week</li>
+</ol>
+<h3 id="weekly-tasks-checklist">Weekly Tasks Checklist</h3>
+<h4 id="task-1-update-enrollment-status-jessica">Task 1: Update Enrollment Status (Jessica)</h4>
+<p><strong>Frequency:</strong> Monday &amp; Thursday
+<strong>Time Required:</strong> 15-30 minutes</p>
+<pre><code>Steps:
+1. Open Excel workbook
+2. Filter ParticipantsTable: Enrollment Status = &quot;Pending&quot;
+3. For each pending participant:
+   a. Check vendor platform for enrollment completion
+   b. Update Enrollment Status:
+      - &quot;Enrolled&quot; = Completed vendor enrollment + research consent
+      - &quot;Platform Only&quot; = Completed vendor enrollment, no research consent
+      - &quot;Pending&quot; = Still within 14-day window, no action yet
+      - &quot;Discontinued&quot; = 14+ days with no enrollment
+4. Update Enrollment Date for completed enrollments
+5. Save workbook
+</code></pre>
+<h4 id="task-2-process-timeouts-jessica">Task 2: Process Timeouts (Jessica)</h4>
+<p><strong>Frequency:</strong> Weekly (Wednesday recommended)
+<strong>Time Required:</strong> 15 minutes</p>
+<pre><code>Steps:
+1. Filter ParticipantsTable where:
+   - Days Since Form &gt;= 12 AND Enrollment Status = &quot;Pending&quot;
+2. Send reminder email to participants approaching timeout
+3. Filter where Days Since Form &gt;= 14:
+   - Update Enrollment Status to &quot;Discontinued&quot;
+   - This automatically opens vendor slots
+4. Document any special cases
+</code></pre>
+<h4 id="task-3-quota--milestone-review-andre">Task 3: Quota &amp; Milestone Review (Andre)</h4>
+<p><strong>Frequency:</strong> Weekly (Friday)
+<strong>Time Required:</strong> 10 minutes</p>
+<pre><code>Steps:
+1. Review VendorDiseaseQuotasTable
+2. Check each vendor/disease combination:
+   - Current Form Submissions
+   - Actual Enrolled count
+   - Remaining Slots
+   - Min Met status
+3. Review MilestonesTable for progress
+4. Flag any concerns for Monday meeting
+</code></pre>
+<h4 id="task-4-power-bi-refresh-andre">Task 4: Power BI Refresh (Andre)</h4>
+<p><strong>Frequency:</strong> Weekly or as needed
+<strong>Time Required:</strong> 5 minutes</p>
+<pre><code>Steps:
+1. Open Power BI report
+2. Click &quot;Refresh&quot; to pull latest Excel data
+3. Verify visualizations show current data
+4. Export weekly summary if needed
+</code></pre>
+<h2 id="4-enrollment-status-management">4. Enrollment Status Management</h2>
+<h3 id="status-definitions">Status Definitions</h3>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Definition</th>
+<th>Action Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Pending</strong></td>
+<td>Form submitted, awaiting vendor enrollment</td>
+<td>Monitor; send reminders at Day 7, Day 12</td>
+</tr>
+<tr>
+<td><strong>Enrolled</strong></td>
+<td>Completed vendor enrollment AND research consent</td>
+<td>None - success state</td>
+</tr>
+<tr>
+<td><strong>Platform Only</strong></td>
+<td>Completed vendor enrollment, NO research consent</td>
+<td>Follow up for consent</td>
+</tr>
+<tr>
+<td><strong>Discontinued</strong></td>
+<td>14+ days without enrollment</td>
+<td>Slot reopened; can re-enroll if interested</td>
+</tr>
+<tr>
+<td><strong>Waitlisted</strong></td>
+<td>All vendors at capacity for disease type</td>
+<td>Notify when slots open</td>
+</tr>
+</tbody>
+</table>
+<h3 id="status-update-workflow">Status Update Workflow</h3>
+<pre><code>Day 0: Form Submitted → Status: &quot;Pending&quot;
+        │
+Day 7:  ├── Still Pending? → Send Reminder Email #1
+        │
+Day 12: ├── Still Pending? → Send Reminder Email #2 (urgent)
+        │
+Day 14: └── Still Pending? → Status: &quot;Discontinued&quot;
+                             Vendor slot reopened
+</code></pre>
+<h3 id="reminder-email-templates">Reminder Email Templates</h3>
+<p><strong>Day 7 Reminder:</strong></p>
+<pre><code>Subject: MOVR 2.0 Pilot - Complete Your Enrollment
+
+Hi [Name],
+
+Thank you for signing up for the MOVR 2.0 Pilot! We noticed you haven't
+completed your enrollment on [Vendor Name] yet.
+
+Your enrollment link: [URL]
+
+Need help? Reply to this email or reach us at mdamovr@mdausa.org.
+
+— The MOVR Team
+</code></pre>
+<p><strong>Day 12 Reminder (Urgent):</strong></p>
+<pre><code>Subject: Action Required: MOVR 2.0 Pilot Enrollment Expiring Soon
+
+Hi [Name],
+
+Your MOVR 2.0 Pilot enrollment window closes in 2 days. Please complete
+your enrollment on [Vendor Name] to secure your spot.
+
+Your enrollment link: [URL]
+
+If you're no longer interested, no action is needed.
+
+— The MOVR Team
+</code></pre>
+<h2 id="5-timeout--waitlist-management">5. Timeout &amp; Waitlist Management</h2>
+<h3 id="timeout-process-14-day-rule">Timeout Process (14-Day Rule)</h3>
+<p><strong>Purpose:</strong> Ensure active participants get slots; prevent indefinite holds</p>
+<p><strong>Process:</strong></p>
+<ol>
+<li>Participant submits form → 14-day enrollment window starts</li>
+<li>Day 7: First reminder email</li>
+<li>Day 12: Urgent reminder email</li>
+<li>Day 14+: If still &quot;Pending&quot;:
+<ul>
+<li>Change status to &quot;Discontinued&quot;</li>
+<li>Remaining Slots formula automatically increases</li>
+<li>Slot becomes available for new participants</li>
+</ul>
+</li>
+</ol>
+<h3 id="waitlist-management">Waitlist Management</h3>
+<p><strong>When participants are waitlisted:</strong></p>
+<ol>
+<li>All vendors at capacity for their disease type</li>
+<li>Status set to &quot;Waitlisted&quot; automatically</li>
+<li>Waitlist email sent with explanation</li>
+</ol>
+<p><strong>When slots open (discontinued participant or quota increase):</strong></p>
+<ol>
+<li>Check for waitlisted participants for that disease type</li>
+<li>Re-process oldest waitlisted submission</li>
+<li>Assign to available vendor</li>
+<li>Send new enrollment email</li>
+<li>Update status to &quot;Pending&quot;</li>
+</ol>
+<h3 id="re-enrollment-process">Re-enrollment Process</h3>
+<p>If a discontinued participant wants to re-enroll:</p>
+<ol>
+<li>Confirm interest via email</li>
+<li>Have them submit new form OR</li>
+<li>Manually update their row:
+<ul>
+<li>Reset Enrollment Status to &quot;Pending&quot;</li>
+<li>Update Timestamp to current date</li>
+<li>Trigger new assignment email</li>
+</ul>
+</li>
+</ol>
+<h2 id="6-power-bi-dashboard-maintenance">6. Power BI Dashboard Maintenance</h2>
+<h3 id="dashboard-components">Dashboard Components</h3>
+<table>
+<thead>
+<tr>
+<th>Report Page</th>
+<th>Metrics</th>
+<th>Refresh Frequency</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Overview</td>
+<td>Total submissions, enrolled, by disease</td>
+<td>Real-time with Excel</td>
+</tr>
+<tr>
+<td>Vendor Distribution</td>
+<td>Submissions/enrollments by vendor</td>
+<td>Real-time</td>
+</tr>
+<tr>
+<td>Conversion Funnel</td>
+<td>Form → Enrolled conversion rates</td>
+<td>Real-time</td>
+</tr>
+<tr>
+<td>Quota Progress</td>
+<td>Min/Max quota tracking</td>
+<td>Real-time</td>
+</tr>
+<tr>
+<td>Timeline</td>
+<td>Enrollments over time</td>
+<td>Real-time</td>
+</tr>
+</tbody>
+</table>
+<h3 id="data-source-configuration">Data Source Configuration</h3>
+<p><strong>Excel Source Path:</strong></p>
+<pre><code>C:\Users\AndreParedes\OneDrive - Muscular Dystrophy Association\Power_automate\movr-pilot-landing-page\MOVR_PILOT_PARTICIPANTS.xlsx
+</code></pre>
+<p><strong>Tables Connected:</strong></p>
+<ul>
+<li>ParticipantsTable</li>
+<li>VendorDiseaseQuotasTable</li>
+<li>MilestonesTable</li>
+</ul>
+<h3 id="refresh-process">Refresh Process</h3>
+<ol>
+<li>Open Power BI Desktop or Service</li>
+<li>Click &quot;Refresh&quot; button</li>
+<li>If prompted, authenticate with MDA Microsoft 365 credentials</li>
+<li>Verify data timestamp updated</li>
+</ol>
+<h3 id="troubleshooting-power-bi">Troubleshooting Power BI</h3>
+<table>
+<thead>
+<tr>
+<th>Issue</th>
+<th>Solution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Refresh fails</td>
+<td>Check Excel file is not open exclusively; verify OneDrive sync</td>
+</tr>
+<tr>
+<td>Data missing</td>
+<td>Ensure Excel tables are properly formatted; check column names match</td>
+</tr>
+<tr>
+<td>Credentials expired</td>
+<td>Re-authenticate with Microsoft 365</td>
+</tr>
+<tr>
+<td>Metrics incorrect</td>
+<td>Verify Excel formulas calculating correctly</td>
+</tr>
+</tbody>
+</table>
+<h2 id="7-troubleshooting-guide">7. Troubleshooting Guide</h2>
+<h3 id="common-issues--solutions">Common Issues &amp; Solutions</h3>
+<h4 id="issue-power-automate-flow-failed">Issue: Power Automate Flow Failed</h4>
+<p><strong>Symptoms:</strong> No assignment email sent; participant reports no email</p>
+<p><strong>Diagnosis:</strong></p>
+<ol>
+<li>Go to Power Platform &gt; Flows</li>
+<li>Open &quot;MOVR Pilot - Form Submission Handler&quot;</li>
+<li>Click &quot;Run history&quot;</li>
+<li>Find failed run and click to expand</li>
+<li>Identify which action failed</li>
+</ol>
+<p><strong>Common Causes &amp; Fixes:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Error</th>
+<th>Cause</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&quot;Table not found&quot;</td>
+<td>Excel table renamed/deleted</td>
+<td>Restore table or update flow reference</td>
+</tr>
+<tr>
+<td>&quot;Authentication failed&quot;</td>
+<td>Credentials expired</td>
+<td>Re-authenticate connections in flow</td>
+</tr>
+<tr>
+<td>&quot;Timeout&quot;</td>
+<td>Excel file locked</td>
+<td>Ensure file not open exclusively</td>
+</tr>
+<tr>
+<td>&quot;Invalid data&quot;</td>
+<td>Malformed form submission</td>
+<td>Check form validation; reject bad data</td>
+</tr>
+</tbody>
+</table>
+<h4 id="issue-participant-didnt-receive-email">Issue: Participant Didn't Receive Email</h4>
+<p><strong>Troubleshooting Steps:</strong></p>
+<ol>
+<li>Check ParticipantsTable for &quot;Email Sent&quot; column</li>
+<li>If FALSE: Flow may have failed - check run history</li>
+<li>If TRUE: Email was sent
+<ul>
+<li>Ask participant to check spam/junk folder</li>
+<li>Verify email address is correct</li>
+<li>Resend manually if needed</li>
+</ul>
+</li>
+</ol>
+<p><strong>Manual Email Resend:</strong></p>
+<ol>
+<li>Copy participant's assigned vendor and URL from Excel</li>
+<li>Send email manually from <a href="mailto:mdamovr@mdausa.org">mdamovr@mdausa.org</a></li>
+<li>Update &quot;Email Sent&quot; to TRUE</li>
+</ol>
+<h4 id="issue-wrong-vendor-assigned">Issue: Wrong Vendor Assigned</h4>
+<p><strong>This should not happen normally. If it does:</strong></p>
+<ol>
+<li>Document the case with timestamp and participant ID</li>
+<li>Check Power Automate run history for that submission</li>
+<li>Verify VendorDiseaseQuotasTable data is correct</li>
+<li>If legitimate error:
+<ul>
+<li>Contact participant to explain</li>
+<li>Offer correct vendor link</li>
+<li>Update Excel row with correct assignment</li>
+<li>Log in CURRENT_STATE.md issue log</li>
+</ul>
+</li>
+</ol>
+<h4 id="issue-quotas-not-updating">Issue: Quotas Not Updating</h4>
+<p><strong>Check Excel Formulas:</strong></p>
+<ol>
+<li>Open VendorDiseaseQuotasTable</li>
+<li>Verify &quot;Form Submissions&quot; formula: <code>=COUNTIFS(...)</code></li>
+<li>Verify &quot;Remaining Slots&quot; formula: <code>=Max Quota - Form Submissions</code></li>
+<li>Check that ParticipantsTable has correct vendor assignments</li>
+</ol>
+<h2 id="8-issue-escalation">8. Issue Escalation</h2>
+<h3 id="escalation-matrix">Escalation Matrix</h3>
+<table>
+<thead>
+<tr>
+<th>Severity</th>
+<th>Examples</th>
+<th>Response</th>
+<th>Escalate To</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Low</strong></td>
+<td>Single participant question</td>
+<td>4 hours</td>
+<td>Clinical Ops</td>
+</tr>
+<tr>
+<td><strong>Medium</strong></td>
+<td>Multiple similar issues; slow flow</td>
+<td>2 hours</td>
+<td>Andre</td>
+</tr>
+<tr>
+<td><strong>High</strong></td>
+<td>Flow completely down; no emails sending</td>
+<td>1 hour</td>
+<td>Andre + IT</td>
+</tr>
+<tr>
+<td><strong>Critical</strong></td>
+<td>Data breach; security incident</td>
+<td>Immediate</td>
+<td>Andre + IT + Leadership</td>
+</tr>
+</tbody>
+</table>
+<h3 id="escalation-process">Escalation Process</h3>
+<ol>
+<li><strong>Identify Severity</strong> using matrix above</li>
+<li><strong>Document Issue:</strong>
+<ul>
+<li>What happened</li>
+<li>When it started</li>
+<li>Who is affected</li>
+<li>What you've tried</li>
+</ul>
+</li>
+<li><strong>Escalate via:</strong>
+<ul>
+<li>Slack/Teams for Medium+</li>
+<li>Email for Low</li>
+<li>Phone for Critical</li>
+</ul>
+</li>
+<li><strong>Track Resolution</strong> in CURRENT_STATE.md issue log</li>
+</ol>
+<h3 id="critical-incident-response">Critical Incident Response</h3>
+<p><strong>If you suspect a security incident or data breach:</strong></p>
+<ol>
+<li>DO NOT attempt to fix alone</li>
+<li>Immediately contact Andre (phone)</li>
+<li>Document what you observed</li>
+<li>Do not delete or modify anything</li>
+<li>Follow MDA incident response procedures</li>
+</ol>
+<h2 id="9-data-security--privacy">9. Data Security &amp; Privacy</h2>
+<h3 id="access-control">Access Control</h3>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Access Level</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Andre</td>
+<td>Full (Excel, Power Automate, Power BI, GitHub)</td>
+</tr>
+<tr>
+<td>Jessica</td>
+<td>Excel (read/write), Power BI (view)</td>
+</tr>
+<tr>
+<td>Clinical Ops</td>
+<td>Excel (limited), Power BI (view)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="data-handling-rules">Data Handling Rules</h3>
+<ol>
+<li><strong>Never share Excel file externally</strong></li>
+<li><strong>Never email participant lists</strong></li>
+<li><strong>Use secure channels (Teams/OneDrive) for internal sharing</strong></li>
+<li><strong>Delete local copies after use</strong></li>
+<li><strong>Report any suspected unauthorized access immediately</strong></li>
+</ol>
+<h3 id="participant-data-requests">Participant Data Requests</h3>
+<p>If a participant requests:</p>
+<ul>
+<li><strong>Access to their data:</strong> Export their row from Excel; send via secure method</li>
+<li><strong>Deletion of their data:</strong> Mark status as &quot;Withdrawn&quot;; retain for audit trail</li>
+<li><strong>Correction of their data:</strong> Update in Excel; document change</li>
+</ul>
+<h2 id="10-contact--support">10. Contact &amp; Support</h2>
+<h3 id="internal-contacts">Internal Contacts</h3>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Name</th>
+<th>Contact</th>
+<th>Availability</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Technical Lead</td>
+<td>Andre D. Paredes</td>
+<td><a href="mailto:andre.paredes@ymail.com">andre.paredes@ymail.com</a></td>
+<td>Business hours</td>
+</tr>
+<tr>
+<td>Clinical Ops Lead</td>
+<td>Jessica Waits</td>
+<td>[email]</td>
+<td>Business hours</td>
+</tr>
+<tr>
+<td>IT Support</td>
+<td>MDA IT</td>
+<td>[helpdesk]</td>
+<td>Business hours</td>
+</tr>
+</tbody>
+</table>
+<h3 id="external-contacts">External Contacts</h3>
+<table>
+<thead>
+<tr>
+<th>Vendor</th>
+<th>Support Contact</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vibrent Health</td>
+<td>[contact info]</td>
+</tr>
+<tr>
+<td>Citizen Health</td>
+<td>[contact info]</td>
+</tr>
+<tr>
+<td>Unite Genomics</td>
+<td>[contact info]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="support-email">Support Email</h3>
+<p><strong><a href="mailto:mdamovr@mdausa.org">mdamovr@mdausa.org</a></strong> - Primary support inbox for participants</p>
+<h2 id="appendix-a-quick-reference">Appendix A: Quick Reference</h2>
+<h3 id="daily-checklist">Daily Checklist</h3>
+<ul class="contains-task-list">
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Check Power Automate flow status</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Review new submissions</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Monitor support inbox</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Respond to participant questions</li>
+</ul>
+<h3 id="weekly-checklist">Weekly Checklist</h3>
+<ul class="contains-task-list">
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Update enrollment statuses (Mon/Thu)</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Process timeouts (Wed)</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Send reminder emails as needed</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Review quota progress (Fri)</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Refresh Power BI dashboard</li>
+</ul>
+<h3 id="monthly-checklist">Monthly Checklist</h3>
+<ul class="contains-task-list">
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Review this SOP for updates</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Audit access permissions</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Review quota utilization trends</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Update documentation as needed</li>
+</ul>
+<h2 id="document-revision-history">Document Revision History</h2>
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Version</th>
+<th>Author</th>
+<th>Changes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2026-01-03</td>
+<td>1.0</td>
+<td>A. Paredes</td>
+<td>Initial SOP creation</td>
+</tr>
+</tbody>
+</table>
+<p><em>This document should be stored in the team OneDrive and reviewed during onboarding for any team member supporting the MOVR 2.0 Pilot.</em></p>
+
+            
+            
+        </body>
+        </html>

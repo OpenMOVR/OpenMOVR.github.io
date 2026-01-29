@@ -1,9 +1,48 @@
 # MOVR Pilot: Microsoft Power Automate + Excel Online Architecture
 
-**PAGE URL:** [openmovr.github.io/pilot](https://openmovr.github.io/pilot)  
-**Backend:** Microsoft Power Automate + Excel Online + Outlook  
-**Target:** 500 participants  
+**PAGE URL:** [openmovr.github.io/pilot](https://openmovr.github.io/pilot)
+**Backend:** Microsoft Power Automate + Excel Online + Outlook
+**Target:** 500 participants
 **Cost:** $0 (included with Microsoft 365)
+
+---
+
+## Changelog
+
+| Date | Version | Author | Changes |
+|------|---------|--------|---------|
+| 2026-01-03 | 2.1 | A. Paredes | Added changelog section; created LANDING_PAGE_CONTENT.md for copy reference; documented Power BI integration path; updated form field documentation to match live site |
+| 2025-11-05 | 2.0 | A. Paredes | Documented critical issues (global minimum logic flaw, no remaining slots error); added detailed priority logic explanation to CURRENT_STATE.md |
+| 2025-10-XX | 1.5 | A. Paredes | Added age group and attestation fields to form; updated Power Automate schema |
+| 2025-10-XX | 1.0 | A. Paredes | Initial architecture document; Power Automate + Excel Online implementation |
+
+---
+
+## Related Documentation
+
+| Document | Purpose | Audience |
+|----------|---------|----------|
+| `CURRENT_STATE.md` | Live system status, issue tracking, technical details | Developers, Technical Ops |
+| `LANDING_PAGE_CONTENT.md` | Landing page copy/text for communications consistency | Marketing, Communications, Leadership |
+| `power-automate-setup.md` | Backend setup instructions | Developers |
+| `power_automate_logic_flow.md` | Assignment logic hierarchy | Developers, Technical Ops |
+| `EDGE_CASE_ANALYSIS.md` | Vulnerability analysis | Developers |
+| `SOP_TECHNICAL.md` | Operational procedures for clinical ops | Clinical Ops, Developers |
+| `EXECUTIVE_SUMMARY.md` | High-level overview for leadership | Senior Leadership, C-Suite |
+
+---
+
+## Data Integration: Power BI
+
+**Excel Source Location:** `C:\Users\AndreParedes\OneDrive - Muscular Dystrophy Association\Power_automate\movr-pilot-landing-page`
+
+A Power BI dashboard connects to the pilot Excel workbook for real-time reporting and visualization. This provides:
+- Enrollment metrics by disease type and vendor
+- Conversion funnel analysis (form → enrollment → active)
+- Quota progress tracking
+- Time-to-enrollment trends
+
+**Note:** Power BI reads from the same Excel Online workbook used by Power Automate. Changes to Excel structure require coordinated updates to both Power Automate flow and Power BI data model.
 
 ---
 
@@ -97,17 +136,37 @@
       }
       ```
 
-2. **Get Vendor Disease Quotas**  
+2. **Get Vendor Disease Quotas**
     - Action: List rows present in `VendorDiseaseQuotasTable` (Excel Online)
 
-3. **Get Milestones Status**  
+3. **Get Milestones Status**
     - Action: List rows present in `MilestonesTable` (Excel Online)
 
-4. **Initialize Variables**  
+4. **Initialize Variables**
     - `AllMinimumsAchieved` (boolean)
     - `AssignedVendor` (string)
     - `VendorURL` (string)
     - `AssignmentReason` (string)
+
+### Current Form Data Schema (Live Site)
+
+```json
+{
+  "name": "string (required) - Participant first and last name",
+  "email": "string (required) - Validated, no disposable domains",
+  "disease": "DMD|SMA|LGMD (required)",
+  "relationship": "Patient|Parent/Caregiver|Other (required)",
+  "ageGroup": "6-younger|7-13|14-17|18-older (required)",
+  "howHeard": "Email|Social|Call|Provider|Friend|Other (required)",
+  "multiPlatform": "true|undefined (optional checkbox)",
+  "attestation": "true (required checkbox)",
+  "submissionTime": "ISO timestamp (auto-generated)",
+  "userAgent": "browser string (auto-generated)",
+  "referrer": "URL (auto-generated)"
+}
+```
+
+**Attestation Text (Live):** "I grant permission for the MOVR team to contact me about this pilot, including enrollment support, feedback requests, and invitations to future phases"
 
 5. **Check Minimums Status**
     - Filter milestones for "All Minimums Met"

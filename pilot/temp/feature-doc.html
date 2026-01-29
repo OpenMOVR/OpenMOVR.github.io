@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>MOVR Pilot&colon; Microsoft Power Automate &plus; Excel Online Architecture</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="movr-pilot-microsoft-power-automate--excel-online-architecture">MOVR Pilot: Microsoft Power Automate + Excel Online Architecture</h1>
+<p><strong>PAGE URL:</strong> <a href="https://openmovr.github.io/pilot">openmovr.github.io/pilot</a>
+<strong>Backend:</strong> Microsoft Power Automate + Excel Online + Outlook
+<strong>Target:</strong> 500 participants
+<strong>Cost:</strong> $0 (included with Microsoft 365)</p>
+<hr>
+<h2 id="changelog">Changelog</h2>
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Version</th>
+<th>Author</th>
+<th>Changes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2026-01-03</td>
+<td>2.1</td>
+<td>A. Paredes</td>
+<td>Added changelog section; created LANDING_PAGE_CONTENT.md for copy reference; documented Power BI integration path; updated form field documentation to match live site</td>
+</tr>
+<tr>
+<td>2025-11-05</td>
+<td>2.0</td>
+<td>A. Paredes</td>
+<td>Documented critical issues (global minimum logic flaw, no remaining slots error); added detailed priority logic explanation to CURRENT_STATE.md</td>
+</tr>
+<tr>
+<td>2025-10-XX</td>
+<td>1.5</td>
+<td>A. Paredes</td>
+<td>Added age group and attestation fields to form; updated Power Automate schema</td>
+</tr>
+<tr>
+<td>2025-10-XX</td>
+<td>1.0</td>
+<td>A. Paredes</td>
+<td>Initial architecture document; Power Automate + Excel Online implementation</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="related-documentation">Related Documentation</h2>
+<table>
+<thead>
+<tr>
+<th>Document</th>
+<th>Purpose</th>
+<th>Audience</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CURRENT_STATE.md</code></td>
+<td>Live system status, issue tracking, technical details</td>
+<td>Developers, Technical Ops</td>
+</tr>
+<tr>
+<td><code>LANDING_PAGE_CONTENT.md</code></td>
+<td>Landing page copy/text for communications consistency</td>
+<td>Marketing, Communications, Leadership</td>
+</tr>
+<tr>
+<td><code>power-automate-setup.md</code></td>
+<td>Backend setup instructions</td>
+<td>Developers</td>
+</tr>
+<tr>
+<td><code>power_automate_logic_flow.md</code></td>
+<td>Assignment logic hierarchy</td>
+<td>Developers, Technical Ops</td>
+</tr>
+<tr>
+<td><code>EDGE_CASE_ANALYSIS.md</code></td>
+<td>Vulnerability analysis</td>
+<td>Developers</td>
+</tr>
+<tr>
+<td><code>SOP_TECHNICAL.md</code></td>
+<td>Operational procedures for clinical ops</td>
+<td>Clinical Ops, Developers</td>
+</tr>
+<tr>
+<td><code>EXECUTIVE_SUMMARY.md</code></td>
+<td>High-level overview for leadership</td>
+<td>Senior Leadership, C-Suite</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="data-integration-power-bi">Data Integration: Power BI</h2>
+<p><strong>Excel Source Location:</strong> <code>C:\Users\AndreParedes\OneDrive - Muscular Dystrophy Association\Power_automate\movr-pilot-landing-page</code></p>
+<p>A Power BI dashboard connects to the pilot Excel workbook for real-time reporting and visualization. This provides:</p>
+<ul>
+<li>Enrollment metrics by disease type and vendor</li>
+<li>Conversion funnel analysis (form → enrollment → active)</li>
+<li>Quota progress tracking</li>
+<li>Time-to-enrollment trends</li>
+</ul>
+<p><strong>Note:</strong> Power BI reads from the same Excel Online workbook used by Power Automate. Changes to Excel structure require coordinated updates to both Power Automate flow and Power BI data model.</p>
+<hr>
+<h2 id="architecture-overview">Architecture Overview</h2>
+<h3 id="frontend">Frontend</h3>
+<ul>
+<li>Static HTML page hosted on GitHub Pages (<code>openmovr.github.io/pilot</code>)</li>
+<li>HTML form with JavaScript</li>
+<li>Form submits to Power Automate HTTP trigger endpoint</li>
+</ul>
+<h3 id="backend">Backend</h3>
+<ul>
+<li>Excel Online workbook in OneDrive/SharePoint</li>
+<li>Power Automate flow handles form submissions</li>
+<li>Vendor assignment based on quota logic</li>
+<li>Emails sent via Outlook</li>
+</ul>
+<hr>
+<h2 id="excel-online-workbook-setup">Excel Online Workbook Setup</h2>
+<ol>
+<li>
+<p><strong>Create a new Excel workbook</strong> in OneDrive for Business<br>
+Name: <code>MOVR_Pilot_Participants.xlsx</code></p>
+</li>
+<li>
+<p><strong>Sheet 1: Participants</strong></p>
+<ul>
+<li>Columns:<br>
+<code>Participant ID | Timestamp | Name | Email | Disease Type | Relationship | Multi-Platform | How Heard | Assigned Vendor | Email Sent | Vendor Link | Enrollment Status | Enrollment Date | Days Since Form | Age Group | Attestation | Timeout Date</code></li>
+<li>Additional formula columns:
+<ul>
+<li>Participant ID: <code>=ROW()-1</code> (auto-incrementing)</li>
+<li>Days Since Form: <code>=TODAY()-B2</code></li>
+<li>Timeout Date: <code>=B2+14</code> (2 weeks from form submission) - <strong>Column Q after adding Age Group &amp; Attestation</strong></li>
+<li>Enrollment Status: Manual update or &quot;Pending&quot; by default</li>
+</ul>
+</li>
+<li>Format as Table: <code>ParticipantsTable</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Sheet 2: Vendor_Disease_Quotas</strong></p>
+<ul>
+<li>Columns:<br>
+<code>Vendor Name | Disease | Min Quota | Max Quota | Form Submissions | Actual Enrolled | Min Met | Remaining Slots | Priority | Enrollment URL</code></li>
+<li>Example rows:<pre><code>Unite Genomics | SMA | 20 | 80 | =COUNTIFS(Participants!H:H,&quot;Unite Genomics&quot;,Participants!D:D,&quot;SMA&quot;) | =COUNTIFS(Participants!H:H,&quot;Unite Genomics&quot;,Participants!D:D,&quot;SMA&quot;,Participants!L:L,&quot;Enrolled&quot;) | =IF(K2&gt;=C2,&quot;YES&quot;,&quot;NO&quot;) | =D2-J2 | 1 | https://unitegenomics.com/enroll/movr
+Unite Genomics | DMD | 10 | 20 | =COUNTIFS(Participants!H:H,&quot;Unite Genomics&quot;,Participants!D:D,&quot;DMD&quot;) | =COUNTIFS(Participants!H:H,&quot;Unite Genomics&quot;,Participants!D:D,&quot;DMD&quot;,Participants!L:L,&quot;Enrolled&quot;) | =IF(K3&gt;=C3,&quot;YES&quot;,&quot;NO&quot;) | =D3-J3 | 3 | https://unitegenomics.com/enroll/movr
+Unite Genomics | LGMD | 10 | 20 | =COUNTIFS(Participants!H:H,&quot;Unite Genomics&quot;,Participants!D:D,&quot;LGMD&quot;) | =COUNTIFS(Participants!H:H,&quot;Unite Genomics&quot;,Participants!D:D,&quot;LGMD&quot;,Participants!L:L,&quot;Enrolled&quot;) | =IF(K4&gt;=C4,&quot;YES&quot;,&quot;NO&quot;) | =D4-J4 | 3 | https://unitegenomics.com/enroll/movr
+Citizen Health | SMA | 10 | 20 | =COUNTIFS(Participants!H:H,&quot;Citizen Health&quot;,Participants!D:D,&quot;SMA&quot;) | =COUNTIFS(Participants!H:H,&quot;Citizen Health&quot;,Participants!D:D,&quot;SMA&quot;,Participants!L:L,&quot;Enrolled&quot;) | =IF(K5&gt;=C5,&quot;YES&quot;,&quot;NO&quot;) | =D5-J5 | 2 | https://citizenhealth.com/join/mda
+Citizen Health | DMD | 10 | 20 | =COUNTIFS(Participants!H:H,&quot;Citizen Health&quot;,Participants!D:D,&quot;DMD&quot;) | =COUNTIFS(Participants!H:H,&quot;Citizen Health&quot;,Participants!D:D,&quot;DMD&quot;,Participants!L:L,&quot;Enrolled&quot;) | =IF(K6&gt;=C6,&quot;YES&quot;,&quot;NO&quot;) | =D6-J6 | 2 | https://citizenhealth.com/join/mda
+Citizen Health | LGMD | 5 | 10 | =COUNTIFS(Participants!H:H,&quot;Citizen Health&quot;,Participants!D:D,&quot;LGMD&quot;) | =COUNTIFS(Participants!H:H,&quot;Citizen Health&quot;,Participants!D:D,&quot;LGMD&quot;,Participants!L:L,&quot;Enrolled&quot;) | =IF(K7&gt;=C7,&quot;YES&quot;,&quot;NO&quot;) | =D7-J7 | 3 | https://citizenhealth.com/join/mda
+Vibrent Health | SMA | 15 | 30 | =COUNTIFS(Participants!H:H,&quot;Vibrent Health&quot;,Participants!D:D,&quot;SMA&quot;) | =COUNTIFS(Participants!H:H,&quot;Vibrent Health&quot;,Participants!D:D,&quot;SMA&quot;,Participants!L:L,&quot;Enrolled&quot;) | =IF(K8&gt;=C8,&quot;YES&quot;,&quot;NO&quot;) | =D8-J8 | 1 | https://vibrenthealth.com/mda/pilot
+Vibrent Health | DMD | 15 | 30 | =COUNTIFS(Participants!H:H,&quot;Vibrent Health&quot;,Participants!D:D,&quot;DMD&quot;) | =COUNTIFS(Participants!H:H,&quot;Vibrent Health&quot;,Participants!D:D,&quot;DMD&quot;,Participants!L:L,&quot;Enrolled&quot;) | =IF(K9&gt;=C9,&quot;YES&quot;,&quot;NO&quot;) | =D9-J9 | 1 | https://vibrenthealth.com/mda/pilot
+Vibrent Health | LGMD | 15 | 30 | =COUNTIFS(Participants!H:H,&quot;Vibrent Health&quot;,Participants!D:D,&quot;LGMD&quot;) | =COUNTIFS(Participants!H:H,&quot;Vibrent Health&quot;,Participants!D:D,&quot;LGMD&quot;,Participants!L:L,&quot;Enrolled&quot;) | =IF(K10&gt;=C10,&quot;YES&quot;,&quot;NO&quot;) | =D10-J10 | 1 | https://vibrenthealth.com/mda/pilot
+</code></pre>
+</li>
+<li>Format as Table: <code>VendorDiseaseQuotasTable</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Sheet 3: Milestones</strong></p>
+<ul>
+<li>Columns:<br>
+<code>Milestone | Target | Current | Status | Date Achieved</code></li>
+<li>Example rows:<pre><code>All Minimums Met | 40 | =COUNTIF(Vendor_Disease_Quotas!G:G,&quot;YES&quot;) | =IF(C2&gt;=B2,&quot;ACHIEVED&quot;,&quot;IN PROGRESS&quot;) | =IF(D2=&quot;ACHIEVED&quot;,TODAY(),&quot;&quot;)
+Vibrent 30 Each | 90 | =SUMIFS(Vendor_Disease_Quotas!K:K,Vendor_Disease_Quotas!A:A,&quot;Vibrent Health&quot;) | =IF(C3&gt;=B3,&quot;ACHIEVED&quot;,&quot;IN PROGRESS&quot;) | =IF(D3=&quot;ACHIEVED&quot;,TODAY(),&quot;&quot;)
+Citizen 30 Total | 50 | =SUMIFS(Vendor_Disease_Quotas!K:K,Vendor_Disease_Quotas!A:A,&quot;Citizen Health&quot;) | =IF(C4&gt;=B4,&quot;ACHIEVED&quot;,&quot;IN PROGRESS&quot;) | =IF(D4=&quot;ACHIEVED&quot;,TODAY(),&quot;&quot;)
+Unite 30 Total | 50 | =SUMIFS(Vendor_Disease_Quotas!K:K,Vendor_Disease_Quotas!A:A,&quot;Unite Genomics&quot;) | =IF(C5&gt;=B5,&quot;ACHIEVED&quot;,&quot;IN PROGRESS&quot;) | =IF(D5=&quot;ACHIEVED&quot;,TODAY(),&quot;&quot;)
+</code></pre>
+</li>
+<li>Format as Table: <code>MilestonesTable</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Share settings:</strong></p>
+<ul>
+<li>Only you need edit access</li>
+<li>Store in OneDrive for Business or SharePoint</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="power-automate-flow-setup">Power Automate Flow Setup</h2>
+<p><strong>Flow Name:</strong> <code>MOVR Pilot - Form Submission Handler</code></p>
+<h3 id="steps">Steps</h3>
+<ol>
+<li>
+<p><strong>Trigger:</strong> When HTTP request is received</p>
+<ul>
+<li>Generates webhook URL for form submission</li>
+<li>Request Body JSON Schema:<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+   <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;object&quot;</span><span class="hljs-punctuation">,</span>
+   <span class="hljs-attr">&quot;properties&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;string&quot;</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;email&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;string&quot;</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;disease&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;string&quot;</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;relationship&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;string&quot;</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;multiPlatform&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;string&quot;</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;howHeard&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;string&quot;</span><span class="hljs-punctuation">}</span>
+   <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Get Vendor Disease Quotas</strong></p>
+<ul>
+<li>Action: List rows present in <code>VendorDiseaseQuotasTable</code> (Excel Online)</li>
+</ul>
+</li>
+<li>
+<p><strong>Get Milestones Status</strong></p>
+<ul>
+<li>Action: List rows present in <code>MilestonesTable</code> (Excel Online)</li>
+</ul>
+</li>
+<li>
+<p><strong>Initialize Variables</strong></p>
+<ul>
+<li><code>AllMinimumsAchieved</code> (boolean)</li>
+<li><code>AssignedVendor</code> (string)</li>
+<li><code>VendorURL</code> (string)</li>
+<li><code>AssignmentReason</code> (string)</li>
+</ul>
+</li>
+</ol>
+<h3 id="current-form-data-schema-live-site">Current Form Data Schema (Live Site)</h3>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;string (required) - Participant first and last name&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;email&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;string (required) - Validated, no disposable domains&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;disease&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;DMD|SMA|LGMD (required)&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;relationship&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Patient|Parent/Caregiver|Other (required)&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;ageGroup&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;6-younger|7-13|14-17|18-older (required)&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;howHeard&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Email|Social|Call|Provider|Friend|Other (required)&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;multiPlatform&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;true|undefined (optional checkbox)&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;attestation&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;true (required checkbox)&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;submissionTime&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ISO timestamp (auto-generated)&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;userAgent&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;browser string (auto-generated)&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;referrer&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;URL (auto-generated)&quot;</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<p><strong>Attestation Text (Live):</strong> &quot;I grant permission for the MOVR team to contact me about this pilot, including enrollment support, feedback requests, and invitations to future phases&quot;</p>
+<ol start="5">
+<li>
+<p><strong>Check Minimums Status</strong></p>
+<ul>
+<li>Filter milestones for &quot;All Minimums Met&quot;</li>
+<li>Set <code>AllMinimumsAchieved</code> = TRUE if status is &quot;ACHIEVED&quot;</li>
+</ul>
+</li>
+<li>
+<p><strong>Disease-Specific Assignment Logic</strong></p>
+<ul>
+<li>
+<p><strong>Condition: All Minimums Not Met</strong></p>
+<ul>
+<li>Filter vendor quotas for participant's disease type</li>
+<li>Filter where Min Met = &quot;NO&quot; AND Remaining Slots &gt; 0</li>
+<li>Select vendor with lowest current Form Submissions count</li>
+<li>Set AssignmentReason = &quot;Minimum quota priority&quot;</li>
+</ul>
+</li>
+<li>
+<p><strong>Condition: All Minimums Met</strong></p>
+<ul>
+<li>Filter vendor quotas for participant's disease type</li>
+<li>Priority order: Vibrent → Citizen → Unite</li>
+<li>Select first vendor with Remaining Slots &gt; 0</li>
+<li>Set AssignmentReason = &quot;Post-minimum priority order&quot;</li>
+</ul>
+</li>
+<li>
+<p><strong>Condition: No Available Slots</strong></p>
+<ul>
+<li>Set AssignedVendor = &quot;FULL&quot;</li>
+<li>Set AssignmentReason = &quot;All vendors at capacity for this disease&quot;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Condition: Valid Assignment</strong></p>
+<ul>
+<li>
+<p><strong>IF AssignedVendor ≠ &quot;FULL&quot;:</strong></p>
+<p><strong>7a. Add Row to Participants Table</strong></p>
+<ul>
+<li>Action: Add a row into <code>ParticipantsTable</code></li>
+<li>Include: Participant ID, all form data, AssignedVendor, VendorURL, AssignmentReason</li>
+<li>Set Enrollment Status = &quot;Pending&quot;</li>
+</ul>
+<p><strong>7b. Compose Success Email Body</strong></p>
+<ul>
+<li>Personalized email with assigned vendor and enrollment link</li>
+<li>Include assignment reason for transparency</li>
+</ul>
+<p><strong>7c. Condition: Multi-Platform Interest</strong></p>
+<ul>
+<li>If checked, append all vendor links to email body</li>
+</ul>
+<p><strong>7d. Send Success Email</strong></p>
+<ul>
+<li>Action: Send an email (V2) via Outlook</li>
+<li>To: participant's email</li>
+<li>Subject: &quot;Welcome to the MOVR Pilot - Next Steps&quot;</li>
+</ul>
+<p><strong>7e. Update Participants Row</strong></p>
+<ul>
+<li>Mark &quot;Email Sent&quot; = TRUE</li>
+</ul>
+<p><strong>7f. Success Response</strong></p>
+<ul>
+<li>Return JSON: <code>{&quot;status&quot;: &quot;success&quot;, &quot;message&quot;: &quot;Thank you for joining! Check your email for next steps.&quot;}</code></li>
+</ul>
+</li>
+<li>
+<p><strong>ELSE (AssignedVendor = &quot;FULL&quot;):</strong></p>
+<p><strong>7g. Add Row to Waitlist</strong></p>
+<ul>
+<li>Action: Add a row into <code>ParticipantsTable</code></li>
+<li>Set Assigned Vendor = &quot;WAITLIST&quot;</li>
+<li>Set Enrollment Status = &quot;Waitlisted&quot;</li>
+</ul>
+<p><strong>7h. Send Waitlist Email</strong></p>
+<ul>
+<li>Action: Send an email (V2) via Outlook</li>
+<li>Subject: &quot;MOVR Pilot - Currently at Capacity&quot;</li>
+<li>Body: Explain waitlist status and timeline</li>
+</ul>
+<p><strong>7i. Waitlist Response</strong></p>
+<ul>
+<li>Return JSON: <code>{&quot;status&quot;: &quot;waitlist&quot;, &quot;message&quot;: &quot;Thank you for your interest. You've been added to our waitlist.&quot;}</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="html-form-example">HTML Form Example</h2>
+<pre><code class="language-html"><span class="hljs-comment">&lt;!-- Google Analytics --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">async</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
+  <span class="hljs-variable language_">window</span>.<span class="hljs-property">dataLayer</span> = <span class="hljs-variable language_">window</span>.<span class="hljs-property">dataLayer</span> || [];
+  <span class="hljs-keyword">function</span> <span class="hljs-title function_">gtag</span>(<span class="hljs-params"></span>){dataLayer.<span class="hljs-title function_">push</span>(<span class="hljs-variable language_">arguments</span>);}
+  <span class="hljs-title function_">gtag</span>(<span class="hljs-string">&#x27;js&#x27;</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>());
+  <span class="hljs-title function_">gtag</span>(<span class="hljs-string">&#x27;config&#x27;</span>, <span class="hljs-string">&#x27;GA_MEASUREMENT_ID&#x27;</span>);
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;form-container&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;pilot-form&quot;</span> <span class="hljs-attr">onsubmit</span>=<span class="hljs-string">&quot;submitForm(event)&quot;</span>&gt;</span>
+    <span class="hljs-comment">&lt;!-- CSRF Protection --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;hidden&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;csrf_token&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;csrf_token&quot;</span>&gt;</span>
+    
+    <span class="hljs-comment">&lt;!-- Enhanced form fields with validation --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;form-group&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;name&quot;</span>&gt;</span>Full Name *<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;name&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;name&quot;</span> <span class="hljs-attr">required</span> 
+             <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;Enter your full name&quot;</span>
+             <span class="hljs-attr">pattern</span>=<span class="hljs-string">&quot;[A-Za-z\s\-&#x27;]+&quot;</span> 
+             <span class="hljs-attr">title</span>=<span class="hljs-string">&quot;Please enter a valid name (letters, spaces, hyphens, apostrophes only)&quot;</span>
+             <span class="hljs-attr">maxlength</span>=<span class="hljs-string">&quot;100&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;error-message&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;name-error&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;form-group&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;email&quot;</span>&gt;</span>Email Address *<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;email&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;email&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;email&quot;</span> <span class="hljs-attr">required</span> 
+             <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;your.email@example.com&quot;</span>
+             <span class="hljs-attr">maxlength</span>=<span class="hljs-string">&quot;100&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;error-message&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;email-error&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;form-group&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;disease&quot;</span>&gt;</span>Disease Type *<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;disease&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;disease&quot;</span> <span class="hljs-attr">required</span>&gt;</span>
+         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;&quot;</span>&gt;</span>Select Disease Type<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;DMD&quot;</span>&gt;</span>Duchenne Muscular Dystrophy (DMD)<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;SMA&quot;</span>&gt;</span>Spinal Muscular Atrophy (SMA)<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;LGMD&quot;</span>&gt;</span>Limb-Girdle Muscular Dystrophy (LGMD)<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;error-message&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;disease-error&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;form-group&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;relationship&quot;</span>&gt;</span>Your Relationship *<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;relationship&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;relationship&quot;</span> <span class="hljs-attr">required</span>&gt;</span>
+         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;&quot;</span>&gt;</span>Select Your Relationship<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;Patient&quot;</span>&gt;</span>I am the patient<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;Parent/Caregiver&quot;</span>&gt;</span>I am a parent/caregiver<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;Other&quot;</span>&gt;</span>Other family member<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;error-message&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;relationship-error&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;form-group&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;howHeard&quot;</span>&gt;</span>How did you hear about this?<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">select</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;howHeard&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;howHeard&quot;</span>&gt;</span>
+         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;&quot;</span>&gt;</span>Select an option<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;Email&quot;</span>&gt;</span>MDA Email<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;Social&quot;</span>&gt;</span>Social Media<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;Event&quot;</span>&gt;</span>MDA Event<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;Provider&quot;</span>&gt;</span>Healthcare Provider<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;Friend&quot;</span>&gt;</span>Friend/Family<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+         <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;Other&quot;</span>&gt;</span>Other<span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;form-group checkbox-group&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">label</span>&gt;</span>
+         <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;checkbox&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;multiPlatform&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;true&quot;</span>&gt;</span>
+         <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;checkmark&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+         I&#x27;m interested in exploring all three platforms (optional)
+      <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;form-group checkbox-group&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">label</span>&gt;</span>
+         <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;checkbox&quot;</span> <span class="hljs-attr">required</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;attestation&quot;</span>&gt;</span>
+         <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;checkmark&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+         I consent to participate and understand my data will be used for research purposes *
+      <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;error-message&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;attestation-error&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;submit-btn&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;submit-button&quot;</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;submit-text&quot;</span>&gt;</span>Submit My Information<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;submit-spinner&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;spinner&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;display:none;&quot;</span>&gt;</span>⏳ Submitting...<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+
+  <span class="hljs-comment">&lt;!-- Success Message --&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;confirmation&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;message success-message&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;display:none;&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>✅ Thank you!<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Check your email for next steps. You should receive an email within the next few minutes with your enrollment link.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+  <span class="hljs-comment">&lt;!-- Waitlist Message --&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;waitlist&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;message waitlist-message&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;display:none;&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>📋 Added to Waitlist<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Thank you for your interest! We&#x27;re currently at capacity for your disease type, but you&#x27;ve been added to our waitlist. We&#x27;ll contact you if a spot opens up.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+  <span class="hljs-comment">&lt;!-- Error Message --&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;error&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;message error-message&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;display:none;&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>❌ Submission Error<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>There was an error submitting your information. Please check your connection and try again, or email <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;mailto:pilothelp@mda.org&quot;</span>&gt;</span>pilothelp@mda.org<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span> for assistance.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">&quot;resetForm()&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;retry-button&quot;</span>&gt;</span>Try Again<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript">
+<span class="hljs-comment">// Rate limiting</span>
+<span class="hljs-keyword">let</span> lastSubmission = <span class="hljs-number">0</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">RATE_LIMIT_MS</span> = <span class="hljs-number">5000</span>; <span class="hljs-comment">// 5 seconds between submissions</span>
+
+<span class="hljs-comment">// Generate CSRF token on page load</span>
+<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&#x27;DOMContentLoaded&#x27;</span>, <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-title function_">generateCSRFToken</span>();
+  <span class="hljs-title function_">trackPageView</span>();
+});
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">generateCSRFToken</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> token = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">random</span>().<span class="hljs-title function_">toString</span>(<span class="hljs-number">36</span>).<span class="hljs-title function_">substr</span>(<span class="hljs-number">2</span>) + <span class="hljs-title class_">Date</span>.<span class="hljs-title function_">now</span>().<span class="hljs-title function_">toString</span>(<span class="hljs-number">36</span>);
+  <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;csrf_token&#x27;</span>).<span class="hljs-property">value</span> = token;
+}
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">trackPageView</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> gtag !== <span class="hljs-string">&#x27;undefined&#x27;</span>) {
+    <span class="hljs-title function_">gtag</span>(<span class="hljs-string">&#x27;event&#x27;</span>, <span class="hljs-string">&#x27;page_view&#x27;</span>, {
+      <span class="hljs-attr">page_title</span>: <span class="hljs-string">&#x27;MOVR Pilot Registration&#x27;</span>,
+      <span class="hljs-attr">page_location</span>: <span class="hljs-variable language_">window</span>.<span class="hljs-property">location</span>.<span class="hljs-property">href</span>
+    });
+  }
+}
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">validateEmail</span>(<span class="hljs-params">email</span>) {
+  <span class="hljs-comment">// Enhanced email validation</span>
+  <span class="hljs-keyword">const</span> emailRegex = <span class="hljs-regexp">/^[^\s@]+@[^\s@]+\.[^\s@]+$/</span>;
+  <span class="hljs-keyword">const</span> disposableEmailDomains = [<span class="hljs-string">&#x27;tempmail.org&#x27;</span>, <span class="hljs-string">&#x27;10minutemail.com&#x27;</span>, <span class="hljs-string">&#x27;guerrillamail.com&#x27;</span>];
+  
+  <span class="hljs-keyword">if</span> (!emailRegex.<span class="hljs-title function_">test</span>(email)) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+  
+  <span class="hljs-keyword">const</span> domain = email.<span class="hljs-title function_">split</span>(<span class="hljs-string">&#x27;@&#x27;</span>)[<span class="hljs-number">1</span>].<span class="hljs-title function_">toLowerCase</span>();
+  <span class="hljs-keyword">return</span> !disposableEmailDomains.<span class="hljs-title function_">includes</span>(domain);
+}
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">validateForm</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-title function_">clearErrors</span>();
+  <span class="hljs-keyword">let</span> isValid = <span class="hljs-literal">true</span>;
+
+  <span class="hljs-comment">// Name validation</span>
+  <span class="hljs-keyword">const</span> name = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;name&#x27;</span>).<span class="hljs-property">value</span>.<span class="hljs-title function_">trim</span>();
+  <span class="hljs-keyword">if</span> (name.<span class="hljs-property">length</span> &lt; <span class="hljs-number">2</span>) {
+    <span class="hljs-title function_">showError</span>(<span class="hljs-string">&#x27;name-error&#x27;</span>, <span class="hljs-string">&#x27;Name must be at least 2 characters long&#x27;</span>);
+    isValid = <span class="hljs-literal">false</span>;
+  }
+
+  <span class="hljs-comment">// Email validation</span>
+  <span class="hljs-keyword">const</span> email = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;email&#x27;</span>).<span class="hljs-property">value</span>.<span class="hljs-title function_">trim</span>();
+  <span class="hljs-keyword">if</span> (!<span class="hljs-title function_">validateEmail</span>(email)) {
+    <span class="hljs-title function_">showError</span>(<span class="hljs-string">&#x27;email-error&#x27;</span>, <span class="hljs-string">&#x27;Please enter a valid email address&#x27;</span>);
+    isValid = <span class="hljs-literal">false</span>;
+  }
+
+  <span class="hljs-comment">// Required field validation</span>
+  <span class="hljs-keyword">const</span> requiredFields = [<span class="hljs-string">&#x27;disease&#x27;</span>, <span class="hljs-string">&#x27;relationship&#x27;</span>];
+  requiredFields.<span class="hljs-title function_">forEach</span>(<span class="hljs-function"><span class="hljs-params">field</span> =&gt;</span> {
+    <span class="hljs-keyword">if</span> (!<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(field).<span class="hljs-property">value</span>) {
+      <span class="hljs-title function_">showError</span>(field + <span class="hljs-string">&#x27;-error&#x27;</span>, <span class="hljs-string">&#x27;This field is required&#x27;</span>);
+      isValid = <span class="hljs-literal">false</span>;
+    }
+  });
+
+  <span class="hljs-comment">// Attestation validation</span>
+  <span class="hljs-keyword">if</span> (!<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;input[name=&quot;attestation&quot;]&#x27;</span>).<span class="hljs-property">checked</span>) {
+    <span class="hljs-title function_">showError</span>(<span class="hljs-string">&#x27;attestation-error&#x27;</span>, <span class="hljs-string">&#x27;You must consent to participate&#x27;</span>);
+    isValid = <span class="hljs-literal">false</span>;
+  }
+
+  <span class="hljs-keyword">return</span> isValid;
+}
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">showError</span>(<span class="hljs-params">elementId, message</span>) {
+  <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(elementId).<span class="hljs-property">textContent</span> = message;
+  <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(elementId).<span class="hljs-property">style</span>.<span class="hljs-property">display</span> = <span class="hljs-string">&#x27;block&#x27;</span>;
+}
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">clearErrors</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> errorElements = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelectorAll</span>(<span class="hljs-string">&#x27;.error-message&#x27;</span>);
+  errorElements.<span class="hljs-title function_">forEach</span>(<span class="hljs-function"><span class="hljs-params">el</span> =&gt;</span> {
+    el.<span class="hljs-property">textContent</span> = <span class="hljs-string">&#x27;&#x27;</span>;
+    el.<span class="hljs-property">style</span>.<span class="hljs-property">display</span> = <span class="hljs-string">&#x27;none&#x27;</span>;
+  });
+}
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">submitForm</span>(<span class="hljs-params">e</span>) {
+  e.<span class="hljs-title function_">preventDefault</span>();
+  
+  <span class="hljs-comment">// Rate limiting check</span>
+  <span class="hljs-keyword">const</span> now = <span class="hljs-title class_">Date</span>.<span class="hljs-title function_">now</span>();
+  <span class="hljs-keyword">if</span> (now - lastSubmission &lt; <span class="hljs-variable constant_">RATE_LIMIT_MS</span>) {
+    <span class="hljs-title function_">showError</span>(<span class="hljs-string">&#x27;email-error&#x27;</span>, <span class="hljs-string">&#x27;Please wait before submitting again&#x27;</span>);
+    <span class="hljs-keyword">return</span>;
+  }
+
+  <span class="hljs-comment">// Validate form</span>
+  <span class="hljs-keyword">if</span> (!<span class="hljs-title function_">validateForm</span>()) {
+    <span class="hljs-title function_">trackEvent</span>(<span class="hljs-string">&#x27;form_validation_failed&#x27;</span>);
+    <span class="hljs-keyword">return</span>;
+  }
+
+  <span class="hljs-comment">// Update UI to show loading state</span>
+  <span class="hljs-keyword">const</span> submitBtn = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;submit-btn&#x27;</span>);
+  <span class="hljs-keyword">const</span> submitText = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;submit-text&#x27;</span>);
+  <span class="hljs-keyword">const</span> submitSpinner = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;submit-spinner&#x27;</span>);
+  
+  submitBtn.<span class="hljs-property">disabled</span> = <span class="hljs-literal">true</span>;
+  submitText.<span class="hljs-property">style</span>.<span class="hljs-property">display</span> = <span class="hljs-string">&#x27;none&#x27;</span>;
+  submitSpinner.<span class="hljs-property">style</span>.<span class="hljs-property">display</span> = <span class="hljs-string">&#x27;inline&#x27;</span>;
+
+  <span class="hljs-comment">// Prepare form data</span>
+  <span class="hljs-keyword">const</span> form = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;pilot-form&#x27;</span>);
+  <span class="hljs-keyword">const</span> formData = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormData</span>(form);
+  <span class="hljs-keyword">const</span> data = {};
+  
+  formData.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">value, key</span>) =&gt;</span> {
+     <span class="hljs-keyword">if</span> (key === <span class="hljs-string">&#x27;multiPlatform&#x27;</span>) {
+        data[key] = value;
+     } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (key !== <span class="hljs-string">&#x27;attestation&#x27;</span> &amp;&amp; key !== <span class="hljs-string">&#x27;csrf_token&#x27;</span>) {
+        data[key] = value.<span class="hljs-title function_">trim</span>();
+     }
+  });
+
+  <span class="hljs-comment">// Add submission metadata</span>
+  data.<span class="hljs-property">submissionTime</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>().<span class="hljs-title function_">toISOString</span>();
+  data.<span class="hljs-property">userAgent</span> = navigator.<span class="hljs-property">userAgent</span>;
+  data.<span class="hljs-property">referrer</span> = <span class="hljs-variable language_">document</span>.<span class="hljs-property">referrer</span>;
+
+  <span class="hljs-keyword">const</span> flowURL = <span class="hljs-string">&#x27;YOUR_POWER_AUTOMATE_HTTP_TRIGGER_URL_HERE&#x27;</span>;
+  
+  <span class="hljs-comment">// Submit with retry logic</span>
+  <span class="hljs-title function_">submitWithRetry</span>(flowURL, data, <span class="hljs-number">3</span>)
+    .<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> response.<span class="hljs-title function_">json</span>())
+    .<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> {
+      lastSubmission = now;
+      form.<span class="hljs-property">style</span>.<span class="hljs-property">display</span> = <span class="hljs-string">&#x27;none&#x27;</span>;
+      
+      <span class="hljs-keyword">if</span> (data.<span class="hljs-property">status</span> === <span class="hljs-string">&#x27;success&#x27;</span>) {
+        <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;confirmation&#x27;</span>).<span class="hljs-property">style</span>.<span class="hljs-property">display</span> = <span class="hljs-string">&#x27;block&#x27;</span>;
+        <span class="hljs-title function_">trackEvent</span>(<span class="hljs-string">&#x27;form_submitted_success&#x27;</span>);
+      } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (data.<span class="hljs-property">status</span> === <span class="hljs-string">&#x27;waitlist&#x27;</span>) {
+        <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;waitlist&#x27;</span>).<span class="hljs-property">style</span>.<span class="hljs-property">display</span> = <span class="hljs-string">&#x27;block&#x27;</span>;
+        <span class="hljs-title function_">trackEvent</span>(<span class="hljs-string">&#x27;form_submitted_waitlist&#x27;</span>);
+      } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&#x27;Unknown response status&#x27;</span>);
+      }
+    })
+    .<span class="hljs-title function_">catch</span>(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> {
+      <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;Submission error:&#x27;</span>, error);
+      <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;error&#x27;</span>).<span class="hljs-property">style</span>.<span class="hljs-property">display</span> = <span class="hljs-string">&#x27;block&#x27;</span>;
+      <span class="hljs-title function_">trackEvent</span>(<span class="hljs-string">&#x27;form_submission_failed&#x27;</span>);
+      <span class="hljs-title function_">resetSubmitButton</span>();
+    });
+}
+
+<span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">submitWithRetry</span>(<span class="hljs-params">url, data, maxRetries</span>) {
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; maxRetries; i++) {
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(url, {
+        <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;POST&#x27;</span>,
+        <span class="hljs-attr">headers</span>: { 
+          <span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;application/json&#x27;</span>,
+          <span class="hljs-string">&#x27;X-Requested-With&#x27;</span>: <span class="hljs-string">&#x27;XMLHttpRequest&#x27;</span>
+        },
+        <span class="hljs-attr">body</span>: <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(data)
+      });
+      
+      <span class="hljs-keyword">if</span> (response.<span class="hljs-property">ok</span>) {
+        <span class="hljs-keyword">return</span> response;
+      }
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">`HTTP <span class="hljs-subst">${response.status}</span>`</span>);
+    } <span class="hljs-keyword">catch</span> (error) {
+      <span class="hljs-keyword">if</span> (i === maxRetries - <span class="hljs-number">1</span>) <span class="hljs-keyword">throw</span> error;
+      <span class="hljs-keyword">await</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function"><span class="hljs-params">resolve</span> =&gt;</span> <span class="hljs-built_in">setTimeout</span>(resolve, <span class="hljs-number">1000</span> * (i + <span class="hljs-number">1</span>))); <span class="hljs-comment">// Exponential backoff</span>
+    }
+  }
+}
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">resetSubmitButton</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> submitBtn = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;submit-btn&#x27;</span>);
+  <span class="hljs-keyword">const</span> submitText = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;submit-text&#x27;</span>);
+  <span class="hljs-keyword">const</span> submitSpinner = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;submit-spinner&#x27;</span>);
+  
+  submitBtn.<span class="hljs-property">disabled</span> = <span class="hljs-literal">false</span>;
+  submitText.<span class="hljs-property">style</span>.<span class="hljs-property">display</span> = <span class="hljs-string">&#x27;inline&#x27;</span>;
+  submitSpinner.<span class="hljs-property">style</span>.<span class="hljs-property">display</span> = <span class="hljs-string">&#x27;none&#x27;</span>;
+}
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">resetForm</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;pilot-form&#x27;</span>).<span class="hljs-property">style</span>.<span class="hljs-property">display</span> = <span class="hljs-string">&#x27;block&#x27;</span>;
+  <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;error&#x27;</span>).<span class="hljs-property">style</span>.<span class="hljs-property">display</span> = <span class="hljs-string">&#x27;none&#x27;</span>;
+  <span class="hljs-title function_">resetSubmitButton</span>();
+  <span class="hljs-title function_">clearErrors</span>();
+}
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">trackEvent</span>(<span class="hljs-params">eventName, parameters = {}</span>) {
+  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> gtag !== <span class="hljs-string">&#x27;undefined&#x27;</span>) {
+    <span class="hljs-title function_">gtag</span>(<span class="hljs-string">&#x27;event&#x27;</span>, eventName, {
+      <span class="hljs-attr">custom_parameter</span>: <span class="hljs-string">&#x27;movr_pilot&#x27;</span>,
+      ...parameters
+    });
+  }
+}
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre>
+<hr>
+<h2 id="getting-your-power-automate-url">Getting Your Power Automate URL</h2>
+<ul>
+<li>After saving your flow, copy the generated HTTP trigger URL</li>
+<li>Paste it into your HTML form JavaScript</li>
+</ul>
+<hr>
+<h2 id="vendor-assignment-logic-priority-system">Vendor Assignment Logic (Priority System)</h2>
+<p><strong>Phase 1: Minimum Quotas First (Priority)</strong></p>
+<ol>
+<li>Check if all minimums are met in Milestones sheet</li>
+<li>If not, assign to vendor/disease combination with:
+<ul>
+<li>Minimum not yet met (Min Met = &quot;NO&quot;)</li>
+<li>Has remaining slots (Remaining Slots &gt; 0)</li>
+<li>Lowest current enrollment count</li>
+</ul>
+</li>
+</ol>
+<p><strong>Phase 2: Post-Minimum Priority Order</strong>
+Once all minimums are achieved:</p>
+<ol>
+<li><strong>Vibrent Health</strong> (Priority 1) - Fill to 30 each disease</li>
+<li><strong>Citizen Health</strong> (Priority 2) - Fill to max totals</li>
+<li><strong>Unite Genomics</strong> (Priority 3) - Fill remaining slots</li>
+</ol>
+<p><strong>Assignment Algorithm:</strong></p>
+<pre><code>FOR each form submission:
+  IF all minimums not met:
+    ASSIGN to vendor/disease with lowest current count where min not met
+  ELSE:
+    IF Vibrent has available slots for this disease:
+      ASSIGN to Vibrent
+    ELSE IF Citizen has available slots for this disease:
+      ASSIGN to Citizen  
+    ELSE IF Unite has available slots for this disease:
+      ASSIGN to Unite
+    ELSE:
+      REJECT - all vendors full for this disease
+</code></pre>
+<p><strong>Hard Rules:</strong></p>
+<ul>
+<li>Never exceed Max Quota for any vendor/disease combination</li>
+<li>Must respect disease-specific quotas (not just vendor totals)</li>
+<li>Assignment stops when vendor reaches max for that disease</li>
+</ul>
+<hr>
+<h2 id="advantages-of-power-automate-vs-google-apps-script">Advantages of Power Automate vs Google Apps Script</h2>
+<ul>
+<li>Sends from your Outlook account (no &quot;via&quot; warnings)</li>
+<li>Microsoft ecosystem: easier IT support and compliance</li>
+<li>Visual flow builder, built-in error handling</li>
+<li>Automatic logging and run history</li>
+</ul>
+<hr>
+<h2 id="enrollment-tracking--monitoring">Enrollment Tracking &amp; Monitoring</h2>
+<h3 id="weekly-enrollment-status-updates">Weekly Enrollment Status Updates</h3>
+<ol>
+<li>
+<p><strong>Manual Status Updates</strong> (Weekly Process):</p>
+<ul>
+<li>Review each &quot;Pending&quot; participant in Excel</li>
+<li>Check vendor enrollment systems for completion</li>
+<li>Update Enrollment Status column:
+<ul>
+<li>&quot;Enrolled&quot; = Successfully completed vendor enrollment</li>
+<li>&quot;Discontinued&quot; = 2+ weeks with no enrollment (opens slot)</li>
+<li>&quot;Pending&quot; = Still within 2-week window</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Automated Milestone Tracking</strong>:</p>
+<ul>
+<li><strong>Milestones Sheet</strong> automatically calculates:
+<ul>
+<li>Minimum quota achievement per vendor/disease</li>
+<li>Overall progress toward 30-person targets</li>
+<li>Date when milestones are reached</li>
+</ul>
+</li>
+<li><strong>Alerts</strong> when milestones achieved (via Excel conditional formatting)</li>
+</ul>
+</li>
+<li>
+<p><strong>Dashboard Views in Excel</strong>:</p>
+<ul>
+<li><strong>Pivot Table 1</strong>: Enrollments by Vendor × Disease Type</li>
+<li><strong>Pivot Table 2</strong>: Weekly enrollment trends</li>
+<li><strong>Pivot Table 3</strong>: Conversion rates (Form → Actual Enrollment)</li>
+<li><strong>Charts</strong>: Visual progress toward quotas</li>
+</ul>
+</li>
+</ol>
+<h3 id="timeout-management-2-week-rule">Timeout Management (2-Week Rule)</h3>
+<ol>
+<li>
+<p><strong>Identification</strong>:</p>
+<ul>
+<li>Filter participants where Days Since Form ≥ 14 AND Enrollment Status = &quot;Pending&quot;</li>
+</ul>
+</li>
+<li>
+<p><strong>Weekly Action</strong>:</p>
+<ul>
+<li>Send reminder email to participants approaching timeout</li>
+<li>After 2 weeks: Change status to &quot;Discontinued&quot;</li>
+<li>This automatically opens slots for new participants (via Excel formulas)</li>
+</ul>
+</li>
+<li>
+<p><strong>Slot Reallocation</strong>:</p>
+<ul>
+<li>When participant marked &quot;Discontinued&quot;, Remaining Slots automatically increases</li>
+<li>New form submissions can now be assigned to that vendor/disease combo</li>
+</ul>
+</li>
+</ol>
+<h3 id="testing--monitoring">Testing &amp; Monitoring</h3>
+<ul>
+<li>Test assignment logic with dummy data in Power Automate</li>
+<li>Verify Excel formulas update correctly with new submissions</li>
+<li>Monitor email delivery success rates via Outlook</li>
+<li>Weekly review of milestone progress and quota balance</li>
+</ul>
+<hr>
+<h2 id="limits--capacity">Limits &amp; Capacity</h2>
+<ul>
+<li>Power Automate: ~5,000 actions/day (sufficient for 500+ submissions)</li>
+<li>Excel Online: 5MB file size, 1M+ rows</li>
+<li>Outlook: 10,000 recipients/day</li>
+</ul>
+<hr>
+<h2 id="advanced-features-optional">Advanced Features (Optional)</h2>
+<ul>
+<li>Reminder emails for incomplete enrollments</li>
+<li>Admin notifications on milestones</li>
+<li>Approval workflows</li>
+<li>Multi-language support</li>
+<li>Vendor completion tracking</li>
+</ul>
+<hr>
+<h2 id="security--privacy">Security &amp; Privacy</h2>
+<ul>
+<li>Data stored in OneDrive for Business (encrypted)</li>
+<li>Power Automate runs under your account</li>
+<li>HTTPS for all form submissions</li>
+<li>Keep URLs and Excel file private</li>
+</ul>
+<hr>
+<h2 id="development-checklist">Development Checklist</h2>
+<ul class="contains-task-list">
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Create Excel workbook and format as tables</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Add vendor URLs and formulas</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Build Power Automate flow</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Test with sample data</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Build and test HTML landing page</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Launch to pilot group</li>
+</ul>
+<hr>
+<h2 id="estimated-build-time">Estimated Build Time</h2>
+<ul>
+<li><strong>New to Power Automate:</strong> ~4-5 hours</li>
+<li><strong>Experienced:</strong> ~3-4 hours</li>
+</ul>
+<hr>
+<h2 id="why-use-microsoft-365-for-this">Why Use Microsoft 365 for This?</h2>
+<ul>
+<li>IT-friendly, secure, and auditable</li>
+<li>Professional email delivery</li>
+<li>Easy collaboration and support</li>
+</ul>
+<hr>
+<h2 id="next-steps">Next Steps</h2>
+<ol>
+<li>Create Excel workbook</li>
+<li>Build Power Automate flow</li>
+<li>Test with your email</li>
+<li>Build HTML page</li>
+<li>Launch</li>
+</ol>
+<hr>
+<p><em>Questions? Want a walkthrough of any step? Let us know!</em></p>
+
+            <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+            
+        </body>
+        </html>

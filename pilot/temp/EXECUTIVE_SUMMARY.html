@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>MOVR 2&period;0 Pilot Program</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="movr-20-pilot-program">MOVR 2.0 Pilot Program</h1>
+<h2 id="executive-summary">Executive Summary</h2>
+<p><strong>Prepared by:</strong> Andre D. Paredes, PhD | Sr. Director of Strategy &amp; Informatics
+<strong>Date:</strong> January 2026
+<strong>Status:</strong> Live &amp; Operational</p>
+<h2 id="overview">Overview</h2>
+<p>The MOVR 2.0 Pilot is MDA's initiative to select the next-generation platform for managing medical data for families living with neuromuscular diseases. We are evaluating three vendor platforms through real-world family feedback before committing to a long-term partner.</p>
+<p><strong>Target:</strong> 500 participants across DMD, SMA, and LGMD
+<strong>Duration:</strong> 6 months (participants can opt out anytime)
+<strong>Cost:</strong> $0 operational (Microsoft 365 infrastructure)</p>
+<h2 id="key-takeaways">Key Takeaways</h2>
+<table>
+<thead>
+<tr>
+<th>Area</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Enrollment</strong></td>
+<td>Live and accepting participants</td>
+</tr>
+<tr>
+<td><strong>Automation</strong></td>
+<td>Fully automated vendor assignment and communications</td>
+</tr>
+<tr>
+<td><strong>Vendor Balance</strong></td>
+<td>System ensures fair distribution across all 3 platforms</td>
+</tr>
+<tr>
+<td><strong>Data Security</strong></td>
+<td>HIPAA-compliant; participant-controlled sharing</td>
+</tr>
+<tr>
+<td><strong>Reporting</strong></td>
+<td>Real-time dashboard via Power BI</td>
+</tr>
+</tbody>
+</table>
+<h2 id="why-this-matters">Why This Matters</h2>
+<p><strong>For Families:</strong></p>
+<ul>
+<li>Modern tools to manage complex medical journeys</li>
+<li>Visualize and share health data on their terms</li>
+<li>Direct input into what MOVR 2.0 becomes</li>
+</ul>
+<p><strong>For MDA:</strong></p>
+<ul>
+<li>Data-driven vendor selection (not assumptions)</li>
+<li>Community-centered design approach</li>
+<li>Foundation for accelerated research partnerships</li>
+</ul>
+<p><strong>For Research:</strong></p>
+<ul>
+<li>Engaged cohort ready to contribute data</li>
+<li>Platform infrastructure for future studies</li>
+<li>Modernized data collection capabilities</li>
+</ul>
+<h2 id="how-it-works">How It Works</h2>
+<pre><code>Family Signs Up → Auto-Assigned to Vendor → Creates Account → Provides Feedback
+                         │
+                   Fair quota system ensures
+                   all 3 vendors get evaluated
+</code></pre>
+<p><strong>Vendor Partners:</strong></p>
+<ol>
+<li><strong>Vibrent Health</strong> - Priority platform</li>
+<li><strong>Citizen Health</strong> - Secondary evaluation</li>
+<li><strong>Unite Genomics</strong> - Tertiary evaluation</li>
+</ol>
+<p>Each vendor receives minimum guaranteed participants before priority order applies, ensuring fair comparison.</p>
+<h2 id="metrics-at-a-glance">Metrics at a Glance</h2>
+<p><em>Real-time metrics available in Power BI dashboard</em></p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Form Submissions</strong></td>
+<td>Total families who signed up</td>
+</tr>
+<tr>
+<td><strong>Enrolled</strong></td>
+<td>Completed vendor platform registration</td>
+</tr>
+<tr>
+<td><strong>Conversion Rate</strong></td>
+<td>% who complete enrollment after signup</td>
+</tr>
+<tr>
+<td><strong>By Disease</strong></td>
+<td>Distribution across DMD, SMA, LGMD</td>
+</tr>
+<tr>
+<td><strong>By Vendor</strong></td>
+<td>Balance across three platforms</td>
+</tr>
+</tbody>
+</table>
+<h2 id="risk-summary">Risk Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Risk</th>
+<th>Mitigation</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Low enrollment</td>
+<td>MDA outreach campaigns; provider referrals</td>
+<td>Monitoring</td>
+</tr>
+<tr>
+<td>Vendor platform issues</td>
+<td>Direct vendor contacts; escalation paths</td>
+<td>Prepared</td>
+</tr>
+<tr>
+<td>Technical system issues</td>
+<td>Documented SOPs; trained team</td>
+<td>Operational</td>
+</tr>
+<tr>
+<td>Participant drop-off</td>
+<td>Reminder system; 14-day enrollment window</td>
+<td>Active</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Known Technical Issue:</strong> One vendor assignment edge case identified and documented. Impact is low; fix planned for next maintenance window.</p>
+<h2 id="team">Team</h2>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Program Lead &amp; Technical</td>
+<td>Andre D. Paredes, PhD</td>
+</tr>
+<tr>
+<td>Clinical Operations</td>
+<td>Jessica Waits</td>
+</tr>
+<tr>
+<td>Support</td>
+<td><a href="mailto:mdamovr@mdausa.org">mdamovr@mdausa.org</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="timeline">Timeline</h2>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Timeframe</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Platform launch</td>
+<td>Q4 2025</td>
+<td>Complete</td>
+</tr>
+<tr>
+<td>Active enrollment</td>
+<td>Q4 2025 - Q1 2026</td>
+<td>In Progress</td>
+</tr>
+<tr>
+<td>Go/No-Go decision</td>
+<td>March 2026</td>
+<td>Planned</td>
+</tr>
+<tr>
+<td>Full platform launch</td>
+<td>Q2 2026</td>
+<td>Planned</td>
+</tr>
+</tbody>
+</table>
+<h2 id="what-success-looks-like">What Success Looks Like</h2>
+<ol>
+<li><strong>500 participants enrolled</strong> across three platforms</li>
+<li><strong>Actionable feedback</strong> on platform features and usability</li>
+<li><strong>Clear recommendation</strong> for MOVR 2.0 vendor partner</li>
+<li><strong>Engaged community</strong> ready for full launch</li>
+</ol>
+<h2 id="questions">Questions?</h2>
+<p>Contact Andre D. Paredes at <a href="mailto:andre.paredes@ymail.com">andre.paredes@ymail.com</a> or the team at <a href="mailto:mdamovr@mdausa.org">mdamovr@mdausa.org</a>.</p>
+<p><em>For detailed technical documentation, see the full Feature Documentation and Standard Operating Procedures in the pilot documentation folder.</em></p>
+
+            <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+            
+        </body>
+        </html>

@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>MOVR Pilot - Current State Documentation</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="movr-pilot---current-state-documentation">MOVR Pilot - Current State Documentation</h1>
+<p><strong>Last Updated:</strong> 2025-11-05<br>
+<strong>Status:</strong> LIVE and operational<br>
+<strong>Live URL:</strong> <a href="https://openmovr.github.io/pilot">https://openmovr.github.io/pilot</a></p>
+<h2 id="issue-log">Issue Log</h2>
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Issue</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2025-11-05</td>
+<td><strong>CRITICAL: Global Minimum Logic Flaw</strong></td>
+<td>🔴 DETECTED</td>
+<td>Condition 2 main logic uses global &quot;All Minimums Met&quot; check instead of disease-specific minimums. When SMA quotas are met but DMD quotas are not, DMD participants incorrectly enter TRUE branch (post-minimum priority) instead of continuing minimum quota filling for DMD. Requires disease-specific minimum checking logic.</td>
+</tr>
+<tr>
+<td>2025-11-05</td>
+<td><strong>ERROR: No Remaining Slots in FALSE Branch</strong></td>
+<td>🔴 DETECTED</td>
+<td>When disease (e.g., DMD) is forced back into FALSE branch (minimum quota mode) but has no remaining slots available, the system errors instead of gracefully handling the waitlist scenario.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="project-overview">Project Overview</h2>
+<p>The MOVR Pilot is a live research program testing three vendor platforms for families managing neuromuscular diseases (DMD, SMA, LGMD). The system uses Microsoft Power Automate + Excel Online architecture to automatically assign participants to vendors based on quota management and priority rules.</p>
+<h2 id="current-architecture">Current Architecture</h2>
+<h3 id="frontend">Frontend</h3>
+<ul>
+<li><strong>Static HTML page</strong> hosted on GitHub Pages at <code>openmovr.github.io/pilot</code></li>
+<li><strong>Main files:</strong>
+<ul>
+<li><code>index.html</code> - Landing page with enrollment form</li>
+<li><code>script.js</code> - Form validation, submission logic, and Google Analytics</li>
+<li><code>style.css</code> - Styling</li>
+<li><code>mda-logo.jpg</code>, <code>banner.jpg</code> - Assets</li>
+</ul>
+</li>
+</ul>
+<h3 id="backend-microsoft-365">Backend (Microsoft 365)</h3>
+<ul>
+<li><strong>Power Automate Flow:</strong> <code>MOVR Pilot - Form Submission Handler</code></li>
+<li><strong>Active Flow URL:</strong> <code>https://default69c088185c17449a9790b60a3c7e52.22.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/03bd50749cff45f2bdf7c90d8c070479/triggers/manual/paths/invoke?api-version=1&amp;sp=%2Ftriggers%2Fmanual%2Frun&amp;sv=1.0&amp;sig=OwjDRaXYA81v0Agvx7HrlcsyJVF0ar0TNNrcrLaUYHY</code></li>
+<li><strong>Excel Workbook:</strong> <code>MOVR_PILOT_PARICIPANTS.xlsx</code> (OneDrive for Business)</li>
+</ul>
+<h3 id="data-structure-excel-tables">Data Structure (Excel Tables)</h3>
+<ol>
+<li><strong>ParticipantsTable</strong> - All form submissions and assignments</li>
+<li><strong>VendorDiseaseQuotasTable</strong> - Quota tracking by vendor/disease combination</li>
+<li><strong>MilestonesTable</strong> - Progress tracking for minimum quota achievements</li>
+</ol>
+<h2 id="vendor-assignment-logic-live-system">Vendor Assignment Logic (LIVE SYSTEM)</h2>
+<h3 id="phase-1-minimum-quota-priority">Phase 1: Minimum Quota Priority</h3>
+<ul>
+<li>System checks if all minimum quotas are achieved via <code>MilestonesTable</code></li>
+<li>If minimums NOT met: assigns to vendor/disease with <code>Min Met = &quot;NO&quot;</code> and available slots</li>
+<li>Priority given to filling minimum quotas first</li>
+</ul>
+<h3 id="phase-2-post-minimum-priority-order">Phase 2: Post-Minimum Priority Order</h3>
+<p>Once all minimums achieved:</p>
+<ol>
+<li><strong>Vibrent Health</strong> (Priority 1)</li>
+<li><strong>Citizen Health</strong> (Priority 2)</li>
+<li><strong>Unite Genomics</strong> (Priority 3)</li>
+</ol>
+<h3 id="assignment-rules">Assignment Rules</h3>
+<ul>
+<li>Must match participant's disease type (DMD/SMA/LGMD)</li>
+<li>Only assign if <code>Remaining Slots &gt; 0</code></li>
+<li>Never exceed <code>Max Quota</code> for any vendor/disease combination</li>
+<li>If all vendors full for disease type → WAITLIST</li>
+</ul>
+<h2 id="vendor-platform-details">Vendor Platform Details</h2>
+<h3 id="vibrent-health">Vibrent Health</h3>
+<ul>
+<li><strong>Priority:</strong> 1 (highest)</li>
+<li><strong>Enrollment URL:</strong> <code>https://vibrenthealth.com/mda/pilot</code></li>
+<li><strong>Target:</strong> 30 participants per disease type</li>
+</ul>
+<h3 id="citizen-health">Citizen Health</h3>
+<ul>
+<li><strong>Priority:</strong> 2 (middle)</li>
+<li><strong>Enrollment URL:</strong> <code>https://citizenhealth.com/join/mda</code></li>
+<li><strong>Target:</strong> Variable by disease type</li>
+</ul>
+<h3 id="unite-genomics">Unite Genomics</h3>
+<ul>
+<li><strong>Priority:</strong> 3 (lowest)</li>
+<li><strong>Enrollment URL:</strong> <code>https://unitegenomics.com/enroll/movr</code></li>
+<li><strong>Target:</strong> Fill remaining slots</li>
+</ul>
+<h2 id="email-automation">Email Automation</h2>
+<h3 id="success-assignment-email">Success Assignment Email</h3>
+<ul>
+<li>Sent to assigned vendor with enrollment link</li>
+<li>Includes assignment reason for transparency</li>
+<li>If <code>multiPlatform = true</code>, includes all three vendor links</li>
+<li>Template in <code>email.txt</code></li>
+</ul>
+<h3 id="waitlist-email">Waitlist Email</h3>
+<ul>
+<li>Sent when all vendors at capacity for participant's disease</li>
+<li>Explains waitlist status and next steps</li>
+</ul>
+<h2 id="form-data-schema">Form Data Schema</h2>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;string (required)&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;email&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;string (required, validated)&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;disease&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;DMD|SMA|LGMD (required)&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;relationship&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Patient|Parent/Caregiver|Other (required)&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;multiPlatform&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;true|undefined (optional)&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;howHeard&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Email|Social|Event|Provider|Friend|Other (optional)&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;submissionTime&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ISO timestamp&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;userAgent&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;browser string&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;referrer&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;URL&quot;</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<h2 id="security--validation-features">Security &amp; Validation Features</h2>
+<h3 id="frontend-security">Frontend Security</h3>
+<ul>
+<li>CSRF token generation</li>
+<li>Rate limiting (5-second intervals)</li>
+<li>Email domain validation (blocks disposable emails)</li>
+<li>Input sanitization and validation</li>
+<li>Form field length limits</li>
+</ul>
+<h3 id="privacy--compliance">Privacy &amp; Compliance</h3>
+<ul>
+<li>Data stored in HIPAA-compliant OneDrive for Business</li>
+<li>Google Analytics tracking (ID: G-85RSP2VHG6)</li>
+<li>No PII shared without consent</li>
+<li>Participant controls data sharing</li>
+</ul>
+<h2 id="current-documentation-files">Current Documentation Files</h2>
+<h3 id="implementation-docs">Implementation Docs</h3>
+<ul>
+<li><code>power-automate-setup.md</code> - Setup guide (noted as &quot;slightly outdated&quot;)</li>
+<li><code>power_automate_logic_flow.md</code> - Detailed flow hierarchy</li>
+<li><code>feature-doc.md</code> - Architecture overview</li>
+<li><code>request_body_schema.json</code> - API schema</li>
+<li><code>email.txt</code> - Email templates</li>
+</ul>
+<h3 id="reference-files">Reference Files</h3>
+<ul>
+<li><code>power-automate.html</code> - Standalone form for testing</li>
+<li><code>MOVR_PILOT_PARICIPANTS.xlsx</code> - Live participant data (copied from production)</li>
+</ul>
+<h2 id="test-status">Test Status</h2>
+<ul>
+<li>Multiple test runs completed</li>
+<li>Excel file updated with live pilot data</li>
+<li>Power Automate flow operational and processing submissions</li>
+<li>Form validation and submission working correctly</li>
+</ul>
+<h2 id="known-status-items">Known Status Items</h2>
+<ol>
+<li>Setup documentation marked as &quot;slightly outdated&quot;</li>
+<li>Multiple test runs have been conducted</li>
+<li>Live Excel file has been copied with current participant data</li>
+<li>System is actively processing real participant submissions</li>
+</ol>
+<h2 id="critical-issues-identified">Critical Issues Identified</h2>
+<h3 id="-critical-global-minimum-logic-flaw-detected-2025-11-05">🔴 CRITICAL: Global Minimum Logic Flaw (Detected 2025-11-05)</h3>
+<p><strong>Problem:</strong> The current Power Automate Condition 2 logic uses a global &quot;All Minimums Met&quot; check from the MilestonesTable instead of disease-specific minimum validation.</p>
+<p><strong>Impact:</strong></p>
+<ul>
+<li>When SMA minimum quotas are achieved but DMD quotas are not met</li>
+<li>DMD participants incorrectly trigger the TRUE branch (post-minimum priority logic)</li>
+<li>This bypasses the minimum quota filling rotation for DMD</li>
+<li>DMD vendors may not receive their guaranteed minimum participants</li>
+<li>Violates the two-phase assignment system design</li>
+</ul>
+<p><strong>Current Flawed Logic:</strong></p>
+<pre><code>IF MilestonesTable &quot;All Minimums Met&quot; = &quot;ACHIEVED&quot;
+  THEN: Use priority-based assignment (TRUE branch)
+  ELSE: Use minimum quota rotation (FALSE branch)
+</code></pre>
+<p><strong>Required Fix:</strong></p>
+<pre><code>IF Disease-specific minimums are met for [participant's disease]
+  THEN: Use priority-based assignment (TRUE branch)
+  ELSE: Use minimum quota rotation (FALSE branch)
+</code></pre>
+<p><strong>Technical Solution Needed:</strong></p>
+<ol>
+<li>Replace global milestone check with disease-specific logic</li>
+<li>Check if ALL vendors for the participant's disease have &quot;Min Met&quot; = &quot;YES&quot;</li>
+<li>Only enter TRUE branch when the specific disease has completed minimum quotas</li>
+<li>Each disease type (DMD/SMA/LGMD) should independently determine phase transition</li>
+</ol>
+<p><strong>SIMPLEST POWER AUTOMATE FIX:</strong></p>
+<p><strong>Step 1: Add New Action Before Condition 2</strong></p>
+<ul>
+<li><strong>Action:</strong> &quot;Get a row&quot; (Excel Online)</li>
+<li><strong>Name:</strong> &quot;Get disease milestone status&quot;</li>
+<li><strong>Table:</strong> MilestonesTable</li>
+<li><strong>Key Column:</strong> Milestone</li>
+<li><strong>Key Value:</strong> <code>concat(triggerBody()?['disease'], ' Minimums Met')</code></li>
+</ul>
+<p><strong>Step 2: Add New Variable Setting Action</strong></p>
+<ul>
+<li><strong>Action:</strong> &quot;Set variable&quot;</li>
+<li><strong>Name:</strong> &quot;Set disease minimums achieved&quot;</li>
+<li><strong>Variable:</strong> AllMinimumsAchieved</li>
+<li><strong>Value:</strong> <code>equals(outputs('Get_disease_milestone_status')?['Status'], 'ACHIEVED')</code></li>
+</ul>
+<p><strong>Step 3: Add Error Handling in FALSE Branch</strong>
+After <code>Filter_eligible_vendors_for_minimum_quota</code>, add:</p>
+<ul>
+<li><strong>Action:</strong> &quot;Condition&quot;</li>
+<li><strong>Name:</strong> &quot;Check if vendors available for minimum&quot;</li>
+<li><strong>Expression:</strong> <code>length(body('Filter_eligible_vendors_for_minimum_quota')) equals 0</code></li>
+<li><strong>IF TRUE:</strong> Set AssignedVendor to empty (triggers waitlist)</li>
+<li><strong>IF FALSE:</strong> Continue with existing logic</li>
+</ul>
+<p><strong>BETTER APPROACH: Disease-Specific Variables</strong></p>
+<p><strong>Why this is cleaner:</strong></p>
+<ul>
+<li>No complex branch modifications needed</li>
+<li>Clear separation of disease logic</li>
+<li>Condition 2 stays simple</li>
+<li>Easy to debug and maintain</li>
+</ul>
+<p><strong>EVEN BETTER: Single Variable with String Detection</strong></p>
+<p><strong>Step 1: Initialize One Variable</strong></p>
+<ul>
+<li><strong>ParticipantDiseaseMinimumAchieved</strong> (Boolean, default: false)</li>
+</ul>
+<p><strong>Step 2: Single Smart Condition in Apply to each Loop</strong>
+Replace all conditions with one condition using <code>contains()</code>:</p>
+<pre><code>contains(items('Apply_to_each')?['Milestone'], triggerBody()?['disease'])
+</code></pre>
+<p><strong>Step 3: Keep Condition 2 Simple</strong>
+Use the single variable: <code>variables('ParticipantDiseaseMinimumAchieved')</code></p>
+<p><strong>How it works:</strong></p>
+<ul>
+<li>DMD participant → looks for milestone containing &quot;DMD&quot; → finds &quot;DMD Minimums Met&quot;</li>
+<li>SMA participant → looks for milestone containing &quot;SMA&quot; → finds &quot;SMA Minimums Met&quot;</li>
+<li>LGMD participant → looks for milestone containing &quot;LGMD&quot; → finds &quot;LGMD Minimums Met&quot;</li>
+</ul>
+<p><strong>Result:</strong> Much cleaner! One variable, one condition, automatic disease detection!</p>
+<p><strong>Business Risk:</strong> Medium-High - Could result in vendor quota imbalances and contractual issues if DMD vendors don't receive minimum guaranteed participants.</p>
+<h2 id="monitoring--management">Monitoring &amp; Management</h2>
+<h3 id="weekly-tasks">Weekly Tasks</h3>
+<ul>
+<li>Review participant enrollment status in Excel</li>
+<li>Update enrollment completion status manually</li>
+<li>Monitor vendor capacity and quota progress</li>
+<li>Track milestone achievements</li>
+<li>Handle timeout management (2-week rule)</li>
+</ul>
+<h3 id="key-metrics-tracked">Key Metrics Tracked</h3>
+<ul>
+<li>Form submissions by disease type</li>
+<li>Vendor assignment distribution</li>
+<li>Email delivery success rates</li>
+<li>Enrollment completion rates</li>
+<li>Quota progress toward minimums</li>
+</ul>
+<h2 id="technical-specifications">Technical Specifications</h2>
+<h3 id="limits--capacity">Limits &amp; Capacity</h3>
+<ul>
+<li>Power Automate: ~5,000 actions/day</li>
+<li>Excel Online: 5MB file size, 1M+ rows</li>
+<li>Outlook: 10,000 recipients/day</li>
+<li>Target: 500 total participants</li>
+</ul>
+<h3 id="browser-compatibility">Browser Compatibility</h3>
+<ul>
+<li>Modern browsers with JavaScript enabled</li>
+<li>Mobile responsive design</li>
+<li>Google Analytics integration</li>
+</ul>
+<h2 id="contact-information">Contact Information</h2>
+<ul>
+<li><strong>Support Email:</strong> <a href="mailto:mdamovr@mdausa.org">mdamovr@mdausa.org</a></li>
+<li><strong>Technical Issues:</strong> Contact Power Automate flow owner</li>
+<li><strong>Participant Questions:</strong> Handled via support email</li>
+</ul>
+<hr>
+<p><strong>Note for Future AI Agents:</strong> This system is LIVE and processing real participant data. Any changes should be carefully tested and documented. The Power Automate flow URL and Excel file contain actual participant information and should be handled with appropriate privacy considerations.</p>
+<h2 id="priority-logic-detailed-explanation">Priority Logic Detailed Explanation</h2>
+<h3 id="phase-1-when-minimum-quotas-are-not-met-priority-phase">Phase 1: When Minimum Quotas ARE NOT MET (Priority Phase)</h3>
+<p><strong>Logic:</strong> Rotate among vendors needing minimums based on form submission count</p>
+<p><strong>How it works:</strong></p>
+<ol>
+<li>System checks <code>MilestonesTable</code> for &quot;All Minimums Met&quot; status</li>
+<li>If status ≠ &quot;ACHIEVED&quot;, enters minimum quota priority mode</li>
+<li><strong>Filter</strong> vendors where:
+<ul>
+<li>Disease matches participant's disease (DMD/SMA/LGMD)</li>
+<li><code>Min Met = &quot;NO&quot;</code> (minimum not yet achieved)</li>
+<li><code>Remaining Slots &gt; 0</code></li>
+</ul>
+</li>
+<li><strong>Extract</strong> Form Submissions counts from filtered vendors</li>
+<li><strong>Find minimum</strong> submission count among eligible vendors</li>
+<li><strong>Filter</strong> for vendors with that minimum count</li>
+<li><strong>Select first</strong> vendor from the tied group</li>
+<li>Assignment reason: &quot;Minimum quota priority - rotation based on form submissions&quot;</li>
+</ol>
+<p><strong>Example scenario:</strong></p>
+<ul>
+<li>Participant submits with SMA</li>
+<li>Eligible vendors: Unite (0 submissions), Citizen (0 submissions), Vibrent (11 submissions)</li>
+<li>Minimum submission count: 0</li>
+<li>Vendors with minimum count: Unite, Citizen (both have 0)</li>
+<li><strong>Result:</strong> Assigns to first vendor with 0 submissions (rotation between Unite/Citizen)</li>
+</ul>
+<h3 id="phase-2-when-minimum-quotas-are-met-post-minimum-phase">Phase 2: When Minimum Quotas ARE MET (Post-Minimum Phase)</h3>
+<p><strong>Logic:</strong> Use Excel-driven priority order from Priority field</p>
+<p><strong>How it works:</strong></p>
+<ol>
+<li>System confirms <code>MilestonesTable</code> shows &quot;All Minimums Met&quot; = &quot;ACHIEVED&quot;</li>
+<li>Enters post-minimum priority mode</li>
+<li><strong>Filter</strong> vendors where:
+<ul>
+<li>Disease matches participant's disease (DMD/SMA/LGMD)</li>
+<li><code>Remaining Slots &gt; 0</code></li>
+</ul>
+</li>
+<li><strong>Extract</strong> Priority values from filtered vendors</li>
+<li><strong>Find minimum</strong> priority number (1 is highest priority)</li>
+<li><strong>Filter</strong> for vendors with that minimum priority number</li>
+<li><strong>Select first</strong> vendor from the highest priority group</li>
+</ol>
+<h4 id="priority-order-excel-driven">Priority Order (Excel-Driven):</h4>
+<ul>
+<li><strong>Priority 1:</strong> Vibrent Health (highest)</li>
+<li><strong>Priority 2:</strong> Citizen Health (middle)</li>
+<li><strong>Priority 3:</strong> Unite Genomics (lowest)</li>
+</ul>
+<p><strong>Assignment process:</strong></p>
+<ul>
+<li>Automatically assigns to vendor with lowest Priority number (highest priority) that has available slots</li>
+<li>If Priority 1 vendor full → assigns to Priority 2 vendor</li>
+<li>If Priority 2 vendor full → assigns to Priority 3 vendor</li>
+<li>If all vendors full → WAITLIST</li>
+</ul>
+<p><strong>Example scenario:</strong></p>
+<ul>
+<li>All minimums achieved</li>
+<li>Participant submits with SMA</li>
+<li>Available vendors: Vibrent (Priority 1, 28 slots), Citizen (Priority 2, 20 slots), Unite (Priority 3, 80 slots)</li>
+<li>Minimum priority number: 1</li>
+<li>Vendors with Priority 1: Vibrent Health</li>
+<li><strong>Result:</strong> Assigns to Vibrent Health (Excel Priority 1) despite other vendors having more capacity</li>
+</ul>
+<h3 id="key-differences">Key Differences</h3>
+<table>
+<thead>
+<tr>
+<th>Aspect</th>
+<th>Minimum NOT Met</th>
+<th>Minimum MET</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Priority Factor</strong></td>
+<td>Form submission count (lowest first)</td>
+<td>Excel Priority field (lowest number first)</td>
+</tr>
+<tr>
+<td><strong>Goal</strong></td>
+<td>Fill minimum quotas efficiently</td>
+<td>Maintain vendor preference hierarchy</td>
+</tr>
+<tr>
+<td><strong>Assignment Logic</strong></td>
+<td>Rotation (lowest form submissions)</td>
+<td>Excel-driven (Priority field)</td>
+</tr>
+<tr>
+<td><strong>Flexibility</strong></td>
+<td>Dynamic based on current data</td>
+<td>Configurable via Excel Priority field</td>
+</tr>
+</tbody>
+</table>
+<h3 id="critical-understanding-priority-field-usage">Critical Understanding: Priority Field Usage</h3>
+<p><strong>Important:</strong> The <code>Priority</code> field in <code>VendorDiseaseQuotasTable</code> is <strong>ONLY used after all minimum quotas are met</strong>.</p>
+<ul>
+<li><strong>Phase 1 (Minimums NOT Met):</strong> Priority field is <strong>IGNORED</strong> - assignment based purely on lowest enrollment count</li>
+<li><strong>Phase 2 (Minimums MET):</strong> Priority field becomes <strong>ACTIVE</strong> - strict priority order enforced</li>
+</ul>
+<h3 id="why-this-two-phase-system">Why This Two-Phase System?</h3>
+<p><strong>Phase 1 Benefits:</strong></p>
+<ul>
+<li>Ensures all vendors get their minimum guaranteed participants</li>
+<li>Prevents any vendor from being completely excluded</li>
+<li>Balances initial distribution fairly</li>
+</ul>
+<p><strong>Phase 2 Benefits:</strong></p>
+<ul>
+<li>Implements MDA's preferred vendor hierarchy</li>
+<li>Gives priority vendors (like Vibrent) preferential treatment</li>
+<li>Maintains predictable assignment patterns for vendor relationships</li>
+</ul>
+<p>This system ensures <strong>fairness during startup</strong> (everyone gets minimums) while <strong>respecting business priorities</strong> once minimums are secured.</p>
+<h2 id="implementation-status">Implementation Status</h2>
+<h3 id="-currently-implemented">✅ Currently Implemented:</h3>
+<ul>
+<li><strong>Phase 1 (FALSE branch):</strong> Rotation based on form submissions ✅</li>
+<li><strong>Milestone checking:</strong> All minimums met detection ✅</li>
+<li><strong>Form validation and submission:</strong> Working ✅</li>
+<li><strong>Email automation:</strong> Success/waitlist emails ✅</li>
+</ul>
+<h3 id="️-future-enhancement-available">⚠️ Future Enhancement Available:</h3>
+<ul>
+<li><strong>Phase 2 (TRUE branch):</strong> Currently uses hard-coded vendor checks</li>
+<li><strong>Excel-driven priorities:</strong> Instructions provided above to implement Priority field usage</li>
+<li><strong>Benefits:</strong> More flexible, maintainable, and Excel-configurable vendor priorities</li>
+</ul>
+<p><strong>To implement Excel-driven priorities:</strong> Follow the 6-step visual instructions above to replace the TRUE branch logic.</p>
+<h2 id="future-enhancement-instructions">Future Enhancement Instructions</h2>
+<h3 id="phase-2-excel-driven-priority-implementation">Phase 2 Excel-Driven Priority Implementation</h3>
+<p><strong>Current Issue:</strong> TRUE branch uses hard-coded vendor name checks instead of Excel Priority field.</p>
+<p><strong>To Replace TRUE Branch with Excel-Driven Logic:</strong></p>
+<ol>
+<li>
+<p><strong>Delete existing TRUE branch actions:</strong></p>
+<ul>
+<li>Remove &quot;Apply_to_each_2&quot; loop</li>
+<li>Remove all nested vendor name conditions</li>
+<li>Remove all hard-coded set variable actions</li>
+</ul>
+</li>
+<li>
+<p><strong>Add new TRUE branch actions in this order:</strong></p>
+<p><strong>Step 1:</strong> Filter array - &quot;Filter available vendors for post-minimum&quot;</p>
+<ul>
+<li>From: <code>outputs('List_rows_present_in_VendorDiseaseQuotasTable')?['body/value']</code></li>
+<li>Conditions: Disease matches AND Remaining Slots &gt; 0</li>
+</ul>
+<p><strong>Step 2:</strong> Condition - &quot;Check if any vendors available&quot;</p>
+<ul>
+<li>Left: <code>length(body('Filter_available_vendors_for_post-minimum'))</code></li>
+<li>Operator: is greater than</li>
+<li>Right: <code>0</code></li>
+</ul>
+<p><strong>IF TRUE (vendors available):</strong></p>
+<p><strong>Step 3:</strong> Select - &quot;Extract priority values&quot;</p>
+<ul>
+<li>From: Step 1 output</li>
+<li>Map: <code>int(item()?['Priority'])</code></li>
+</ul>
+<p><strong>Step 4:</strong> Compose - &quot;Find minimum priority&quot;</p>
+<ul>
+<li>Inputs: <code>min(body('Extract_priority_values'))</code></li>
+</ul>
+<p><strong>Step 5:</strong> Filter array - &quot;Filter vendors with minimum priority&quot;</p>
+<ul>
+<li>From: Step 1 output</li>
+<li>Condition: Priority equals Step 4 output</li>
+</ul>
+<p><strong>Step 6:</strong> Compose - &quot;Select vendor with highest priority&quot;</p>
+<ul>
+<li>Inputs: <code>first(body('Filter_vendors_with_minimum_priority'))</code></li>
+</ul>
+<p><strong>Step 7:</strong> Set variables (AssignedVendor, VendorURL, AssignmentReason)</p>
+<ul>
+<li>Use Step 6 output for all values</li>
+</ul>
+<p><strong>IF FALSE (no vendors available):</strong></p>
+<ul>
+<li>Leave empty (variables remain unset → triggers downstream waitlist logic)</li>
+</ul>
+</li>
+</ol>
+<p><strong>Benefits:</strong> Change priorities by updating Excel Priority column instead of modifying Power Automate flow.</p>
+<h3 id="age-field-addition-requirements">Age Field Addition Requirements</h3>
+<p><strong>Overview:</strong> Add age demographics collection to participant data.</p>
+<p><strong>Excel Updates Required:</strong></p>
+<ol>
+<li><strong>Add new column to ParticipantsTable:</strong> &quot;Age Group&quot;</li>
+<li><strong>Column position:</strong> Before &quot;Timeout Date&quot; column (minimal formula disruption)</li>
+<li><strong>Data type:</strong> Text (dropdown values)</li>
+<li><strong>Possible values:</strong> &quot;6-younger&quot;, &quot;7-13&quot;, &quot;14-17&quot;, &quot;18-older&quot;</li>
+</ol>
+<p><strong>Attestation Field Addition:</strong></p>
+<ol>
+<li><strong>Add new column to ParticipantsTable:</strong> &quot;Attestation&quot;</li>
+<li><strong>Column position:</strong> Before &quot;Timeout Date&quot; column (after Age Group)</li>
+<li><strong>Data type:</strong> Boolean (TRUE/FALSE)</li>
+<li><strong>Purpose:</strong> Compliance and consent documentation</li>
+</ol>
+<p><strong>Power Automate Updates Required:</strong></p>
+<ol>
+<li><strong>Update HTTP trigger schema:</strong> Add &quot;ageGroup&quot; and &quot;attestation&quot; fields to request_body_schema.json</li>
+<li><strong>Update &quot;Add a row&quot; action:</strong> Include both new field mappings
+<ul>
+<li>Column: &quot;Age Group&quot; - Value: <code>triggerBody()?['ageGroup']</code></li>
+<li>Column: &quot;Attestation&quot; - Value: <code>triggerBody()?['attestation']</code></li>
+</ul>
+</li>
+</ol>
+<p><strong>HTML Updates Required (Completed):</strong></p>
+<ul>
+<li>Age group dropdown field already in enrollment form ✅</li>
+<li>Attestation checkbox already in enrollment form ✅</li>
+<li>Form validation for required fields already implemented ✅</li>
+<li>Form submission JavaScript already includes both fields ✅</li>
+</ul>
+<p><strong>Data Collection Purpose:</strong> Demographic analysis and age-appropriate vendor assignment (if needed in future).</p>
+
+            
+            
+        </body>
+        </html>

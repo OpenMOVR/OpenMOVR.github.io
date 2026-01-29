@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>MOVR Pilot - Edge Case Analysis</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="movr-pilot---edge-case-analysis">MOVR Pilot - Edge Case Analysis</h1>
+<p><strong>Last Updated:</strong> 2025-10-31<br>
+<strong>Purpose:</strong> Identify potential failure scenarios and system vulnerabilities in the vendor assignment logic</p>
+<hr>
+<h2 id="phase-1-edge-cases-minimums-not-met">Phase 1 Edge Cases (Minimums NOT Met)</h2>
+<h3 id="-critical-edge-cases-could-break-flow">🔴 <strong>Critical Edge Cases (Could Break Flow)</strong></h3>
+<h4 id="1-data-type-errors-in-form-submissions">1. Data Type Errors in Form Submissions</h4>
+<p><strong>Scenario:</strong> Form Submissions column contains non-numeric data</p>
+<ul>
+<li><strong>Example:</strong> Cell shows &quot;N/A&quot;, &quot;TBD&quot;, or Excel error &quot;#DIV/0!&quot;</li>
+<li><strong>Impact:</strong> <code>int(item()?['Form Submissions'])</code> conversion fails</li>
+<li><strong>Flow Result:</strong> Power Automate crashes with template language error</li>
+<li><strong>Likelihood:</strong> Medium (Excel formula dependencies)</li>
+<li><strong>Mitigation:</strong> Add error handling with <code>coalesce(int(item()?['Form Submissions']), 0)</code></li>
+</ul>
+<h4 id="2-excel-formula-errors-in-min-met-column">2. Excel Formula Errors in Min Met Column</h4>
+<p><strong>Scenario:</strong> Min Met calculation breaks, shows &quot;ERROR&quot; instead of &quot;YES/NO&quot;</p>
+<ul>
+<li><strong>Example:</strong> COUNTIFS formula references deleted rows</li>
+<li><strong>Impact:</strong> Filter <code>equals(item()?['Min Met'], 'NO')</code> fails to match &quot;ERROR&quot;</li>
+<li><strong>Flow Result:</strong> Vendor excluded from rotation incorrectly</li>
+<li><strong>Likelihood:</strong> Low (but high impact)</li>
+<li><strong>Mitigation:</strong> Excel data validation rules to restrict values to &quot;YES/NO&quot;</li>
+</ul>
+<h3 id="-business-logic-edge-cases-unexpected-behavior">🟡 <strong>Business Logic Edge Cases (Unexpected Behavior)</strong></h3>
+<h4 id="3-data-inconsistency-in-quota-calculations">3. Data Inconsistency in Quota Calculations</h4>
+<p><strong>Scenario:</strong> Min Met = &quot;NO&quot; but Actual Enrolled ≥ Min Quota (formula bug)</p>
+<ul>
+<li><strong>Example:</strong> Vibrent SMA shows Min Met = &quot;NO&quot; with 16/15 enrolled</li>
+<li><strong>Impact:</strong> System continues assigning beyond minimum quota</li>
+<li><strong>Flow Result:</strong> Disrupts quota balance, defeats minimum protection</li>
+<li><strong>Likelihood:</strong> Medium (manual data entry errors)</li>
+<li><strong>Risk Level:</strong> HIGH - Breaks fundamental business logic</li>
+<li><strong>Mitigation:</strong> Excel conditional formatting to highlight inconsistencies</li>
+</ul>
+<h4 id="4-manual-data-tampering">4. Manual Data Tampering</h4>
+<p><strong>Scenario:</strong> User manually edits Form Submissions count incorrectly</p>
+<ul>
+<li><strong>Example:</strong> Admin changes Unite SMA from 0 to 50 submissions manually</li>
+<li><strong>Impact:</strong> Rotation becomes unfair, wrong vendor gets priority</li>
+<li><strong>Flow Result:</strong> Fair rotation defeated</li>
+<li><strong>Likelihood:</strong> Low (access controls)</li>
+<li><strong>Risk Level:</strong> MEDIUM - Compromises system integrity</li>
+</ul>
+<h4 id="5-all-vendors-tied-at-zero-submissions">5. All Vendors Tied at Zero Submissions</h4>
+<p><strong>Scenario:</strong> Multiple vendors have identical lowest submission counts</p>
+<ul>
+<li><strong>Example:</strong> Unite=0, Citizen=0, Vibrent=0 form submissions for DMD</li>
+<li><strong>Impact:</strong> <code>first()</code> function always selects same vendor (depends on Excel row order)</li>
+<li><strong>Flow Result:</strong> Not truly random rotation among tied vendors</li>
+<li><strong>Likelihood:</strong> High (during system startup)</li>
+<li><strong>Risk Level:</strong> LOW - Still functionally fair, just predictable</li>
+</ul>
+<h3 id="-graceful-edge-cases-flow-handles-well">🟢 <strong>Graceful Edge Cases (Flow Handles Well)</strong></h3>
+<h4 id="6-no-vendors-need-minimums-for-disease">6. No Vendors Need Minimums for Disease</h4>
+<p><strong>Scenario:</strong> All vendors show Min Met = &quot;YES&quot; for participant's disease type</p>
+<ul>
+<li><strong>Example:</strong> All DMD vendors have achieved minimums</li>
+<li><strong>Impact:</strong> Filter returns empty array</li>
+<li><strong>Flow Result:</strong> ✅ Variables remain empty → triggers waitlist logic</li>
+<li><strong>Expected Behavior:</strong> Correct - should move to Phase 2</li>
+</ul>
+<h4 id="7-all-vendors-at-capacity">7. All Vendors at Capacity</h4>
+<p><strong>Scenario:</strong> All vendors have Remaining Slots = 0 for disease type</p>
+<ul>
+<li><strong>Example:</strong> DMD capacity full across all vendors</li>
+<li><strong>Impact:</strong> Filter excludes all vendors (not &gt; 0)</li>
+<li><strong>Flow Result:</strong> ✅ Empty variables → waitlist</li>
+<li><strong>Expected Behavior:</strong> Correct</li>
+</ul>
+<h4 id="8-negative-remaining-slots">8. Negative Remaining Slots</h4>
+<p><strong>Scenario:</strong> Excel calculation error shows negative remaining slots</p>
+<ul>
+<li><strong>Example:</strong> Calculation shows -5 slots due to over-enrollment</li>
+<li><strong>Impact:</strong> Filter condition <code>&gt; 0</code> excludes vendor</li>
+<li><strong>Flow Result:</strong> ✅ System safety mechanism works</li>
+<li><strong>Expected Behavior:</strong> Correct - prevents over-assignment</li>
+</ul>
+<hr>
+<h2 id="phase-2-edge-cases-minimums-met">Phase 2 Edge Cases (Minimums MET)</h2>
+<h3 id="-critical-edge-cases-could-break-flow-1">🔴 <strong>Critical Edge Cases (Could Break Flow)</strong></h3>
+<h4 id="1-data-type-errors-in-priority-field">1. Data Type Errors in Priority Field</h4>
+<p><strong>Scenario:</strong> Priority column contains non-numeric data</p>
+<ul>
+<li><strong>Example:</strong> Cell shows &quot;High&quot;, &quot;Medium&quot;, &quot;Low&quot; instead of 1, 2, 3</li>
+<li><strong>Impact:</strong> <code>int(item()?['Priority'])</code> conversion fails</li>
+<li><strong>Flow Result:</strong> Power Automate crashes with template language error</li>
+<li><strong>Likelihood:</strong> Medium (manual data entry)</li>
+<li><strong>Mitigation:</strong> Excel data validation to restrict to numbers 1-3</li>
+</ul>
+<h4 id="2-missing-priority-values">2. Missing Priority Values</h4>
+<p><strong>Scenario:</strong> Priority field is empty/null for some vendors</p>
+<ul>
+<li><strong>Example:</strong> New vendor added without Priority assignment</li>
+<li><strong>Impact:</strong> <code>min()</code> function may fail with null values</li>
+<li><strong>Flow Result:</strong> Potential crash or unexpected vendor selection</li>
+<li><strong>Likelihood:</strong> Medium (data maintenance gaps)</li>
+<li><strong>Mitigation:</strong> Default priority value and data validation</li>
+</ul>
+<h4 id="3-empty-filter-results-leading-to-min-failure">3. Empty Filter Results Leading to min() Failure</h4>
+<p><strong>Scenario:</strong> No vendors available, but Steps 3-4 still execute</p>
+<ul>
+<li><strong>Example:</strong> All vendors full, but availability check fails</li>
+<li><strong>Impact:</strong> <code>min(body('Extract_priority_values'))</code> operates on empty array</li>
+<li><strong>Flow Result:</strong> Crash - min() function requires non-empty array</li>
+<li><strong>Likelihood:</strong> Low (availability check should prevent)</li>
+<li><strong>Mitigation:</strong> Ensure Step 2 condition properly guards subsequent steps</li>
+</ul>
+<h3 id="-business-logic-edge-cases-unexpected-behavior-1">🟡 <strong>Business Logic Edge Cases (Unexpected Behavior)</strong></h3>
+<h4 id="4-duplicate-priority-values">4. Duplicate Priority Values</h4>
+<p><strong>Scenario:</strong> Multiple vendors assigned same priority number</p>
+<ul>
+<li><strong>Example:</strong> Vibrent=1, Citizen=1, Unite=3 (two vendors with Priority 1)</li>
+<li><strong>Impact:</strong> <code>first()</code> selects based on Excel row order, not business intent</li>
+<li><strong>Flow Result:</strong> Inconsistent vendor selection among same-priority vendors</li>
+<li><strong>Likelihood:</strong> Medium (human error)</li>
+<li><strong>Risk Level:</strong> MEDIUM - May not reflect intended business priorities</li>
+</ul>
+<h4 id="5-non-sequential-priority-numbers">5. Non-Sequential Priority Numbers</h4>
+<p><strong>Scenario:</strong> Priority values skip numbers or use unexpected ranges</p>
+<ul>
+<li><strong>Example:</strong> Vibrent=1, Citizen=5, Unite=10 instead of 1,2,3</li>
+<li><strong>Impact:</strong> Logic still works but may be confusing for maintenance</li>
+<li><strong>Flow Result:</strong> ✅ Functional but unclear priority relationships</li>
+<li><strong>Risk Level:</strong> LOW - System works but harder to understand</li>
+</ul>
+<h4 id="6-priority-order-conflicts-with-business-intent">6. Priority Order Conflicts with Business Intent</h4>
+<p><strong>Scenario:</strong> Excel Priority field doesn't match actual business preferences</p>
+<ul>
+<li><strong>Example:</strong> Unite accidentally set to Priority 1 instead of Priority 3</li>
+<li><strong>Impact:</strong> Wrong vendor gets preferential treatment</li>
+<li><strong>Flow Result:</strong> Business logic violated</li>
+<li><strong>Likelihood:</strong> Medium (data entry errors)</li>
+<li><strong>Risk Level:</strong> HIGH - Defeats business objectives</li>
+</ul>
+<h3 id="-graceful-edge-cases-flow-handles-well-1">🟢 <strong>Graceful Edge Cases (Flow Handles Well)</strong></h3>
+<h4 id="7-all-vendors-at-capacity-post-minimum">7. All Vendors at Capacity (Post-Minimum)</h4>
+<p><strong>Scenario:</strong> All vendors have Remaining Slots = 0 after minimums met</p>
+<ul>
+<li><strong>Example:</strong> High enrollment pushes all vendors to capacity</li>
+<li><strong>Impact:</strong> Step 1 filter returns empty array</li>
+<li><strong>Flow Result:</strong> ✅ Step 2 condition catches empty → waitlist</li>
+<li><strong>Expected Behavior:</strong> Correct</li>
+</ul>
+<h4 id="8-single-vendor-available">8. Single Vendor Available</h4>
+<p><strong>Scenario:</strong> Only one vendor has remaining capacity for disease</p>
+<ul>
+<li><strong>Example:</strong> Vibrent and Citizen full, only Unite has DMD slots</li>
+<li><strong>Impact:</strong> Filter returns single vendor, priority logic still works</li>
+<li><strong>Flow Result:</strong> ✅ Assigns to available vendor regardless of priority</li>
+<li><strong>Expected Behavior:</strong> Correct - capacity trumps priority</li>
+</ul>
+<h4 id="9-milestone-status-flip-during-operation">9. Milestone Status Flip During Operation</h4>
+<p><strong>Scenario:</strong> AllMinimumsAchieved changes from false to true mid-flow</p>
+<ul>
+<li><strong>Example:</strong> Another submission completes final minimum during processing</li>
+<li><strong>Impact:</strong> Current submission still uses Phase 1 logic (snapshot in time)</li>
+<li><strong>Flow Result:</strong> ✅ Consistent within single execution</li>
+<li><strong>Expected Behavior:</strong> Acceptable - next submission will use Phase 2</li>
+</ul>
+<hr>
+<h2 id="cross-phase-edge-cases">Cross-Phase Edge Cases</h2>
+<h3 id="-system-level-critical-issues">🔴 <strong>System-Level Critical Issues</strong></h3>
+<h4 id="1-milestone-detection-failure">1. Milestone Detection Failure</h4>
+<p><strong>Scenario:</strong> MilestonesTable &quot;All Minimums Met&quot; calculation breaks</p>
+<ul>
+<li><strong>Example:</strong> Formula error causes status to show &quot;ERROR&quot; instead of &quot;ACHIEVED&quot;</li>
+<li><strong>Impact:</strong> AllMinimumsAchieved variable incorrectly set</li>
+<li><strong>Flow Result:</strong> Wrong phase selection (Phase 1 vs Phase 2)</li>
+<li><strong>Likelihood:</strong> Low (but catastrophic impact)</li>
+<li><strong>Risk Level:</strong> CRITICAL - Entire system logic compromised</li>
+</ul>
+<h4 id="2-excel-table-corruption">2. Excel Table Corruption</h4>
+<p><strong>Scenario:</strong> VendorDiseaseQuotasTable becomes corrupted or deleted</p>
+<ul>
+<li><strong>Example:</strong> Accidental deletion of table during Excel maintenance</li>
+<li><strong>Impact:</strong> Both phases fail to retrieve vendor data</li>
+<li><strong>Flow Result:</strong> Complete system failure</li>
+<li><strong>Likelihood:</strong> Very Low (but total failure)</li>
+<li><strong>Mitigation:</strong> Excel file backups and access controls</li>
+</ul>
+<h3 id="-data-consistency-issues">🟡 <strong>Data Consistency Issues</strong></h3>
+<h4 id="3-race-conditions-in-high-volume-scenarios">3. Race Conditions in High-Volume Scenarios</h4>
+<p><strong>Scenario:</strong> Multiple form submissions processed simultaneously</p>
+<ul>
+<li><strong>Example:</strong> Two DMD submissions arrive within seconds</li>
+<li><strong>Impact:</strong> Both read same Excel state, may over-assign slots</li>
+<li><strong>Flow Result:</strong> Potential quota violations</li>
+<li><strong>Likelihood:</strong> Low (current volume)</li>
+<li><strong>Risk Level:</strong> MEDIUM - Could increase with pilot growth</li>
+</ul>
+<h4 id="4-excel-formula-dependency-breaks">4. Excel Formula Dependency Breaks</h4>
+<p><strong>Scenario:</strong> Remaining Slots calculation depends on external references</p>
+<ul>
+<li><strong>Example:</strong> Formula references moved or renamed ranges</li>
+<li><strong>Impact:</strong> Remaining Slots shows incorrect values</li>
+<li><strong>Flow Result:</strong> Wrong capacity assessments</li>
+<li><strong>Likelihood:</strong> Medium (Excel maintenance risks)</li>
+</ul>
+<hr>
+<h2 id="recommendations">Recommendations</h2>
+<h3 id="high-priority-fixes"><strong>High Priority Fixes</strong></h3>
+<ol>
+<li><strong>Add error handling</strong> for data type conversions (Form Submissions, Priority)</li>
+<li><strong>Implement data validation</strong> in Excel for critical fields</li>
+<li><strong>Add consistency checks</strong> for Min Met vs Actual Enrolled logic</li>
+<li><strong>Create monitoring</strong> for milestone calculation accuracy</li>
+</ol>
+<h3 id="medium-priority-improvements"><strong>Medium Priority Improvements</strong></h3>
+<ol>
+<li><strong>Standardize priority numbering</strong> (enforce 1,2,3 sequence)</li>
+<li><strong>Add duplicate priority detection</strong> and warnings</li>
+<li><strong>Implement Excel backup automation</strong></li>
+<li><strong>Create data integrity dashboard</strong></li>
+</ol>
+<h3 id="low-priority-enhancements"><strong>Low Priority Enhancements</strong></h3>
+<ol>
+<li><strong>Add random selection</strong> for tied vendors in Phase 1</li>
+<li><strong>Create admin tools</strong> for priority management</li>
+<li><strong>Implement audit logging</strong> for manual data changes</li>
+<li><strong>Add capacity planning projections</strong></li>
+</ol>
+
+            
+            
+        </body>
+        </html>

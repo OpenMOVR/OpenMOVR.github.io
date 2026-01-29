@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Power Automate Flow Setup&colon; MOVR Pilot Disease-Specific Vendor Assignment</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="power-automate-flow-setup-movr-pilot-disease-specific-vendor-assignment">Power Automate Flow Setup: MOVR Pilot Disease-Specific Vendor Assignment</h1>
+<p><strong>Flow Name:</strong> <code>MOVR Pilot - Form Submission Handler</code></p>
+<h2 id="step-1-trigger---when-http-request-is-received">Step 1: Trigger - When HTTP Request is Received</h2>
+<p><strong>Action:</strong> &quot;When a HTTP request is received&quot;</p>
+<p><strong>Settings:</strong></p>
+<ul>
+<li><strong>Who can trigger the flow:</strong> Anyone</li>
+<li><strong>Request Body JSON Schema:</strong> (Copy from pilot.json)</li>
+</ul>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;object&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;properties&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;string&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Participant&#x27;s full name&quot;</span>
+        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;email&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;string&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;email&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Participant&#x27;s email address&quot;</span>
+        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;disease&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;string&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;enum&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;DMD&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;SMA&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;LGMD&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Disease type: DMD, SMA, or LGMD&quot;</span>
+        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;relationship&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;string&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;enum&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;Patient&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;Parent/Caregiver&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;Other&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Participant&#x27;s relationship to patient&quot;</span>
+        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;ageGroup&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;string&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;enum&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;6-younger&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;7-13&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;14-17&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;18-older&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Participant&#x27;s age group&quot;</span>
+        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;attestation&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;string&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Consent checkbox value (true when checked)&quot;</span>
+        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;multiPlatform&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;string&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Interest in exploring multiple platforms (optional)&quot;</span>
+        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;howHeard&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;string&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;enum&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;Email&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;Social&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;Call&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;Provider&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;Friend&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;Other&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;How participant heard about pilot&quot;</span>
+        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;submissionTime&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;string&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;date-time&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ISO timestamp of form submission&quot;</span>
+        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;userAgent&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;string&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Browser user agent string&quot;</span>
+        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;referrer&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;string&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;description&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Page referrer URL&quot;</span>
+        <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;required&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;name&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;email&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;disease&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;relationship&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;ageGroup&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;howHeard&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;attestation&quot;</span><span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<h2 id="step-2-get-vendor-disease-quotas">Step 2: Get Vendor Disease Quotas</h2>
+<p><strong>Action:</strong> &quot;List rows present in a table&quot; (Excel Online)</p>
+<p><strong>Settings:</strong></p>
+<ul>
+<li><strong>Location:</strong> OneDrive for Business</li>
+<li><strong>Document Library:</strong> OneDrive</li>
+<li><strong>File:</strong> <code>MOVR_PILOT_PARICIPANTS.xlsx</code></li>
+<li><strong>Table:</strong> <code>VendorDiseaseQuotasTable</code></li>
+<li><strong>Table ID:</strong> <code>{61B3D0A9-C6A9-4BEC-8D7A-61DE464F3A12}</code></li>
+</ul>
+<p><strong>Purpose:</strong> Gets current quota status for all vendor/disease combinations</p>
+<h2 id="step-3-get-milestones-status">Step 3: Get Milestones Status</h2>
+<p><strong>Action:</strong> &quot;List rows present in a table&quot; (Excel Online)</p>
+<p><strong>Settings:</strong></p>
+<ul>
+<li><strong>Location:</strong> OneDrive for Business</li>
+<li><strong>Document Library:</strong> OneDrive</li>
+<li><strong>File:</strong> <code>MOVR_PILOT_PARICIPANTS.xlsx</code></li>
+<li><strong>Table:</strong> <code>MilestonesTable</code></li>
+<li><strong>Table ID:</strong> <code>{EC5F379C-7C93-4061-ACD0-DD9294D44AC3}</code></li>
+</ul>
+<p><strong>Purpose:</strong> Checks if minimum quotas have been achieved (disease-specific)</p>
+<h2 id="step-4-initialize-variables">Step 4: Initialize Variables</h2>
+<p>Create the following variables:</p>
+<h3 id="variable-1-participantdiseaseminimumachieved">Variable 1: ParticipantDiseaseMinimumAchieved</h3>
+<ul>
+<li><strong>Name:</strong> <code>ParticipantDiseaseMinimumAchieved</code></li>
+<li><strong>Type:</strong> Boolean</li>
+<li><strong>Value:</strong> <code>false</code></li>
+</ul>
+<h3 id="variable-2-assignedvendor">Variable 2: AssignedVendor</h3>
+<ul>
+<li><strong>Name:</strong> <code>AssignedVendor</code></li>
+<li><strong>Type:</strong> String</li>
+<li><strong>Value:</strong> (leave empty)</li>
+</ul>
+<h3 id="variable-3-vendorurl">Variable 3: VendorURL</h3>
+<ul>
+<li><strong>Name:</strong> <code>VendorURL</code></li>
+<li><strong>Type:</strong> String</li>
+<li><strong>Value:</strong> (leave empty)</li>
+</ul>
+<h3 id="variable-4-assignmentreason">Variable 4: AssignmentReason</h3>
+<ul>
+<li><strong>Name:</strong> <code>AssignmentReason</code></li>
+<li><strong>Type:</strong> String</li>
+<li><strong>Value:</strong> (leave empty)</li>
+</ul>
+<h2 id="step-5-check-minimums-status-disease-specific">Step 5: Check Minimums Status (Disease-Specific)</h2>
+<p><strong>Action:</strong> &quot;Apply to each&quot; (loop through milestones)</p>
+<p><strong>Input:</strong></p>
+<pre><code>@outputs('List_rows_present_in_MilestonesTable')?['body/value']
+</code></pre>
+<p><strong>Inside the loop:</strong></p>
+<h3 id="condition-check-if-milestone-contains-participants-disease">Condition: Check if Milestone contains participant's disease</h3>
+<p><strong>Expression:</strong></p>
+<pre><code>contains(items('Apply_to_each')?['Milestone'], triggerBody()?['disease'])
+</code></pre>
+<p><strong>If Yes:</strong></p>
+<ul>
+<li><strong>Action:</strong> Set variable <code>ParticipantDiseaseMinimumAchieved</code></li>
+<li><strong>Value:</strong></li>
+</ul>
+<pre><code>equals(items('Apply_to_each')?['Status'], 'ACHIEVED')
+</code></pre>
+<p><strong>How it works:</strong></p>
+<ul>
+<li>DMD participant → looks for milestone containing &quot;DMD&quot; → finds &quot;DMD Minimums Met&quot;</li>
+<li>SMA participant → looks for milestone containing &quot;SMA&quot; → finds &quot;SMA Minimums Met&quot;</li>
+<li>LGMD participant → looks for milestone containing &quot;LGMD&quot; → finds &quot;LGMD Minimums Met&quot;</li>
+</ul>
+<blockquote>
+<p><strong>Note:</strong> This disease-specific check replaces the previous global &quot;All Minimums Met&quot; check, ensuring each disease type independently determines its phase transition.</p>
+</blockquote>
+<h2 id="step-6-disease-specific-assignment-logic">Step 6: Disease-Specific Assignment Logic</h2>
+<p><strong>Action:</strong> &quot;Condition&quot;</p>
+<p><strong>Condition:</strong> Check if disease-specific minimums are achieved</p>
+<pre><code>@equals(variables('ParticipantDiseaseMinimumAchieved'), true)
+</code></pre>
+<h3 id="if-yes-minimums-met---post-minimum-phase">If Yes (Minimums Met) - POST-MINIMUM PHASE</h3>
+<p><strong>Action:</strong> &quot;Apply to each&quot; (loop through vendor quotas)</p>
+<p><strong>Input:</strong></p>
+<pre><code>@outputs('List_rows_present_in_VendorDiseaseQuotasTable')?['body/value']
+</code></pre>
+<p><strong>Inside loop - Condition:</strong> Check disease match AND available slots</p>
+<pre><code>Disease matches:
+@equals(items('Apply_to_each_2')?['Disease'], triggerBody()?['disease'])
+
+Remaining slots &gt; 0:
+@greater(int(items('Apply_to_each_2')?['Remaining Slots']), 0)
+</code></pre>
+<p><strong>If Yes, check priority order (nested conditions):</strong></p>
+<h4 id="priority-1-vibrent-health">Priority 1: Vibrent Health</h4>
+<p><strong>Condition:</strong> Vendor name equals &quot;Vibrent Health&quot;</p>
+<p><strong>If Yes:</strong></p>
+<ol>
+<li><strong>Set variable:</strong> <code>AssignedVendor</code> = <code>Vibrent Health</code></li>
+<li><strong>Set variable:</strong> <code>VendorURL</code> = <code>items('Apply_to_each_2')?['Enrollment URL']</code></li>
+<li><strong>Set variable:</strong> <code>AssignmentReason</code> = <code>Post-minimum priority: Vibrent Health</code></li>
+</ol>
+<h4 id="priority-2-citizen-health">Priority 2: Citizen Health</h4>
+<p><strong>Condition:</strong> Vendor name equals &quot;Citizen Health&quot;</p>
+<p><strong>If Yes:</strong></p>
+<ol>
+<li><strong>Set variable:</strong> <code>AssignedVendor</code> = <code>Citizen Health</code></li>
+<li><strong>Set variable:</strong> <code>VendorURL</code> = <code>items('Apply_to_each_2')?['Enrollment URL']</code></li>
+<li><strong>Set variable:</strong> <code>AssignmentReason</code> = <code>Post-minimum priority: Citizen Health</code></li>
+</ol>
+<h4 id="priority-3-unite-genomics">Priority 3: Unite Genomics</h4>
+<p><strong>Condition:</strong> Vendor name equals &quot;Unite Genomics&quot;</p>
+<p><strong>If Yes:</strong></p>
+<ol>
+<li><strong>Set variable:</strong> <code>AssignedVendor</code> = <code>Unite Genomics</code></li>
+<li><strong>Set variable:</strong> <code>VendorURL</code> = <code>items('Apply_to_each_2')?['Enrollment URL']</code></li>
+<li><strong>Set variable:</strong> <code>AssignmentReason</code> = <code>Post-minimum priority: Unite Genomics</code></li>
+</ol>
+<h3 id="if-no-minimums-not-met---minimum-quota-priority-phase">If No (Minimums Not Met) - MINIMUM QUOTA PRIORITY PHASE</h3>
+<p><strong>Action:</strong> Filter and assign to vendor needing minimum quota</p>
+<p><strong>Filter criteria:</strong></p>
+<ul>
+<li>Disease matches participant's disease</li>
+<li><code>Min Met</code> = <code>NO</code></li>
+<li><code>Remaining Slots</code> &gt; 0</li>
+</ul>
+<p><strong>Assignment logic:</strong></p>
+<ul>
+<li>Select vendor with lowest current Form Submissions count (rotation)</li>
+</ul>
+<p><strong>Set variables:</strong></p>
+<ol>
+<li><strong>Set variable:</strong> <code>AssignedVendor</code> = Selected vendor name</li>
+<li><strong>Set variable:</strong> <code>VendorURL</code> = Selected vendor's Enrollment URL</li>
+<li><strong>Set variable:</strong> <code>AssignmentReason</code> = <code>Minimum quota priority - rotation based on form submissions</code></li>
+</ol>
+<blockquote>
+<p><strong>Note:</strong> The variable is <code>ParticipantDiseaseMinimumAchieved</code> (disease-specific), not the previous global <code>AllMinimumsAchieved</code>.</p>
+</blockquote>
+<h2 id="step-7-final-assignment-check">Step 7: Final Assignment Check</h2>
+<p><strong>Action:</strong> &quot;Condition&quot;</p>
+<p><strong>Check if assignment was made:</strong></p>
+<pre><code>@equals(length(variables('AssignedVendor')), 0)
+</code></pre>
+<h3 id="if-yes-no-assignment-made---all-vendors-full">If Yes (No Assignment Made - All Vendors Full)</h3>
+<ol>
+<li><strong>Set variable:</strong> <code>AssignedVendor</code> = <code>WAITLIST</code></li>
+<li><strong>Set variable:</strong> <code>AssignmentReason</code> = <code>All vendors at capacity for this disease</code></li>
+</ol>
+<h2 id="step-8-add-participant-to-excel">Step 8: Add Participant to Excel</h2>
+<p><strong>Action:</strong> &quot;Add a row into a table&quot; (Excel Online)</p>
+<p><strong>Settings:</strong></p>
+<ul>
+<li><strong>Location:</strong> OneDrive for Business</li>
+<li><strong>Document Library:</strong> OneDrive</li>
+<li><strong>File:</strong> <code>MOVR_PILOT_PARICIPANTS.xlsx</code></li>
+<li><strong>Table:</strong> <code>ParticipantsTable</code></li>
+<li><strong>Table ID:</strong> <code>{748BF5EC-CF2A-4B57-B4A4-3EE5BBE903F0}</code></li>
+</ul>
+<p><strong>Column Mappings:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Participant ID</td>
+<td><code>@guid()</code></td>
+</tr>
+<tr>
+<td>Timestamp</td>
+<td><code>@triggerBody()?['submissionTime']</code></td>
+</tr>
+<tr>
+<td>Name</td>
+<td><code>@triggerBody()?['name']</code></td>
+</tr>
+<tr>
+<td>Email</td>
+<td><code>@triggerBody()?['email']</code></td>
+</tr>
+<tr>
+<td>Disease Type</td>
+<td><code>@triggerBody()?['disease']</code></td>
+</tr>
+<tr>
+<td>Relationship</td>
+<td><code>@triggerBody()?['relationship']</code></td>
+</tr>
+<tr>
+<td>Multi-Platform Interest</td>
+<td><code>@triggerBody()?['multiPlatform']</code></td>
+</tr>
+<tr>
+<td>How Heard</td>
+<td><code>@triggerBody()?['howHeard']</code></td>
+</tr>
+<tr>
+<td>Assigned Vendor</td>
+<td><code>@variables('AssignedVendor')</code></td>
+</tr>
+<tr>
+<td>Email Sent</td>
+<td><code>FALSE</code></td>
+</tr>
+<tr>
+<td>Vendor Link</td>
+<td><code>@variables('VendorURL')</code></td>
+</tr>
+<tr>
+<td>Enrollment Status</td>
+<td><code>@if(equals(variables('AssignedVendor'), 'WAITLIST'), 'Waitlisted', 'Pending')</code></td>
+</tr>
+<tr>
+<td>Days Since Form</td>
+<td><code>0</code></td>
+</tr>
+<tr>
+<td>Age Group</td>
+<td><code>@triggerBody()?['ageGroup']</code></td>
+</tr>
+<tr>
+<td>Attestation</td>
+<td><code>@triggerBody()?['attestation']</code></td>
+</tr>
+<tr>
+<td>Assignment Reason</td>
+<td><code>@variables('AssignmentReason')</code></td>
+</tr>
+<tr>
+<td>Timeout Date</td>
+<td><code>@addDays(utcNow(), 14)</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="step-9-email-composition-and-sending">Step 9: Email Composition and Sending</h2>
+<p><strong>Action:</strong> &quot;Condition&quot;</p>
+<p><strong>Check assignment type:</strong></p>
+<pre><code>@not(equals(variables('AssignedVendor'), 'WAITLIST'))
+</code></pre>
+<h3 id="if-yes-success-assignment">If Yes (Success Assignment):</h3>
+<p><strong>Action:</strong> &quot;Compose&quot; - Name: <code>Compose_Success_Email</code></p>
+<p><strong>Email Body:</strong></p>
+<pre><code>Hi @{triggerBody()?['name']},
+
+Thank you for joining the MOVR pilot! You're helping shape how we support families managing neuromuscular diseases.
+
+Your next step: Get started with @{variables('AssignedVendor')}
+
+Click here to begin: @{variables('VendorURL')}
+
+Assignment Reason: @{variables('AssignmentReason')}
+
+What to expect:
+- Create your account (5 minutes)
+- Explore the platform and add information at your own pace (30-45 minutes)
+- We'll send a brief feedback survey in 1-2 weeks
+
+@{if(equals(triggerBody()?['multiPlatform'], 'true'),
+'You indicated interest in exploring all platforms. Here are the other enrollment links:
+- Unite Genomics: https://unitegenomics.com/enroll/movr
+- Citizen Health: https://citizenhealth.com/join/mda
+- Vibrent Health: https://vibrenthealth.com/mda/pilot',
+'')}
+
+Questions? Reply to this email or contact mdamovr@mdausa.org
+
+Thanks for being part of this!
+The MDA MOVR Team
+</code></pre>
+<p><strong>Action:</strong> &quot;Send an email (V2)&quot; (Office 365 Outlook)</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>To</td>
+<td><code>@outputs('Add_row_to_ParticipantsTable')?['body/Email']</code></td>
+</tr>
+<tr>
+<td>Subject</td>
+<td><code>Welcome to the MOVR 2.0 Pilot for @{triggerBody()?['disease']} - Next Steps</code></td>
+</tr>
+<tr>
+<td>Body</td>
+<td><code>@outputs('Compose_Success_Email')</code></td>
+</tr>
+<tr>
+<td>Cc</td>
+<td><code>MDAMOVR@mdausa.org</code></td>
+</tr>
+<tr>
+<td>Importance</td>
+<td><code>High</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="if-no-waitlist">If No (Waitlist):</h3>
+<p><strong>Action:</strong> &quot;Compose&quot; - Name: <code>Compose_Waitlist_Email</code></p>
+<p><strong>Waitlist Email Body:</strong></p>
+<pre><code>Hi @{triggerBody()?['name']},
+
+Thank you for your interest in the MOVR pilot!
+
+We're currently at capacity for @{triggerBody()?['disease']} participants, but you've been added to our waitlist. We'll contact you immediately if a spot opens up.
+
+In the meantime, feel free to reach out with any questions at mdamovr@mdausa.org
+
+Thanks for your interest in helping improve MOVR!
+The MDA MOVR Team
+</code></pre>
+<p><strong>Action:</strong> &quot;Send an email (V2)&quot; (Office 365 Outlook)</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>To</td>
+<td><code>@outputs('Add_row_to_ParticipantsTable')?['body/Email']</code></td>
+</tr>
+<tr>
+<td>Subject</td>
+<td><code>MOVR 2.0 Pilot - Currently at Capacity for @{triggerBody()?['disease']}</code></td>
+</tr>
+<tr>
+<td>Body</td>
+<td><code>@outputs('Compose_Waitlist_Email')</code></td>
+</tr>
+<tr>
+<td>Bcc</td>
+<td><code>MDAMOVR@mdausa.org</code></td>
+</tr>
+<tr>
+<td>Importance</td>
+<td><code>High</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="step-10-update-email-status">Step 10: Update Email Status</h2>
+<p><strong>Action:</strong> &quot;Update a row&quot; (Excel Online)</p>
+<p><strong>Settings:</strong></p>
+<ul>
+<li><strong>Location:</strong> OneDrive for Business</li>
+<li><strong>Document Library:</strong> OneDrive</li>
+<li><strong>File:</strong> <code>MOVR_PILOT_PARICIPANTS.xlsx</code></li>
+<li><strong>Table:</strong> <code>ParticipantsTable</code></li>
+<li><strong>Table ID:</strong> <code>{748BF5EC-CF2A-4B57-B4A4-3EE5BBE903F0}</code></li>
+<li><strong>Key Column:</strong> <code>Participant ID</code></li>
+<li><strong>Key Value:</strong> <code>@outputs('Add_row_to_ParticipantsTable')?['body/Participant ID']</code></li>
+</ul>
+<p><strong>Update:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Email Sent</td>
+<td><code>TRUE</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="step-11-response">Step 11: Response</h2>
+<p><strong>Action:</strong> &quot;Response&quot;</p>
+<p><strong>Condition:</strong> Check if assigned vendor is not WAITLIST</p>
+<h3 id="if-success-not-waitlist">If Success (Not Waitlist):</h3>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;status&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;success&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;message&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Thank you for joining! Check your email for next steps.&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;vendor&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;@{variables(&#x27;AssignedVendor&#x27;)}&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;enrollmentUrl&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;@{variables(&#x27;VendorURL&#x27;)}&quot;</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<h3 id="if-waitlist">If Waitlist:</h3>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;status&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;waitlist&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;message&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Thank you for your interest. You&#x27;ve been added to our waitlist.&quot;</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<h2 id="testing-checklist">Testing Checklist</h2>
+<ul class="contains-task-list">
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Test with each disease type (DMD, SMA, LGMD)</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Verify quota calculations update correctly</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Test when minimums not met vs. met</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Test vendor priority order</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Test waitlist functionality when at capacity</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Verify email delivery</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Check Excel data accuracy</li>
+<li class="task-list-item enabled"><input class="task-list-item-checkbox"type="checkbox"> Test milestone achievement detection</li>
+</ul>
+<h2 id="monitoring">Monitoring</h2>
+<p><strong>Run History:</strong> Check Power Automate run history for:</p>
+<ul>
+<li>Successful executions</li>
+<li>Failed runs and error messages</li>
+<li>Processing time per submission</li>
+</ul>
+<p><strong>Excel Monitoring:</strong> Weekly review of:</p>
+<ul>
+<li>Participant enrollment status</li>
+<li>Quota progress</li>
+<li>Milestone achievements</li>
+<li>Email delivery confirmations</li>
+</ul>
+
+            
+            
+        </body>
+        </html>

@@ -2,7 +2,6 @@
 
 **Flow Name:** `MOVR Pilot - Form Submission Handler`
 
----
 
 ## Step 1: Trigger - When HTTP Request is Received
 
@@ -35,14 +34,23 @@
             "enum": ["Patient", "Parent/Caregiver", "Other"],
             "description": "Participant's relationship to patient"
         },
+        "ageGroup": {
+            "type": "string",
+            "enum": ["6-younger", "7-13", "14-17", "18-older"],
+            "description": "Participant's age group"
+        },
+        "attestation": {
+            "type": "string",
+            "description": "Consent checkbox value (true when checked)"
+        },
         "multiPlatform": {
             "type": "string",
             "description": "Interest in exploring multiple platforms (optional)"
         },
         "howHeard": {
             "type": "string",
-            "enum": ["Email", "Social", "Event", "Provider", "Friend", "Other"],
-            "description": "How participant heard about pilot (optional)"
+            "enum": ["Email", "Social", "Call", "Provider", "Friend", "Other"],
+            "description": "How participant heard about pilot"
         },
         "submissionTime": {
             "type": "string",
@@ -58,11 +66,10 @@
             "description": "Page referrer URL"
         }
     },
-    "required": ["name", "email", "disease", "relationship"]
+    "required": ["name", "email", "disease", "relationship", "ageGroup", "howHeard", "attestation"]
 }
 ```
 
----
 
 ## Step 2: Get Vendor Disease Quotas
 
@@ -71,12 +78,12 @@
 **Settings:**
 - **Location:** OneDrive for Business
 - **Document Library:** OneDrive
-- **File:** `MOVR_Pilot_Participants.xlsx`
+- **File:** `MOVR_PILOT_PARICIPANTS.xlsx`
 - **Table:** `VendorDiseaseQuotasTable`
+- **Table ID:** `{61B3D0A9-C6A9-4BEC-8D7A-61DE464F3A12}`
 
 **Purpose:** Gets current quota status for all vendor/disease combinations
 
----
 
 ## Step 3: Get Milestones Status
 
@@ -84,20 +91,20 @@
 
 **Settings:**
 - **Location:** OneDrive for Business
-- **Document Library:** OneDrive  
-- **File:** `MOVR_Pilot_Participants.xlsx`
+- **Document Library:** OneDrive
+- **File:** `MOVR_PILOT_PARICIPANTS.xlsx`
 - **Table:** `MilestonesTable`
+- **Table ID:** `{EC5F379C-7C93-4061-ACD0-DD9294D44AC3}`
 
-**Purpose:** Checks if minimum quotas have been achieved
+**Purpose:** Checks if minimum quotas have been achieved (disease-specific)
 
----
 
 ## Step 4: Initialize Variables
 
 Create the following variables:
 
-### Variable 1: AllMinimumsAchieved
-- **Name:** `AllMinimumsAchieved`
+### Variable 1: ParticipantDiseaseMinimumAchieved
+- **Name:** `ParticipantDiseaseMinimumAchieved`
 - **Type:** Boolean
 - **Value:** `false`
 
@@ -116,132 +123,127 @@ Create the following variables:
 - **Type:** String
 - **Value:** (leave empty)
 
----
 
-## Step 5: Check Minimums Status
+## Step 5: Check Minimums Status (Disease-Specific)
 
 **Action:** "Apply to each" (loop through milestones)
 
-**Input:** `body('Get_Milestones_Status')?['value']`
+**Input:**
+```
+@outputs('List_rows_present_in_MilestonesTable')?['body/value']
+```
 
 **Inside the loop:**
 
-### Condition: Check if "All Minimums Met"
-- **Left side:** `items('Apply_to_each')?['Milestone']`
-- **Operator:** is equal to
-- **Right side:** `All Minimums Met`
+### Condition: Check if Milestone contains participant's disease
+**Expression:**
+```
+contains(items('Apply_to_each')?['Milestone'], triggerBody()?['disease'])
+```
 
 **If Yes:**
-- **Action:** Set variable `AllMinimumsAchieved`
-- **Value:** 
+- **Action:** Set variable `ParticipantDiseaseMinimumAchieved`
+- **Value:**
 ```
-if(equals(items('Apply_to_each')?['Status'], 'ACHIEVED'), true, false)
+equals(items('Apply_to_each')?['Status'], 'ACHIEVED')
 ```
 
----
+**How it works:**
+- DMD participant → looks for milestone containing "DMD" → finds "DMD Minimums Met"
+- SMA participant → looks for milestone containing "SMA" → finds "SMA Minimums Met"
+- LGMD participant → looks for milestone containing "LGMD" → finds "LGMD Minimums Met"
+
+> **Note:** This disease-specific check replaces the previous global "All Minimums Met" check, ensuring each disease type independently determines its phase transition.
+
 
 ## Step 6: Disease-Specific Assignment Logic
 
-**Action:** "Condition" 
+**Action:** "Condition"
 
-**Condition:** Check if minimums are achieved
-- **Left side:** `variables('AllMinimumsAchieved')`
-- **Operator:** is equal to
-- **Right side:** `false`
+**Condition:** Check if disease-specific minimums are achieved
+```
+@equals(variables('ParticipantDiseaseMinimumAchieved'), true)
+```
 
-### If No (Minimums Not Met) - PRIORITY PHASE
-
-**Action:** "Apply to each" (loop through vendor quotas)
-**Input:** `body('Get_Vendor_Disease_Quotas')?['value']`
-
-**Inside loop - Condition:** Check for minimum quota assignment
-- **Left side:** `items('Apply_to_each_2')?['Disease']`
-- **Operator:** is equal to  
-- **Right side:** `triggerBody()?['disease']`
-
-**AND**
-
-- **Left side:** `items('Apply_to_each_2')?['Min Met']`
-- **Operator:** is equal to
-- **Right side:** `NO`
-
-**AND**
-
-- **Left side:** `int(items('Apply_to_each_2')?['Remaining Slots'])`
-- **Operator:** is greater than
-- **Right side:** `0`
-
-**If Yes (Found minimum quota slot):**
-1. **Set variable:** `AssignedVendor` = `items('Apply_to_each_2')?['Vendor Name']`
-2. **Set variable:** `VendorURL` = `items('Apply_to_each_2')?['Enrollment URL']`
-3. **Set variable:** `AssignmentReason` = `Minimum quota priority`
 
 ### If Yes (Minimums Met) - POST-MINIMUM PHASE
 
 **Action:** "Apply to each" (loop through vendor quotas)
-**Input:** `body('Get_Vendor_Disease_Quotas')?['value']`
 
-**Filter for disease type first:**
+**Input:**
+```
+@outputs('List_rows_present_in_VendorDiseaseQuotasTable')?['body/value']
+```
 
-**Condition:** Match disease type
-- **Left side:** `items('Apply_to_each_3')?['Disease']`
-- **Operator:** is equal to
-- **Right side:** `triggerBody()?['disease']`
+**Inside loop - Condition:** Check disease match AND available slots
+```
+Disease matches:
+@equals(items('Apply_to_each_2')?['Disease'], triggerBody()?['disease'])
 
-**AND**
+Remaining slots > 0:
+@greater(int(items('Apply_to_each_2')?['Remaining Slots']), 0)
+```
 
-- **Left side:** `int(items('Apply_to_each_3')?['Remaining Slots'])`
-- **Operator:** is greater than
-- **Right side:** `0`
+**If Yes, check priority order (nested conditions):**
 
-**If Yes, check priority order:**
-
-**Condition 1:** Check for Vibrent (Priority 1)
-- **Left side:** `items('Apply_to_each_3')?['Vendor Name']`
-- **Operator:** is equal to
-- **Right side:** `Vibrent Health`
+#### Priority 1: Vibrent Health
+**Condition:** Vendor name equals "Vibrent Health"
 
 **If Yes:**
 1. **Set variable:** `AssignedVendor` = `Vibrent Health`
-2. **Set variable:** `VendorURL` = `items('Apply_to_each_3')?['Enrollment URL']`
+2. **Set variable:** `VendorURL` = `items('Apply_to_each_2')?['Enrollment URL']`
 3. **Set variable:** `AssignmentReason` = `Post-minimum priority: Vibrent Health`
 
-**Else, Condition 2:** Check for Citizen (Priority 2)
-- **Left side:** `items('Apply_to_each_3')?['Vendor Name']`
-- **Operator:** is equal to
-- **Right side:** `Citizen Health`
+#### Priority 2: Citizen Health
+**Condition:** Vendor name equals "Citizen Health"
 
 **If Yes:**
 1. **Set variable:** `AssignedVendor` = `Citizen Health`
-2. **Set variable:** `VendorURL` = `items('Apply_to_each_3')?['Enrollment URL']`
+2. **Set variable:** `VendorURL` = `items('Apply_to_each_2')?['Enrollment URL']`
 3. **Set variable:** `AssignmentReason` = `Post-minimum priority: Citizen Health`
 
-**Else, Condition 3:** Check for Unite (Priority 3)
-- **Left side:** `items('Apply_to_each_3')?['Vendor Name']`
-- **Operator:** is equal to
-- **Right side:** `Unite Genomics`
+#### Priority 3: Unite Genomics
+**Condition:** Vendor name equals "Unite Genomics"
 
 **If Yes:**
 1. **Set variable:** `AssignedVendor` = `Unite Genomics`
-2. **Set variable:** `VendorURL` = `items('Apply_to_each_3')?['Enrollment URL']`
+2. **Set variable:** `VendorURL` = `items('Apply_to_each_2')?['Enrollment URL']`
 3. **Set variable:** `AssignmentReason` = `Post-minimum priority: Unite Genomics`
 
----
+
+### If No (Minimums Not Met) - MINIMUM QUOTA PRIORITY PHASE
+
+**Action:** Filter and assign to vendor needing minimum quota
+
+**Filter criteria:**
+- Disease matches participant's disease
+- `Min Met` = `NO`
+- `Remaining Slots` > 0
+
+**Assignment logic:**
+- Select vendor with lowest current Form Submissions count (rotation)
+
+**Set variables:**
+1. **Set variable:** `AssignedVendor` = Selected vendor name
+2. **Set variable:** `VendorURL` = Selected vendor's Enrollment URL
+3. **Set variable:** `AssignmentReason` = `Minimum quota priority - rotation based on form submissions`
+
+> **Note:** The variable is `ParticipantDiseaseMinimumAchieved` (disease-specific), not the previous global `AllMinimumsAchieved`.
+
 
 ## Step 7: Final Assignment Check
 
 **Action:** "Condition"
 
 **Check if assignment was made:**
-- **Left side:** `length(variables('AssignedVendor'))`
-- **Operator:** is greater than
-- **Right side:** `0`
+```
+@equals(length(variables('AssignedVendor')), 0)
+```
 
-### If No Assignment Made (All Vendors Full)
+### If Yes (No Assignment Made - All Vendors Full)
 1. **Set variable:** `AssignedVendor` = `WAITLIST`
 2. **Set variable:** `AssignmentReason` = `All vendors at capacity for this disease`
 
----
 
 ## Step 8: Add Participant to Excel
 
@@ -250,40 +252,46 @@ if(equals(items('Apply_to_each')?['Status'], 'ACHIEVED'), true, false)
 **Settings:**
 - **Location:** OneDrive for Business
 - **Document Library:** OneDrive
-- **File:** `MOVR_Pilot_Participants.xlsx`
+- **File:** `MOVR_PILOT_PARICIPANTS.xlsx`
 - **Table:** `ParticipantsTable`
+- **Table ID:** `{748BF5EC-CF2A-4B57-B4A4-3EE5BBE903F0}`
 
 **Column Mappings:**
-- **Participant ID:** `add(outputs('Get_rows')?['body/value']?[0]?['Participant_x0020_ID'], 1)`
-- **Timestamp:** `triggerBody()?['submissionTime']`
-- **Name:** `triggerBody()?['name']`
-- **Email:** `triggerBody()?['email']`
-- **Disease Type:** `triggerBody()?['disease']`
-- **Relationship:** `triggerBody()?['relationship']`
-- **Multi-Platform:** `triggerBody()?['multiPlatform']`
-- **How Heard:** `triggerBody()?['howHeard']`
-- **Assigned Vendor:** `variables('AssignedVendor')`
-- **Email Sent:** `FALSE`
-- **Vendor Link:** `variables('VendorURL')`
-- **Enrollment Status:** `if(equals(variables('AssignedVendor'), 'WAITLIST'), 'Waitlisted', 'Pending')`
-- **Enrollment Date:** (leave empty)
-- **Days Since Form:** `0`
-- **Timeout Date:** `addDays(utcNow(), 14)`
 
----
+| Column | Value |
+|--------|-------|
+| Participant ID | `@guid()` |
+| Timestamp | `@triggerBody()?['submissionTime']` |
+| Name | `@triggerBody()?['name']` |
+| Email | `@triggerBody()?['email']` |
+| Disease Type | `@triggerBody()?['disease']` |
+| Relationship | `@triggerBody()?['relationship']` |
+| Multi-Platform Interest | `@triggerBody()?['multiPlatform']` |
+| How Heard | `@triggerBody()?['howHeard']` |
+| Assigned Vendor | `@variables('AssignedVendor')` |
+| Email Sent | `FALSE` |
+| Vendor Link | `@variables('VendorURL')` |
+| Enrollment Status | `@if(equals(variables('AssignedVendor'), 'WAITLIST'), 'Waitlisted', 'Pending')` |
+| Days Since Form | `0` |
+| Age Group | `@triggerBody()?['ageGroup']` |
+| Attestation | `@triggerBody()?['attestation']` |
+| Assignment Reason | `@variables('AssignmentReason')` |
+| Timeout Date | `@addDays(utcNow(), 14)` |
+
 
 ## Step 9: Email Composition and Sending
 
 **Action:** "Condition"
 
 **Check assignment type:**
-- **Left side:** `variables('AssignedVendor')`
-- **Operator:** is not equal to
-- **Right side:** `WAITLIST`
+```
+@not(equals(variables('AssignedVendor'), 'WAITLIST'))
+```
 
-### If Success Assignment:
 
-**Action:** "Compose" (Create email body)
+### If Yes (Success Assignment):
+
+**Action:** "Compose" - Name: `Compose_Success_Email`
 
 **Email Body:**
 ```
@@ -302,11 +310,11 @@ What to expect:
 - Explore the platform and add information at your own pace (30-45 minutes)
 - We'll send a brief feedback survey in 1-2 weeks
 
-@{if(equals(triggerBody()?['multiPlatform'], 'true'), 
+@{if(equals(triggerBody()?['multiPlatform'], 'true'),
 'You indicated interest in exploring all platforms. Here are the other enrollment links:
 - Unite Genomics: https://unitegenomics.com/enroll/movr
-- Citizen Health: https://citizenhealth.com/join/mda  
-- Vibrent Health: https://vibrenthealth.com/mda/pilot', 
+- Citizen Health: https://citizenhealth.com/join/mda
+- Vibrent Health: https://vibrenthealth.com/mda/pilot',
 '')}
 
 Questions? Reply to this email or contact mdamovr@mdausa.org
@@ -317,14 +325,18 @@ The MDA MOVR Team
 
 **Action:** "Send an email (V2)" (Office 365 Outlook)
 
-**Settings:**
-- **To:** `triggerBody()?['email']`
-- **Subject:** `Welcome to the MOVR Pilot - Next Steps`
-- **Body:** `outputs('Compose')`
+| Setting | Value |
+|---------|-------|
+| To | `@outputs('Add_row_to_ParticipantsTable')?['body/Email']` |
+| Subject | `Welcome to the MOVR 2.0 Pilot for @{triggerBody()?['disease']} - Next Steps` |
+| Body | `@outputs('Compose_Success_Email')` |
+| Cc | `MDAMOVR@mdausa.org` |
+| Importance | `High` |
 
-### If Waitlist:
 
-**Action:** "Compose" (Create waitlist email)
+### If No (Waitlist):
+
+**Action:** "Compose" - Name: `Compose_Waitlist_Email`
 
 **Waitlist Email Body:**
 ```
@@ -342,12 +354,14 @@ The MDA MOVR Team
 
 **Action:** "Send an email (V2)" (Office 365 Outlook)
 
-**Settings:**
-- **To:** `triggerBody()?['email']`
-- **Subject:** `MOVR Pilot - Currently at Capacity`
-- **Body:** `outputs('Compose_2')`
+| Setting | Value |
+|---------|-------|
+| To | `@outputs('Add_row_to_ParticipantsTable')?['body/Email']` |
+| Subject | `MOVR 2.0 Pilot - Currently at Capacity for @{triggerBody()?['disease']}` |
+| Body | `@outputs('Compose_Waitlist_Email')` |
+| Bcc | `MDAMOVR@mdausa.org` |
+| Importance | `High` |
 
----
 
 ## Step 10: Update Email Status
 
@@ -356,39 +370,43 @@ The MDA MOVR Team
 **Settings:**
 - **Location:** OneDrive for Business
 - **Document Library:** OneDrive
-- **File:** `MOVR_Pilot_Participants.xlsx`
+- **File:** `MOVR_PILOT_PARICIPANTS.xlsx`
 - **Table:** `ParticipantsTable`
+- **Table ID:** `{748BF5EC-CF2A-4B57-B4A4-3EE5BBE903F0}`
 - **Key Column:** `Participant ID`
-- **Key Value:** (ID from Step 8)
+- **Key Value:** `@outputs('Add_row_to_ParticipantsTable')?['body/Participant ID']`
 
 **Update:**
-- **Email Sent:** `TRUE`
 
----
+| Column | Value |
+|--------|-------|
+| Email Sent | `TRUE` |
+
 
 ## Step 11: Response
 
 **Action:** "Response"
 
-**Condition:** Check assignment result
+**Condition:** Check if assigned vendor is not WAITLIST
 
-### If Success:
+### If Success (Not Waitlist):
 ```json
 {
   "status": "success",
-  "message": "Thank you for joining! Check your email for next steps."
+  "message": "Thank you for joining! Check your email for next steps.",
+  "vendor": "@{variables('AssignedVendor')}",
+  "enrollmentUrl": "@{variables('VendorURL')}"
 }
 ```
 
 ### If Waitlist:
 ```json
 {
-  "status": "waitlist", 
+  "status": "waitlist",
   "message": "Thank you for your interest. You've been added to our waitlist."
 }
 ```
 
----
 
 ## Testing Checklist
 
@@ -401,7 +419,6 @@ The MDA MOVR Team
 - [ ] Check Excel data accuracy
 - [ ] Test milestone achievement detection
 
----
 
 ## Monitoring
 
