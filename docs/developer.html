@@ -38,7 +38,7 @@
                     <li><a href="../pilot/" class="nav-link">MOVR 2.0 Pilot</a></li>
                     <li><a href="developer.html" class="nav-link active">Developer Docs</a></li>
                     <li><a href="movr-datahub-analytics.html" class="nav-link">DataHub Analytics</a></li>
-                    <li><a href="https://mdausa.tfaforms.net/389761" class="nav-link" target="_blank">Data Request Form</a></li>
+                    <li><a href="https://mdausa.tfaforms.net/389761" class="nav-link" target="_blank">MOVR Data Request</a></li>
                 </ul>
 
                 <div class="docs-footer">
@@ -46,7 +46,7 @@
                     Technical: <a href="mailto:andre.paredes@ymail.com">andre.paredes@ymail.com</a><br>
                     MDA: <a href="mailto:MDAMOVR@mdausa.org">MDAMOVR@mdausa.org</a>
                     <div class="footer-links">
-                        <a href="https://www.mda.org/science/movr" target="_blank">Official MDA MOVR</a>
+                        <a href="https://www.mda.org/science/movr2" target="_blank">Official MDA MOVR Initiative</a>
                         <a href="../movr-viewer/index.html">MOVR Viewer</a>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
 
             <div class="alert alert-info">
                 <h3>Welcome Developers</h3>
-                <p>OpenMOVR maintains two public repositories. Select a tab below to view documentation for each project.</p>
+                <p>OpenMOVR maintains three public repositories plus research tools. Select a tab below to view documentation for each project.</p>
             </div>
 
             <!-- Tab Navigation -->
@@ -69,6 +69,7 @@
                 <div class="tab-nav">
                     <button class="tab-btn active" data-tab="overview">Overview</button>
                     <button class="tab-btn" data-tab="website">OpenMOVR.github.io</button>
+                    <button class="tab-btn" data-tab="app">OpenMOVR App</button>
                     <button class="tab-btn" data-tab="analytics">movr-datahub-analytics</button>
                     <button class="tab-btn" data-tab="viewer">MOVR Viewer</button>
                 </div>
@@ -87,6 +88,17 @@
                                 <li><strong>Focus:</strong> Public information, community engagement</li>
                             </ul>
                             <p><a href="https://github.com/OpenMOVR/OpenMOVR.github.io" target="_blank">View Repository</a></p>
+                        </div>
+
+                        <div class="card">
+                            <h3>OpenMOVR App</h3>
+                            <p>Interactive Streamlit dashboard for MDA MOVR Study data. Explore disease cohorts, facility distributions, and data completeness metrics.</p>
+                            <ul>
+                                <li><strong>Tech:</strong> Python, Streamlit, Plotly</li>
+                                <li><strong>Deployment:</strong> Streamlit Cloud</li>
+                                <li><strong>Focus:</strong> Interactive analytics, visualization</li>
+                            </ul>
+                            <p><a href="https://openmovr-gen1.streamlit.app/" target="_blank">Open App</a> | <a href="https://github.com/OpenMOVR/openmovr-app" target="_blank">View Repository</a></p>
                         </div>
 
                         <div class="card">
@@ -242,6 +254,199 @@ git push origin feature/viewer-enhancement
                             <li>Update documentation if needed</li>
                         </ul>
                     </div>
+                </div>
+
+                <!-- OpenMOVR App Tab -->
+                <div id="app" class="tab-content">
+                    <h2>OpenMOVR App</h2>
+                    <p><a href="https://openmovr-gen1.streamlit.app/" target="_blank">Live App</a> | <a href="https://github.com/OpenMOVR/openmovr-app" target="_blank">github.com/OpenMOVR/openmovr-app</a></p>
+
+                    <div class="alert alert-primary">
+                        <h4>Interactive MDA MOVR Study Analytics Dashboard</h4>
+                        <p>Streamlit-based web application for exploring MDA MOVR Study data. Built for researchers, clinicians, and data analysts to understand disease cohorts, facility distributions, and data completeness across the MOVR registry.</p>
+                    </div>
+
+                    <h3>Quick Start</h3>
+                    <div class="card">
+                        <pre># Clone the repository
+git clone https://github.com/OpenMOVR/openmovr-app.git
+cd openmovr-app
+
+# Create virtual environment
+python3 -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run locally
+streamlit run app.py
+
+# Visit http://localhost:8501</pre>
+                    </div>
+
+                    <h3>Features</h3>
+                    <div class="grid-2">
+                        <div class="card">
+                            <h4>Dashboard</h4>
+                            <ul>
+                                <li>Database overview statistics</li>
+                                <li>Participant counts by disease</li>
+                                <li>Facility distribution map</li>
+                                <li>Demographics analysis</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h4>Disease Explorer</h4>
+                            <ul>
+                                <li>Filter by diagnosis (DMD, SMA, ALS, LGMD, etc.)</li>
+                                <li>Real-time cohort analysis</li>
+                                <li>Age and gender distributions</li>
+                                <li>Disease subtype breakdown</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h4>Data Dictionary</h4>
+                            <ul>
+                                <li>Browse MOVR data fields</li>
+                                <li>Filter by disease and form</li>
+                                <li>Data completeness metrics</li>
+                                <li>Field descriptions</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h4>Disease Overviews</h4>
+                            <ul>
+                                <li>LGMD-specific analytics</li>
+                                <li>PAG presentation features</li>
+                                <li>Custom visualizations</li>
+                                <li>Extensible for new diseases</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h3>Architecture</h3>
+                    <div class="card">
+                        <p>The app uses a dual-mode architecture:</p>
+                        <pre><strong>Snapshot Mode</strong> (default):
+- Uses pre-computed JSON statistics
+- No parquet files needed
+- Fast loading, limited interactivity
+- Safe for public deployment
+
+<strong>Live Mode</strong> (with data):
+- Uses parquet data files
+- Full filtering and real-time calculations
+- Complete interactivity
+- Requires data access</pre>
+
+                        <h4>Directory Structure</h4>
+                        <pre>openmovr-app/
+├── app.py                    # Main dashboard
+├── requirements.txt          # Dependencies
+├── pages/                    # Multi-page app
+│   ├── 1_Disease_Explorer.py
+│   ├── 2_Facility_View.py
+│   ├── 3_Data_Dictionary.py
+│   └── 4_LGMD_Overview.py
+├── api/                      # Data access layer
+│   ├── cohorts.py
+│   ├── stats.py
+│   ├── lgmd.py
+│   └── data_dictionary.py
+├── components/               # UI components
+├── config/                   # Settings & filters
+├── src/                      # Core analytics
+├── stats/                    # Pre-computed snapshots (JSON)
+├── data/                     # Parquet files (GITIGNORED)
+└── scripts/                  # Utility scripts</pre>
+                    </div>
+
+                    <h3>Deployment</h3>
+                    <div class="card">
+                        <h4>To Streamlit Cloud (Recommended)</h4>
+                        <ol>
+                            <li>Push to GitHub: <code>git push origin main</code></li>
+                            <li>Go to <a href="https://share.streamlit.io" target="_blank">share.streamlit.io</a></li>
+                            <li>Click "New app" and select this repo</li>
+                            <li>Set main file to <code>app.py</code></li>
+                            <li>Click "Deploy"</li>
+                        </ol>
+                        <p><strong>Default URL:</strong> <code>openmovr-app.streamlit.app</code></p>
+                        <p><strong>Custom Domain:</strong> Configure in Streamlit Cloud settings</p>
+                    </div>
+
+                    <h3>Data Handling</h3>
+                    <div class="card">
+                        <p><strong>Snapshots (stats/*.json)</strong></p>
+                        <ul>
+                            <li>Pre-computed aggregate statistics</li>
+                            <li>No PHI - safe to commit and deploy</li>
+                            <li>Updated manually when data changes</li>
+                        </ul>
+
+                        <p><strong>Parquet Files (data/*.parquet)</strong></p>
+                        <ul>
+                            <li>Raw registry data (may contain PHI)</li>
+                            <li>.gitignored - never commit to public repos</li>
+                            <li>For private deployment with full interactivity</li>
+                        </ul>
+
+                        <p><strong>Regenerating Snapshots:</strong></p>
+                        <pre>python scripts/generate_stats_snapshot.py
+python scripts/generate_lgmd_snapshot.py</pre>
+                    </div>
+
+                    <h3>Development</h3>
+                    <div class="card">
+                        <h4>Adding a New Disease Page</h4>
+                        <ol>
+                            <li>Create <code>scripts/generate_{disease}_snapshot.py</code></li>
+                            <li>Create <code>api/{disease}.py</code> with API class</li>
+                            <li>Create <code>pages/X_{Disease}_Overview.py</code></li>
+                            <li>Update <code>api/__init__.py</code> exports</li>
+                        </ol>
+
+                        <h4>GSOC Project: Evolving OpenMOVR App</h4>
+                        <p>OpenMOVR App is an established GSOC 2026 project opportunity. Contributors can help expand the dashboard with new features, disease-specific overviews, enhanced analytics, and improved data visualization.</p>
+
+                        <h4>Testing Locally</h4>
+                        <pre># With virtual env activated
+streamlit run app.py
+
+# App opens at localhost:8501
+# Changes auto-reload</pre>
+
+                        <h4>Code Standards</h4>
+                        <ul>
+                            <li>Type hints for function signatures</li>
+                            <li>Docstrings for public APIs</li>
+                            <li>Black formatter for consistency</li>
+                            <li>API facade pattern for data access</li>
+                        </ul>
+                    </div>
+
+                    <h3>Technology Stack</h3>
+                    <div class="grid-2">
+                        <div class="card">
+                            <h4>Framework</h4>
+                            <ul>
+                                <li><strong>Streamlit</strong> - Web framework</li>
+                                <li><strong>Plotly</strong> - Interactive charts</li>
+                                <li><strong>Pandas</strong> - Data manipulation</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h4>Data</h4>
+                            <ul>
+                                <li><strong>PyArrow</strong> - Parquet support</li>
+                                <li><strong>JSON</strong> - Snapshots</li>
+                                <li><strong>YAML</strong> - Configuration</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <p><strong>For complete details</strong> see the <a href="https://github.com/OpenMOVR/openmovr-app" target="_blank">README.md</a> and <a href="https://github.com/OpenMOVR/openmovr-app/blob/main/ARCHITECTURE.md" target="_blank">ARCHITECTURE.md</a> in the repository.</p>
                 </div>
 
                 <!-- Analytics Tab -->
