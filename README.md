@@ -2,7 +2,11 @@
 
 Open science initiative for neuromuscular disease research. Building the future through transparent collaboration and open source software.
 
-**Founded by Andre Daniel Paredes, PhD**
+## About
+
+OpenMOVR is an independently managed open science initiative established in 2025, leaning on open source methods to advance neuromuscular disease research. 
+
+Designed and built by Andre Daniel Paredes, PhD, OpenMOVR is continuously evolving to better serve researchers and make a lasting impact on neuromuscular disease research.
 
 ## Overview
 
@@ -95,11 +99,9 @@ See [BRANCH_STRATEGY.md](./BRANCH_STRATEGY.md) for branch workflow details.
 
 ## Contact
 
-- **General**: mdamovr@mdausa.org
-- **Technical**: andre.paredes@ymail.com
+- **MOVR Team**: mdamovr@mdausa.org
 - **GitHub**: [github.com/OpenMOVR](https://github.com/OpenMOVR)
 
 ## License
 
 Copyright 2025 OpenMOVR Open Science Initiative
-Founded by Andre Daniel Paredes, PhD
