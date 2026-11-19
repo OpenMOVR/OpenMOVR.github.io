@@ -21,26 +21,22 @@ OpenMOVR advances neuromuscular disease research through:
 ```
 OpenMOVR.github.io/
 ├── index.html              # Homepage
+├── progress.html           # MOVR progress (renders data/progress.json)
+├── movr2.html              # MOVR 2.0: pilot recap, what's coming
+├── front-door.html         # MOVR front door, today and after launch
+├── faq.html                # FAQ
 ├── gsoc.html               # Google Summer of Code program
-├── docs/                   # Documentation system
-│   ├── index.html          # MOVR 2.0 (tabbed: Updates, Vision, History, FAQ)
-│   ├── developer.html      # Developer Docs (repos, MOVR Viewer)
-│   └── movr-datahub-analytics.html  # Python library documentation
-├── pilot/                  # MOVR 2.0 Pilot enrollment
+├── docs/
+│   ├── developer.html      # Developer docs
+│   ├── movr-datahub-analytics.html  # Python library docs
+│   └── index.html          # Redirects to movr2.html
+├── pilot/                  # MOVR 2.0 pilot page (closed)
 ├── movr-viewer/            # Research tools
-│   ├── index.html          # MOVR Viewer home
-│   └── data_dictionary_viewer.html  # Dictionary exploration
-├── css/
-│   ├── main.css            # Site-wide styles
-│   └── docs.css            # Documentation styles
-├── js/
-│   ├── config.js           # Site configuration
-│   ├── main.js             # Main functionality
-│   └── header-loader.js    # Header component loader
-├── components/
-│   └── header.html         # Shared header
+├── data/                   # progress.json, front-door-*.json
+├── css/main.css            # The one design system
+├── js/                     # config, main, header-loader, progress, front-door, doc-toc
+├── components/             # header.html, footer.html
 ├── assets/                 # Images and logos
-├── .gitignore
 ├── README.md
 ├── CONTRIBUTING.md
 └── BRANCH_STRATEGY.md

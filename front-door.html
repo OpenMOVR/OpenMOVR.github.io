@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOVR Front Door | OpenMOVR</title>
+
+    <meta name="description" content="The MOVR 2.0 front door, built in the open: what's in MOVR today, and a preview of how the page will look after launch.">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://openmovr.github.io/front-door.html">
+    <meta property="og:title" content="MOVR Front Door | OpenMOVR">
+    <meta property="og:description" content="What's in MOVR today, and a preview of the MOVR 2.0 front door.">
+    <meta property="og:image" content="https://openmovr.github.io/assets/movr_logo_clean.jpg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,600;1,8..60,600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" type="image/png" href="assets/movr_logo_clean_nobackground.png">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-85RSP2VHG6"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-85RSP2VHG6');
+    </script>
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div id="header-placeholder"></div>
+
+    <main id="main">
+        <section class="page-hero page-hero-compact">
+            <div class="container">
+                <span class="eyebrow">Built in the open</span>
+                <h1>The MOVR front door</h1>
+                <p class="lede">MOVR 2.0's public front door will show what's in the registry, updated regularly, so families, clinicians and researchers can watch it grow. It runs today on figures MDA already holds.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--space-4); margin-bottom: var(--space-5);">
+                    <div class="view-toggle" role="group" aria-label="Choose a view">
+                        <button type="button" aria-pressed="true" data-front-door-config="data/front-door-today.json">Today, real figures</button>
+                        <button type="button" aria-pressed="false" data-front-door-config="data/front-door-sample.json">After launch, sample</button>
+                    </div>
+                    <a href="progress.html" class="text-link">Full progress page →</a>
+                </div>
+
+                <div id="front-door" class="front-door" data-config="data/front-door-today.json" aria-live="polite">
+                    <p class="fd-error">Loading…</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-paper">
+            <div class="container">
+                <div class="section-header">
+                    <span class="eyebrow">How it goes live</span>
+                    <h2>One file, three stages</h2>
+                    <p>Every number on the front door comes from a single config file. Only counts leave MOVR, and groups too small to be safe are always hidden.</p>
+                </div>
+                <div class="grid-3 howto">
+                    <div class="card">
+                        <span class="pill pill-live" style="align-self: flex-start;">Now</span>
+                        <h3>Figures MDA already holds</h3>
+                        <p>MOVR Data Hub counts and pilot results, the same figures as the progress page, each with its population and dates.</p>
+                    </div>
+                    <div class="card">
+                        <span class="pill pill-soon" style="align-self: flex-start;">At launch</span>
+                        <h3>MOVR 2.0 counts, approved and posted</h3>
+                        <p>As people join, the MOVR team updates the file with participant counts and data coverage, reviewed before each update.</p>
+                    </div>
+                    <div class="card">
+                        <span class="pill" style="align-self: flex-start;">Later</span>
+                        <h3>Updated automatically</h3>
+                        <p>The file can be generated from MOVR 2.0's aggregate counts on a schedule, so the page stays current without hand edits.</p>
+                    </div>
+                </div>
+                <p style="margin-top: var(--space-6); font-size: 0.9375rem;">Read the config files on <a href="https://github.com/OpenMOVR/OpenMOVR.github.io/tree/main/data" target="_blank" rel="noopener">GitHub</a>, or see <a href="faq.html#data">how MOVR data is shared</a>.</p>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="js/config.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/header-loader.js"></script>
+    <script src="js/front-door.js"></script>
+</body>
+</html>

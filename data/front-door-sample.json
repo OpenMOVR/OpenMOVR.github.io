@@ -1,6 +1,8 @@
 {
   "_note": "SAMPLE DATA for the front door preview. These are not real MOVR numbers. At launch this file is replaced by approved figures.",
   "sample": true,
+  "title": "What's in MOVR today",
+  "bars_title": "Participants by disease",
   "as_of": "2027-06-30",
   "suppress_below": 10,
   "modalities": [

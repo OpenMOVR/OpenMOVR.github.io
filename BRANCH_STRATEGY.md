@@ -33,7 +33,6 @@ OpenMOVR uses a modular branch strategy designed for community contributions. Ea
   - `docs/index.html` - MOVR 2.0 (Updates, Vision, History, FAQ)
   - `docs/developer.html` - Developer documentation
   - `docs/movr-datahub-analytics.html` - Python library docs
-  - `docs/css/docs.css` - Documentation styles
 - **Merge Pattern**: Merges into `main` when docs are production-ready
 
 #### `movr-viewer`

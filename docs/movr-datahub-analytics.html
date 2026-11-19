@@ -3,91 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MOVR DataHub Analytics | OpenMOVR</title>
-    <meta name="description" content="OpenMOVR - The MOVR open science initiative. Python package documentation for analyzing neuromuscular disease registry data.">
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://openmovr.github.io/docs/movr-datahub-analytics.html">
-    <meta property="og:title" content="OpenMOVR | MOVR DataHub Analytics">
-    <meta property="og:description" content="The MOVR open science initiative. Python package for analyzing neuromuscular disease registry data.">
-    <meta property="og:image" content="https://openmovr.github.io/assets/movr_logo_clean.jpg">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://openmovr.github.io/docs/movr-datahub-analytics.html">
-    <meta property="twitter:title" content="OpenMOVR | MOVR DataHub Analytics">
-    <meta property="twitter:description" content="The MOVR open science initiative. Python package for analyzing neuromuscular disease registry data.">
-    <meta property="twitter:image" content="https://openmovr.github.io/assets/movr_logo_clean.jpg">
-
+    <title>DataHub Analytics | OpenMOVR</title>
+    <meta name="description" content="Documentation for movr-datahub-analytics, the Python package for MOVR Data Hub registry data.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/docs.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,600;1,8..60,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/main.css">
     <link rel="icon" type="image/png" href="../assets/movr_logo_clean_nobackground.png">
+
 </head>
 <body>
-    <div class="docs-container">
-        <nav class="docs-sidebar">
-            <div class="docs-header">
-                <h1><a href="developer.html">OpenMOVR Docs</a></h1>
-                <p>Documentation</p>
-                <a href="../index.html" class="back-link">Back to OpenMOVR</a>
-            </div>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div id="header-placeholder"></div>
 
-            <div class="docs-nav">
-                <ul>
-                    <li><a href="../movr2.html" class="nav-link">MOVR 2.0</a></li>
-                    <li><a href="../pilot/" class="nav-link">MOVR 2.0 Pilot</a></li>
-                    <li><a href="developer.html" class="nav-link">Developer Docs</a></li>
-                    <li><a href="movr-datahub-analytics.html" class="nav-link active">DataHub Analytics</a></li>
-                    <li><a href="https://mdausa.tfaforms.net/389761" class="nav-link" target="_blank">MOVR Data Request</a></li>
-                </ul>
-
-                <div class="docs-footer">
-                    <strong>Contact</strong>
-                    Technical: <a href="mailto:andre.paredes@ymail.com">andre.paredes@ymail.com</a><br>
-                    MDA: <a href="mailto:MDAMOVR@mdausa.org">MDAMOVR@mdausa.org</a>
-                    <div class="footer-links">
-                        <a href="https://www.mda.org/science/movr" target="_blank">Official MDA MOVR</a>
-                        <a href="../movr-viewer/index.html">MOVR Viewer</a>
-                    </div>
-                </div>
-            </div>
-        </nav>
-
-        <main class="docs-content">
-            <div class="content-header">
+    <main id="main">
+        <section class="page-hero page-hero-compact">
+            <div class="container">
+                <span class="eyebrow">Python package · GSoC 2026</span>
                 <h1>MOVR DataHub Analytics</h1>
-                <span class="badge badge-info">Python Package</span>
-                <span class="badge badge-secondary">GSoC 2026</span>
+                <div class="lede"><p>A Python package for analyzing clinical registry data from the MOVR Data Hub (2019–2025), covering ALS, DMD, SMA, BMD, LGMD, FSHD and Pompe disease. For cited study-wide figures, see <a href="../progress.html" style="color: var(--gold);">MOVR progress</a>.</p>
+                <div class="btn-group" style="margin-top: var(--space-5);">
+                    <a href="https://github.com/OpenMOVR/movr-datahub-analytics" class="btn btn-accent" target="_blank" rel="noopener">View on GitHub</a>
+                    <a href="https://github.com/OpenMOVR/movr-datahub-analytics/issues" class="btn btn-ghost-light" target="_blank" rel="noopener">Issues</a>
+                    <a href="https://github.com/OpenMOVR/movr-datahub-analytics/discussions" class="btn btn-ghost-light" target="_blank" rel="noopener">Discussions</a>
+                </div></div>
             </div>
+        </section>
 
-            <div class="alert alert-primary">
-                <h3>MOVR Legacy DataHub Library</h3>
-                <p>A Python package for analyzing clinical registry data from the MOVR DataHub (2019-2025): 3,570 participants, 11,501 encounters across ALS, DMD, SMA, BMD, LGMD, FSHD, and Pompe disease.</p>
-                <p style="margin-top: var(--spacing-sm);">
-                    <a href="https://github.com/OpenMOVR/movr-datahub-analytics" target="_blank">View on GitHub</a> |
-                    <a href="https://github.com/OpenMOVR/movr-datahub-analytics/issues" target="_blank">Issues</a> |
-                    <a href="https://github.com/OpenMOVR/movr-datahub-analytics/discussions" target="_blank">Discussions</a>
-                </p>
-            </div>
-
-            <!-- Tab Navigation -->
-            <div class="tabs">
-                <div class="tab-nav">
-                    <button class="tab-btn active" data-tab="overview">Overview</button>
-                    <button class="tab-btn" data-tab="installation">Installation</button>
-                    <button class="tab-btn" data-tab="cli">CLI Reference</button>
-                    <button class="tab-btn" data-tab="contributing">Contributing</button>
-                </div>
-
-                <!-- Overview Tab -->
-                <div id="overview" class="tab-content active">
+        <div class="container doc-layout">
+            <nav class="doc-toc" aria-label="On this page">
+                <div class="doc-toc-title">On this page</div>
+                <ol>
+                    <li><a href="#overview">Overview</a>
+                        <ol>
+                        <li><a href="#key-capabilities">Key Capabilities</a></li>
+                        <li><a href="#project-structure">Project Structure</a></li>
+                        <li><a href="#roadmap">Roadmap</a></li>
+                        </ol>
+                    </li>
+                    <li><a href="#installation">Installation</a>
+                        <ol>
+                        <li><a href="#requirements">Requirements</a></li>
+                        <li><a href="#basic-installation">Basic Installation</a></li>
+                        <li><a href="#full-installation-recommended">Full Installation (recommended)</a></li>
+                        <li><a href="#configuration-setup">Configuration Setup</a></li>
+                        <li><a href="#verify-installation">Verify Installation</a></li>
+                        </ol>
+                    </li>
+                    <li><a href="#cli-reference">CLI Reference</a>
+                        <ol>
+                        <li><a href="#setup-commands">Setup Commands</a></li>
+                        <li><a href="#data-pipeline">Data Pipeline</a></li>
+                        <li><a href="#data-dictionary">Data Dictionary</a></li>
+                        <li><a href="#cohort-management">Cohort Management</a></li>
+                        <li><a href="#analytics">Analytics</a></li>
+                        </ol>
+                    </li>
+                    <li><a href="#contributing">Contributing</a>
+                        <ol>
+                        <li><a href="#development-setup">Development Setup</a></li>
+                        <li><a href="#code-quality">Code Quality</a></li>
+                        <li><a href="#pull-request-process">Pull Request Process</a></li>
+                        <li><a href="#contribution-areas">Contribution Areas</a></li>
+                        <li><a href="#resources">Resources</a></li>
+                        </ol>
+                    </li>
+                </ol>
+            </nav>
+            <article class="doc-body">
+                <section class="doc-section" id="overview">
                     <h2>Overview</h2>
+                    
                     <p><strong>MOVR DataHub Analytics</strong> transforms raw Excel registry exports into analysis-ready datasets through automated data wrangling, quality validation, and cohort management.</p>
 
-                    <h3>Key Capabilities</h3>
+                    <h3 id="key-capabilities">Key Capabilities</h3>
                     <div class="grid-3">
                         <div class="card">
                             <h4>Data Pipeline</h4>
@@ -115,7 +104,7 @@
                         </div>
                     </div>
 
-                    <h3>Project Structure</h3>
+                    <h3 id="project-structure">Project Structure</h3>
                     <div class="card">
                         <pre>movr-datahub-analytics/
 ├── src/movr/               # Main package
@@ -133,7 +122,7 @@
 └── docs/                   # Documentation</pre>
                     </div>
 
-                    <h3>Roadmap</h3>
+                    <h3 id="roadmap">Roadmap</h3>
                     <div class="grid-2">
                         <div class="card">
                             <h4>Phase 1: Core Library (2025)</h4>
@@ -156,24 +145,24 @@
                             </ul>
                         </div>
                     </div>
-                </div>
+                </section>
 
-                <!-- Installation Tab -->
-                <div id="installation" class="tab-content">
+                <section class="doc-section" id="installation">
                     <h2>Installation</h2>
+                    
 
                     <div class="alert alert-info">
                         <p><strong>Note:</strong> This package is not yet on PyPI. Install locally in editable mode.</p>
                     </div>
 
-                    <h3>Requirements</h3>
+                    <h3 id="requirements">Requirements</h3>
                     <ul>
                         <li>Python 3.9+</li>
                         <li>Git</li>
                         <li>Virtual environment (recommended)</li>
                     </ul>
 
-                    <h3>Basic Installation</h3>
+                    <h3 id="basic-installation">Basic Installation</h3>
                     <div class="card">
                         <pre># Clone the repository
 git clone https://github.com/OpenMOVR/movr-datahub-analytics.git
@@ -187,7 +176,7 @@ source .venv/bin/activate  # Windows: .venv\Scripts\activate
 pip install -e .</pre>
                     </div>
 
-                    <h3>Full Installation (recommended)</h3>
+                    <h3 id="full-installation-recommended">Full Installation (recommended)</h3>
                     <div class="card">
                         <pre># Install with all optional dependencies
 pip install -e ".[dev,viz,notebooks]"
@@ -198,7 +187,7 @@ pip install -e ".[dev,viz,notebooks]"
 # - notebooks: jupyter, ipywidgets</pre>
                     </div>
 
-                    <h3>Configuration Setup</h3>
+                    <h3 id="configuration-setup">Configuration Setup</h3>
                     <div class="card">
                         <pre># Run the setup wizard (first time)
 movr setup
@@ -210,7 +199,7 @@ movr setup
 # - Initialize audit logging</pre>
                     </div>
 
-                    <h3>Verify Installation</h3>
+                    <h3 id="verify-installation">Verify Installation</h3>
                     <div class="card">
                         <pre># Check CLI is working
 movr --help
@@ -221,14 +210,14 @@ movr --version
 # Run tests
 pytest</pre>
                     </div>
-                </div>
+                </section>
 
-                <!-- CLI Reference Tab -->
-                <div id="cli" class="tab-content">
+                <section class="doc-section" id="cli-reference">
                     <h2>CLI Reference</h2>
+                    
                     <p>The <code>movr</code> command-line interface provides access to all package functionality.</p>
 
-                    <h3>Setup Commands</h3>
+                    <h3 id="setup-commands">Setup Commands</h3>
                     <div class="card">
                         <pre># Interactive setup wizard
 movr setup
@@ -240,7 +229,7 @@ movr config show
 movr config validate</pre>
                     </div>
 
-                    <h3>Data Pipeline</h3>
+                    <h3 id="data-pipeline">Data Pipeline</h3>
                     <div class="card">
                         <pre># Convert Excel files to Parquet
 movr convert
@@ -256,7 +245,7 @@ movr summary --registry datahub --metric all
 movr summary --registry datahub --metric enrollment</pre>
                     </div>
 
-                    <h3>Data Dictionary</h3>
+                    <h3 id="data-dictionary">Data Dictionary</h3>
                     <div class="card">
                         <pre># Search for fields
 movr dictionary search "age"
@@ -273,7 +262,7 @@ movr dictionary show-field FACPATID
 movr dictionary export --format csv</pre>
                     </div>
 
-                    <h3>Cohort Management</h3>
+                    <h3 id="cohort-management">Cohort Management</h3>
                     <div class="card">
                         <pre># Create cohort from YAML config
 movr cohort create --config cohort_config.yaml
@@ -285,7 +274,7 @@ movr cohort list
 movr cohort export --name "my_cohort" --format parquet</pre>
                     </div>
 
-                    <h3>Analytics</h3>
+                    <h3 id="analytics">Analytics</h3>
                     <div class="card">
                         <pre># Run descriptive statistics
 movr analytics describe --cohort "my_cohort"
@@ -293,11 +282,11 @@ movr analytics describe --cohort "my_cohort"
 # Generate report
 movr analytics report --cohort "my_cohort" --output report.html</pre>
                     </div>
-                </div>
+                </section>
 
-                <!-- Contributing Tab -->
-                <div id="contributing" class="tab-content">
+                <section class="doc-section" id="contributing">
                     <h2>Contributing</h2>
+                    
                     <p>We welcome contributions from both the research and software engineering communities.</p>
 
                     <div class="alert alert-primary">
@@ -305,7 +294,7 @@ movr analytics report --cohort "my_cohort" --output report.html</pre>
                         <p>This is a priority project for Google Summer of Code 2026. Students should review the <a href="https://github.com/OpenMOVR/movr-datahub-analytics/blob/main/CONTRIBUTING.md" target="_blank">Contributing Guide</a>.</p>
                     </div>
 
-                    <h3>Development Setup</h3>
+                    <h3 id="development-setup">Development Setup</h3>
                     <div class="card">
                         <pre># Install with development dependencies
 pip install -e ".[dev]"
@@ -317,7 +306,7 @@ pre-commit install
 pre-commit run --all-files</pre>
                     </div>
 
-                    <h3>Code Quality</h3>
+                    <h3 id="code-quality">Code Quality</h3>
                     <div class="card">
                         <pre># Run tests
 pytest
@@ -335,7 +324,7 @@ mypy src/
 ruff check src/ tests/</pre>
                     </div>
 
-                    <h3>Pull Request Process</h3>
+                    <h3 id="pull-request-process">Pull Request Process</h3>
                     <div class="card">
                         <ol>
                             <li>Fork the repository on GitHub</li>
@@ -348,7 +337,7 @@ ruff check src/ tests/</pre>
                         </ol>
                     </div>
 
-                    <h3>Contribution Areas</h3>
+                    <h3 id="contribution-areas">Contribution Areas</h3>
                     <div class="grid-2">
                         <div class="card">
                             <h4>Code</h4>
@@ -370,7 +359,7 @@ ruff check src/ tests/</pre>
                         </div>
                     </div>
 
-                    <h3>Resources</h3>
+                    <h3 id="resources">Resources</h3>
                     <ul>
                         <li><a href="https://github.com/OpenMOVR/movr-datahub-analytics/blob/main/README.md" target="_blank">README</a> - Project overview</li>
                         <li><a href="https://github.com/OpenMOVR/movr-datahub-analytics/blob/main/QUICK_START.md" target="_blank">Quick Start Guide</a></li>
@@ -378,35 +367,22 @@ ruff check src/ tests/</pre>
                         <li><a href="https://github.com/OpenMOVR/movr-datahub-analytics/tree/main/docs" target="_blank">Technical Docs</a></li>
                         <li><a href="https://github.com/OpenMOVR/movr-datahub-analytics/tree/main/notebooks" target="_blank">Example Notebooks</a></li>
                     </ul>
+                </section>
+
+                <div class="alert alert-info doc-section">
+                    <h3>Support</h3>
+                    <p><strong>GitHub Issues:</strong> <a href="https://github.com/OpenMOVR/movr-datahub-analytics/issues" target="_blank">Report bugs or request features</a></p>
+                    <p><strong>Technical:</strong> <a href="mailto:andre.paredes@ymail.com">andre.paredes@ymail.com</a></p>
                 </div>
-            </div>
+            </article>
+        </div>
+    </main>
 
-            <div class="alert alert-info">
-                <h3>Support</h3>
-                <p><strong>GitHub Issues:</strong> <a href="https://github.com/OpenMOVR/movr-datahub-analytics/issues" target="_blank">Report bugs or request features</a></p>
-                <p><strong>Technical:</strong> <a href="mailto:andre.paredes@ymail.com">andre.paredes@ymail.com</a></p>
-            </div>
-        </main>
-    </div>
+    <div id="footer-placeholder"></div>
 
-    <script>
-        // Tab functionality
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-
-                btn.classList.add('active');
-                document.getElementById(btn.dataset.tab).classList.add('active');
-            });
-        });
-
-        // Handle URL hash for direct linking
-        if (window.location.hash) {
-            const tab = window.location.hash.substring(1);
-            const btn = document.querySelector(`[data-tab="${tab}"]`);
-            if (btn) btn.click();
-        }
-    </script>
+    <script src="../js/config.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/header-loader.js"></script>
+    <script src="../js/doc-toc.js"></script>
 </body>
 </html>

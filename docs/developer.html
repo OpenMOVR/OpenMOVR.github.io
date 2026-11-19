@@ -3,88 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Developer Documentation | OpenMOVR</title>
-    <meta name="description" content="OpenMOVR - The MOVR open science initiative. Official documentation for open source projects advancing neuromuscular disease research.">
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://openmovr.github.io/docs/developer.html">
-    <meta property="og:title" content="OpenMOVR | Developer Documentation">
-    <meta property="og:description" content="The MOVR open science initiative. Official documentation for open source projects advancing neuromuscular disease research.">
-    <meta property="og:image" content="https://openmovr.github.io/assets/movr_logo_clean.jpg">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://openmovr.github.io/docs/developer.html">
-    <meta property="twitter:title" content="OpenMOVR | Developer Documentation">
-    <meta property="twitter:description" content="The MOVR open science initiative. Official documentation for open source projects advancing neuromuscular disease research.">
-    <meta property="twitter:image" content="https://openmovr.github.io/assets/movr_logo_clean.jpg">
-
+    <title>Developer Docs | OpenMOVR</title>
+    <meta name="description" content="Developer documentation for OpenMOVR: the website, the OpenMOVR App, the DataHub Analytics library and the MOVR Viewer.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/docs.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,600;1,8..60,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/main.css">
     <link rel="icon" type="image/png" href="../assets/movr_logo_clean_nobackground.png">
+
 </head>
 <body>
-    <div class="docs-container">
-        <nav class="docs-sidebar">
-            <div class="docs-header">
-                <h1><a href="developer.html">OpenMOVR Docs</a></h1>
-                <p>Documentation</p>
-                <a href="../index.html" class="back-link">Back to OpenMOVR</a>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div id="header-placeholder"></div>
+
+    <main id="main">
+        <section class="page-hero page-hero-compact">
+            <div class="container">
+                <span class="eyebrow">Developers</span>
+                <h1>Developer documentation</h1>
+                <div class="lede"><p>OpenMOVR maintains three public repositories plus research tools. Everything is on this page: use the contents to jump to a project.</p></div>
             </div>
+        </section>
 
-            <div class="docs-nav">
-                <ul>
-                    <li><a href="../movr2.html" class="nav-link">MOVR 2.0</a></li>
-                    <li><a href="../pilot/" class="nav-link">MOVR 2.0 Pilot</a></li>
-                    <li><a href="developer.html" class="nav-link active">Developer Docs</a></li>
-                    <li><a href="movr-datahub-analytics.html" class="nav-link">DataHub Analytics</a></li>
-                    <li><a href="https://mdausa.tfaforms.net/389761" class="nav-link" target="_blank">MOVR Data Request</a></li>
-                </ul>
-
-                <div class="docs-footer">
-                    <strong>Contact</strong>
-                    Technical: <a href="mailto:andre.paredes@ymail.com">andre.paredes@ymail.com</a><br>
-                    MDA: <a href="mailto:MDAMOVR@mdausa.org">MDAMOVR@mdausa.org</a>
-                    <div class="footer-links">
-                        <a href="https://www.mda.org/science/movr2" target="_blank">Official MDA MOVR Initiative</a>
-                        <a href="../movr-viewer/index.html">MOVR Viewer</a>
-                    </div>
-                </div>
-            </div>
-        </nav>
-
-        <main class="docs-content">
-            <div class="content-header">
-                <h1>Developer Documentation</h1>
-                <span class="badge badge-info">Technical Guide</span>
-            </div>
-
-            <div class="alert alert-info">
-                <h3>Welcome Developers</h3>
-                <p>OpenMOVR maintains three public repositories plus research tools. Select a tab below to view documentation for each project.</p>
-            </div>
-
-            <!-- Tab Navigation -->
-            <div class="tabs">
-                <div class="tab-nav">
-                    <button class="tab-btn active" data-tab="overview">Overview</button>
-                    <button class="tab-btn" data-tab="website">OpenMOVR.github.io</button>
-                    <button class="tab-btn" data-tab="app">OpenMOVR App</button>
-                    <button class="tab-btn" data-tab="analytics">movr-datahub-analytics</button>
-                    <button class="tab-btn" data-tab="viewer">MOVR Viewer</button>
-                </div>
-
-                <!-- Overview Tab -->
-                <div id="overview" class="tab-content active">
+        <div class="container doc-layout">
+            <nav class="doc-toc" aria-label="On this page">
+                <div class="doc-toc-title">On this page</div>
+                <ol>
+                    <li><a href="#openmovr-projects">OpenMOVR Projects</a>
+                        <ol>
+                        <li><a href="#getting-started">Getting Started</a></li>
+                        <li><a href="#code-standards">Code Standards</a></li>
+                        </ol>
+                    </li>
+                    <li><a href="#openmovr-github-io">OpenMOVR.github.io</a>
+                        <ol>
+                        <li><a href="#quick-start">Quick Start</a></li>
+                        <li><a href="#repository-structure">Repository Structure</a></li>
+                        <li><a href="#branch-strategy">Branch Strategy</a></li>
+                        <li><a href="#common-tasks">Common Tasks</a></li>
+                        <li><a href="#testing-checklist">Testing Checklist</a></li>
+                        </ol>
+                    </li>
+                    <li><a href="#openmovr-app">OpenMOVR App</a>
+                        <ol>
+                        <li><a href="#quick-start-2">Quick Start</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#architecture">Architecture</a></li>
+                        <li><a href="#deployment">Deployment</a></li>
+                        <li><a href="#data-handling">Data Handling</a></li>
+                        <li><a href="#development">Development</a></li>
+                        <li><a href="#technology-stack">Technology Stack</a></li>
+                        </ol>
+                    </li>
+                    <li><a href="#movr-datahub-analytics">movr-datahub-analytics</a>
+                        <ol>
+                        <li><a href="#quick-start-3">Quick Start</a></li>
+                        <li><a href="#key-features">Key Features</a></li>
+                        <li><a href="#cli-commands">CLI Commands</a></li>
+                        <li><a href="#development-2">Development</a></li>
+                        </ol>
+                    </li>
+                    <li><a href="#movr-viewer">MOVR Viewer</a>
+                        <ol>
+                        <li><a href="#available-tools">Available Tools</a></li>
+                        <li><a href="#upcoming-features">Upcoming Features</a></li>
+                        <li><a href="#contributing">Contributing</a></li>
+                        </ol>
+                    </li>
+                </ol>
+            </nav>
+            <article class="doc-body">
+                <section class="doc-section" id="openmovr-projects">
                     <h2>OpenMOVR Projects</h2>
+                    
 
                     <div class="grid-3">
                         <div class="card">
                             <h3>OpenMOVR.github.io</h3>
-                            <p>The main website repository - documentation, GSoC program, pilot enrollment, and MOVR Viewer tools.</p>
+                            <p>The main website repository - MOVR progress, MOVR 2.0 updates, the FAQ, documentation, the GSoC program and MOVR Viewer tools.</p>
                             <ul>
                                 <li><strong>Tech:</strong> HTML, CSS, JavaScript</li>
                                 <li><strong>Hosting:</strong> GitHub Pages</li>
@@ -106,7 +102,7 @@
 
                         <div class="card">
                             <h3>movr-datahub-analytics</h3>
-                            <p>Python package for analyzing MOVR DataHub (2019-2025) registry data - 3,570 participants, 11,501 encounters.</p>
+                            <p>Python package for analyzing MOVR DataHub (2019-2025) registry data across seven diseases.</p>
                             <ul>
                                 <li><strong>Tech:</strong> Python, pandas, PyArrow</li>
                                 <li><strong>Status:</strong> GSoC 2026 Priority Project</li>
@@ -127,18 +123,18 @@
                         </div>
                     </div>
 
-                    <h2>Getting Started</h2>
+                    <h3 id="getting-started">Getting Started</h3>
                     <div class="card">
                         <ol>
                             <li><strong>Choose your project</strong> - Website (HTML/CSS/JS) or Analytics (Python)</li>
                             <li><strong>Fork the repository</strong> on GitHub</li>
                             <li><strong>Read the CONTRIBUTING.md</strong> in each repo</li>
-                            <li><strong>Set up your environment</strong> (see tabs above)</li>
+                            <li><strong>Set up your environment</strong> (see each project below)</li>
                             <li><strong>Create a feature branch</strong> and submit a PR</li>
                         </ol>
                     </div>
 
-                    <h2>Code Standards</h2>
+                    <h3 id="code-standards">Code Standards</h3>
                     <div class="grid-2">
                         <div class="card">
                             <h4>Website (HTML/CSS/JS)</h4>
@@ -161,14 +157,14 @@
                             </ul>
                         </div>
                     </div>
-                </div>
+                </section>
 
-                <!-- Website Tab -->
-                <div id="website" class="tab-content">
+                <section class="doc-section" id="openmovr-github-io">
                     <h2>OpenMOVR.github.io</h2>
+                    
                     <p><a href="https://github.com/OpenMOVR/OpenMOVR.github.io" target="_blank">github.com/OpenMOVR/OpenMOVR.github.io</a></p>
 
-                    <h3>Quick Start</h3>
+                    <h3 id="quick-start">Quick Start</h3>
                     <div class="card">
                         <pre>git clone git@github.com:YOUR-USERNAME/OpenMOVR.github.io.git
 cd OpenMOVR.github.io
@@ -182,30 +178,38 @@ cd OpenMOVR.github.io
 git checkout -b feature/your-feature-name</pre>
                     </div>
 
-                    <h3>Repository Structure</h3>
+                    <h3 id="repository-structure">Repository Structure</h3>
                     <div class="card">
                         <pre>OpenMOVR.github.io/
 ├── index.html              # Homepage
+├── movr2.html              # MOVR 2.0: pilot recap, what's coming, front door
+├── progress.html           # MOVR progress (renders data/progress.json)
+├── front-door.html         # MOVR front door preview
 ├── gsoc.html               # Google Summer of Code program
-├── docs/                   # Documentation system
-│   ├── index.html          # MOVR updates
-│   ├── css/docs.css        # Docs styles
-│   └── *.html              # Other doc pages
-├── pilot/                  # MOVR 2.0 Pilot enrollment
+├── docs/                   # Developer and library docs
+│   └── index.html          # Redirects to movr2.html
+├── pilot/                  # MOVR 2.0 pilot page (closed)
 ├── movr-viewer/            # Research tools
-├── css/main.css            # Global styles
+├── data/
+│   ├── progress.json       # Every figure on progress.html
+│   ├── front-door-today.json   # Front door, real figures
+│   └── front-door-sample.json  # Front door, sample launch view
+├── css/main.css            # The one design system
 ├── js/
-│   ├── config.js           # Site configuration
-│   ├── main.js             # Main functionality
-│   └── header-loader.js    # Header component
-├── components/header.html  # Shared header
+│   ├── config.js           # Header navigation
+│   ├── main.js             # Navigation, mobile menu, reveal
+│   ├── header-loader.js    # Injects header and footer
+│   ├── progress.js         # Progress page renderer
+│   ├── front-door.js       # Front door renderer
+│   └── doc-toc.js          # Docs table of contents
+├── components/             # header.html, footer.html
 ├── assets/                 # Images, logos
 ├── BRANCH_STRATEGY.md
 ├── CONTRIBUTING.md
 └── README.md</pre>
                     </div>
 
-                    <h3>Branch Strategy</h3>
+                    <h3 id="branch-strategy">Branch Strategy</h3>
                     <div class="card">
                         <p><strong>main</strong> - Production website (homepage, docs, GSoC, pilot)</p>
                         <p><strong>viewer-apps</strong> - MOVR Viewer applications (research tools)</p>
@@ -227,27 +231,26 @@ git push origin feature/viewer-enhancement
 # Open PR to viewer-apps</pre>
                     </div>
 
-                    <h3>Common Tasks</h3>
+                    <h3 id="common-tasks">Common Tasks</h3>
                     <div class="card">
                         <h4>Adding a New Page</h4>
                         <ol>
                             <li>Create HTML file in appropriate directory</li>
-                            <li>Include header: <code>&lt;div id="header-placeholder"&gt;&lt;/div&gt;</code></li>
-                            <li>Add <code>&lt;script src="js/header-loader.js"&gt;&lt;/script&gt;</code></li>
-                            <li>Update navigation in <code>js/config.js</code> if needed</li>
+                            <li>Link <code>css/main.css</code> and use its classes; avoid inline styles</li>
+                            <li>Add <code>&lt;div id="header-placeholder"&gt;&lt;/div&gt;</code> at the top of the body and <code>&lt;div id="footer-placeholder"&gt;&lt;/div&gt;</code> at the end</li>
+                            <li>Load <code>js/config.js</code>, <code>js/main.js</code> and <code>js/header-loader.js</code>, in that order</li>
+                            <li>Add the page to <code>js/config.js</code> so it appears in the navigation, and to <code>components/footer.html</code></li>
+                            <li>A page in a new subfolder needs that folder added to <code>SUBDIRS</code> in <code>header-loader.js</code></li>
                         </ol>
 
                         <h4>Updating Statistics</h4>
-                        <p>Edit <code>js/config.js</code> - the <code>legacy</code> object:</p>
-                        <pre>legacy: {
-    participantsTrusted: 5895,
-    encountersLogged: 20152,
-    sitesCollaborating: 63,
-    yearsLearning: 12
-}</pre>
+                        <p>Every figure on <a href="../progress.html">progress.html</a> comes from <code>data/progress.json</code>. Edit the numbers and the <code>updated</code> date there; percentages are computed from the counts. Each block keeps its <code>population</code>, <code>source</code> and dates, so a figure is never published without them.</p>
+                        <p>The homepage stats are written in <code>index.html</code>, in the "MOVR Data Hub at a glance" panel, and must match the <a href="https://openmovr-gen1.streamlit.app/Community_Snapshot" target="_blank">Community Snapshot</a>.</p>
+                        <h4>Updating the front door</h4>
+                        <p><code>data/front-door-today.json</code> holds the real figures shown on <a href="../front-door.html">front-door.html</a>; <code>data/front-door-sample.json</code> holds the labeled sample view. Groups under <code>suppress_below</code> are never shown.</p>
                     </div>
 
-                    <h3>Testing Checklist</h3>
+                    <h3 id="testing-checklist">Testing Checklist</h3>
                     <div class="card">
                         <ul>
                             <li>Test locally (<code>./launch.sh</code>)</li>
@@ -257,11 +260,11 @@ git push origin feature/viewer-enhancement
                             <li>Update documentation if needed</li>
                         </ul>
                     </div>
-                </div>
+                </section>
 
-                <!-- OpenMOVR App Tab -->
-                <div id="app" class="tab-content">
+                <section class="doc-section" id="openmovr-app">
                     <h2>OpenMOVR App</h2>
+                    
                     <p><a href="https://openmovr-gen1.streamlit.app/" target="_blank">Live App</a> | <a href="https://github.com/OpenMOVR/openmovr-app" target="_blank">github.com/OpenMOVR/openmovr-app</a> | <a href="https://github.com/OpenMOVR/openmovr-app/blob/main/CHANGELOG.md" target="_blank">Changelog</a></p>
 
                     <div class="alert alert-primary">
@@ -270,7 +273,7 @@ git push origin feature/viewer-enhancement
                         <p><strong>Current release: v0.3.0</strong> (2026-09-28). Adds the public Community Snapshot page and a data provenance banner. Every page now states the data extract date, the statistics generation date and the app version.</p>
                     </div>
 
-                    <h3>Quick Start</h3>
+                    <h3 id="quick-start-2">Quick Start</h3>
                     <div class="card">
                         <pre># Clone the repository
 git clone https://github.com/OpenMOVR/openmovr-app.git
@@ -289,7 +292,7 @@ streamlit run app.py
 # Visit http://localhost:8501</pre>
                     </div>
 
-                    <h3>Features</h3>
+                    <h3 id="features">Features</h3>
                     <div class="grid-2">
                         <div class="card">
                             <h4><a href="https://openmovr-gen1.streamlit.app/Community_Snapshot" target="_blank">Community Snapshot</a></h4>
@@ -338,7 +341,7 @@ streamlit run app.py
                         </div>
                     </div>
 
-                    <h3>Architecture</h3>
+                    <h3 id="architecture">Architecture</h3>
                     <div class="card">
                         <p>The app uses a dual-mode architecture:</p>
                         <pre><strong>Snapshot Mode</strong> (default):
@@ -379,7 +382,7 @@ streamlit run app.py
 └── scripts/                  # Utility scripts</pre>
                     </div>
 
-                    <h3>Deployment</h3>
+                    <h3 id="deployment">Deployment</h3>
                     <div class="card">
                         <h4>To Streamlit Cloud (Recommended)</h4>
                         <ol>
@@ -393,7 +396,7 @@ streamlit run app.py
                         <p><strong>Custom Domain:</strong> Configure in Streamlit Cloud settings</p>
                     </div>
 
-                    <h3>Data Handling</h3>
+                    <h3 id="data-handling">Data Handling</h3>
                     <div class="card">
                         <p><strong>Snapshots (stats/*.json)</strong></p>
                         <ul>
@@ -415,7 +418,7 @@ python scripts/generate_{dmd,lgmd,als,sma}_snapshot.py
 python scripts/generate_curated_dictionary.py</pre>
                     </div>
 
-                    <h3>Development</h3>
+                    <h3 id="development">Development</h3>
                     <div class="card">
                         <h4>Adding a New Disease Page</h4>
                         <ol>
@@ -444,7 +447,7 @@ streamlit run app.py
                         </ul>
                     </div>
 
-                    <h3>Technology Stack</h3>
+                    <h3 id="technology-stack">Technology Stack</h3>
                     <div class="grid-2">
                         <div class="card">
                             <h4>Framework</h4>
@@ -465,11 +468,11 @@ streamlit run app.py
                     </div>
 
                     <p><strong>For complete details</strong> see the <a href="https://github.com/OpenMOVR/openmovr-app" target="_blank">README.md</a> and <a href="https://github.com/OpenMOVR/openmovr-app/blob/main/ARCHITECTURE.md" target="_blank">ARCHITECTURE.md</a> in the repository.</p>
-                </div>
+                </section>
 
-                <!-- Analytics Tab -->
-                <div id="analytics" class="tab-content">
+                <section class="doc-section" id="movr-datahub-analytics">
                     <h2>movr-datahub-analytics</h2>
+                    
                     <p><a href="https://github.com/OpenMOVR/movr-datahub-analytics" target="_blank">github.com/OpenMOVR/movr-datahub-analytics</a> | <a href="movr-datahub-analytics.html">Full Documentation</a></p>
 
                     <div class="alert alert-primary">
@@ -477,7 +480,7 @@ streamlit run app.py
                         <p>Python package for analyzing MOVR DataHub (2019-2025) registry data. Ideal for students interested in healthcare data analytics.</p>
                     </div>
 
-                    <h3>Quick Start</h3>
+                    <h3 id="quick-start-3">Quick Start</h3>
                     <div class="card">
                         <pre># Clone the repository
 git clone https://github.com/OpenMOVR/movr-datahub-analytics.git
@@ -497,7 +500,7 @@ movr setup
 movr --help</pre>
                     </div>
 
-                    <h3>Key Features</h3>
+                    <h3 id="key-features">Key Features</h3>
                     <div class="grid-2">
                         <div class="card">
                             <h4>Data Pipeline</h4>
@@ -517,7 +520,7 @@ movr --help</pre>
                         </div>
                     </div>
 
-                    <h3>CLI Commands</h3>
+                    <h3 id="cli-commands">CLI Commands</h3>
                     <div class="card">
                         <pre># Setup configuration
 movr setup
@@ -536,7 +539,7 @@ movr dictionary search "age"
 movr dictionary search "medication" --diseases "DMD,SMA"</pre>
                     </div>
 
-                    <h3>Development</h3>
+                    <h3 id="development-2">Development</h3>
                     <div class="card">
                         <pre># Run tests
 pytest
@@ -553,18 +556,18 @@ pre-commit run --all-files</pre>
                     </div>
 
                     <p><strong>For complete documentation</strong> including architecture, API reference, and contribution guidelines, see the <a href="movr-datahub-analytics.html">DataHub Analytics Documentation</a>.</p>
-                </div>
+                </section>
 
-                <!-- MOVR Viewer Tab -->
-                <div id="viewer" class="tab-content">
+                <section class="doc-section" id="movr-viewer">
                     <h2>MOVR Viewer</h2>
+                    
                     <p><a href="../movr-viewer/index.html">Open MOVR Viewer</a></p>
 
                     <div class="alert alert-info">
                         <p><strong>Status:</strong> Alpha - Tools for exploring MOVR Data Dictionary fields and vendor mappings.</p>
                     </div>
 
-                    <h3>Available Tools</h3>
+                    <h3 id="available-tools">Available Tools</h3>
                     <div class="grid-2">
                         <div class="card">
                             <h4>Dictionary Viewer</h4>
@@ -578,11 +581,11 @@ pre-commit run --all-files</pre>
                         <div class="card">
                             <h4>Vendor Mapping</h4>
                             <p>Review vendor mapping coverage for MOVR variables. See field mapping status and coverage percentages across different data sources.</p>
-                            <p><a href="../movr-viewer/vendor_mapping_viewer.html">Open Vendor Mapping</a></p>
+                            <p><em>Coming soon</em></p>
                         </div>
                     </div>
 
-                    <h3>Upcoming Features</h3>
+                    <h3 id="upcoming-features">Upcoming Features</h3>
                     <div class="card">
                         <p>The following tools are planned for future development:</p>
                         <ul>
@@ -592,7 +595,7 @@ pre-commit run --all-files</pre>
                         <p>These are ideal GSoC project opportunities. Contributors need experience with web applications and data privacy principles.</p>
                     </div>
 
-                    <h3>Contributing</h3>
+                    <h3 id="contributing">Contributing</h3>
                     <div class="card">
                         <p>MOVR Viewer is part of the OpenMOVR.github.io repository. To contribute:</p>
                         <pre>git clone git@github.com:YOUR-USERNAME/OpenMOVR.github.io.git
@@ -608,36 +611,21 @@ git checkout -b feature/viewer-enhancement
 # Make changes in movr-viewer/ directory
 # Submit PR to viewer-apps branch</pre>
                     </div>
+                </section>
+
+                <div class="alert alert-info doc-section">
+                    <h3>Questions?</h3>
+                    <p>Technical: <a href="mailto:andre.paredes@ymail.com">andre.paredes@ymail.com</a> · MDA: <a href="mailto:mdamovr@mdausa.org">mdamovr@mdausa.org</a></p>
                 </div>
-            </div>
+            </article>
+        </div>
+    </main>
 
-            <div class="alert alert-info">
-                <h3>Questions?</h3>
-                <p>Technical: <a href="mailto:andre.paredes@ymail.com">andre.paredes@ymail.com</a> | MDA: <a href="mailto:mdamovr@mdausa.org">mdamovr@mdausa.org</a></p>
-            </div>
-        </main>
-    </div>
+    <div id="footer-placeholder"></div>
 
-    <script>
-        // Tab functionality
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                // Remove active from all
-                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-
-                // Add active to clicked
-                btn.classList.add('active');
-                document.getElementById(btn.dataset.tab).classList.add('active');
-            });
-        });
-
-        // Handle URL hash for direct linking
-        if (window.location.hash) {
-            const tab = window.location.hash.substring(1);
-            const btn = document.querySelector(`[data-tab="${tab}"]`);
-            if (btn) btn.click();
-        }
-    </script>
+    <script src="../js/config.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/header-loader.js"></script>
+    <script src="../js/doc-toc.js"></script>
 </body>
 </html>

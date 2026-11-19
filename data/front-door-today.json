@@ -1,0 +1,33 @@
+{
+  "_note": "Front door, today view. Real figures MDA already holds. Every number must match data/progress.json.",
+  "sample": false,
+  "title": "What's in MOVR today",
+  "as_of": "2026-11-19",
+  "suppress_below": 10,
+  "intro": "MOVR 2.0 recruitment opens in Q1 2027. Until then, this shows what MOVR already holds.",
+  "modalities": [
+    { "id": "ehr",    "name": "Health records",    "status": "launch" },
+    { "id": "docs",   "name": "Medical documents", "status": "launch" },
+    { "id": "notes",  "name": "Clinician notes",   "status": "launch" },
+    { "id": "survey", "name": "Surveys",           "status": "planned" },
+    { "id": "wear",   "name": "Wearables",         "status": "planned" },
+    { "id": "ecrf",   "name": "Clinic forms",      "status": "future" },
+    { "id": "bio",    "name": "Biospecimens",      "status": "future" }
+  ],
+  "kpis": [
+    { "value": "3,444", "label": "MOVR Data Hub participants" },
+    { "value": "122", "label": "MOVR 2.0 pilot participants consented" },
+    { "value": "Q1 2027", "label": "MOVR 2.0 recruitment opens" }
+  ],
+  "bars_title": "MOVR Data Hub participants by disease",
+  "diseases": [
+    { "name": "ALS",   "participants": 1652 },
+    { "name": "DMD",   "participants": 688 },
+    { "name": "SMA",   "participants": 524 },
+    { "name": "LGMD",  "participants": 210 },
+    { "name": "FSHD",  "participants": 184 },
+    { "name": "BMD",   "participants": 149 },
+    { "name": "Pompe", "participants": 37 }
+  ],
+  "footnote": "MOVR Data Hub: participants with validated enrollment, excluding USNDR legacy participants; enrollment through March 25, 2025; computed September 28, 2026 (OpenMOVR App v0.3.0). Pilot: MOVR 2.0 pilot participants, SMA, DMD and LGMD, 2025 – 2026."
+}

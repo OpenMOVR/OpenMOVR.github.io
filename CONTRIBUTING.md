@@ -203,7 +203,7 @@ MOVR 2.0 enrollment system:
 - 2-space indentation
 
 ### CSS
-- Use CSS variables (see `css/main.css`, `docs/css/docs.css`)
+- Use the CSS variables and classes in `css/main.css`; avoid inline styles
 - Mobile-first responsive design
 
 ### JavaScript
