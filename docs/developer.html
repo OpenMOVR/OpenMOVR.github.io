@@ -92,13 +92,13 @@
 
                         <div class="card">
                             <h3>OpenMOVR App</h3>
-                            <p>Interactive Streamlit dashboard for MDA MOVR Study data. Explore disease cohorts, facility distributions, and data completeness metrics.</p>
+                            <p>Interactive Streamlit dashboard for MDA MOVR Study data. Explore disease cohorts, facility distributions, and data completeness metrics. The public Community Snapshot page carries citable study-wide figures.</p>
                             <ul>
                                 <li><strong>Tech:</strong> Python, Streamlit, Plotly</li>
                                 <li><strong>Deployment:</strong> Streamlit Cloud</li>
                                 <li><strong>Focus:</strong> Interactive analytics, visualization</li>
                             </ul>
-                            <p><a href="https://openmovr-gen1.streamlit.app/" target="_blank">Open App</a> | <a href="https://github.com/OpenMOVR/openmovr-app" target="_blank">View Repository</a></p>
+                            <p><a href="https://openmovr-gen1.streamlit.app/" target="_blank">Open App</a> | <a href="https://openmovr-gen1.streamlit.app/Community_Snapshot" target="_blank">Community Snapshot</a> | <a href="https://github.com/OpenMOVR/openmovr-app" target="_blank">View Repository</a></p>
                         </div>
 
                         <div class="card">
@@ -259,11 +259,12 @@ git push origin feature/viewer-enhancement
                 <!-- OpenMOVR App Tab -->
                 <div id="app" class="tab-content">
                     <h2>OpenMOVR App</h2>
-                    <p><a href="https://openmovr-gen1.streamlit.app/" target="_blank">Live App</a> | <a href="https://github.com/OpenMOVR/openmovr-app" target="_blank">github.com/OpenMOVR/openmovr-app</a></p>
+                    <p><a href="https://openmovr-gen1.streamlit.app/" target="_blank">Live App</a> | <a href="https://github.com/OpenMOVR/openmovr-app" target="_blank">github.com/OpenMOVR/openmovr-app</a> | <a href="https://github.com/OpenMOVR/openmovr-app/blob/main/CHANGELOG.md" target="_blank">Changelog</a></p>
 
                     <div class="alert alert-primary">
                         <h4>Interactive MDA MOVR Study Analytics Dashboard</h4>
                         <p>Streamlit-based web application for exploring MDA MOVR Study data. Built for researchers, clinicians, and data analysts to understand disease cohorts, facility distributions, and data completeness across the MOVR registry.</p>
+                        <p><strong>Current release: v0.3.0</strong> (2026-09-28). Adds the public Community Snapshot page and a data provenance banner. Every page now states the data extract date, the statistics generation date and the app version.</p>
                     </div>
 
                     <h3>Quick Start</h3>
@@ -287,6 +288,15 @@ streamlit run app.py
 
                     <h3>Features</h3>
                     <div class="grid-2">
+                        <div class="card">
+                            <h4><a href="https://openmovr-gen1.streamlit.app/Community_Snapshot" target="_blank">Community Snapshot</a></h4>
+                            <ul>
+                                <li>Study-wide demographics across all seven diseases</li>
+                                <li>Health insurance overall, by disease, by disease group and by age at enrollment</li>
+                                <li>Methods: source field, denominators, multi-select handling, small-cell suppression</li>
+                                <li>Suggested citation, plus CSV/JSON downloads</li>
+                            </ul>
+                        </div>
                         <div class="card">
                             <h4>Dashboard</h4>
                             <ul>
@@ -315,12 +325,12 @@ streamlit run app.py
                             </ul>
                         </div>
                         <div class="card">
-                            <h4>Disease Overviews</h4>
+                            <h4>Clinical Analytics</h4>
                             <ul>
-                                <li>LGMD-specific analytics</li>
-                                <li>PAG presentation features</li>
-                                <li>Custom visualizations</li>
-                                <li>Extensible for new diseases</li>
+                                <li>DMD, LGMD, ALS and SMA pages</li>
+                                <li>Organized by clinical domain</li>
+                                <li>Summary tables in public snapshot mode</li>
+                                <li>Full detail requires a signed DUA</li>
                             </ul>
                         </div>
                     </div>
@@ -345,14 +355,18 @@ streamlit run app.py
 ├── app.py                    # Main dashboard
 ├── requirements.txt          # Dependencies
 ├── pages/                    # Multi-page app
+│   ├── 0_Community_Snapshot.py
 │   ├── 1_Disease_Explorer.py
 │   ├── 2_Facility_View.py
 │   ├── 3_Data_Dictionary.py
-│   └── 4_LGMD_Overview.py
+│   ├── 4_About.py
+│   ├── 5_Sign_the_DUA.py ... 7_Download_Center.py
+│   └── 8–11_{DMD,LGMD,ALS,SMA}_Clinical_Analytics.py
 ├── api/                      # Data access layer
 │   ├── cohorts.py
 │   ├── stats.py
-│   ├── lgmd.py
+│   ├── dmd.py, lgmd.py, als.py, sma.py
+│   ├── reports.py
 │   └── data_dictionary.py
 ├── components/               # UI components
 ├── config/                   # Settings & filters
@@ -393,8 +407,9 @@ streamlit run app.py
                         </ul>
 
                         <p><strong>Regenerating Snapshots:</strong></p>
-                        <pre>python scripts/generate_stats_snapshot.py
-python scripts/generate_lgmd_snapshot.py</pre>
+                        <pre>python scripts/generate_stats_snapshot.py   # includes community_profile
+python scripts/generate_{dmd,lgmd,als,sma}_snapshot.py
+python scripts/generate_curated_dictionary.py</pre>
                     </div>
 
                     <h3>Development</h3>
@@ -403,7 +418,7 @@ python scripts/generate_lgmd_snapshot.py</pre>
                         <ol>
                             <li>Create <code>scripts/generate_{disease}_snapshot.py</code></li>
                             <li>Create <code>api/{disease}.py</code> with API class</li>
-                            <li>Create <code>pages/X_{Disease}_Overview.py</code></li>
+                            <li>Create <code>pages/X_{Disease}_Clinical_Analytics.py</code></li>
                             <li>Update <code>api/__init__.py</code> exports</li>
                         </ol>
 

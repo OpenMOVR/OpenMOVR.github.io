@@ -41,8 +41,9 @@
     <script>
         // CONFIGURABLE STATS - Update these values as needed
         const STATS = {
-            participants: 6021,
-            clinicalVisits: 20883,
+            // MOVR 1.0 only (excludes USNDR legacy), matching the app's Community Snapshot (v0.3.0)
+            participants: 3444,
+            clinicalVisits: 10489,
             yearsExperience: 12
         };
     </script>
@@ -65,6 +66,7 @@
 
                 <div class="btn-group justify-center">
                     <a href="https://openmovr-gen1.streamlit.app/" class="btn btn-primary btn-large" style="background-color: var(--mda-gold) !important; background: var(--mda-gold) !important; color: #000 !important;" target="_blank">OpenMOVR App (Alpha)</a>
+                    <a href="https://openmovr-gen1.streamlit.app/Community_Snapshot" class="btn btn-outline btn-large" target="_blank">Community Snapshot</a>
                     <a href="https://mdausa.tfaforms.net/389761" class="btn btn-outline btn-large" target="_blank">MOVR Data Request</a>
                 </div>
             </div>
@@ -123,18 +125,22 @@
                 <!-- Configurable Stats -->
                 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--spacing-md); margin: var(--spacing-md) 0; padding: var(--spacing-md); background: rgba(255, 255, 255, 0.1); border-radius: var(--radius-lg); backdrop-filter: blur(10px);">
                     <div style="text-align: center;">
-                        <div style="font-size: 1.75rem; font-weight: 700; color: var(--mda-gold);" id="stat-participants">6,021</div>
+                        <div style="font-size: 1.75rem; font-weight: 700; color: var(--mda-gold);" id="stat-participants">3,444</div>
                         <div style="opacity: 0.9; font-size: 0.85rem;">Participants</div>
                     </div>
                     <div style="text-align: center;">
-                        <div style="font-size: 1.75rem; font-weight: 700; color: var(--mda-gold);" id="stat-visits">20,883</div>
-                        <div style="opacity: 0.9; font-size: 0.85rem;">Clinical Visits</div>
+                        <div style="font-size: 1.75rem; font-weight: 700; color: var(--mda-gold);" id="stat-visits">10,489</div>
+                        <div style="opacity: 0.9; font-size: 0.85rem;">Clinical Encounters</div>
                     </div>
                     <div style="text-align: center;">
                         <div style="font-size: 1.75rem; font-weight: 700; color: var(--mda-gold);" id="stat-years">12</div>
                         <div style="opacity: 0.9; font-size: 0.85rem;">Years</div>
                     </div>
                 </div>
+                <p style="text-align: center; font-size: 0.8rem; opacity: 0.85; margin-top: calc(-1 * var(--spacing-sm));">
+                    MDA MOVR Data Hub Study (MOVR 1.0), excluding USNDR legacy participants. Enrollment through March 25, 2025.
+                    Source: <a href="https://openmovr-gen1.streamlit.app/Community_Snapshot" target="_blank" style="color: var(--mda-gold);">Community Snapshot</a>, OpenMOVR App v0.3.0.
+                </p>
 
                 <div style="background: rgba(255, 255, 255, 0.15); padding: var(--spacing-md); border-radius: var(--radius-lg); backdrop-filter: blur(10px); margin-top: var(--spacing-md);">
                     <h4 style="color: var(--white); margin-bottom: var(--spacing-sm);">Our Vision: Open Science, Eventually Open Data</h4>
@@ -148,9 +154,10 @@
 
                 <div class="grid grid-2" style="gap: var(--spacing-md); margin-top: var(--spacing-md);">
                     <div style="background: rgba(255, 255, 255, 0.1); padding: var(--spacing-md); border-radius: var(--radius-lg); backdrop-filter: blur(10px);">
-                        <h4 style="color: var(--mda-gold); margin-bottom: var(--spacing-sm); font-size: 1rem;">Current Focus (Q2 2026)</h4>
+                        <h4 style="color: var(--mda-gold); margin-bottom: var(--spacing-sm); font-size: 1rem;">Current Focus (Q4 2026)</h4>
                         <ul style="line-height: 1.6; font-size: 0.9rem; padding-left: var(--spacing-md);">
-                            <li>MOVR 2.0 operational validation</li>
+                            <li>Preparing the MOVR 2.0 full launch (recruitment Q1 2027)</li>
+                            <li>Public, citable registry statistics</li>
                             <li>Open source tool development</li>
                             <li>Community building via GSoC</li>
                             <li>Transparent governance frameworks</li>
@@ -193,9 +200,9 @@
                     <div class="card" style="border-left: 3px solid var(--mda-green);">
                         <div class="card-content">
                             <h4 style="color: var(--mda-green);">For Patients & Families</h4>
-                            <p style="margin-bottom: var(--spacing-sm);">Be part of <strong>MOVR 2.0 Pilot</strong> — help co-create the next generation data platform.</p>
-                            <p style="margin-bottom: var(--spacing-sm);"><strong>Limited enrollment</strong> for DMD, SMA, and LGMD families.</p>
-                            <a href="pilot/" class="btn btn-primary" style="background: var(--mda-gold); border-color: var(--mda-gold);">Join Pilot</a>
+                            <p style="margin-bottom: var(--spacing-sm);"><strong>MOVR 2.0 Pilot</strong> enrollment is closed. Thank you to every family who helped co-create the next generation data platform.</p>
+                            <p style="margin-bottom: var(--spacing-sm);">Recruitment for the <strong>full MOVR 2.0 launch</strong> begins in Q1 2027.</p>
+                            <a href="pilot/" class="btn btn-primary" style="background: var(--mda-gold); border-color: var(--mda-gold);">Pilot Update</a>
                         </div>
                     </div>
                 </div>
