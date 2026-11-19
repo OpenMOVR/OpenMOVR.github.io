@@ -443,6 +443,30 @@ header .container {
     text-align: center;
 }
 
+.pilot-closed-box {
+    background: #e8f4ea;
+    border: 3px solid #2e7d32;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.pilot-closed-box p {
+    margin: 0 0 10px;
+    color: #1b4d20;
+    font-size: 1.05em;
+    line-height: 1.5;
+}
+
+.pilot-closed-box p:last-child {
+    margin-bottom: 0;
+}
+
+.pilot-closed-box .pilot-closed-lead {
+    font-size: 1.2em;
+}
+
 .form-warning-box {
     background: #fff3cd;
     border: 3px solid #ffc107;
