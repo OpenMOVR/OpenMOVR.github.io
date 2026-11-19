@@ -6,10 +6,12 @@ const movrConfig = {
         { label: "Home", href: "index.html" },
         {
             label: "MOVR 2.0",
-            href: "docs/index.html",
+            href: "movr2.html",
             dropdown: [
-                { label: "Updates & roadmap", href: "docs/index.html", description: "Where MOVR is now and what comes next" },
-                { label: "MOVR 2.0 pilot", href: "pilot/", description: "Enrollment closed. Thank you, participants" }
+                { label: "What the pilot taught us", href: "movr2.html#pilot", description: "Findings from families who tested MOVR 2.0" },
+                { label: "What's coming", href: "movr2.html#coming", description: "The 2027 launch, diseases and data" },
+                { label: "Front door preview", href: "movr2.html#front-door-preview", description: "The progress page, built in the open" },
+                { label: "FAQ", href: "movr2.html#faq", description: "For participants and researchers" }
             ]
         },
         {
