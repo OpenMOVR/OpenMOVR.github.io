@@ -3,32 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GSoC 2026 | OpenMOVR - Google Summer of Code</title>
-    
-    <!-- Meta Description -->
-    <meta name="description" content="OpenMOVR - The MOVR open science initiative. Google Summer of Code program for open source neuromuscular disease research projects.">
+    <title>Google Summer of Code | OpenMOVR</title>
+
+    <meta name="description" content="Build open source tools for neuromuscular disease research with OpenMOVR, the open science program of MDA's MOVR registry, through Google Summer of Code.">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://openmovr.github.io/gsoc.html">
-    <meta property="og:title" content="OpenMOVR | Google Summer of Code Program">
-    <meta property="og:description" content="The MOVR open science initiative. GSoC program for open source neuromuscular disease research projects.">
+    <meta property="og:title" content="OpenMOVR | Google Summer of Code">
+    <meta property="og:description" content="Build open source tools for neuromuscular disease research, mentored by the MOVR team.">
     <meta property="og:image" content="https://openmovr.github.io/assets/movr_logo_clean.jpg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://openmovr.github.io/gsoc.html">
-    <meta property="twitter:title" content="OpenMOVR | Google Summer of Code Program">
-    <meta property="twitter:description" content="The MOVR open science initiative. GSoC program for open source neuromuscular disease research projects.">
+    <meta property="twitter:title" content="OpenMOVR | Google Summer of Code">
+    <meta property="twitter:description" content="Build open source tools for neuromuscular disease research, mentored by the MOVR team.">
     <meta property="twitter:image" content="https://openmovr.github.io/assets/movr_logo_clean.jpg">
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,600;1,8..60,600&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="css/main.css">
     <link rel="icon" type="image/png" href="assets/movr_logo_clean_nobackground.png">
-    
+
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-85RSP2VHG6"></script>
     <script>
@@ -37,853 +36,284 @@
       gtag('js', new Date());
       gtag('config', 'G-85RSP2VHG6');
     </script>
-    
-    <style>
-        /* Compact, smaller font styling */
-        body {
-            font-size: 0.85rem;
-            line-height: 1.5;
-        }
-
-        h1 { font-size: 1.75rem; }
-        h2 { font-size: 1.4rem; }
-        h3 { font-size: 1.1rem; }
-        h4 { font-size: 1rem; }
-        h5 { font-size: 0.9rem; }
-
-        p, li { font-size: 0.85rem; }
-
-        .section { padding: 1.5rem 0; }
-        .card-content { padding: 0.875rem; }
-
-        .hero-gsoc {
-            background: linear-gradient(135deg, #4285f4 0%, #34a853 50%, #fbbc04 75%, #ea4335 100%);
-            padding: 2rem 0;
-            color: var(--white);
-            text-align: center;
-        }
-
-        .project-card {
-            border-left: 4px solid var(--primary-blue);
-            background: var(--white);
-            margin-bottom: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .project-card:hover {
-            border-left-color: var(--success-green);
-            box-shadow: var(--shadow-md);
-        }
-
-        .difficulty-badge {
-            display: inline-block;
-            padding: 0.15rem 0.5rem;
-            border-radius: var(--radius);
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .difficulty-beginner {
-            background: #d1fae5;
-            color: #065f46;
-        }
-
-        .difficulty-intermediate {
-            background: #fed7aa;
-            color: #9a3412;
-        }
-
-        .difficulty-advanced {
-            background: #fecaca;
-            color: #991b1b;
-        }
-        
-        /* Proper bullet point indentation in cards */
-        .card ul, .card ol {
-            padding-left: 1.5rem;
-            margin-left: 0;
-        }
-        
-        .card li {
-            margin-bottom: 0.4rem;
-        }
-
-        .timeline-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 1rem;
-        }
-
-        .timeline-date {
-            min-width: 100px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            color: var(--primary-blue);
-        }
-
-        .mentor-card {
-            text-align: center;
-            padding: 1rem;
-        }
-
-        .mentor-avatar {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary-blue), var(--success-green));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            margin: 0 auto 0.75rem;
-            color: var(--white);
-        }
-
-        .tech-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.3rem;
-            margin-top: 0.5rem;
-        }
-
-        .tech-tag {
-            background: var(--light-gray);
-            color: var(--text-primary);
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 0.8rem;
-        }
-
-        /* Ensure good contrast for header buttons */
-        .header .btn-outline {
-            background: var(--white);
-            color: var(--primary-blue);
-            border: 2px solid var(--primary-blue);
-            font-weight: 600;
-        }
-
-        .header .btn-outline:hover {
-            background: var(--primary-blue);
-            color: var(--white);
-            border-color: var(--primary-blue);
-        }
-    </style>
-
-    <!-- Load header component -->
-    <script src="js/header-loader.js"></script>
 </head>
 <body>
-    <!-- Header Component Placeholder -->
+    <a class="skip-link" href="#main">Skip to content</a>
     <div id="header-placeholder"></div>
 
-    <!-- Hero Section -->
-    <section class="hero-gsoc">
-        <div class="container">
-            <div style="max-width: 600px; margin: 0 auto;">
-                <h1 style="margin-bottom: 0.5rem; color: var(--white);">Google Summer of Code 2026</h1>
-                <p style="margin-bottom: 1rem; opacity: 0.95;">Build open source tools for neuromuscular disease research</p>
-
-                <div class="btn-group justify-center">
-                    <a href="#projects" class="btn btn-primary" style="background: var(--white); color: #4285f4; font-weight: 700;">View Projects</a>
-                    <a href="#apply" class="btn btn-outline" style="border-color: var(--white); color: var(--white); border-width: 2px; background: rgba(255,255,255,0.1);">Apply</a>
+    <main id="main">
+        <section class="page-hero">
+            <div class="container">
+                <span class="eyebrow">Google Summer of Code 2026</span>
+                <h1>Build open source tools for neuromuscular disease research</h1>
+                <p class="lede">Spend a summer making twelve years of MOVR registry data easier for researchers to use, mentored by the team that runs the registry.</p>
+                <div class="btn-group">
+                    <a href="#projects" class="btn btn-accent btn-lg">See project ideas <span class="arrow" aria-hidden="true">→</span></a>
+                    <a href="#apply" class="btn btn-ghost-light btn-lg">How to apply</a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Program Overview -->
-    <section class="section" style="background: var(--white);">
-        <div class="container">
-            <div class="section-header text-center">
-                <h2>Why OpenMOVR?</h2>
-                <p style="font-size: 0.9rem;">Real healthcare impact with expert mentorship</p>
-            </div>
-            
-            <div class="grid grid-3">
-                <div class="card" style="text-align: center;">
-                    <div class="card-content">
-                        <div style="font-size: 2.5rem; margin-bottom: 0.75rem;"></div>
-                        <h3>Healthcare Impact</h3>
-                        <p>Support research for ALS, SMA, DMD, and other neuromuscular diseases affecting thousands worldwide.</p>
+        <!-- Why -->
+        <section class="section-tight section">
+            <div class="container">
+                <div class="grid-3 principles">
+                    <div class="principle">
+                        <h3>Work that reaches patients</h3>
+                        <p>Your code supports research into ALS, SMA, DMD and other neuromuscular diseases, and ships to researchers who use it.</p>
                     </div>
-                </div>
-                
-                <div class="card" style="text-align: center;">
-                    <div class="card-content">
-                        <div style="font-size: 2.5rem; margin-bottom: 0.75rem;"></div>
-                        <h3>Expert Mentorship</h3>
-                        <p>Work with experienced researchers, data scientists, and software engineers from the MOVR team.</p>
+                    <div class="principle">
+                        <h3>Mentors who run the registry</h3>
+                        <p>Work directly with the MOVR data science and clinical operations leads, not a proxy.</p>
                     </div>
-                </div>
-                
-                <div class="card" style="text-align: center;">
-                    <div class="card-content">
-                        <div style="font-size: 2.5rem; margin-bottom: 0.75rem;"></div>
-                        <h3>Modern Tech Stack</h3>
-                        <p>FHIR standards, healthcare APIs, ML pipelines, and modern data processing frameworks.</p>
+                    <div class="principle">
+                        <h3>Real clinical data standards</h3>
+                        <p>FHIR, longitudinal clinical datasets, privacy-preserving publication and modern Python data tooling.</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Project Ideas -->
-    <section class="section" id="projects" style="background: var(--light-gray);">
-        <div class="container">
-            <div class="section-header text-center">
-                <h2>2026 Project Ideas</h2>
-                <p>Priority focus: Making 12 years of MOVR legacy data easily accessible to researchers worldwide</p>
-            </div>
-            
-            <!-- Featured Priority Project -->
-            <div style="margin-bottom: var(--spacing-xl);">
-                <div class="alert alert-primary" style="text-align: center; margin-bottom: var(--spacing-lg);">
-                    <h3>🏆 Priority Project: MOVR Legacy Datahub Library</h3>
-                    <p>Our flagship GSoC project - building the foundation for global neuromuscular disease research</p>
+        <!-- Projects -->
+        <section class="section section-paper" id="projects">
+            <div class="container">
+                <div class="section-header">
+                    <span class="eyebrow">Project ideas</span>
+                    <h2>Where you can contribute</h2>
+                    <p>Our priority is making MOVR's legacy data easy for researchers anywhere to access and analyze.</p>
                 </div>
-            </div>
-            
-            <div class="project-card card" style="border-left: 4px solid #34a853;">
-                <div class="card-content">
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--spacing-md);">
-                        <h3>MOVR Legacy Datahub Python Library</h3>
-                        <span class="difficulty-badge difficulty-intermediate">Intermediate</span>
-                    </div>
 
-                    <div style="margin-bottom: var(--spacing-md);">
-                        <a href="https://github.com/OpenMOVR/movr-datahub-analytics" target="_blank" style="display: inline-block; background: var(--primary-blue); color: white; padding: 0.5rem 1rem; border-radius: var(--radius); text-decoration: none; margin-right: 0.5rem;">📂 GitHub Repository</a>
-                        <a href="docs/movr-datahub-analytics.html" style="display: inline-block; background: var(--success-green); color: white; padding: 0.5rem 1rem; border-radius: var(--radius); text-decoration: none;">📚 Developer Docs</a>
-                    </div>
-
-                    <p><strong>Repository:</strong> <code>movr-datahub-analytics</code> | <strong>Mission:</strong> Create a pip-installable Python library that makes 12 years of MOVR legacy data (5,895+ participants, 20,152+ encounters) easily accessible to researchers, universities, and data scientists worldwide.</p>
-                    
-                    <div style="background: #f0f9ff; padding: var(--spacing-md); border-radius: var(--radius); margin: var(--spacing-md) 0;">
-                        <h4 style="color: #1e40af;">Vision: Democratizing Neuromuscular Disease Data</h4>
-                        <p style="margin-bottom: 0;">Enable any researcher to access and analyze comprehensive longitudinal data with just <code>pip install movr-datahub</code></p>
-                    </div>
-                    
-                    <h4>Core Features to Build:</h4>
-                    <div class="grid grid-2" style="gap: var(--spacing-md); margin: var(--spacing-md) 0;">
-                        <div>
-                            <ul>
-                                <li><strong>Easy Data Loading:</strong> <code>movr.load_dataset('ALS')</code></li>
-                                <li><strong>Disease-Specific Modules:</strong> ALS, DMD, SMA, BMD, LGMD, FSHD, Pompe</li>
-                                <li><strong>Pandas Integration:</strong> Return clean DataFrames ready for analysis</li>
-                                <li><strong>Longitudinal Tools:</strong> Track disease progression over time</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <ul>
-                                <li><strong>Visualization Utilities:</strong> Built-in plotting functions</li>
-                                <li><strong>ML Framework Support:</strong> scikit-learn, PyTorch integration</li>
-                                <li><strong>Jupyter Examples:</strong> Comprehensive tutorial notebooks</li>
-                                <li><strong>Research Templates:</strong> Common analysis patterns</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <h4>Example Usage:</h4>
-                    <div class="tech-highlight" style="margin: var(--spacing-md) 0;">
-                        <code>
-# Install and load MOVR data<br>
-pip install movr-datahub<br><br>
-import movr_datahub as movr<br>
-import pandas as pd<br><br>
-# Load ALS patient data<br>
-als_data = movr.load_dataset('ALS', include_longitudinal=True)<br>
-print(f"Loaded {len(als_data)} ALS participants")<br><br>
-# Analyze disease progression<br>
-progression = movr.analyze_progression(als_data, metric='ALSFRS_R')<br>
-movr.plot_progression(progression, save='my_analysis.png')
-                        </code>
-                    </div>
-                    
-                    <div style="margin-top: var(--spacing-md);">
-                        <strong>Impact:</strong> Enable hundreds of researchers worldwide to access MOVR data without technical barriers, accelerating research into ALS, SMA, DMD and other neuromuscular diseases.
-                    </div>
-                    
-                    <div style="margin-top: var(--spacing-md);">
-                        <strong>Expected Deliverables:</strong> 
-                        <ul style="margin-top: var(--spacing-sm);">
-                            <li>Production-ready Python package on PyPI</li>
-                            <li>Comprehensive documentation and API reference</li>
-                            <li>10+ Jupyter notebook tutorials covering common research questions</li>
-                            <li>Unit tests and integration tests</li>
-                            <li>Example research projects and case studies</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="tech-stack">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">Pandas</span>
-                        <span class="tech-tag">NumPy</span>
-                        <span class="tech-tag">Matplotlib/Seaborn</span>
-                        <span class="tech-tag">Jupyter</span>
-                        <span class="tech-tag">PyPI Packaging</span>
-                        <span class="tech-tag">Clinical Data</span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Supporting Projects -->
-            <div style="margin-top: var(--spacing-xl);">
-                <h3 style="text-align: center; margin-bottom: var(--spacing-lg);">Established Projects</h3>
-            </div>
-
-            <div class="project-card card" style="border-left: 4px solid #f1b434;">
-                <div class="card-content">
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--spacing-md);">
-                        <h3>OpenMOVR App: Interactive Analytics Dashboard</h3>
-                        <span class="difficulty-badge difficulty-intermediate">Intermediate</span>
-                    </div>
-
-                    <div style="margin-bottom: var(--spacing-md);">
-                        <a href="https://openmovr-gen1.streamlit.app/" target="_blank" style="display: inline-block; background: #f1b434 !important; background-color: var(--mda-gold) !important; color: #000 !important; padding: 0.5rem 1rem; border-radius: var(--radius); text-decoration: none; margin-right: 0.5rem; font-weight: 600;">🚀 Live App</a>
-                        <a href="https://github.com/OpenMOVR/openmovr-app" target="_blank" style="display: inline-block; background: var(--primary-blue); color: white; padding: 0.5rem 1rem; border-radius: var(--radius); text-decoration: none;">📂 GitHub Repository</a>
-                    </div>
-
-                    <p><strong>Repository:</strong> <code>openmovr-app</code> | <strong>Mission:</strong> Build an interactive Streamlit dashboard for exploring MDA MOVR Study data. Already deployed and actively used - perfect for contributors looking to enhance analytics capabilities and develop new features.</p>
-                    
-                    <div style="background: #fffbf0; padding: var(--spacing-md); border-radius: var(--radius); margin: var(--spacing-md) 0;">
-                        <h4 style="color: #b45309;">Alpha Project: Evolving with Community Input</h4>
-                        <p style="margin-bottom: 0;">An established alpha/prototype demonstrating the tools OpenMOVR is building. GSoC contributors can help expand disease-specific overviews, improve visualizations, and add interactive analysis features.</p>
-                    </div>
-                    
-                    <h4>Current Features & Enhancement Opportunities:</h4>
-                    <div class="grid grid-2" style="gap: var(--spacing-md); margin: var(--spacing-md) 0;">
-                        <div>
-                            <ul>
-                                <li><strong>Dashboard:</strong> Database overview, participant statistics</li>
-                                <li><strong>Disease Explorer:</strong> Filter by diagnosis, cohort analysis</li>
-                                <li><strong>Data Dictionary:</strong> Browse fields, completeness metrics</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <ul>
-                                <li><strong>Potential Enhancements:</strong> New disease pages, advanced analytics</li>
-                                <li><strong>Visualization Improvements:</strong> Custom charts, better UX</li>
-                                <li><strong>Architecture Evolution:</strong> API expansion, live mode optimization</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <h4>Tech Stack:</h4>
-                    <div class="tech-stack">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">Streamlit</span>
-                        <span class="tech-tag">Plotly</span>
-                        <span class="tech-tag">Pandas</span>
-                        <span class="tech-tag">PyArrow</span>
-                        <span class="tech-tag">Clinical Data</span>
-                    </div>
-
-                    <div style="margin-top: var(--spacing-md);">
-                        <strong>Perfect For:</strong> Contributors interested in web development, data visualization, analytics, or clinical research tools who want to see their work live and used immediately.
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Supporting Projects -->
-            <div style="margin-top: var(--spacing-xl);">
-                <h3 style="text-align: center; margin-bottom: var(--spacing-lg);">Supporting Projects</h3>
-            </div>
-
-            <div class="project-card card">
-                <div class="card-content">
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--spacing-md);">
-                        <h3>FHIR Data Integration Library</h3>
-                        <span class="difficulty-badge difficulty-intermediate">Intermediate</span>
-                    </div>
-                    
-                    <p><strong>Objective:</strong> Develop a Python library for future FHIR R4 data extraction and integration (MOVR 2.0 preparation).</p>
-                    
-                    <h4>Key Features:</h4>
-                    <ul>
-                        <li>FHIR resource parsing and validation</li>
-                        <li>Data quality checks and standardization</li>
-                        <li>Integration with MOVR legacy data formats</li>
-                        <li>Preparation for next-generation EMR integration</li>
-                    </ul>
-                    
-                    <div class="tech-stack">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">FHIR</span>
-                        <span class="tech-tag">Healthcare APIs</span>
-                        <span class="tech-tag">JSON/XML</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card card">
-                <div class="card-content">
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--spacing-md);">
-                        <h3>Pharmacovigilance Classification System</h3>
-                        <span class="difficulty-badge difficulty-advanced">Advanced</span>
-                    </div>
-                    
-                    <p><strong>Objective:</strong> Build an AI-powered system to automatically classify hospitalization reasons from clinical notes, addressing the challenge of 58% "other" classifications in adverse event reporting.</p>
-                    
-                    <h4>Key Features:</h4>
-                    <ul>
-                        <li>Natural language processing for clinical notes</li>
-                        <li>FDA-reportable adverse event ontology</li>
-                        <li>Machine learning classification pipeline</li>
-                        <li>Validation against expert annotations</li>
-                    </ul>
-                    
-                    <div style="margin-top: var(--spacing-md);">
-                        <strong>Expected Outcomes:</strong> ML model, classification API, evaluation metrics, and integration with MOVR data pipeline.
-                    </div>
-                    
-                    <div class="tech-stack">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">NLP</span>
-                        <span class="tech-tag">scikit-learn</span>
-                        <span class="tech-tag">spaCy</span>
-                        <span class="tech-tag">Clinical Ontologies</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card card">
-                <div class="card-content">
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--spacing-md);">
-                        <h3>Research API and Developer Portal</h3>
-                        <span class="difficulty-badge difficulty-beginner">Beginner</span>
-                    </div>
-                    
-                    <p><strong>Objective:</strong> Create a comprehensive API and developer portal for researchers to access aggregated MOVR insights and integrate with their own analysis workflows.</p>
-                    
-                    <h4>Key Features:</h4>
-                    <ul>
-                        <li>RESTful API for data access</li>
-                        <li>Interactive API documentation</li>
-                        <li>Authentication and rate limiting</li>
-                        <li>Code examples in multiple languages</li>
-                    </ul>
-                    
-                    <div style="margin-top: var(--spacing-md);">
-                        <strong>Expected Outcomes:</strong> API server, documentation portal, client libraries, and usage examples.
-                    </div>
-                    
-                    <div class="tech-stack">
-                        <span class="tech-tag">Node.js</span>
-                        <span class="tech-tag">Express</span>
-                        <span class="tech-tag">OpenAPI</span>
-                        <span class="tech-tag">React</span>
-                        <span class="tech-tag">PostgreSQL</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card card">
-                <div class="card-content">
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--spacing-md);">
-                        <h3>Data Visualization Dashboard</h3>
-                        <span class="difficulty-badge difficulty-intermediate">Intermediate</span>
-                    </div>
-                    
-                    <p><strong>Objective:</strong> Develop an interactive web dashboard for exploring MOVR data patterns, disease progression trends, and research insights.</p>
-                    
-                    <h4>Key Features:</h4>
-                    <ul>
-                        <li>Interactive charts and visualizations</li>
-                        <li>Real-time data updates</li>
-                        <li>Export capabilities for presentations</li>
-                        <li>Mobile-responsive design</li>
-                    </ul>
-                    
-                    <div style="margin-top: var(--spacing-md);">
-                        <strong>Expected Outcomes:</strong> Web application, visualization library, deployment configuration, and user documentation.
-                    </div>
-                    
-                    <div class="tech-stack">
-                        <span class="tech-tag">React</span>
-                        <span class="tech-tag">D3.js</span>
-                        <span class="tech-tag">TypeScript</span>
-                        <span class="tech-tag">Chart.js</span>
-                        <span class="tech-tag">Material-UI</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card card">
-                <div class="card-content">
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--spacing-md);">
-                        <h3>Clinical Trial Matching Engine</h3>
-                        <span class="difficulty-badge difficulty-advanced">Advanced</span>
-                    </div>
-                    
-                    <p><strong>Objective:</strong> Build a system to match MOVR participants with relevant clinical trials based on their medical history, genetic profiles, and current treatments.</p>
-                    
-                    <h4>Key Features:</h4>
-                    <ul>
-                        <li>Clinical trial database integration</li>
-                        <li>Patient-trial matching algorithms</li>
-                        <li>Privacy-preserving computation</li>
-                        <li>Clinician notification system</li>
-                    </ul>
-                    
-                    <div style="margin-top: var(--spacing-md);">
-                        <strong>Expected Outcomes:</strong> Matching engine, privacy framework, validation studies, and clinician interface.
-                    </div>
-                    
-                    <div class="tech-stack">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">Machine Learning</span>
-                        <span class="tech-tag">Privacy Preserving</span>
-                        <span class="tech-tag">ClinicalTrials.gov API</span>
-                        <span class="tech-tag">Flask</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Timeline -->
-    <section class="section" style="background: var(--white);">
-        <div class="container">
-            <div class="section-header text-center">
-                <h2>2026 GSoC Timeline</h2>
-                <p>Important dates and milestones for the program</p>
-            </div>
-            
-            <div style="max-width: 800px; margin: 0 auto;">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="timeline-item">
-                            <div class="timeline-date">Feb 1-19</div>
-                            <div>
-                                <h4>Organization Application</h4>
-                                <p>OpenMOVR submits application to participate in GSoC 2026</p>
-                            </div>
-                        </div>
-                        
-                        <div class="timeline-item">
-                            <div class="timeline-date">Feb 26</div>
-                            <div>
-                                <h4>Organizations Announced</h4>
-                                <p>Google announces accepted organizations (fingers crossed! 🤞)</p>
-                            </div>
-                        </div>
-                        
-                        <div class="timeline-item">
-                            <div class="timeline-date">Mar-Apr</div>
-                            <div>
-                                <h4>Student Application Period</h4>
-                                <p>Students can apply for projects and interact with mentors</p>
-                            </div>
-                        </div>
-                        
-                        <div class="timeline-item">
-                            <div class="timeline-date">May 1</div>
-                            <div>
-                                <h4>Student Projects Announced</h4>
-                                <p>Selected students and projects are revealed</p>
-                            </div>
-                        </div>
-                        
-                        <div class="timeline-item">
-                            <div class="timeline-date">May-Aug</div>
-                            <div>
-                                <h4>Coding Period</h4>
-                                <p>12+ weeks of coding with mentor support and evaluations</p>
-                            </div>
-                        </div>
-                        
-                        <div class="timeline-item">
-                            <div class="timeline-date">Sep 8</div>
-                            <div>
-                                <h4>Final Results</h4>
-                                <p>Project completion and final evaluations</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Team -->
-    <section class="section" id="team" style="background: var(--light-gray);">
-        <div class="container">
-            <div class="section-header text-center">
-                <h2>Meet Our GSoC Team</h2>
-                <p>The OpenMOVR team leading our 2026 program (accepting 1 student)</p>
-            </div>
-            
-            <div class="grid grid-2" style="max-width: 900px; margin: 0 auto;">
-                <div class="card" style="text-align: center;">
-                    <div class="card-content">
-                        <div class="mentor-avatar" style="background: linear-gradient(135deg, #1e40af, #3b82f6);">
-                            <span style="font-size: 1.5rem; font-weight: bold;">AP</span>
-                        </div>
-                        <h4>Andre Daniel Paredes, PhD</h4>
-                        <p style="color: var(--primary-blue); font-weight: 600; margin-bottom: var(--spacing-sm);">GSoC Mentor & Technical Lead</p>
-                        <p style="font-size: 0.9rem; margin-bottom: var(--spacing-md);">Senior Director, Strategy & Informatics, Data Science</p>
-                        
-                        <div style="text-align: left; background: #f8fafc; padding: var(--spacing-md); border-radius: var(--radius); margin-bottom: var(--spacing-md);">
-                            <h5 style="margin-bottom: var(--spacing-sm);">Mentorship Focus:</h5>
-                            <ul style="font-size: 0.9rem; margin-bottom: 0;">
-                                <li>Technical architecture & Python development</li>
-                                <li>Healthcare data standards (FHIR, clinical datasets)</li>
-                                <li>Open source best practices & community building</li>
-                                <li>Research integration & real-world impact</li>
-                            </ul>
-                        </div>
-                        
-                        <p style="font-size: 0.9rem; font-style: italic; color: var(--medium-gray);">"Building tools that accelerate research for diseases that need champions"</p>
-                    </div>
-                </div>
-                
-                <div class="card" style="text-align: center;">
-                    <div class="card-content">
-                        <div class="mentor-avatar" style="background: linear-gradient(135deg, #10b981, #059669);">
-                            <span style="font-size: 1.5rem; font-weight: bold;">JW</span>
-                        </div>
-                        <h4>Jessica Waits</h4>
-                        <p style="color: var(--success-green); font-weight: 600; margin-bottom: var(--spacing-sm);">GSoC Administrator & Project Lead</p>
-                        <p style="font-size: 0.9rem; margin-bottom: var(--spacing-md);">Director of Clinical Operations</p>
-                        
-                        <div style="text-align: left; background: #f0fdf4; padding: var(--spacing-md); border-radius: var(--radius); margin-bottom: var(--spacing-md);">
-                            <h5 style="margin-bottom: var(--spacing-sm);">Administrative Role:</h5>
-                            <ul style="font-size: 0.9rem; margin-bottom: 0;">
-                                <li>GSoC program coordination & student relations</li>
-                                <li>Project planning & milestone management</li>
-                                <li>Clinical research context & requirements</li>
-                                <li>Community engagement & stakeholder relations</li>
-                            </ul>
-                        </div>
-                        
-                        <p style="font-size: 0.9rem; font-style: italic; color: var(--medium-gray);">"Ensuring research serves patients and families first"</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div style="text-align: center; margin-top: var(--spacing-xl);">
-                <div class="alert alert-info" style="display: inline-block; max-width: 600px; background: #fef3c7; border-left: 4px solid #f59e0b;">
-                    <h4 style="color: #92400e;">🎯 2026 Program Capacity</h4>
-                    <p style="color: #92400e; margin-bottom: 0;">OpenMOVR can accept <strong>1 student</strong> for GSoC 2026. We're looking for a dedicated developer passionate about healthcare impact to work on our priority MOVR Legacy Datahub Library project.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Prerequisites -->
-    <section class="section" style="background: var(--light-gray);">
-        <div class="container">
-            <div class="section-header text-center">
-                <h2>Prerequisites & Skills</h2>
-                <p>What you should know before applying</p>
-            </div>
-            
-            <div class="grid grid-2">
-                <div class="card">
+                <!-- Priority project -->
+                <article class="card project-card is-priority">
                     <div class="card-header">
-                        <h3>🔧 Technical Skills</h3>
+                        <div class="project-meta">
+                            <span class="pill pill-soon">Priority project</span>
+                            <span class="difficulty-badge difficulty-intermediate">Intermediate</span>
+                        </div>
+                        <h3>MOVR Legacy DataHub Python library</h3>
+                        <p>Repository: <code>movr-datahub-analytics</code>. Create a pip-installable library that makes twelve years of MOVR registry data (2013–2025) easy for researchers, universities and data scientists to load and analyze.</p>
                     </div>
-                    <div class="card-content">
-                        <h4>Required for Most Projects:</h4>
-                        <ul>
-                            <li>Proficiency in Python or JavaScript</li>
-                            <li>Experience with Git and version control</li>
-                            <li>Understanding of REST APIs</li>
-                            <li>Basic knowledge of databases</li>
-                        </ul>
-                        
-                        <h4>Bonus Skills:</h4>
-                        <ul>
-                            <li>Healthcare data experience (FHIR, HL7)</li>
-                            <li>Machine learning frameworks</li>
-                            <li>Web development (React, Node.js)</li>
-                            <li>Data visualization tools</li>
-                        </ul>
+                    <div class="card-body">
+                        <div class="grid-2" style="gap: var(--space-6);">
+                            <div>
+                                <h4>What you'll build</h4>
+                                <ul class="check-list feature-list" style="margin-top: var(--space-3); columns: 1;">
+                                    <li>Simple data loading: <code>movr.load_dataset('ALS')</code></li>
+                                    <li>Disease modules for ALS, DMD, SMA, BMD, LGMD, FSHD and Pompe</li>
+                                    <li>Clean pandas DataFrames, ready for analysis</li>
+                                    <li>Longitudinal tools to follow disease progression</li>
+                                    <li>Plotting utilities and scikit-learn / PyTorch support</li>
+                                    <li>Jupyter tutorials and research templates</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4>Example usage</h4>
+<pre style="margin-top: var(--space-3);"><code>pip install movr-datahub
+
+import movr_datahub as movr
+
+als = movr.load_dataset('ALS', include_longitudinal=True)
+print(f"Loaded {len(als)} ALS participants")
+
+progression = movr.analyze_progression(als, metric='ALSFRS_R')
+movr.plot_progression(progression, save='analysis.png')</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-info">
+                            <strong>Deliverables:</strong> a production package on PyPI, API documentation, 10+ tutorial notebooks covering common research questions, unit and integration tests, and worked example analyses.
+                        </div>
+
+                        <div class="tech-stack">
+                            <span class="tech-tag">Python</span><span class="tech-tag">pandas</span><span class="tech-tag">NumPy</span><span class="tech-tag">Matplotlib / Seaborn</span><span class="tech-tag">Jupyter</span><span class="tech-tag">PyPI packaging</span><span class="tech-tag">Clinical data</span>
+                        </div>
+
+                        <div class="btn-group">
+                            <a href="https://github.com/OpenMOVR/movr-datahub-analytics" class="btn btn-primary btn-sm" target="_blank" rel="noopener">GitHub repository</a>
+                            <a href="docs/movr-datahub-analytics.html" class="btn btn-outline btn-sm">Library docs</a>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="card">
+                </article>
+
+                <!-- Established project -->
+                <h3 style="margin: var(--space-8) 0 var(--space-5);">Established project</h3>
+                <article class="card project-card">
                     <div class="card-header">
-                        <h3>Soft Skills</h3>
+                        <div class="project-meta">
+                            <span class="pill pill-live">Live, v0.3.0</span>
+                            <span class="difficulty-badge difficulty-intermediate">Intermediate</span>
+                        </div>
+                        <h3>OpenMOVR App: interactive analytics</h3>
+                        <p>Repository: <code>openmovr-app</code>. A deployed Streamlit app for exploring MOVR data, including the public Community Snapshot. Contributions go live and are used right away.</p>
                     </div>
-                    <div class="card-content">
-                        <h4>Essential Qualities:</h4>
-                        <ul>
-                            <li><strong>Communication:</strong> Clear, proactive communication with mentors</li>
-                            <li><strong>Independence:</strong> Ability to research and solve problems</li>
-                            <li><strong>Reliability:</strong> Consistent progress and meeting deadlines</li>
-                            <li><strong>Curiosity:</strong> Interest in healthcare and patient impact</li>
-                        </ul>
-                        
-                        <h4>Healthcare Context:</h4>
-                        <ul>
-                            <li>Understanding of patient privacy importance</li>
-                            <li>Appreciation for data quality in medical research</li>
-                            <li>Interest in making a positive health impact</li>
-                        </ul>
+                    <div class="card-body">
+                        <div class="grid-2" style="gap: var(--space-6);">
+                            <div>
+                                <h4>Already in place</h4>
+                                <ul class="check-list" style="margin-top: var(--space-3);">
+                                    <li>Community Snapshot with methods and citation guidance</li>
+                                    <li>Disease Explorer and cohort analysis</li>
+                                    <li>Curated data dictionary of 1,024 fields</li>
+                                    <li>Clinical analytics for DMD, LGMD, ALS and SMA</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4>Where you can help</h4>
+                                <ul class="check-list" style="margin-top: var(--space-3);">
+                                    <li>New disease pages and cross-disease metrics</li>
+                                    <li>Better visualizations and accessibility</li>
+                                    <li>API expansion and live-mode performance</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Python</span><span class="tech-tag">Streamlit</span><span class="tech-tag">Plotly</span><span class="tech-tag">pandas</span><span class="tech-tag">PyArrow</span>
+                        </div>
+                        <div class="btn-group">
+                            <a href="https://openmovr-gen1.streamlit.app/" class="btn btn-primary btn-sm" target="_blank" rel="noopener">Open the app</a>
+                            <a href="https://github.com/OpenMOVR/openmovr-app" class="btn btn-outline btn-sm" target="_blank" rel="noopener">GitHub repository</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Supporting projects -->
+                <h3 style="margin: var(--space-8) 0 var(--space-5);">Supporting projects</h3>
+                <div class="grid-2">
+                    <article class="card">
+                        <span class="difficulty-badge difficulty-intermediate" style="align-self: flex-start;">Intermediate</span>
+                        <h3>FHIR data integration library</h3>
+                        <p>A Python library for FHIR R4 extraction and validation, mapped to MOVR's legacy data formats, preparing for EMR integration in MOVR 2.0.</p>
+                        <div class="tech-stack card-foot"><span class="tech-tag">Python</span><span class="tech-tag">FHIR</span><span class="tech-tag">Healthcare APIs</span></div>
+                    </article>
+                    <article class="card">
+                        <span class="difficulty-badge difficulty-advanced" style="align-self: flex-start;">Advanced</span>
+                        <h3>Hospitalization reason classifier</h3>
+                        <p>Classify hospitalization reasons from clinical notes into an FDA-reportable adverse event ontology, addressing the 58% of reasons currently recorded as "other".</p>
+                        <div class="tech-stack card-foot"><span class="tech-tag">Python</span><span class="tech-tag">NLP</span><span class="tech-tag">scikit-learn</span><span class="tech-tag">spaCy</span></div>
+                    </article>
+                    <article class="card">
+                        <span class="difficulty-badge difficulty-beginner" style="align-self: flex-start;">Beginner</span>
+                        <h3>Research API and developer portal</h3>
+                        <p>A documented API for aggregated MOVR insights, with authentication, rate limiting and client examples in several languages.</p>
+                        <div class="tech-stack card-foot"><span class="tech-tag">Node.js</span><span class="tech-tag">OpenAPI</span><span class="tech-tag">React</span><span class="tech-tag">PostgreSQL</span></div>
+                    </article>
+                    <article class="card">
+                        <span class="difficulty-badge difficulty-advanced" style="align-self: flex-start;">Advanced</span>
+                        <h3>Clinical trial matching engine</h3>
+                        <p>Match participants to relevant trials from ClinicalTrials.gov using medical history, genetics and treatment, with privacy-preserving computation and a clinician-facing interface.</p>
+                        <div class="tech-stack card-foot"><span class="tech-tag">Python</span><span class="tech-tag">Machine learning</span><span class="tech-tag">Flask</span></div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline + team -->
+        <section class="section">
+            <div class="container">
+                <div class="grid-2" style="gap: var(--space-8); align-items: start;">
+                    <div>
+                        <span class="eyebrow">Program timeline</span>
+                        <h2 style="margin-bottom: var(--space-6);">GSoC 2026 dates</h2>
+                        <ol class="timeline">
+                            <li class="timeline-item"><div class="timeline-date">Feb 1–19</div><h4>Organization applications</h4><p>OpenMOVR applies to take part in GSoC 2026.</p></li>
+                            <li class="timeline-item"><div class="timeline-date">Feb 26</div><h4>Organizations announced</h4><p>Google announces accepted organizations.</p></li>
+                            <li class="timeline-item"><div class="timeline-date">Mar–Apr</div><h4>Contributor applications</h4><p>Applicants propose projects and talk with mentors.</p></li>
+                            <li class="timeline-item"><div class="timeline-date">May 1</div><h4>Projects announced</h4><p>Selected contributors and projects are published.</p></li>
+                            <li class="timeline-item"><div class="timeline-date">May–Aug</div><h4>Coding period</h4><p>12+ weeks of building, with mentor support and evaluations.</p></li>
+                            <li class="timeline-item"><div class="timeline-date">Sep 8</div><h4>Final results</h4><p>Projects wrap up with final evaluations.</p></li>
+                        </ol>
+                    </div>
+
+                    <div>
+                        <span class="eyebrow">Your mentors</span>
+                        <h2 style="margin-bottom: var(--space-6);">Meet the team</h2>
+                        <div class="grid" style="gap: var(--space-5);">
+                            <div class="card">
+                                <div class="mentor">
+                                    <div class="mentor-avatar mentor-initials" aria-hidden="true">AP</div>
+                                    <div>
+                                        <h3>Andre Daniel Paredes, PhD</h3>
+                                        <p class="card-kicker">GSoC mentor and technical lead · VP, Data Strategy and Real-World Evidence, MDA</p>
+                                    </div>
+                                </div>
+                                <p>Technical architecture and Python development, healthcare data standards (FHIR, clinical datasets), and open source practice.</p>
+                            </div>
+                            <div class="card">
+                                <div class="mentor">
+                                    <div class="mentor-avatar mentor-initials" aria-hidden="true">JW</div>
+                                    <div>
+                                        <h3>Jessica Waits</h3>
+                                        <p class="card-kicker">GSoC administrator and project lead · Director of Clinical Operations, MDA</p>
+                                    </div>
+                                </div>
+                                <p>Program coordination, milestones, and the clinical research context and requirements behind each project.</p>
+                            </div>
+                            <div class="alert alert-primary">
+                                <strong>2026 capacity:</strong> OpenMOVR can accept one contributor, focused on the priority DataHub library project.
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Application Process -->
-    <section class="section" id="apply" style="background: var(--white);">
-        <div class="container">
-            <div class="section-header text-center">
-                <h2>How to Apply</h2>
-                <p>Steps to join our GSoC program</p>
-            </div>
-            
-            <div class="grid grid-2" style="gap: var(--spacing-xl);">
-                <div>
+        <!-- Skills + apply -->
+        <section class="section section-paper" id="apply">
+            <div class="container">
+                <div class="section-header">
+                    <span class="eyebrow">Applying</span>
+                    <h2>What we look for, and how to apply</h2>
+                </div>
+                <div class="grid-3">
                     <div class="card">
-                        <div class="card-header">
-                            <h3>Application Steps</h3>
-                        </div>
-                        <div class="card-content">
-                            <ol>
-                                <li><strong>Get Familiar:</strong> Review our project ideas and codebase</li>
-                                <li><strong>Join Community:</strong> Introduce yourself on our communication channels</li>
-                                <li><strong>Make a Contribution:</strong> Submit a small PR or fix to show your skills</li>
-                                <li><strong>Write Proposal:</strong> Create a detailed project proposal</li>
-                                <li><strong>Submit Application:</strong> Apply through the official GSoC website</li>
-                            </ol>
-                        </div>
+                        <h3>Technical skills</h3>
+                        <ul class="check-list">
+                            <li>Python or JavaScript</li>
+                            <li>Git and version control</li>
+                            <li>REST APIs and basic databases</li>
+                            <li><em>Bonus:</em> FHIR/HL7, machine learning, data visualization</li>
+                        </ul>
                     </div>
-                </div>
-                
-                <div>
                     <div class="card">
-                        <div class="card-header">
-                            <h3>Tips for Success</h3>
-                        </div>
-                        <div class="card-content">
-                            <ul>
-                                <li><strong>Start Early:</strong> Begin engaging with the community before applications open</li>
-                                <li><strong>Show Initiative:</strong> Propose improvements or ask thoughtful questions</li>
-                                <li><strong>Understand the Domain:</strong> Learn about neuromuscular diseases and healthcare data</li>
-                                <li><strong>Be Specific:</strong> Include detailed timelines and deliverables in your proposal</li>
-                                <li><strong>Communicate:</strong> Stay active in discussions and respond promptly</li>
-                            </ul>
-                        </div>
+                        <h3>How you work</h3>
+                        <ul class="check-list">
+                            <li>Clear, proactive communication</li>
+                            <li>Independent problem solving</li>
+                            <li>Steady progress against deadlines</li>
+                            <li>Respect for patient privacy and data quality</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Steps to apply</h3>
+                        <ol style="padding-left: 1.2em;">
+                            <li>Read the project ideas and codebase</li>
+                            <li>Introduce yourself to the mentors</li>
+                            <li>Submit a small pull request</li>
+                            <li>Write a proposal with a timeline and deliverables</li>
+                            <li>Apply on the GSoC website</li>
+                        </ol>
                     </div>
                 </div>
-            </div>
-            
-            <div style="text-align: center; margin-top: var(--spacing-xl);">
-                <div style="background: linear-gradient(135deg, #4285f4 0%, #34a853 25%, #fbbc04 75%, #ea4335 100%); 
-                            padding: 3px; 
-                            border-radius: 16px; 
-                            display: inline-block; 
-                            max-width: 750px;
-                            box-shadow: 0 8px 24px rgba(66, 133, 244, 0.3);">
-                    <div style="background: white; 
-                                border-radius: 14px; 
-                                padding: 2.5rem 2rem;">
-                        <h3 style="font-size: 2rem; 
-                                   margin-bottom: 1rem; 
-                                   background: linear-gradient(135deg, #4285f4, #ea4335); 
-                                   -webkit-background-clip: text; 
-                                   -webkit-text-fill-color: transparent; 
-                                   background-clip: text;
-                                   font-weight: 700;">
-                            🚀 Ready to Apply?
-                        </h3>
-                        <p style="font-size: 1.05rem; 
-                                  color: #5f6368; 
-                                  margin-bottom: 1.5rem; 
-                                  line-height: 1.6;">
-                            Applications open through the official Google Summer of Code website.<br>
-                            Connect with our mentors first to discuss your project proposal.
-                        </p>
-                        <div class="btn-group" style="margin-top: var(--spacing-md); gap: 0.75rem;">
-                            <a href="https://summerofcode.withgoogle.com/" 
-                               class="btn btn-primary" 
-                               target="_blank" 
-                               style="background: linear-gradient(135deg, #4285f4, #34a853); 
-                                      border: none; 
-                                      font-weight: 700; 
-                                      font-size: 1.05rem;
-                                      padding: 0.9rem 1.8rem;
-                                      box-shadow: 0 4px 12px rgba(66, 133, 244, 0.4);
-                                      transition: all 0.3s ease;">
-                                Apply on GSoC Website →
-                            </a>
-                            <a href="mailto:mdamovr@mdausa.org?subject=GSoC%202026%20Interest" 
-                               class="btn btn-outline" 
-                               style="border: 2px solid #4285f4; 
-                                      color: #4285f4; 
-                                      font-weight: 600;
-                                      padding: 0.9rem 1.8rem;
-                                      transition: all 0.3s ease;">
-                                Contact Mentors
-                            </a>
-                            <a href="https://github.com/openmovr" 
-                               class="btn btn-outline" 
-                               target="_blank"
-                               style="border: 2px solid #34a853; 
-                                      color: #34a853; 
-                                      font-weight: 600;
-                                      padding: 0.9rem 1.8rem;
-                                      transition: all 0.3s ease;">
-                                View GitHub
-                            </a>
-                        </div>
+
+                <div class="cta-band" style="margin-top: var(--space-7); background: var(--white); border: 1px solid var(--line);">
+                    <div>
+                        <h2>Talk to us before you apply</h2>
+                        <p>The strongest proposals start with a conversation with the mentors.</p>
+                    </div>
+                    <div class="btn-group">
+                        <a href="mailto:mdamovr@mdausa.org?subject=GSoC%20Interest" class="btn btn-primary">Contact the mentors</a>
+                        <a href="https://summerofcode.withgoogle.com/" class="btn btn-outline" target="_blank" rel="noopener">GSoC website</a>
                     </div>
                 </div>
+                <p style="margin-top: var(--space-5); font-size: 0.875rem; color: var(--muted);">Google Summer of Code is a trademark of Google LLC.</p>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div>
-                    <h4>OpenMOVR GSoC</h4>
-                    <p>Google Summer of Code mentorship program for neuromuscular disease research.</p>
-                    <p style="margin-top: var(--spacing-sm);"><strong>Contact:</strong> mdamovr@mdausa.org</p>
-                </div>
+    <div id="footer-placeholder"></div>
 
-                <div>
-                    <h4>Documentation</h4>
-                    <ul style="list-style: none; padding: 0;">
-                        <li><a href="index.html">OpenMOVR Home</a></li>
-                        <li><a href="docs/index.html">MOVR 2.0</a></li>
-                        <li><a href="docs/developer.html">Developer Docs</a></li>
-                        <li><a href="docs/movr-datahub-analytics.html">DataHub Analytics</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4>Development</h4>
-                    <ul style="list-style: none; padding: 0;">
-                        <li><a href="https://github.com/openmovr" target="_blank">GitHub</a></li>
-                        <li><a href="#projects">Project Ideas</a></li>
-                        <li><a href="mailto:mdamovr@mdausa.org">Contact Mentors</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4>Resources</h4>
-                    <ul style="list-style: none; padding: 0;">
-                        <li><a href="https://www.mda.org/science/movr" target="_blank">MDA MOVR</a></li>
-                        <li><a href="https://summerofcode.withgoogle.com/" target="_blank">GSoC Website</a></li>
-                        <li><a href="pilot/">MOVR 2.0 Pilot</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div style="border-top: 1px solid rgba(255, 255, 255, 0.2); margin-top: var(--spacing-md); padding-top: var(--spacing-sm); text-align: center; opacity: 0.8;">
-                <p>2025 OpenMOVR Open Science Initiative</p>
-                <p style="margin-top: 0.25rem;">Founded by Andre Daniel Paredes | GSoC is a trademark of Google LLC</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Scripts -->
     <script src="js/config.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/header-loader.js"></script>
 </body>
 </html>
