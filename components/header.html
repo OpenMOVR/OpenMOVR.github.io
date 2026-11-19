@@ -1,23 +1,23 @@
-<!-- Header Component -->
+<!-- Header Component: {{root}} is replaced with the path to the site root -->
 <header class="header">
     <div class="container">
         <div class="header-content">
-            <a href="index.html" class="logo">
-                <img src="assets/movr_logo_clean.jpg" alt="OpenMOVR Logo">
-                <div class="logo-text">
+            <a href="{{root}}index.html" class="logo">
+                <img src="{{root}}assets/movr_logo_clean_nobackground.png" alt="" width="40" height="40">
+                <div>
                     <div class="logo-main">OpenMOVR</div>
-                    <div class="logo-sub">MDA MOVR Open Source Extension</div>
+                    <div class="logo-sub">Open science for MDA's MOVR registry</div>
                 </div>
             </a>
 
-            <nav class="nav">
-                <!-- Navigation will be populated by JavaScript from config.js -->
+            <nav class="nav" aria-label="Main">
+                <!-- Populated from js/config.js -->
             </nav>
 
             <div class="header-actions">
-                <a href="https://openmovr-gen1.streamlit.app/" class="btn btn-primary" style="background-color: var(--mda-gold) !important; background: var(--mda-gold) !important; color: #000 !important; margin-right: 0.5rem;" target="_blank">App</a>
-                <a href="https://www.mda.org/science/movr2" class="btn btn-outline" target="_blank">Official MDA MOVR</a>
-                <button class="mobile-menu-toggle">☰</button>
+                <a href="https://openmovr-gen1.streamlit.app/" class="btn btn-accent btn-sm" target="_blank" rel="noopener">Explore the data</a>
+                <a href="https://www.mda.org/science/movr2" class="btn btn-outline btn-sm" target="_blank" rel="noopener">MDA MOVR</a>
+                <button class="mobile-menu-toggle" aria-label="Toggle menu">☰</button>
             </div>
         </div>
     </div>

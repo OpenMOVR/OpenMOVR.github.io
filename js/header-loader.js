@@ -1,89 +1,51 @@
-// Header Loader Utility
-// Dynamically loads the header component from components/header.html
+// Component loader
+// Injects components/header.html and components/footer.html into
+// #header-placeholder and #footer-placeholder. Components use {{root}}
+// for links, replaced here with the relative path to the site root.
 
 (function() {
     'use strict';
 
-    // Load header component
-    function loadHeader() {
-        const headerPlaceholder = document.getElementById('header-placeholder');
+    const SUBDIRS = ['/docs/', '/pilot/', '/movr-viewer/'];
+    const inSubdir = SUBDIRS.some(dir => window.location.pathname.includes(dir));
+    const root = inSubdir ? '../' : '';
 
-        if (!headerPlaceholder) {
-            console.warn('Header placeholder not found. Skipping header load.');
-            return;
-        }
+    function loadComponent(name, placeholderId) {
+        const placeholder = document.getElementById(placeholderId);
+        if (!placeholder) return Promise.resolve(false);
 
-        // Determine the correct path to components based on current location
-        const currentPath = window.location.pathname;
-        let componentsPath = 'components/header.html';
-
-        // Adjust path for subdirectories
-        if (currentPath.includes('/docs/') ||
-            currentPath.includes('/pilot/') ||
-            currentPath.includes('/movr-viewer/')) {
-            componentsPath = '../components/header.html';
-        }
-
-        // Fetch and inject the header
-        fetch(componentsPath)
+        return fetch(`${root}components/${name}.html`)
             .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Failed to load header: ${response.status}`);
-                }
+                if (!response.ok) throw new Error(`Failed to load ${name}: ${response.status}`);
                 return response.text();
             })
             .then(html => {
-                headerPlaceholder.innerHTML = html;
-
-                // Fix asset paths for subdirectories
-                const isSubdirectory = currentPath.includes('/docs/') ||
-                                     currentPath.includes('/pilot/') ||
-                                     currentPath.includes('/movr-viewer/');
-
-                if (isSubdirectory) {
-                    // Update image src to use correct relative path
-                    const headerImg = headerPlaceholder.querySelector('.logo img');
-                    if (headerImg) {
-                        headerImg.src = '../assets/movr_logo_clean.jpg';
-                    }
-                    // Update logo link to use correct relative path
-                    const logoLink = headerPlaceholder.querySelector('a.logo');
-                    if (logoLink) {
-                        logoLink.href = '../index.html';
-                    }
-                }
-
-                // After header is loaded, initialize navigation and mobile menu
-                if (typeof loadHeaderNavigation === 'function') {
-                    loadHeaderNavigation();
-                }
-                if (typeof setupMobileMenu === 'function') {
-                    setupMobileMenu();
-                }
+                placeholder.outerHTML = html.replaceAll('{{root}}', root);
+                return true;
             })
             .catch(error => {
-                console.error('Error loading header:', error);
-                // Fallback: show minimal header
-                headerPlaceholder.innerHTML = `
-                    <header class="header">
-                        <div class="container">
-                            <div class="header-content">
-                                <div class="logo">
-                                    <a href="/" style="text-decoration: none; color: inherit;">
-                                        <div class="logo-main">OpenMOVR</div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </header>
-                `;
+                console.error(error);
+                if (name === 'header') {
+                    placeholder.innerHTML = `<header class="header"><div class="container"><div class="header-content">
+                        <a class="logo" href="${root}index.html"><div class="logo-main">OpenMOVR</div></a>
+                    </div></div></header>`;
+                }
+                return false;
             });
     }
 
-    // Load header when DOM is ready
+    function loadAll() {
+        loadComponent('header', 'header-placeholder').then(loaded => {
+            if (!loaded) return;
+            if (typeof loadHeaderNavigation === 'function') loadHeaderNavigation();
+            if (typeof setupMobileMenu === 'function') setupMobileMenu();
+        });
+        loadComponent('footer', 'footer-placeholder');
+    }
+
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', loadHeader);
+        document.addEventListener('DOMContentLoaded', loadAll);
     } else {
-        loadHeader();
+        loadAll();
     }
 })();

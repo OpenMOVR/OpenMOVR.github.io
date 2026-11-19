@@ -3,32 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OpenMOVR | Open Science Initiative for Neuromuscular Disease Research</title>
-    
-    <!-- Meta Description -->
-    <meta name="description" content="OpenMOVR - The MOVR open science initiative. Official documentation for open source projects advancing neuromuscular disease research.">
+    <title>OpenMOVR | Open tools and citable data for neuromuscular disease research</title>
+
+    <meta name="description" content="OpenMOVR is the open science program of MDA's MOVR registry: citable registry statistics, open source tools, and the path to MOVR 2.0.">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://openmovr.github.io/">
-    <meta property="og:title" content="OpenMOVR | The MOVR Open Science Initiative">
-    <meta property="og:description" content="Official documentation for open source projects advancing neuromuscular disease research.">
+    <meta property="og:title" content="OpenMOVR | Open science for MDA's MOVR registry">
+    <meta property="og:description" content="Citable registry statistics, open source tools, and the path to MOVR 2.0.">
     <meta property="og:image" content="https://openmovr.github.io/assets/movr_logo_clean.jpg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://openmovr.github.io/">
-    <meta property="twitter:title" content="OpenMOVR | The MOVR Open Science Initiative">
-    <meta property="twitter:description" content="Official documentation for open source projects advancing neuromuscular disease research.">
+    <meta property="twitter:title" content="OpenMOVR | Open science for MDA's MOVR registry">
+    <meta property="twitter:description" content="Citable registry statistics, open source tools, and the path to MOVR 2.0.">
     <meta property="twitter:image" content="https://openmovr.github.io/assets/movr_logo_clean.jpg">
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,600;1,8..60,600&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="css/main.css">
     <link rel="icon" type="image/png" href="assets/movr_logo_clean_nobackground.png">
-    
+
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-85RSP2VHG6"></script>
     <script>
@@ -37,262 +36,368 @@
       gtag('js', new Date());
       gtag('config', 'G-85RSP2VHG6');
     </script>
-    
-    <script>
-        // CONFIGURABLE STATS - Update these values as needed
-        const STATS = {
-            // MOVR 1.0 only (excludes USNDR legacy), matching the app's Community Snapshot (v0.3.0)
-            participants: 3444,
-            clinicalVisits: 10489,
-            yearsExperience: 12
-        };
-    </script>
-
-    <!-- Load header component -->
-    <script src="js/header-loader.js"></script>
 </head>
 <body>
-    <!-- Header Component Placeholder -->
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <div class="notice-bar" role="region" aria-label="Announcement">
+        <div class="container">
+            <span><strong>MOVR 2.0 pilot enrollment is closed.</strong> Thank you to every family who took part. Recruitment for the full launch opens in Q1 2027.</span>
+            <a href="pilot/">Read the update</a>
+        </div>
+    </div>
+
     <div id="header-placeholder"></div>
 
-    <!-- Hero Section: What is OpenMOVR -->
-    <section class="hero">
-        <div class="hero-background"></div>
-        <div class="container">
-            <div class="hero-content">
-                <h1>OpenMOVR</h1>
-                <p class="hero-subtitle">Open Science Initiative for Neuromuscular Disease Research</p>
-                <p>MOVR is creating <strong>open source initiatives in software</strong> and eventually science — building transparent, community-driven tools that accelerate research and benefit everyone.</p>
-
-                <div class="btn-group justify-center">
-                    <a href="https://openmovr-gen1.streamlit.app/" class="btn btn-primary btn-large" style="background-color: var(--mda-gold) !important; background: var(--mda-gold) !important; color: #000 !important;" target="_blank">OpenMOVR App (Alpha)</a>
-                    <a href="https://openmovr-gen1.streamlit.app/Community_Snapshot" class="btn btn-outline btn-large" target="_blank">Community Snapshot</a>
-                    <a href="https://mdausa.tfaforms.net/389761" class="btn btn-outline btn-large" target="_blank">MOVR Data Request</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section 1: What We're Building -->
-    <section class="section" style="background: var(--white);">
-        <div class="container">
-            <div class="section-header text-center">
-                <h2>What We're Building</h2>
-                <p>Open source tools and collaborative infrastructure for the research community</p>
-            </div>
-
-            <div style="max-width: 900px; margin: 0 auto;">
-                <div class="grid grid-3" style="gap: var(--spacing-md);">
-                    <div class="card" style="text-align: center; border-top: 3px solid var(--mda-blue);">
-                        <div class="card-content">
-                            <h3>Open Source Software</h3>
-                            <p>Clinical data integration libraries, data processing pipelines, and research tools built transparently with the community.</p>
+    <main id="main">
+        <!-- Hero -->
+        <section class="hero">
+            <svg class="hero-network" viewBox="0 0 1200 640" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <g stroke="#5f7bc4" stroke-width="1" stroke-opacity="0.35">
+            <line x1="70" y1="325" x2="124" y2="406"/>
+            <line x1="70" y1="325" x2="176" y2="348"/>
+            <line x1="70" y1="325" x2="100" y2="548"/>
+            <line x1="502" y1="154" x2="408" y2="224"/>
+            <line x1="502" y1="154" x2="576" y2="200"/>
+            <line x1="502" y1="154" x2="427" y2="19"/>
+            <line x1="502" y1="154" x2="567" y2="124"/>
+            <line x1="992" y1="79" x2="836" y2="42"/>
+            <line x1="992" y1="79" x2="1037" y2="178"/>
+            <line x1="992" y1="79" x2="910" y2="125"/>
+            <line x1="992" y1="79" x2="1060" y2="36"/>
+            <line x1="1137" y1="369" x2="1182" y2="282"/>
+            <line x1="1137" y1="369" x2="1182" y2="505"/>
+            <line x1="1137" y1="369" x2="1045" y2="429"/>
+            <line x1="173" y1="75" x2="211" y2="148"/>
+            <line x1="173" y1="75" x2="63" y2="0"/>
+            <line x1="743" y1="318" x2="819" y2="243"/>
+            <line x1="743" y1="318" x2="817" y2="358"/>
+            <line x1="743" y1="318" x2="888" y2="306"/>
+            <line x1="559" y1="591" x2="346" y2="627"/>
+            <line x1="559" y1="591" x2="556" y2="476"/>
+            <line x1="559" y1="591" x2="632" y2="598"/>
+            <line x1="953" y1="447" x2="978" y2="331"/>
+            <line x1="953" y1="447" x2="912" y2="584"/>
+            <line x1="953" y1="447" x2="1045" y2="429"/>
+            <line x1="360" y1="317" x2="408" y2="224"/>
+            <line x1="360" y1="317" x2="358" y2="411"/>
+            <line x1="360" y1="317" x2="487" y2="343"/>
+            <line x1="346" y1="627" x2="358" y2="411"/>
+            <line x1="346" y1="627" x2="214" y2="505"/>
+            <line x1="408" y1="224" x2="485" y2="270"/>
+            <line x1="408" y1="224" x2="487" y2="343"/>
+            <line x1="836" y1="42" x2="910" y2="125"/>
+            <line x1="836" y1="42" x2="743" y2="77"/>
+            <line x1="1037" y1="178" x2="910" y2="125"/>
+            <line x1="1037" y1="178" x2="1092" y2="226"/>
+            <line x1="1037" y1="178" x2="1060" y2="36"/>
+            <line x1="1037" y1="178" x2="1002" y2="252"/>
+            <line x1="819" y1="243" x2="888" y2="306"/>
+            <line x1="211" y1="148" x2="63" y2="0"/>
+            <line x1="211" y1="148" x2="176" y2="348"/>
+            <line x1="817" y1="358" x2="888" y2="306"/>
+            <line x1="124" y1="406" x2="176" y2="348"/>
+            <line x1="124" y1="406" x2="214" y2="505"/>
+            <line x1="124" y1="406" x2="100" y2="548"/>
+            <line x1="1182" y1="282" x2="1092" y2="226"/>
+            <line x1="576" y1="200" x2="567" y2="124"/>
+            <line x1="576" y1="200" x2="632" y2="153"/>
+            <line x1="888" y1="306" x2="978" y2="331"/>
+            <line x1="176" y1="348" x2="100" y2="548"/>
+            <line x1="358" y1="411" x2="214" y2="505"/>
+            <line x1="358" y1="411" x2="487" y2="343"/>
+            <line x1="427" y1="19" x2="531" y2="46"/>
+            <line x1="567" y1="124" x2="531" y2="46"/>
+            <line x1="567" y1="124" x2="632" y2="153"/>
+            <line x1="214" y1="505" x2="100" y2="548"/>
+            <line x1="556" y1="476" x2="632" y2="598"/>
+            <line x1="1086" y1="516" x2="1051" y2="594"/>
+            <line x1="1086" y1="516" x2="1182" y2="505"/>
+            <line x1="1086" y1="516" x2="1045" y2="429"/>
+            <line x1="658" y1="84" x2="743" y2="77"/>
+            <line x1="658" y1="84" x2="632" y2="153"/>
+            <line x1="1092" y1="226" x2="1002" y2="252"/>
+            <line x1="978" y1="331" x2="1002" y2="252"/>
+            <line x1="743" y1="77" x2="632" y2="153"/>
+            <line x1="912" y1="584" x2="1051" y2="594"/>
+            <line x1="912" y1="584" x2="964" y2="636"/>
+            <line x1="1051" y1="594" x2="964" y2="636"/>
+            <line x1="485" y1="270" x2="487" y2="343"/>
+            </g>
+            <circle cx="70" cy="325" r="5" fill="#1e93d2" fill-opacity="0.7"/>
+            <circle cx="502" cy="154" r="2.5" fill="#3d5aa8" fill-opacity="0.7"/>
+            <circle cx="992" cy="79" r="7" fill="#3d5aa8" fill-opacity="0.7"/>
+            <circle cx="1137" cy="369" r="3.5" fill="#1e93d2" fill-opacity="0.7"/>
+            <circle cx="173" cy="75" r="3.5" fill="#3d5aa8" fill-opacity="0.7"/>
+            <circle cx="743" cy="318" r="3.5" fill="#f1b434" fill-opacity="0.9"/>
+            <circle cx="559" cy="591" r="3.5" fill="#1e93d2" fill-opacity="0.7"/>
+            <circle cx="953" cy="447" r="7" fill="#3d5aa8" fill-opacity="0.7"/>
+            <circle cx="360" cy="317" r="5" fill="#3d5aa8" fill-opacity="0.7"/>
+            <circle cx="346" cy="627" r="5" fill="#1e93d2" fill-opacity="0.7"/>
+            <circle cx="408" cy="224" r="5" fill="#3d5aa8" fill-opacity="0.7"/>
+            <circle cx="836" cy="42" r="3.5" fill="#3d5aa8" fill-opacity="0.7"/>
+            <circle cx="1037" cy="178" r="3.5" fill="#1e93d2" fill-opacity="0.7"/>
+            <circle cx="819" cy="243" r="2.5" fill="#3d5aa8" fill-opacity="0.7"/>
+            <circle cx="211" cy="148" r="5" fill="#3d5aa8" fill-opacity="0.7"/>
+            <circle cx="817" cy="358" r="5" fill="#1e93d2" fill-opacity="0.7"/>
+            <circle cx="124" cy="406" r="2.5" fill="#3d5aa8" fill-opacity="0.7"/>
+            <circle cx="1182" cy="282" r="7" fill="#3d5aa8" fill-opacity="0.7"/>
+            <circle cx="63" cy="0" r="2.5" fill="#f1b434" fill-opacity="0.9"/>
+            <circle cx="576" cy="200" r="3.5" fill="#3d5aa8" fill-opacity="0.7"/>
+            <circle cx="888" cy="306" r="7" fill="#3d5aa8" fill-opacity="0.7"/>
+            <circle cx="176" cy="348" r="7" fill="#1e93d2" fill-opacity="0.7"/>
+            <circle cx="358" cy="411" r="3.5" fill="#3d5aa8" fill-opacity="0.7"/>
+            <circle cx="910" cy="125" r="5" fill="#3d5aa8" fill-opacity="0.7"/>
+            <circle cx="427" cy="19" r="3.5" fill="#1e93d2" fill-opacity="0.7"/>
+            <circle cx="567" cy="124" r="3.5" fill="#3d5aa8" fill-opacity="0.7"/>
+            <circle cx="214" cy="505" r="5" fill="#3d5aa8" fill-opacity="0.7"/>
+            <circle cx="556" cy="476" r="3.5" fill="#1e93d2" fill-opacity="0.7"/>
+            <circle cx="1086" cy="516" r="7" fill="#3d5aa8" fill-opacity="0.7"/>
+            <circle cx="658" cy="84" r="2.5" fill="#3d5aa8" fill-opacity="0.7"/>
+            <circle cx="632" cy="598" r="3.5" fill="#1e93d2" fill-opacity="0.7"/>
+            <circle cx="1092" cy="226" r="7" fill="#f1b434" fill-opacity="0.9"/>
+            <circle cx="978" cy="331" r="7" fill="#3d5aa8" fill-opacity="0.7"/>
+            <circle cx="743" cy="77" r="7" fill="#1e93d2" fill-opacity="0.7"/>
+            <circle cx="1060" cy="36" r="2.5" fill="#3d5aa8" fill-opacity="0.7"/>
+            <circle cx="912" cy="584" r="7" fill="#3d5aa8" fill-opacity="0.7"/>
+            <circle cx="1051" cy="594" r="3.5" fill="#1e93d2" fill-opacity="0.7"/>
+            <circle cx="531" cy="46" r="2.5" fill="#3d5aa8" fill-opacity="0.7"/>
+            <circle cx="485" cy="270" r="2.5" fill="#3d5aa8" fill-opacity="0.7"/>
+            <circle cx="1182" cy="505" r="2.5" fill="#1e93d2" fill-opacity="0.7"/>
+            <circle cx="487" cy="343" r="5" fill="#3d5aa8" fill-opacity="0.7"/>
+            <circle cx="100" cy="548" r="2.5" fill="#3d5aa8" fill-opacity="0.7"/>
+            <circle cx="632" cy="153" r="3.5" fill="#1e93d2" fill-opacity="0.7"/>
+            <circle cx="964" cy="636" r="2.5" fill="#3d5aa8" fill-opacity="0.7"/>
+            <circle cx="1002" cy="252" r="3.5" fill="#f1b434" fill-opacity="0.9"/>
+            <circle cx="1045" cy="429" r="3.5" fill="#1e93d2" fill-opacity="0.7"/>
+            </svg>
+            <div class="container">
+                <div class="hero-grid">
+                    <div>
+                        <span class="eyebrow">The open science program of MDA's MOVR registry</span>
+                        <h1>Open tools and <em>citable</em> data for neuromuscular disease research</h1>
+                        <p class="lede">OpenMOVR publishes MOVR registry statistics that anyone can cite, releases the code behind them, and is building the next generation of MOVR in the open, with the families, clinicians and researchers who rely on it.</p>
+                        <div class="btn-group">
+                            <a href="https://openmovr-gen1.streamlit.app/" class="btn btn-accent btn-lg" target="_blank" rel="noopener">Explore the data <span class="arrow" aria-hidden="true">→</span></a>
+                            <a href="https://mdausa.tfaforms.net/389761" class="btn btn-ghost-light btn-lg" target="_blank" rel="noopener">Request MOVR data</a>
                         </div>
                     </div>
 
-                    <div class="card" style="text-align: center; border-top: 3px solid var(--mda-gold);">
-                        <div class="card-content">
-                            <h3>Open Science</h3>
-                            <p>Transparent research processes, shared datasets, and collaborative frameworks that benefit the entire research ecosystem.</p>
+                    <aside class="hero-panel" aria-labelledby="glance-title">
+                        <div class="hero-panel-title" id="glance-title">MOVR Data Hub at a glance</div>
+                        <div class="hero-stats">
+                            <div>
+                                <div class="hero-stat-value">3,444</div>
+                                <div class="hero-stat-label">Participants</div>
+                            </div>
+                            <div>
+                                <div class="hero-stat-value">10,489</div>
+                                <div class="hero-stat-label">Clinical encounters</div>
+                            </div>
+                            <div>
+                                <div class="hero-stat-value">7</div>
+                                <div class="hero-stat-label">Neuromuscular diseases</div>
+                            </div>
+                            <div>
+                                <div class="hero-stat-value">60</div>
+                                <div class="hero-stat-label">Participating sites</div>
+                            </div>
+                        </div>
+                        <p class="hero-panel-note">
+                            MDA MOVR Data Hub Study (MOVR 1.0), excluding USNDR legacy participants. Enrollment through March 25, 2025.
+                            Source: <a href="https://openmovr-gen1.streamlit.app/Community_Snapshot" target="_blank" rel="noopener">Community Snapshot</a>, OpenMOVR App v0.3.0.
+                        </p>
+                    </aside>
+                </div>
+            </div>
+        </section>
+
+        <!-- Available today -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="eyebrow">Available today</span>
+                    <h2>Use MOVR data now</h2>
+                    <p>Twelve years of registry data from ALS, DMD, SMA, BMD, LGMD, FSHD and Pompe disease, made usable at three levels of access.</p>
+                </div>
+
+                <div class="grid-3">
+                    <a class="card card-link card-feature is-gold reveal" href="https://openmovr-gen1.streamlit.app/Community_Snapshot" target="_blank" rel="noopener">
+                        <div class="icon-tile" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
+                        </div>
+                        <span class="pill pill-live">Public</span>
+                        <h3>Community Snapshot</h3>
+                        <p>Study-wide demographics, health insurance and diagnosis elements across all seven diseases, with the methods, denominators and a suggested citation alongside every figure.</p>
+                        <div class="card-foot"><span class="text-link">Open the Snapshot →</span></div>
+                    </a>
+
+                    <a class="card card-link card-feature is-sky reveal" href="https://openmovr-gen1.streamlit.app/" target="_blank" rel="noopener">
+                        <div class="icon-tile" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3M8 11h6M11 8v6"/></svg>
+                        </div>
+                        <span class="pill pill-live">Public + DUA</span>
+                        <h3>OpenMOVR App</h3>
+                        <p>Explore cohorts by disease, see where participants receive care, and browse 1,024 curated data fields. Clinical analytics for DMD, LGMD, ALS and SMA open up under a data use agreement.</p>
+                        <div class="card-foot"><span class="text-link">Launch the app →</span></div>
+                    </a>
+
+                    <a class="card card-link card-feature reveal" href="https://mdausa.tfaforms.net/389761" target="_blank" rel="noopener">
+                        <div class="icon-tile" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg>
+                        </div>
+                        <span class="pill">By application</span>
+                        <h3>Research data requests</h3>
+                        <p>The MOVR dataset remains available for approved research after the Data Hub study closed in 2025. Tell us about your study and the MOVR team will follow up.</p>
+                        <div class="card-foot"><span class="text-link">Start a request →</span></div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- How we work -->
+        <section class="section section-paper">
+            <div class="container">
+                <div class="grid-2" style="align-items: start; gap: var(--space-8);">
+                    <div class="section-header" style="margin-bottom: 0;">
+                        <span class="eyebrow">How we work</span>
+                        <h2>Open by default, careful with what matters</h2>
+                        <p>Registry numbers end up in grant applications, publications and policy work. Everything we publish is built to hold up when someone checks it.</p>
+                        <div class="btn-group" style="margin-top: var(--space-6);">
+                            <a href="https://github.com/OpenMOVR" class="btn btn-primary" target="_blank" rel="noopener">OpenMOVR on GitHub</a>
+                            <a href="docs/developer.html" class="btn btn-outline">Developer docs</a>
                         </div>
                     </div>
 
-                    <div class="card" style="text-align: center; border-top: 3px solid var(--mda-green);">
-                        <div class="card-content">
-                            <h3>Community Collaboration</h3>
-                            <p>Bringing together researchers, developers, patients, and institutions under unified governance and shared goals.</p>
+                    <div class="principles grid" style="gap: var(--space-6);">
+                        <div class="principle reveal">
+                            <h3>Every figure names its population</h3>
+                            <p>Published statistics carry their cohort, denominator, data date and app version, so a number quoted elsewhere can be traced back and checked.</p>
+                        </div>
+                        <div class="principle reveal">
+                            <h3>The code is public</h3>
+                            <p>The app, the analytics library and this site are open source under the MIT license. Methods are reviewable, and anyone can contribute.</p>
+                        </div>
+                        <div class="principle reveal">
+                            <h3>Participants are protected</h3>
+                            <p>Only aggregates are public, and small cells are suppressed. Record-level data is shared only under a data use agreement.</p>
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <div style="text-align: center; margin-top: var(--spacing-lg); padding: var(--spacing-md); background: linear-gradient(135deg, var(--light-gray) 0%, var(--mda-tan) 100%); border-radius: var(--radius-lg);">
-                    <h4 style="color: var(--mda-blue); margin-bottom: var(--spacing-sm);">Much of this is still being built out</h4>
-                    <p style="max-width: 600px; margin: 0 auto;">We're in the early stages — validating MOVR 2.0, developing open source tools, and establishing the foundations for transparent, community-driven neuromuscular disease research.</p>
+        <!-- Roadmap -->
+        <section class="section section-navy" id="roadmap">
+            <div class="container">
+                <div class="section-header">
+                    <span class="eyebrow">Where MOVR is going</span>
+                    <h2>From registry to open platform</h2>
+                    <p style="color: #c3cce4;">MOVR has run in phases since 2013. Each one built on the last, and the next is shaped by the families who tested it.</p>
+                </div>
+
+                <ol class="roadmap">
+                    <li class="is-done reveal">
+                        <div class="roadmap-when">2013 – 2018</div>
+                        <h3>USNDR</h3>
+                        <p>The United States Neuromuscular Disease Registry, MOVR's foundation study, across 26 sites and 4 diseases.</p>
+                    </li>
+                    <li class="is-done reveal">
+                        <div class="roadmap-when">2019 – 2025</div>
+                        <h3>MOVR Data Hub</h3>
+                        <p>MDA's flagship registry, covering 7 diseases at 60+ sites. Data collection has ended, and the dataset remains open to approved research.</p>
+                    </li>
+                    <li class="is-done reveal">
+                        <div class="roadmap-when">2025 – 2026</div>
+                        <h3>MOVR 2.0 pilot</h3>
+                        <p>Families living with DMD, SMA and LGMD tested candidate platforms and told us what works. Enrollment is closed.</p>
+                    </li>
+                    <li class="is-now reveal">
+                        <div class="roadmap-when">Next · Q1 2027</div>
+                        <h3>MOVR 2.0 launch</h3>
+                        <p>Recruitment opens for the full MOVR 2.0 platform, shaped by what the pilot taught us.</p>
+                    </li>
+                </ol>
+
+                <div style="margin-top: var(--space-7);">
+                    <a href="docs/index.html" class="btn btn-ghost-light">Read the MOVR 2.0 updates <span class="arrow" aria-hidden="true">→</span></a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Section 2: Our Vision & Impact -->
-    <section class="section" id="vision" style="background: linear-gradient(135deg, var(--mda-blue) 0%, var(--mda-purple) 100%); color: var(--white);">
-        <div class="container">
-            <div class="section-header text-center">
-                <h2 style="color: var(--white);">Building on a Foundation of Trust</h2>
-                <p style="color: rgba(255, 255, 255, 0.9);">12 years of proven excellence in neuromuscular disease research</p>
-            </div>
-
-            <div style="max-width: 800px; margin: 0 auto;">
-                <!-- Configurable Stats -->
-                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--spacing-md); margin: var(--spacing-md) 0; padding: var(--spacing-md); background: rgba(255, 255, 255, 0.1); border-radius: var(--radius-lg); backdrop-filter: blur(10px);">
-                    <div style="text-align: center;">
-                        <div style="font-size: 1.75rem; font-weight: 700; color: var(--mda-gold);" id="stat-participants">3,444</div>
-                        <div style="opacity: 0.9; font-size: 0.85rem;">Participants</div>
-                    </div>
-                    <div style="text-align: center;">
-                        <div style="font-size: 1.75rem; font-weight: 700; color: var(--mda-gold);" id="stat-visits">10,489</div>
-                        <div style="opacity: 0.9; font-size: 0.85rem;">Clinical Encounters</div>
-                    </div>
-                    <div style="text-align: center;">
-                        <div style="font-size: 1.75rem; font-weight: 700; color: var(--mda-gold);" id="stat-years">12</div>
-                        <div style="opacity: 0.9; font-size: 0.85rem;">Years</div>
-                    </div>
-                </div>
-                <p style="text-align: center; font-size: 0.8rem; opacity: 0.85; margin-top: calc(-1 * var(--spacing-sm));">
-                    MDA MOVR Data Hub Study (MOVR 1.0), excluding USNDR legacy participants. Enrollment through March 25, 2025.
-                    Source: <a href="https://openmovr-gen1.streamlit.app/Community_Snapshot" target="_blank" style="color: var(--mda-gold);">Community Snapshot</a>, OpenMOVR App v0.3.0.
-                </p>
-
-                <div style="background: rgba(255, 255, 255, 0.15); padding: var(--spacing-md); border-radius: var(--radius-lg); backdrop-filter: blur(10px); margin-top: var(--spacing-md);">
-                    <h4 style="color: var(--white); margin-bottom: var(--spacing-sm);">Our Vision: Open Science, Eventually Open Data</h4>
-                    <p style="line-height: 1.6; margin-bottom: var(--spacing-sm);">
-                        MOVR is evolving from a traditional registry into an <strong>open science initiative</strong> — creating transparent, community-driven software tools that accelerate neuromuscular disease research.
-                    </p>
-                    <p style="line-height: 1.6;">
-                        We're building the infrastructure for modern research: FHIR-based EMR integration, automated data processing, and collaborative frameworks that bring researchers, patients, and institutions together.
-                    </p>
+        <!-- Audiences -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="eyebrow">Get involved</span>
+                    <h2>Find your way in</h2>
                 </div>
 
-                <div class="grid grid-2" style="gap: var(--spacing-md); margin-top: var(--spacing-md);">
-                    <div style="background: rgba(255, 255, 255, 0.1); padding: var(--spacing-md); border-radius: var(--radius-lg); backdrop-filter: blur(10px);">
-                        <h4 style="color: var(--mda-gold); margin-bottom: var(--spacing-sm); font-size: 1rem;">Current Focus (Q4 2026)</h4>
-                        <ul style="line-height: 1.6; font-size: 0.9rem; padding-left: var(--spacing-md);">
-                            <li>Preparing the MOVR 2.0 full launch (recruitment Q1 2027)</li>
-                            <li>Public, citable registry statistics</li>
-                            <li>Open source tool development</li>
-                            <li>Community building via GSoC</li>
-                            <li>Transparent governance frameworks</li>
+                <div class="grid-4">
+                    <div class="card audience reveal">
+                        <div class="icon-tile" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6L4.5 18.5A1.7 1.7 0 0 0 6 21h12a1.7 1.7 0 0 0 1.5-2.5L14 9V3"/><path d="M7 15h10"/></svg>
+                        </div>
+                        <h3>Researchers</h3>
+                        <ul>
+                            <li><a href="https://openmovr-gen1.streamlit.app/Community_Snapshot" target="_blank" rel="noopener">Cite registry figures</a></li>
+                            <li><a href="https://openmovr-gen1.streamlit.app/" target="_blank" rel="noopener">Explore cohorts</a></li>
+                            <li><a href="https://mdausa.tfaforms.net/389761" target="_blank" rel="noopener">Request data</a></li>
+                            <li><a href="docs/movr-datahub-analytics.html">Python library</a></li>
                         </ul>
                     </div>
 
-                    <div style="background: rgba(255, 255, 255, 0.1); padding: var(--spacing-md); border-radius: var(--radius-lg); backdrop-filter: blur(10px);">
-                        <h4 style="color: var(--mda-gold); margin-bottom: var(--spacing-sm); font-size: 1rem;">What's Next</h4>
-                        <ul style="line-height: 1.6; font-size: 0.9rem; padding-left: var(--spacing-md);">
-                            <li>Clinical data integration libraries</li>
-                            <li>Research data access tools</li>
-                            <li>Collaborative research platform</li>
-                            <li>AI-powered analytics & insights</li>
+                    <div class="card audience reveal">
+                        <div class="icon-tile" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5s-7.5-4.4-7.5-10.2A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7c0 5.8-7.5 10.2-7.5 10.2z"/></svg>
+                        </div>
+                        <h3>Families &amp; patients</h3>
+                        <ul>
+                            <li><a href="pilot/">Pilot update</a></li>
+                            <li><a href="docs/index.html">What's changing with MOVR</a></li>
+                            <li><a href="mailto:mdamovr@mdausa.org">Contact the MOVR team</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="card audience reveal">
+                        <div class="icon-tile" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M13.5 4l-3 16"/></svg>
+                        </div>
+                        <h3>Developers</h3>
+                        <ul>
+                            <li><a href="docs/developer.html">Developer docs</a></li>
+                            <li><a href="gsoc.html">Google Summer of Code</a></li>
+                            <li><a href="https://github.com/OpenMOVR" target="_blank" rel="noopener">GitHub</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="card audience reveal">
+                        <div class="icon-tile" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M2.5 20a5.5 5.5 0 0 1 11 0M10.5 20a5.5 5.5 0 0 1 11 0"/></svg>
+                        </div>
+                        <h3>Partners &amp; industry</h3>
+                        <ul>
+                            <li><a href="mailto:mdamovr@mdausa.org?subject=Partnering%20with%20MOVR">Partner on MOVR 2.0</a></li>
+                            <li><a href="https://www.mda.org/science/movr2" target="_blank" rel="noopener">MDA's MOVR initiative</a></li>
                         </ul>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Section 3: Get Involved -->
-    <section class="section" style="background: var(--white);">
-        <div class="container">
-            <div class="section-header text-center">
-                <h2>Get Involved</h2>
-                <p>Join us in building the future of neuromuscular disease research</p>
-            </div>
-
-            <div style="max-width: 800px; margin: 0 auto;">
-                <div class="grid grid-2" style="gap: var(--spacing-md); margin-bottom: var(--spacing-lg);">
-                    <div class="card" style="border-left: 3px solid var(--mda-purple);">
-                        <div class="card-content">
-                            <h4 style="color: var(--mda-purple);">For Developers</h4>
-                            <p style="margin-bottom: var(--spacing-sm);">Join our <strong>Google Summer of Code</strong> program and help build open source tools for neuromuscular disease research.</p>
-                            <p style="margin-bottom: var(--spacing-sm);"><strong>Featured:</strong> MOVR DataHub Analytics — Python library for research data access.</p>
-                            <a href="gsoc.html" class="btn btn-primary">GSoC Program</a>
-                        </div>
+                <div class="cta-band reveal" style="margin-top: var(--space-8);">
+                    <div>
+                        <h2>Questions about MOVR data?</h2>
+                        <p>The MOVR team answers questions about the registry, data access and MOVR 2.0.</p>
                     </div>
-
-                    <div class="card" style="border-left: 3px solid var(--mda-green);">
-                        <div class="card-content">
-                            <h4 style="color: var(--mda-green);">For Patients & Families</h4>
-                            <p style="margin-bottom: var(--spacing-sm);"><strong>MOVR 2.0 Pilot</strong> enrollment is closed. Thank you to every family who helped co-create the next generation data platform.</p>
-                            <p style="margin-bottom: var(--spacing-sm);">Recruitment for the <strong>full MOVR 2.0 launch</strong> begins in Q1 2027.</p>
-                            <a href="pilot/" class="btn btn-primary" style="background: var(--mda-gold); border-color: var(--mda-gold);">Pilot Update</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div style="text-align: center; padding: var(--spacing-md); background: linear-gradient(135deg, var(--dark-gray) 0%, var(--mda-blue) 100%); color: var(--white); border-radius: var(--radius-lg);">
-                    <h4 style="color: var(--white); margin-bottom: var(--spacing-sm);">Stay Connected</h4>
-                    <p style="margin-bottom: var(--spacing-md); opacity: 0.9;">Whether you're a researcher, developer, clinician, or someone passionate about advancing neuromuscular disease research.</p>
-
-                    <div class="btn-group justify-center">
-                        <a href="docs/index.html" class="btn btn-primary">MOVR 2.0 Docs</a>
-                        <a href="docs/developer.html" class="btn btn-outline" style="border-color: var(--white); color: var(--white); background: rgba(255, 255, 255, 0.1);">Developer Docs</a>
-                        <a href="mailto:mdamovr@mdausa.org" class="btn btn-outline" style="border-color: var(--white); color: var(--white); background: rgba(255, 255, 255, 0.1);">Contact</a>
-                    </div>
+                    <a href="mailto:mdamovr@mdausa.org" class="btn btn-primary btn-lg">Email mdamovr@mdausa.org</a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div>
-                    <h4>OpenMOVR</h4>
-                    <p>Open science initiative for neuromuscular disease research. Building transparent, community-driven tools that accelerate discovery.</p>
-                    <p style="margin-top: var(--spacing-sm);"><strong>Contact:</strong> mdamovr@mdausa.org</p>
-                </div>
+    <div id="footer-placeholder"></div>
 
-                <div>
-                    <h4>Documentation</h4>
-                    <ul style="list-style: none; padding: 0;">
-                        <li><a href="docs/index.html">MOVR 2.0</a></li>
-                        <li><a href="docs/developer.html">Developer Docs</a></li>
-                        <li><a href="docs/movr-datahub-analytics.html">DataHub Analytics</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4>Get Involved</h4>
-                    <ul style="list-style: none; padding: 0;">
-                        <li><a href="gsoc.html">GSoC Program</a></li>
-                        <li><a href="pilot/">MOVR 2.0 Pilot</a></li>
-                        <li><a href="mailto:mdamovr@mdausa.org">Contact Team</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4>Official Links</h4>
-                    <ul style="list-style: none; padding: 0;">
-                        <li><a href="https://www.mda.org/science/movr2" target="_blank">MDA MOVR Initiative</a></li>
-                        <li><a href="https://mdausa.tfaforms.net/389761" target="_blank">Data Request</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div style="border-top: 1px solid rgba(255, 255, 255, 0.2); margin-top: var(--spacing-md); padding-top: var(--spacing-sm); text-align: center; opacity: 0.8;">
-                <p>OpenMOVR — An independently managed open science initiative, established in 2025 and leveraging open source methods.</p>
-                <p style="margin-top: 0.5rem;"><strong>Contact MDA MOVR Team:</strong> mdamovr@mdausa.org</p>
-                <p style="margin-top: 0.25rem;"><strong>Contact Andre:</strong> andre.paredes@ymail.com</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Scripts -->
     <script src="js/config.js"></script>
     <script src="js/main.js"></script>
-    
-    <script>
-        // Apply configurable stats
-        document.getElementById('stat-participants').textContent = STATS.participants.toLocaleString();
-        document.getElementById('stat-visits').textContent = STATS.clinicalVisits.toLocaleString();
-        document.getElementById('stat-years').textContent = STATS.yearsExperience;
-        
-        // Hero banner image cycling
-        const heroBackground = document.querySelector('.hero-background');
-        const bannerImages = [
-            'assets/movr_hero_banner_1.jpg',
-            'assets/movr_hero_banner_2.jpg',
-            'assets/movr_hero_banner_3.jpg'
-        ];
-        
-        let currentImageIndex = 0;
-        
-        function cycleBannerImage() {
-            heroBackground.style.backgroundImage = `url('${bannerImages[currentImageIndex]}')`;
-            currentImageIndex = (currentImageIndex + 1) % bannerImages.length;
-        }
-        
-        cycleBannerImage();
-        setInterval(cycleBannerImage, 5000);
-    </script>
+    <script src="js/header-loader.js"></script>
 </body>
 </html>
