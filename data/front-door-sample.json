@@ -6,20 +6,85 @@
   "as_of": "2027-06-30",
   "suppress_below": 10,
   "modalities": [
-    { "id": "ehr",    "name": "Health records",    "sub": "Diagnoses, medications, labs", "status": "live" },
-    { "id": "docs",   "name": "Medical documents", "sub": "Genetic and imaging reports",  "status": "live" },
-    { "id": "notes",  "name": "Clinician notes",   "sub": "Function and milestones",      "status": "live" },
-    { "id": "survey", "name": "Surveys",           "sub": "What daily life is like",      "status": "planned" },
-    { "id": "wear",   "name": "Wearables",         "sub": "Steps and mobility",           "status": "planned" },
-    { "id": "ecrf",   "name": "Clinic forms",      "sub": "Entered by care teams",        "status": "future" },
-    { "id": "bio",    "name": "Biospecimens",      "sub": "Blood samples",                "status": "future" }
+    {
+      "id": "ehr",
+      "name": "Health records",
+      "sub": "Diagnoses, medications, labs",
+      "status": "live"
+    },
+    {
+      "id": "docs",
+      "name": "Medical documents",
+      "sub": "Genetic and imaging reports",
+      "status": "live"
+    },
+    {
+      "id": "notes",
+      "name": "Clinician notes",
+      "sub": "Function and milestones",
+      "status": "live"
+    },
+    {
+      "id": "survey",
+      "name": "Surveys",
+      "sub": "What daily life is like",
+      "status": "planned"
+    },
+    {
+      "id": "wear",
+      "name": "Wearables",
+      "sub": "Steps and mobility",
+      "status": "planned"
+    },
+    {
+      "id": "ecrf",
+      "name": "Clinic forms",
+      "sub": "Entered by care teams",
+      "status": "future"
+    },
+    {
+      "id": "bio",
+      "name": "Biospecimens",
+      "sub": "Blood samples",
+      "status": "future"
+    }
   ],
   "diseases": [
-    { "name": "SMA",             "participants": 140, "coverage": { "ehr": 97, "docs": 68, "notes": 44 } },
-    { "name": "LGMD",            "participants": 120, "coverage": { "ehr": 95, "docs": 62, "notes": 38 } },
-    { "name": "DMD",             "participants": 90,  "coverage": { "ehr": 96, "docs": 66, "notes": 42 } },
-    { "name": "CMT",             "participants": 70,  "coverage": { "ehr": 93, "docs": 55, "notes": 31 } },
-    { "name": "BMD",             "participants": 35,  "coverage": { "ehr": 94, "docs": 57, "notes": 35 } },
-    { "name": "ChAT deficiency", "participants": 6,   "coverage": { "ehr": 100, "docs": 50, "notes": 33 } }
+    {
+      "name": "SMA",
+      "participants": 140,
+      "coverage": {
+        "ehr": 97,
+        "docs": 68,
+        "notes": 44
+      }
+    },
+    {
+      "name": "DMD",
+      "participants": 120,
+      "coverage": {
+        "ehr": 96,
+        "docs": 66,
+        "notes": 42
+      }
+    },
+    {
+      "name": "LGMD",
+      "participants": 90,
+      "coverage": {
+        "ehr": 95,
+        "docs": 62,
+        "notes": 38
+      }
+    },
+    {
+      "name": "Other",
+      "participants": 6,
+      "coverage": {
+        "ehr": 100,
+        "docs": 50,
+        "notes": 33
+      }
+    }
   ]
 }

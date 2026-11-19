@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OpenMOVR | MDA's MOVR Data Hub, open source</title>
+    <title>OpenMOVR | The open source program of MDA's MOVR registry</title>
 
-    <meta name="description" content="OpenMOVR is the open source space of the Muscular Dystrophy Association's MOVR Data Hub: citable registry statistics, open source tools, and the path to MOVR 2.0.">
+    <meta name="description" content="OpenMOVR is the open source program of the Muscular Dystrophy Association's MOVR registry. Citable registry figures, open source tools, and a place for volunteers to help.">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
@@ -40,12 +40,6 @@
 <body>
     <a class="skip-link" href="#main">Skip to content</a>
 
-    <div class="notice-bar" role="region" aria-label="Announcement">
-        <div class="container">
-            <span><strong>MOVR 2.0 pilot enrollment is closed.</strong> Thank you to every family who took part. Recruitment for the full launch opens in Q1 2027.</span>
-            <a href="pilot/">Read the update</a>
-        </div>
-    </div>
 
     <div id="header-placeholder"></div>
 
@@ -174,13 +168,14 @@
             <div class="container">
                 <div class="hero-grid">
                     <div>
-                        <span class="eyebrow">MDA's MOVR Data Hub · Open source</span>
+                        <span class="eyebrow">MDA's MOVR registry · Open source</span>
                         <h1>Open tools and <em>citable</em> data for neuromuscular disease research</h1>
-                        <p class="lede">OpenMOVR is the open source space of the Muscular Dystrophy Association's MOVR Data Hub. We publish registry statistics anyone can cite, release the code behind them, and build the next generation of MOVR in the open, with the families, clinicians and researchers who rely on it.</p>
+                        <p class="lede">OpenMOVR is the open source program of the Muscular Dystrophy Association's MOVR registry. We publish registry figures anyone can cite, share the code behind them, and welcome volunteers who want to make MOVR data more useful.</p>
                         <div class="btn-group">
                             <a href="https://openmovr-gen1.streamlit.app/" class="btn btn-accent btn-lg" target="_blank" rel="noopener">Explore the data <span class="arrow" aria-hidden="true">→</span></a>
                             <a href="https://mdausa.tfaforms.net/389761" class="btn btn-ghost-light btn-lg" target="_blank" rel="noopener">Request MOVR data</a>
                         </div>
+                        <p class="hero-note"><strong>MOVR 2.0 pilot enrollment is closed.</strong> Thank you to every family who took part. Recruitment for the full launch opens in Q1 2027. <a href="pilot/">Read the update</a></p>
                     </div>
 
                     <aside class="hero-panel" aria-labelledby="glance-title">
@@ -219,7 +214,7 @@
                 <div class="section-header">
                     <span class="eyebrow">Available today</span>
                     <h2>Use MOVR data now</h2>
-                    <p>Twelve years of registry data from ALS, DMD, SMA, BMD, LGMD, FSHD and Pompe disease: explore it in the app, request it for your study, or build on the code.</p>
+                    <p>Twelve years of registry data from ALS, DMD, SMA, BMD, LGMD, FSHD and Pompe disease. Explore it in the app, request it for your study, or build on the code.</p>
                 </div>
 
                 <div class="grid-3">
@@ -249,42 +244,72 @@
                         </div>
                         <span class="pill">MIT license</span>
                         <h3>Open source code</h3>
-                        <p>The app, the DataHub Analytics Python library and this site are developed in the open. Read the methods behind every figure, open an issue, or contribute.</p>
+                        <p>The app, the DataHub Analytics Python library and this site are developed publicly on GitHub. Read the methods behind every figure, open an issue, or contribute.</p>
                         <div class="card-foot"><span class="text-link">OpenMOVR on GitHub →</span></div>
                     </a>
                 </div>
             </div>
         </section>
 
-        <!-- How we work -->
+        <!-- Why open source -->
         <section class="section section-paper">
             <div class="container">
                 <div class="grid-2" style="align-items: start; gap: var(--space-8);">
                     <div class="section-header" style="margin-bottom: 0;">
-                        <span class="eyebrow">How we work</span>
-                        <h2>Open by default, careful with what matters</h2>
-                        <p>Registry numbers end up in grant applications, publications and policy work. Everything we publish is built to hold up when someone checks it.</p>
+                        <span class="eyebrow">Why open source</span>
+                        <h2>A registry this important deserves more hands</h2>
+                        <p>MOVR is a nonprofit registry, stewarded by MDA alongside patient advocates. Open source has a long history of volunteers building tools that small teams could never fund alone. OpenMOVR brings that tradition to MOVR.</p>
                         <div class="btn-group" style="margin-top: var(--space-6);">
-                            <a href="https://github.com/OpenMOVR" class="btn btn-primary" target="_blank" rel="noopener">OpenMOVR on GitHub</a>
-                            <a href="docs/developer.html" class="btn btn-outline">Developer docs</a>
+                            <a href="contribute.html" class="btn btn-primary">Why contribute</a>
+                            <a href="https://github.com/OpenMOVR" class="btn btn-outline" target="_blank" rel="noopener">OpenMOVR on GitHub</a>
                         </div>
                     </div>
 
                     <div class="principles grid" style="gap: var(--space-6);">
                         <div class="principle reveal">
-                            <h3>Every figure names its population</h3>
-                            <p>Published statistics carry their cohort, denominator, data date and app version, so a number quoted elsewhere can be traced back and checked.</p>
+                            <h3>Volunteers make the data more useful</h3>
+                            <p>Google Summer of Code contributors, technologists, data scientists and graduate students write the tools that clean, document and analyze MOVR data.</p>
                         </div>
                         <div class="principle reveal">
-                            <h3>The code is public</h3>
-                            <p>The app, the analytics library and this site are open source under the MIT license. Methods are reviewable, and anyone can contribute.</p>
+                            <h3>Research keeps moving when funding is thin</h3>
+                            <p>When grants and budgets are tight, volunteer analytics still turn registry data into findings.</p>
                         </div>
                         <div class="principle reveal">
-                            <h3>Participants are protected</h3>
-                            <p>Only aggregates are public, and small cells are suppressed. Record-level data is shared only under a data use agreement.</p>
+                            <h3>Contributors get something back</h3>
+                            <p>Real clinical data problems, mentorship from the MOVR team, public credit and work for a portfolio.</p>
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- Data protection -->
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="eyebrow">Data sharing</span>
+                    <h2>How MOVR data is protected</h2>
+                    <p>Open tools and careful data sharing go together. Here is how MOVR handles the data people trust it with.</p>
+                </div>
+                <div class="grid-4">
+                    <div class="card reveal">
+                        <h3>IRB-approved protocol</h3>
+                        <p>MOVR runs under an IRB-approved research protocol. Every use of data has to fit what participants consented to.</p>
+                    </div>
+                    <div class="card reveal">
+                        <h3>Free for academic research</h3>
+                        <p>Academic researchers use MOVR data at no cost, under a strict data use agreement.</p>
+                    </div>
+                    <div class="card reveal">
+                        <h3>Reviewed by the community</h3>
+                        <p>A governance board and advisory committees review data requests. In MOVR 1.0 they included patient advocates, clinicians and registry experts. MOVR 2.0's groups are being formed now.</p>
+                    </div>
+                    <div class="card reveal">
+                        <h3>Only counts are public</h3>
+                        <p>Published figures are counts with small groups hidden. The MDA MOVR team monitors every use of record-level data.</p>
+                    </div>
+                </div>
+                <p style="margin-top: var(--space-5);"><a href="faq.html#data" class="text-link">How data sharing works →</a></p>
             </div>
         </section>
 
@@ -335,8 +360,8 @@
                     </a>
                     <div>
                         <span class="eyebrow">Part of the Muscular Dystrophy Association</span>
-                        <h2>MOVR is MDA's registry. OpenMOVR is its open source space.</h2>
-                        <p>MOVR was created by the Muscular Dystrophy Association to capture the real-world experience of people living with neuromuscular disease, across 60+ clinical sites in the United States. OpenMOVR opens that work up: the tools, the methods and the figures.</p>
+                        <h2>MOVR is MDA's registry. OpenMOVR is its open source program.</h2>
+                        <p>MDA created MOVR to capture the real-world experience of people living with neuromuscular disease, at 60+ clinical sites across the United States. OpenMOVR shares the tools, methods and figures that come out of that work.</p>
                         <div class="btn-group" style="margin-top: var(--space-5);">
                             <a href="https://www.mda.org" class="btn btn-primary" target="_blank" rel="noopener">Learn about MDA <span class="arrow" aria-hidden="true">→</span></a>
                             <a href="https://www.mda.org/science/movr2" class="btn btn-outline" target="_blank" rel="noopener">MDA's MOVR initiative</a>
@@ -384,8 +409,9 @@
                         <div class="icon-tile" aria-hidden="true">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M13.5 4l-3 16"/></svg>
                         </div>
-                        <h3>Developers</h3>
+                        <h3>Contributors</h3>
                         <ul>
+                            <li><a href="contribute.html">Why contribute</a></li>
                             <li><a href="docs/developer.html">Developer docs</a></li>
                             <li><a href="gsoc.html">Google Summer of Code</a></li>
                             <li><a href="https://github.com/OpenMOVR" target="_blank" rel="noopener">GitHub</a></li>

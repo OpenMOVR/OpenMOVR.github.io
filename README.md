@@ -25,6 +25,7 @@ OpenMOVR.github.io/
 ├── movr2.html              # MOVR 2.0: pilot recap, what's coming
 ├── front-door.html         # MOVR front door, today and after launch
 ├── faq.html                # FAQ
+├── contribute.html         # Why contribute
 ├── gsoc.html               # Google Summer of Code program
 ├── docs/
 │   ├── developer.html      # Developer docs

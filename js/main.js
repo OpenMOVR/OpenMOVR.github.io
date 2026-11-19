@@ -16,11 +16,11 @@ function loadHeaderNavigation() {
     const isHome = !inSubdir && (pathname === '/' || pathname.endsWith('/') || pathname.endsWith('/index.html'));
 
     navElement.innerHTML = window.movrConfig.navigation
-        .filter(item => !(isHome && item.href === 'index.html'))
         .map(item => {
             if (item.dropdown) return createDropdownNavigation(item, prefix, pathname);
             const isActive = !isHome && !inSubdir && pathname.endsWith('/' + item.href);
-            return `<a href="${prefix}${item.href}" class="nav-link${isActive ? ' nav-active' : ''}">${item.label}</a>`;
+            const cls = 'nav-link' + (item.pill ? ' nav-pill' : '') + (isActive ? ' nav-active' : '');
+            return `<a href="${prefix}${item.href}" class="${cls}">${item.label}</a>`;
         })
         .join('');
 

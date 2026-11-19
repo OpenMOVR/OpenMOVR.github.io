@@ -21,7 +21,7 @@
             <div class="container">
                 <span class="eyebrow">Developers</span>
                 <h1>Developer documentation</h1>
-                <div class="lede"><p>OpenMOVR maintains three public repositories plus research tools. Everything is on this page: use the contents to jump to a project.</p></div>
+                <div class="lede"><p>OpenMOVR maintains three public repositories plus research tools. Everything is on this page, and the contents list jumps to each project. New here? Start with <a href="../contribute.html">why contribute</a>.</p></div>
             </div>
         </section>
 
@@ -185,6 +185,8 @@ git checkout -b feature/your-feature-name</pre>
 ├── movr2.html              # MOVR 2.0: pilot recap, what's coming, front door
 ├── progress.html           # MOVR progress (renders data/progress.json)
 ├── front-door.html         # MOVR front door preview
+├── faq.html                # FAQ
+├── contribute.html         # Why contribute
 ├── gsoc.html               # Google Summer of Code program
 ├── docs/                   # Developer and library docs
 │   └── index.html          # Redirects to movr2.html
@@ -270,7 +272,7 @@ git push origin feature/viewer-enhancement
                     <div class="alert alert-primary">
                         <h4>Interactive MDA MOVR Study Analytics Dashboard</h4>
                         <p>Streamlit-based web application for exploring MDA MOVR Study data. Built for researchers, clinicians, and data analysts to understand disease cohorts, facility distributions, and data completeness across the MOVR registry.</p>
-                        <p><strong>Current release: v0.3.0</strong> (2026-09-28). Adds the public Community Snapshot page and a data provenance banner. Every page now states the data extract date, the statistics generation date and the app version.</p>
+                        <p>The <strong>current release is v0.3.0</strong> (2026-09-28). It adds the public Community Snapshot page and a data provenance banner. Every page now states the data extract date, the statistics generation date and the app version.</p>
                     </div>
 
                     <h3 id="quick-start-2">Quick Start</h3>
@@ -299,7 +301,7 @@ streamlit run app.py
                             <ul>
                                 <li>Study-wide demographics across all seven diseases</li>
                                 <li>Health insurance overall, by disease, by disease group and by age at enrollment</li>
-                                <li>Methods: source field, denominators, multi-select handling, small-cell suppression</li>
+                                <li>Methods covering the source field, denominators, multi-select handling and small-cell suppression</li>
                                 <li>Suggested citation, plus CSV/JSON downloads</li>
                             </ul>
                         </div>
@@ -428,7 +430,7 @@ python scripts/generate_curated_dictionary.py</pre>
                             <li>Update <code>api/__init__.py</code> exports</li>
                         </ol>
 
-                        <h4>GSOC Project: Evolving OpenMOVR App</h4>
+                        <h4>GSoC project, evolving the OpenMOVR App</h4>
                         <p>OpenMOVR App is an established GSOC 2026 project opportunity. Contributors can help expand the dashboard with new features, disease-specific overviews, enhanced analytics, and improved data visualization.</p>
 
                         <h4>Testing Locally</h4>
