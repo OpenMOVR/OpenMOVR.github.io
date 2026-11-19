@@ -108,7 +108,8 @@ function clearErrors() {
 }
 
 // Form Submission with enhanced features
-document.getElementById('pilot-form').addEventListener('submit', function(e) {
+// Pilot enrollment is closed; the form is no longer on the page
+document.getElementById('pilot-form')?.addEventListener('submit', function(e) {
     e.preventDefault();
     
     // Rate limiting check
