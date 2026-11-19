@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOVR Progress | OpenMOVR</title>
+
+    <meta name="description" content="Where MDA's MOVR registry stands today: MOVR 2.0 milestones, pilot results and MOVR Data Hub figures, each with its population and source.">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://openmovr.github.io/progress.html">
+    <meta property="og:title" content="MOVR Progress | OpenMOVR">
+    <meta property="og:description" content="Where MDA's MOVR registry stands today, with every figure's population and source.">
+    <meta property="og:image" content="https://openmovr.github.io/assets/movr_logo_clean.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://openmovr.github.io/progress.html">
+    <meta property="twitter:title" content="MOVR Progress | OpenMOVR">
+    <meta property="twitter:description" content="Where MDA's MOVR registry stands today, with every figure's population and source.">
+    <meta property="twitter:image" content="https://openmovr.github.io/assets/movr_logo_clean.jpg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,600;1,8..60,600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" type="image/png" href="assets/movr_logo_clean_nobackground.png">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-85RSP2VHG6"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-85RSP2VHG6');
+    </script>
+</head>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div id="header-placeholder"></div>
+
+    <main id="main">
+        <section class="page-hero">
+            <div class="container">
+                <span class="eyebrow">MOVR progress</span>
+                <h1>Where MOVR stands today</h1>
+                <p class="lede">The current state of MDA's MOVR registry on one page: MOVR 2.0 milestones, what the pilot produced, and what the MOVR Data Hub holds. Every figure names its population and source.</p>
+                <div class="progress-meta">
+                    <span><strong>Last updated:</strong> <span data-updated>November 19, 2026</span></span>
+                    <span><strong>Questions:</strong> <a href="mailto:mdamovr@mdausa.org" style="color: var(--gold);">mdamovr@mdausa.org</a></span>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-tight section section-paper">
+            <div class="container">
+                <div class="relation">
+                    <div class="relation-card is-here">
+                        <span class="card-kicker"><span>You are here</span><span>openmovr.github.io</span></span>
+                        <h3>OpenMOVR: the open record</h3>
+                        <p>Progress, figures, methods and code, published as things happen. Open to everyone, and built to be checked.</p>
+                    </div>
+                    <div class="relation-arrow" aria-hidden="true"><div><span>⇄</span>Same program, two front doors</div></div>
+                    <div class="relation-card">
+                        <span class="card-kicker"><span>MDA's official site</span><span>mda.org</span></span>
+                        <h3>MDA MOVR: where you'll join</h3>
+                        <p>MDA's home for MOVR, where participants will sign up when recruitment opens in Q1 2027. <a href="https://www.mda.org/science/movr2" target="_blank" rel="noopener">Visit MDA MOVR</a></p>
+                    </div>
+                </div>
+                <p class="relation-note">Until MDA's MOVR 2.0 site launches, OpenMOVR is where MOVR updates are published first.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div id="progress" data-config="data/progress.json" aria-live="polite">
+                    <p class="fd-error">Loading progress figures…</p>
+                </div>
+
+                <div class="cta-band" style="margin-top: var(--space-7);">
+                    <div>
+                        <h2>Want more detail?</h2>
+                        <p>Explore the MOVR Data Hub in the app, or read what the pilot taught us and what's coming in 2027.</p>
+                    </div>
+                    <div class="btn-group">
+                        <a href="https://openmovr-gen1.streamlit.app/Community_Snapshot" class="btn btn-primary" target="_blank" rel="noopener">Community Snapshot</a>
+                        <a href="movr2.html" class="btn btn-outline">MOVR 2.0 updates</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="js/config.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/header-loader.js"></script>
+    <script src="js/progress.js"></script>
+</body>
+</html>

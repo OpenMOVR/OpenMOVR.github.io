@@ -1,0 +1,43 @@
+{
+  "_note": "Single source for progress.html. Every figure carries its population and source. Update this file, not the page.",
+  "updated": "2026-11-19",
+  "milestones": [
+    { "when": "2019 – 2025", "title": "MOVR Data Hub (MOVR 1.0)", "status": "done", "text": "MDA's registry across 7 diseases and 60 sites. Data collection ended in 2025; the data remains available for approved research." },
+    { "when": "2025 – 2026", "title": "MOVR 2.0 pilot", "status": "done", "text": "Families living with SMA, DMD and LGMD tested competing platforms side by side. Enrollment is closed." },
+    { "when": "2026", "title": "Technology partner selected", "status": "done", "text": "MDA selected Vibrent Health as the technology partner for MOVR 2.0, informed by the pilot." },
+    { "when": "Q1 2027", "title": "MOVR 2.0 recruitment opens", "status": "next", "text": "Phase 1 opens to SMA, DMD, BMD, LGMD, CMT and ChAT deficiency." }
+  ],
+  "pilot": {
+    "title": "MOVR 2.0 pilot",
+    "population": "Participants in the MOVR 2.0 pilot (SMA, DMD and LGMD), 2025 – 2026",
+    "source": "MOVR team pilot records, reported November 2026",
+    "stats": [
+      { "value": 122, "label": "consented to the study" },
+      { "value": 44, "label": "shared health data", "detail": "36% of the 122 who consented" },
+      { "value": 6, "label": "focus group members", "detail": "patients and caregivers, interviewed in depth" }
+    ]
+  },
+  "movr1": {
+    "title": "MOVR Data Hub (MOVR 1.0)",
+    "population": "MDA MOVR Data Hub Study participants with validated enrollment (a record in demographics, diagnosis and encounters), excluding USNDR legacy participants",
+    "data_through": "2025-03-25",
+    "computed": "2026-09-28",
+    "source": "OpenMOVR App v0.3.0, Community Snapshot",
+    "source_url": "https://openmovr-gen1.streamlit.app/Community_Snapshot",
+    "stats": [
+      { "value": 3444, "label": "participants" },
+      { "value": 10489, "label": "clinical encounters" },
+      { "value": 60, "label": "participating sites" },
+      { "value": 1480, "label": "with 3 or more encounters", "detail": "43% of 3,444 participants" }
+    ],
+    "by_disease": [
+      { "name": "ALS",   "count": 1652 },
+      { "name": "DMD",   "count": 688 },
+      { "name": "SMA",   "count": 524 },
+      { "name": "LGMD",  "count": 210 },
+      { "name": "FSHD",  "count": 184 },
+      { "name": "BMD",   "count": 149 },
+      { "name": "Pompe", "count": 37 }
+    ]
+  }
+}

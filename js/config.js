@@ -14,6 +14,7 @@ const movrConfig = {
                 { label: "FAQ", href: "movr2.html#faq", description: "For participants and researchers" }
             ]
         },
+        { label: "Progress", href: "progress.html" },
         {
             label: "Developers",
             href: "docs/developer.html",

@@ -525,6 +525,40 @@ pre code { background: none; padding: 0; color: inherit; }
 .faq-group + .faq-group { margin-top: var(--space-7); }
 .faq-group h3 { margin-bottom: var(--space-3); font-size: 1rem; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; font-family: var(--font-sans); }
 
+/* ---------- Progress page ---------- */
+
+.progress-meta { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); font-size: 0.9375rem; color: #c3cce4; }
+.progress-meta strong { color: var(--white); font-weight: 600; }
+.progress-block { padding: var(--space-7) 0; border-top: 1px solid var(--line); }
+.progress-block:first-child { border-top: none; padding-top: 0; }
+.progress-block h2 { font-size: clamp(1.5rem, 2.8vw, 2rem); margin-bottom: var(--space-5); }
+.progress-sub { margin: var(--space-6) 0 var(--space-4); }
+.progress-bars { max-width: 720px; }
+.progress-bars .fd-bar-row { grid-template-columns: 80px minmax(0, 1fr) 130px; }
+.muted { color: var(--muted); }
+.progress-source { font-size: 0.875rem; color: var(--muted); margin-top: var(--space-5); max-width: 90ch; line-height: 1.6; }
+.progress-source strong { color: var(--body); font-weight: 600; }
+.progress-steps { list-style: none; border-left: 2px solid var(--line); margin-left: 6px; }
+.progress-step { position: relative; display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: var(--space-4); padding: 0 0 var(--space-5) var(--space-5); }
+.progress-step::before { content: ""; position: absolute; left: -8px; top: 5px; width: 14px; height: 14px; border-radius: 50%; background: var(--white); border: 2px solid var(--ok); }
+.progress-step.is-done::before { background: var(--ok); }
+.progress-step.is-next::before { border-color: var(--gold); background: var(--gold); box-shadow: 0 0 0 5px rgba(241, 180, 52, 0.22); }
+.progress-when { font-size: 0.875rem; font-weight: 600; color: var(--blue-ink); padding-top: 2px; }
+.progress-step h3 { font-size: 1.0625rem; display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); }
+.progress-step p { font-size: 0.9375rem; margin-top: var(--space-1); }
+
+/* ---------- Relationship banner ---------- */
+
+.relation { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: var(--space-5); align-items: stretch; }
+.relation-card { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: var(--space-5) var(--space-6); }
+.relation-card.is-here { border: 2px solid var(--navy); }
+.relation-card h3 { font-size: 1.0625rem; margin: var(--space-2) 0; }
+.relation-card p { font-size: 0.9375rem; }
+.relation-card .card-kicker { display: flex; justify-content: space-between; gap: var(--space-2); }
+.relation-arrow { display: grid; place-items: center; color: var(--muted); font-size: 0.8125rem; text-align: center; max-width: 120px; }
+.relation-arrow span { display: block; font-size: 1.5rem; color: var(--blue-ink); }
+.relation-note { margin-top: var(--space-4); font-size: 0.9375rem; color: var(--body); }
+
 /* ---------- Footer ---------- */
 
 .footer { background: var(--navy-deep); color: #aebbdb; padding: var(--space-8) 0 var(--space-6); font-size: 0.9375rem; }
@@ -582,6 +616,9 @@ pre code { background: none; padding: 0; color: inherit; }
   .cta-band { grid-template-columns: 1fr; padding: var(--space-6); }
   .mda-band { grid-template-columns: 1fr; gap: var(--space-5); }
   .fd-grid, .learned { grid-template-columns: 1fr; }
+  .relation { grid-template-columns: 1fr; }
+  .relation-arrow { max-width: none; }
+  .relation-arrow span { transform: rotate(90deg); }
   .fd-panel + .fd-panel { border-left: none; border-top: 1px solid var(--line); }
   .fd-spectrum { grid-template-columns: repeat(4, minmax(0, 1fr)); row-gap: var(--space-4); }
   .stat-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -603,4 +640,6 @@ pre code { background: none; padding: 0; color: inherit; }
   .fd-kpis > div + div { border-left: none; border-top: 1px solid var(--line); }
   .fd-spectrum { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .fd-bar-row { grid-template-columns: 90px minmax(0, 1fr) auto; }
+  .progress-step { grid-template-columns: 1fr; gap: var(--space-1); }
+  .progress-bars .fd-bar-row { grid-template-columns: 56px minmax(0, 1fr) auto; }
 }
