@@ -389,6 +389,13 @@ pre code { background: none; padding: 0; color: inherit; }
 .principle h3 { font-size: 1.125rem; margin-bottom: var(--space-2); }
 .principle p { font-size: 0.9875rem; }
 
+/* ---------- MDA band ---------- */
+
+.mda-band { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: var(--space-8); align-items: center; }
+.mda-logo-link { display: block; background: var(--white); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: var(--space-6); }
+.mda-logo-link img { width: 100%; height: auto; }
+.mda-band h2 { font-size: clamp(1.5rem, 2.8vw, 2.125rem); margin-bottom: var(--space-3); }
+
 /* ---------- Callout / CTA band ---------- */
 
 .cta-band {
@@ -502,6 +509,8 @@ pre code { background: none; padding: 0; color: inherit; }
   }
   .grid-2, .grid-3 { grid-template-columns: 1fr; }
   .cta-band { grid-template-columns: 1fr; padding: var(--space-6); }
+  .mda-band { grid-template-columns: 1fr; gap: var(--space-5); }
+  .mda-logo-link { max-width: 280px; }
   .feature-list { columns: 1; }
 }
 
