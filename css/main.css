@@ -639,6 +639,9 @@ pre code { background: none; padding: 0; color: inherit; }
 .footer li + li { margin-top: var(--space-2); }
 .footer-brand { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-4); }
 .footer-brand img { width: 40px; height: 40px; }
+.footer-contact { display: flex; flex-direction: column; gap: 2px; margin-bottom: var(--space-3); }
+.footer-contact strong { color: var(--white); font-weight: 600; }
+.footer-contact small { line-height: 1.45; }
 .footer-brand > span { font-weight: 700; color: var(--white); font-size: 1.3125rem; }
 .footer-bottom { border-top: 1px solid rgba(255, 255, 255, 0.12); margin-top: var(--space-7); padding-top: var(--space-5); display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-3); font-size: 0.875rem; }
 
