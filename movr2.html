@@ -149,11 +149,11 @@
                     </div>
                 </div>
 
-                <h3 style="margin: var(--space-8) 0 var(--space-4);">Where each piece of a DMD record comes from</h3>
+                <div style="display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); margin: var(--space-8) 0 var(--space-4);"><h3 style="margin: 0;">How a DMD record could come together</h3><span class="pill">Example</span></div>
                 <div class="table-wrap">
                     <table class="simple-table">
                         <thead>
-                            <tr><th scope="col">Data element</th><th scope="col">Where it lives</th><th scope="col">How it's read</th></tr>
+                            <tr><th scope="col">Data element</th><th scope="col">Where it often lives</th><th scope="col">How it could be read</th></tr>
                         </thead>
                         <tbody>
                             <tr><td>DMD variant</td><td>Genetic report</td><td>Document extraction, checked by an expert</td></tr>
@@ -165,12 +165,12 @@
                         </tbody>
                     </table>
                 </div>
-                <p class="table-note">An illustration. Two of the six elements arrive through HL7 FHIR alone.</p>
+                <p class="table-note">A hypothetical example to show the idea. It is not pilot data or a description of any participant. Where an element lives varies by care site and health system, so the same measure can be structured at one site and found only in notes at another.</p>
 
                 <div class="grid-2" style="margin-top: var(--space-8);">
                     <div>
                         <h3 style="margin-bottom: var(--space-3);">Why this is promising</h3>
-                        <p>In the pilot, reading documents and notes reached far more genetic, motor function and breathing data than structured fields alone. Language models can now turn clinical text into standard FHIR data, and expert review keeps that work honest.</p>
+                        <p>Early pilot work suggested that reading documents and notes can reach much more genetic, motor function and breathing data than structured fields alone. MDA MOVR will report the official results. Language models can now turn clinical text into standard FHIR data, and expert review keeps that work honest.</p>
                         <p>Participants authorize once, so records from every care site they've visited can follow them, past and future.</p>
                     </div>
                     <div>
