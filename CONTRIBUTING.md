@@ -1,6 +1,6 @@
 # Contributing to OpenMOVR
 
-Thank you for your interest in contributing to OpenMOVR! This project is an open science initiative focused on advancing rare disease research through open source tools and community collaboration.
+Thank you for your interest in contributing to OpenMOVR! OpenMOVR is the open source program of the Muscular Dystrophy Association's MOVR registry. Start with [Why contribute](https://openmovr.github.io/contribute.html) for the bigger picture.
 
 ## Quick Start
 
@@ -10,33 +10,24 @@ Thank you for your interest in contributing to OpenMOVR! This project is an open
    git clone git@github.com:YOUR-USERNAME/OpenMOVR.github.io.git
    cd OpenMOVR.github.io
    ```
-3. **Choose the right branch** (see table below)
-4. **Create a feature branch**:
+3. **Create a feature branch from `main`**:
    ```bash
    git checkout -b feature/your-feature-name
    ```
-5. **Make your changes** and test locally
-6. **Commit with clear messages**:
+4. **Make your changes** and test locally
+5. **Commit with clear messages**:
    ```bash
    git commit -m "component: Description of what you changed"
    ```
-7. **Push to your fork**:
+6. **Push to your fork**:
    ```bash
    git push origin feature/your-feature-name
    ```
-8. **Open a Pull Request** targeting the correct branch
+7. **Open a Pull Request** into `main`
 
-## Which Branch Do I Use?
+## Branches
 
-| Working on... | Branch from | PR target |
-|---------------|-------------|-----------|
-| Homepage, shared CSS/JS | `main` | `main` |
-| Pilot enrollment (`pilot/`) | `pilot-landing-page` | `pilot-landing-page` |
-| Documentation (`docs/`) | `openmovr-docs` | `openmovr-docs` |
-| MOVR Viewer (`movr-viewer/`) | `movr-viewer` | `movr-viewer` |
-| GSoC page (`gsoc.html`) | `gsoc` | `gsoc` |
-
-See [BRANCH_STRATEGY.md](./BRANCH_STRATEGY.md) for complete details.
+Everything branches from `main` and merges back into it. See [BRANCH_STRATEGY.md](./BRANCH_STRATEGY.md). Do not add AI attribution (Claude, Copilot or similar) to commit messages or pull requests. A check on every push enforces this.
 
 ## Code of Conduct
 
@@ -83,22 +74,22 @@ python3 -m http.server 8000
 
 ```
 OpenMOVR.github.io/
-├── index.html              # Homepage (main branch)
-├── gsoc.html               # GSoC program (gsoc branch)
-├── docs/                   # Documentation (openmovr-docs branch)
-│   ├── index.html          # MOVR 2.0 page
+├── index.html              # Homepage
+├── gsoc.html               # GSoC program
+├── docs/                   # Developer docs
+│   ├── index.html          # Redirects to movr2.html
 │   ├── developer.html      # Developer docs
 │   └── movr-datahub-analytics.html
-├── pilot/                  # Pilot enrollment (pilot-landing-page branch)
+├── pilot/                  # MOVR 2.0 pilot page (closed)
 │   ├── index.html
 │   └── script.js
-├── movr-viewer/            # MOVR Viewer (movr-viewer branch)
+├── movr-viewer/            # MOVR Viewer
 │   ├── index.html
 │   └── data_dictionary_viewer.html
-├── css/                    # Shared styles (main branch)
-├── js/                     # Shared JavaScript (main branch)
-├── assets/                 # Images, logos (main branch)
-└── components/             # Reusable components (main branch)
+├── css/                    # Shared styles
+├── js/                     # Shared JavaScript
+├── assets/                 # Images, logos
+└── components/             # Reusable components
 ```
 
 ## Pull Request Guidelines
@@ -109,7 +100,7 @@ OpenMOVR.github.io/
 - [ ] Test on mobile (or use browser dev tools)
 - [ ] Update documentation if you changed functionality
 - [ ] Keep PRs focused (one feature/fix per PR)
-- [ ] Target the correct branch (see table above)
+- [ ] Branch from and target `main`
 
 ### PR Title Format
 
@@ -138,7 +129,7 @@ Before/after screenshots.
 - [ ] Tested locally
 - [ ] Tested on mobile
 - [ ] Documentation updated (if needed)
-- [ ] Targeting correct branch
+- [ ] Targeting `main`
 ```
 
 ## Commit Message Guidelines
@@ -164,35 +155,35 @@ Longer explanation if needed.
 
 ## Contribution Areas
 
-### Documentation (`openmovr-docs` branch)
+### Documentation (`docs/`)
 
-The docs use a tabbed interface:
-- `docs/index.html` - MOVR 2.0 (Updates, Vision, History, FAQ tabs)
-- `docs/developer.html` - Developer Docs (repos, MOVR Viewer tabs)
+Long-form docs with a section menu, in the site design:
+- `docs/developer.html` - Developer docs
 - `docs/movr-datahub-analytics.html` - Python library docs
 
-### MOVR Viewer (`movr-viewer` branch)
+### MOVR Viewer (`movr-viewer/`)
 
 Research tools for data exploration:
 - `movr-viewer/index.html` - Viewer home page
 - `movr-viewer/data_dictionary_viewer.html` - Dictionary explorer
 - `*.json` - Data files (be careful editing)
 
-### GSoC Page (`gsoc` branch)
+### GSoC Page (`gsoc.html`)
 
 Google Summer of Code program:
 - `gsoc.html` - Program details, projects, mentors
 
-### Pilot Enrollment (`pilot-landing-page` branch)
+### Pilot page (`pilot/`, closed)
 
-MOVR 2.0 enrollment system:
-- `pilot/index.html` - Enrollment landing page
-- `pilot/script.js` - Form handling
-- Handles PII - never commit real patient data
+The closed MOVR 2.0 pilot page, kept as a record:
+- `pilot/index.html` and `pilot/index-es.html` - English and Spanish pages
+- Never commit participant data
 
-### Homepage (`main` branch)
+### Homepage (`index.html`)
 
 - `index.html` - Homepage
+- `progress.html`, `movr2.html`, `front-door.html`, `faq.html`, `contribute.html`
+- `data/*.json` - Figures for the progress page and front door. Every figure needs its population and source.
 - `css/`, `js/`, `assets/`, `components/` - Shared resources
 
 ## Style Guidelines

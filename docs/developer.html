@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Developer Docs | OpenMOVR</title>
     <meta name="description" content="Developer documentation for OpenMOVR: the website, the OpenMOVR App, the DataHub Analytics library and the MOVR Viewer.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://openmovr.github.io/docs/developer.html">
+    <meta property="og:title" content="Developer Docs | OpenMOVR">
+    <meta property="og:description" content="Developer documentation for OpenMOVR: the website, the OpenMOVR App, the DataHub Analytics library and the MOVR Viewer.">
+    <meta property="og:image" content="https://openmovr.github.io/assets/openmovr-social.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,600;1,8..60,600&display=swap" rel="stylesheet">
@@ -107,7 +115,7 @@
                             <p>Python package for analyzing MOVR DataHub (2019-2025) registry data across seven diseases.</p>
                             <ul>
                                 <li><strong>Tech:</strong> Python, pandas, PyArrow</li>
-                                <li><strong>Status:</strong> GSoC 2026 Priority Project</li>
+                                <li><strong>Status:</strong> GSoC priority project</li>
                                 <li><strong>Focus:</strong> Data analysis, research tools</li>
                             </ul>
                             <p><a href="https://github.com/OpenMOVR/movr-datahub-analytics" target="_blank">View Repository</a> | <a href="movr-datahub-analytics.html">Full Documentation</a></p>
@@ -215,24 +223,14 @@ git checkout -b feature/your-feature-name</pre>
 
                     <h3 id="branch-strategy">Branch Strategy</h3>
                     <div class="card">
-                        <p><strong>main</strong> - Production website (homepage, docs, GSoC, pilot)</p>
-                        <p><strong>viewer-apps</strong> - MOVR Viewer applications (research tools)</p>
-
-                        <h4>Website Changes</h4>
+                        <p><strong>main</strong> is the only long-lived branch. It is the live site, and every push deploys it. Work happens on short-lived branches that merge into <code>main</code> by pull request and are then deleted. See <a href="https://github.com/OpenMOVR/OpenMOVR.github.io/blob/main/BRANCH_STRATEGY.md" target="_blank" rel="noopener">BRANCH_STRATEGY.md</a>.</p>
                         <pre>git checkout main
 git pull origin main
 git checkout -b feature/your-feature
 # Make changes, commit
 git push origin feature/your-feature
-# Open PR to main</pre>
-
-                        <h4>MOVR Viewer Changes</h4>
-                        <pre>git checkout viewer-apps
-git pull origin viewer-apps
-git checkout -b feature/viewer-enhancement
-# Make changes, commit
-git push origin feature/viewer-enhancement
-# Open PR to viewer-apps</pre>
+# Open a pull request into main</pre>
+                        <p>Two checks run on every push and pull request. One fails on broken internal links, and one fails on AI attribution in commit messages.</p>
                     </div>
 
                     <h3 id="common-tasks">Common Tasks</h3>
@@ -433,7 +431,7 @@ python scripts/generate_curated_dictionary.py</pre>
                         </ol>
 
                         <h4>GSoC project, evolving the OpenMOVR App</h4>
-                        <p>OpenMOVR App is an established GSOC 2026 project opportunity. Contributors can help expand the dashboard with new features, disease-specific overviews, enhanced analytics, and improved data visualization.</p>
+                        <p>OpenMOVR App is an established GSoC project opportunity. Contributors can help expand the dashboard with new features, disease-specific overviews, enhanced analytics, and improved data visualization.</p>
 
                         <h4>Testing Locally</h4>
                         <pre># With virtual env activated
@@ -480,7 +478,7 @@ streamlit run app.py
                     <p><a href="https://github.com/OpenMOVR/movr-datahub-analytics" target="_blank">github.com/OpenMOVR/movr-datahub-analytics</a> | <a href="movr-datahub-analytics.html">Full Documentation</a></p>
 
                     <div class="alert alert-primary">
-                        <h4>GSoC 2026 Priority Project</h4>
+                        <h4>GSoC Priority Project</h4>
                         <p>Python package for analyzing MOVR DataHub (2019-2025) registry data. Ideal for students interested in healthcare data analytics.</p>
                     </div>
 
@@ -605,15 +603,13 @@ pre-commit run --all-files</pre>
                         <pre>git clone git@github.com:YOUR-USERNAME/OpenMOVR.github.io.git
 cd OpenMOVR.github.io
 
-# Switch to viewer-apps branch
-git checkout viewer-apps
-git pull origin viewer-apps
-
-# Create feature branch
+# Create a feature branch from main
+git checkout main
+git pull origin main
 git checkout -b feature/viewer-enhancement
 
-# Make changes in movr-viewer/ directory
-# Submit PR to viewer-apps branch</pre>
+# Make changes in the movr-viewer/ directory
+# Open a pull request into main</pre>
                     </div>
                 </section>
 

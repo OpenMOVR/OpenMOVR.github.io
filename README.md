@@ -1,20 +1,24 @@
-# OpenMOVR Community Initiative
+# OpenMOVR
 
-Open science initiative for neuromuscular disease research. Building the future through transparent collaboration and open source software.
+The open source program of the Muscular Dystrophy Association's MOVR registry.
+
+**Site:** [openmovr.github.io](https://openmovr.github.io) · **MDA MOVR:** [mda.org/science/movr2](https://www.mda.org/science/movr2)
 
 ## About
 
-OpenMOVR is an independently managed open science initiative established in 2025, leaning on open source methods to advance neuromuscular disease research. 
+OpenMOVR publishes MOVR registry figures anyone can cite, the open source tools and code behind them, and progress on MOVR 2.0 as it happens. It is also a place for volunteers, including Google Summer of Code contributors, technologists, data scientists and graduate students, to make MOVR data more useful.
 
-Designed and built by Andre Daniel Paredes, PhD, OpenMOVR is continuously evolving to better serve researchers and make a lasting impact on neuromuscular disease research.
+MOVR is MDA's registry. MDA MOVR publishes the official findings and documents, and OpenMOVR links to them.
 
-## Overview
+Founded and led by [Andre Paredes, PhD](https://github.com/ADParedes), founder & technical lead, with the MDA MOVR team.
 
-OpenMOVR advances neuromuscular disease research through:
-- **Open Source Tools**: MOVR DataHub Analytics Python library for researchers
-- **Google Summer of Code**: Mentorship program for open source development
-- **Research Data Access**: Official MOVR data request process
-- **Community Documentation**: Comprehensive guides and developer resources
+## What is here
+
+- **[MOVR progress](https://openmovr.github.io/progress.html):** milestones, pilot highlights and MOVR Data Hub figures, each with its population and source
+- **[MOVR 2.0](https://openmovr.github.io/movr2.html):** pilot highlights, health records and what's coming
+- **[The MOVR front door](https://openmovr.github.io/front-door.html):** the public page MOVR 2.0 will launch with, built in the open
+- **[Why contribute](https://openmovr.github.io/contribute.html)** and the **[developer docs](https://openmovr.github.io/docs/developer.html)**
+- **[OpenMOVR App](https://openmovr-gen1.streamlit.app/Community_Snapshot):** the live analytics app and its citable Community Snapshot
 
 ## To-do
 
@@ -54,7 +58,7 @@ OpenMOVR.github.io/
 
 ```bash
 # Clone the repository
-git clone git@github.com:YOUR-USERNAME/OpenMOVR.github.io.git
+git clone git@github.com:OpenMOVR/OpenMOVR.github.io.git
 cd OpenMOVR.github.io
 
 # Start local server
@@ -64,19 +68,10 @@ cd OpenMOVR.github.io
 # Visit http://localhost:8000
 ```
 
-### Key Pages
-
-- **Homepage**: Overview, stats, calls-to-action
-- **MOVR 2.0 Docs**: Updates, vision, history, FAQ (tabbed interface)
-- **Developer Docs**: Repository info, MOVR Viewer, contribution guides
-- **DataHub Analytics**: Python library documentation for researchers
-- **GSoC Program**: Google Summer of Code mentorship details
-- **Pilot Program**: MOVR 2.0 enrollment for patients/families
-
 ## OpenMOVR Repositories
 
 ### OpenMOVR.github.io
-This repository - the main website with documentation, GSoC program, and pilot enrollment.
+This repository, the OpenMOVR website.
 
 - **Tech**: HTML, CSS, JavaScript
 - **Hosting**: GitHub Pages
@@ -85,7 +80,6 @@ This repository - the main website with documentation, GSoC program, and pilot e
 Python package for analyzing MOVR DataHub (2019-2025) registry data.
 
 - **Tech**: Python, pandas, PyArrow
-- **Status**: GSoC 2026 Priority Project
 - **Repository**: [github.com/OpenMOVR/movr-datahub-analytics](https://github.com/OpenMOVR/movr-datahub-analytics)
 
 ## Contributing
@@ -101,9 +95,10 @@ See [BRANCH_STRATEGY.md](./BRANCH_STRATEGY.md) for branch workflow details.
 
 ## Contact
 
-- **MOVR Team**: mdamovr@mdausa.org
+- **MDA MOVR team:** mdamovr@mdausa.org (the registry, data requests, MOVR 2.0)
+- **OpenMOVR:** andre.paredes@ymail.com ([Andre Paredes](https://github.com/ADParedes), founder & technical lead)
 - **GitHub**: [github.com/OpenMOVR](https://github.com/OpenMOVR)
 
 ## License
 
-Copyright 2025 OpenMOVR Open Science Initiative
+MIT. See [LICENSE](LICENSE).

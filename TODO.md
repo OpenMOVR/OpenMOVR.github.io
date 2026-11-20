@@ -20,16 +20,16 @@ Owner: [Andre Paredes](https://github.com/ADParedes), founder & technical lead.
 
 ## Pages
 
-- [ ] **GSoC.** `gsoc.html` still shows 2026 dates. Decide on a 2027 application and update or archive the page.
+- [ ] **GSoC.** The page now says the 2026 program has ended and 2027 is to be announced. Update it once the 2027 plan is decided.
 - [ ] **Front door.** Move `data/front-door-today.json` to MOVR 2.0 counts at launch, then generate it on a schedule (stage 3 on `front-door.html`).
 - [ ] **Progress page.** Refresh `data/progress.json` each time the Community Snapshot is recomputed, keeping population, data-through and computed dates.
 
 ## Repository
 
-- [ ] **Old branches.** `pilot-landing-page`, `redesign`, `academic-redesign`, `css`, `dev` and the viewer branches predate the current site. Merge what is still needed and delete the rest.
-- [ ] **README.** The About section still calls OpenMOVR an "independently managed open science initiative". Align it with the site, "the open source program of MDA's MOVR registry".
+- [x] **Old branches.** Deleted the section branches. Everything merged into `main` first, and `main` is now the only long-lived branch.
+- [x] **README.** Aligned with the site, "the open source program of MDA's MOVR registry".
 
 ## Rules for this repo
 
-- No AI attribution in commits or pull requests. No `Co-Authored-By` lines for Claude, Copilot or any other assistant, and no "Generated with" footers. The `attribution-check` workflow fails any push or pull request that has one.
+- No AI attribution in commits or pull requests. No `Co-Authored-By` lines for Claude, Copilot or any other assistant, and no "Generated with" footers. The `attribution-check` workflow fails any push or pull request that has one, and `link-check` fails on broken internal links or anchors.
 - Every published figure names its population and source. Never publish a bare rate.
