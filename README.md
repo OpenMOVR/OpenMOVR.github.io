@@ -16,6 +16,10 @@ OpenMOVR advances neuromuscular disease research through:
 - **Research Data Access**: Official MOVR data request process
 - **Community Documentation**: Comprehensive guides and developer resources
 
+## To-do
+
+Open items for the site are tracked in [TODO.md](TODO.md).
+
 ## Website Structure
 
 ```
@@ -27,6 +31,7 @@ OpenMOVR.github.io/
 ├── faq.html                # FAQ
 ├── contribute.html         # Why contribute
 ├── gsoc.html               # Google Summer of Code program
+├── TODO.md                 # Open items for the site
 ├── docs/
 │   ├── developer.html      # Developer docs
 │   ├── movr-datahub-analytics.html  # Python library docs

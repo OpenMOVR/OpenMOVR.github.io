@@ -1,0 +1,49 @@
+name: attribution-check
+
+# Fails when a commit message or pull request description credits an AI
+# assistant (Claude, Copilot or similar). See the rules in TODO.md.
+
+on:
+  push:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check commit messages and PR description
+        env:
+          EVENT: ${{ github.event_name }}
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.sha }}
+          BASE: ${{ github.event.pull_request.base.sha }}
+          HEAD: ${{ github.event.pull_request.head.sha }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: |
+          pattern='co-authored-by:.*(claude|copilot|anthropic|openai|chatgpt|gemini)|generated (with|by) .*(claude|copilot|chatgpt)|noreply@anthropic\.com'
+          if [ "$EVENT" = "pull_request" ]; then
+            range="$BASE..$HEAD"
+          elif [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
+            range="$AFTER"
+          else
+            range="$BEFORE..$AFTER"
+          fi
+          bad=$(git log --format='%h %s%n%b' "$range" | grep -iE "$pattern" || true)
+          if [ -n "$bad" ]; then
+            echo "AI attribution found in commit messages:"
+            echo "$bad"
+            exit 1
+          fi
+          if printf '%s' "$PR_BODY" | grep -iqE "$pattern"; then
+            echo "AI attribution found in the pull request description."
+            exit 1
+          fi
+          echo "No AI attribution found."
