@@ -59,7 +59,7 @@
       },
       {
         "title": "Baseline survey",
-        "text": "A short survey about the participant and their diagnosis. We are validating it before launch."
+        "text": "A short survey about the participant and their diagnosis, being validated before launch."
       },
       {
         "title": "Consent",
@@ -71,7 +71,7 @@
       }
     ],
     "groups_title": "The working groups",
-    "groups_intro": "We approached each advisor individually before any data arrived, and each group worked from a charter with clear objectives.",
+    "groups_intro": "Each advisor was approached individually before any data arrived, and each group worked from a charter with clear objectives. MDA MOVR publishes the official account of the pilot.",
     "groups": [
       {
         "title": "Clinical",
