@@ -74,7 +74,7 @@
                 <h3 class="progress-sub">${esc(cfg.pilot.groups_title)}</h3>
                 <p class="progress-intro">${esc(cfg.pilot.groups_intro)}</p>
                 ${cards(cfg.pilot.groups, 'grid-3')}
-                <p class="progress-source" style="margin-top: var(--space-4);">What the pilot taught us is on the <a href="movr2.html#pilot">MOVR 2.0 page</a>.</p>
+                <p class="progress-source" style="margin-top: var(--space-4);">The principles we took from it are on the <a href="movr2.html#pilot">MOVR 2.0 page</a>.</p>
                 <p class="progress-source"><strong>Population:</strong> ${esc(cfg.pilot.population)}. <strong>Source:</strong> ${esc(cfg.pilot.source)}.</p>
             </section>
 
