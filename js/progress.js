@@ -26,9 +26,15 @@
 
     const stats = list => `<div class="stat-strip">${list.map(s => `
         <div>
-            <div class="value">${fmt(s.value)}</div>
+            <div class="value">${typeof s.value === 'number' ? fmt(s.value) : esc(s.value)}</div>
             <div class="label">${esc(s.label)}</div>
             ${s.detail ? `<div class="base">${esc(s.detail)}</div>` : ''}
+        </div>`).join('')}</div>`;
+
+    const cards = (list, cls) => `<div class="${cls}">${list.map(c => `
+        <div class="card">
+            <h3>${esc(c.title)}</h3>
+            <p>${esc(c.text)}</p>
         </div>`).join('')}</div>`;
 
     function render(cfg) {
@@ -61,7 +67,14 @@
 
             <section class="progress-block" aria-labelledby="pg-pilot">
                 <h2 id="pg-pilot">${esc(cfg.pilot.title)}</h2>
+                <p class="progress-intro">${esc(cfg.pilot.intro)}</p>
                 ${stats(cfg.pilot.stats)}
+                <h3 class="progress-sub">${esc(cfg.pilot.steps_title)}</h3>
+                ${cards(cfg.pilot.steps, 'grid-4 howto journey')}
+                <h3 class="progress-sub">${esc(cfg.pilot.groups_title)}</h3>
+                <p class="progress-intro">${esc(cfg.pilot.groups_intro)}</p>
+                ${cards(cfg.pilot.groups, 'grid-3')}
+                <p class="progress-source" style="margin-top: var(--space-4);">What the pilot taught us is on the <a href="movr2.html#pilot">MOVR 2.0 page</a>.</p>
                 <p class="progress-source"><strong>Population:</strong> ${esc(cfg.pilot.population)}. <strong>Source:</strong> ${esc(cfg.pilot.source)}.</p>
             </section>
 

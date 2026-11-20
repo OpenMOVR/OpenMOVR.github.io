@@ -10,6 +10,7 @@ const movrConfig = {
             href: "movr2.html",
             dropdown: [
                 { label: "What the pilot taught us", href: "movr2.html#pilot", description: "Findings from families who tested MOVR 2.0" },
+                { label: "Health records", href: "movr2.html#records", description: "What data standards can and can't do" },
                 { label: "What's coming", href: "movr2.html#coming", description: "The 2027 launch" },
                 { label: "The MOVR front door", href: "front-door.html", description: "What's in MOVR today" }
             ]

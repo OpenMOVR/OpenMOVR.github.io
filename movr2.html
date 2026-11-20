@@ -94,7 +94,7 @@
                     </div>
                     <div class="principle">
                         <h3>Consenting is easy. Connecting records is hard.</h3>
-                        <p>Of 122 pilot participants who consented, 44 went on to share health data. That step is what MOVR 2.0 has to make simple.</p>
+                        <p>Many people who consented stopped before connecting their records. That step is what MOVR 2.0 has to make simple. <a href="progress.html">How joining worked</a>.</p>
                     </div>
                     <div class="principle">
                         <h3>People stay for what comes back</h3>
@@ -124,8 +124,68 @@
             </div>
         </section>
 
+        <!-- Health records -->
+        <section class="section section-paper" id="records">
+            <div class="container">
+                <div class="section-header">
+                    <span class="eyebrow">Health records</span>
+                    <h2>What data standards can do, and what still needs building</h2>
+                    <p>MOVR 2.0 starts from the records participants authorize. HL7 FHIR, the standard US health record systems are required to support, carries the structured part of a record well. Much of what matters in neuromuscular disease lives outside it.</p>
+                </div>
+
+                <div class="grid-2">
+                    <div class="card">
+                        <h3>What HL7 FHIR carries well</h3>
+                        <p>Diagnoses, medications and lab results, already coded to SNOMED CT, RxNorm and LOINC. Under the 21st Century Cures Act, certified health record systems have to share data this way, so the connection already exists at most care sites.</p>
+                    </div>
+                    <div class="card">
+                        <h3>What it misses</h3>
+                        <p>Motor function scores and timed tests sit in clinical notes. Genetic results arrive as scanned reports, and an uncertain variant can be recorded as normal. Breathing tests come as PDFs, medication dates break, and walking status is sometimes coded for billing rather than care.</p>
+                    </div>
+                </div>
+
+                <h3 style="margin: var(--space-8) 0 var(--space-4);">Where each piece of a DMD record comes from</h3>
+                <div class="table-wrap">
+                    <table class="simple-table">
+                        <thead>
+                            <tr><th scope="col">Data element</th><th scope="col">Where it lives</th><th scope="col">How it's read</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>DMD variant</td><td>Genetic report</td><td>Document extraction, checked by an expert</td></tr>
+                            <tr><td>Corticosteroid and dose</td><td>Structured record</td><td>HL7 FHIR</td></tr>
+                            <tr><td>Creatine kinase</td><td>Structured record</td><td>HL7 FHIR</td></tr>
+                            <tr><td>FVC, % predicted</td><td>Breathing test report</td><td>Document extraction, checked by a reviewer</td></tr>
+                            <tr><td>North Star motor score</td><td>Clinical notes</td><td>Note extraction, checked by an expert</td></tr>
+                            <tr><td>Falls in the past month</td><td>Family survey</td><td>Asked directly</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="table-note">An illustration. Two of the six elements arrive through HL7 FHIR alone.</p>
+
+                <div class="grid-2" style="margin-top: var(--space-8);">
+                    <div>
+                        <h3 style="margin-bottom: var(--space-3);">Why we're excited</h3>
+                        <p>In the pilot, reading documents and notes reached far more genetic, motor function and breathing data than structured fields alone. Language models can now turn clinical text into standard FHIR data, and expert review keeps that work honest.</p>
+                        <p>Participants authorize once, so records from every care site they've visited can follow them, past and future.</p>
+                    </div>
+                    <div>
+                        <h3 style="margin-bottom: var(--space-3);">What needs engineering work</h3>
+                        <ul class="check-list">
+                            <li>Extraction from documents and notes, with expert review and an audit trail</li>
+                            <li>Mapping to standards such as SNOMED CT, LOINC, RxNorm and HGVS</li>
+                            <li>Conflicting, missing or impossible dates</li>
+                            <li>Telling an assessment that was done apart from its score</li>
+                            <li>Checking output against the source documents</li>
+                            <li>Reporting gaps honestly, so "unknown" and "not there" mean different things</li>
+                        </ul>
+                        <p style="margin-top: var(--space-4);">Shared methods, mappings and checks are a natural fit for open source. <a href="contribute.html">Why contribute</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- What's coming -->
-        <section class="section section-paper" id="coming">
+        <section class="section" id="coming">
             <div class="container">
                 <div class="section-header">
                     <span class="eyebrow">What's coming</span>
@@ -154,7 +214,7 @@
         </section>
 
         <!-- Front door + FAQ -->
-        <section class="section">
+        <section class="section section-paper">
             <div class="container">
                 <div class="grid-2">
                     <a class="card card-link card-feature is-gold" href="front-door.html">

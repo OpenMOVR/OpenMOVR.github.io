@@ -29,22 +29,61 @@
   ],
   "pilot": {
     "title": "MOVR 2.0 pilot",
-    "population": "Participants in the MOVR 2.0 pilot (SMA, DMD and LGMD), 2025 – 2026",
+    "intro": "Families living with SMA, DMD and LGMD walked through every step of joining MOVR 2.0 from home, on three platforms run side by side. Enrollment is closed.",
+    "population": "Participants in the MOVR 2.0 pilot (SMA, DMD and LGMD), 2025 – 2026. Pilot participant counts are shown as ranges",
     "source": "MOVR team pilot records, reported November 2026",
     "stats": [
       {
-        "value": 122,
+        "value": "100+",
         "label": "consented to the study"
       },
       {
-        "value": 44,
-        "label": "shared health data",
-        "detail": "36% of the 122 who consented"
+        "value": 3,
+        "label": "disease communities",
+        "detail": "SMA, DMD and LGMD"
       },
       {
-        "value": 6,
-        "label": "focus group members",
-        "detail": "patients and caregivers, interviewed in depth"
+        "value": 3,
+        "label": "platforms tested side by side"
+      },
+      {
+        "value": 3,
+        "label": "working groups advising"
+      }
+    ],
+    "steps_title": "How joining worked",
+    "steps": [
+      {
+        "title": "Create an account",
+        "text": "Sign up from home on a phone or computer, with no clinic visit needed."
+      },
+      {
+        "title": "Baseline survey",
+        "text": "A short survey about the participant and their diagnosis. We are validating it before launch."
+      },
+      {
+        "title": "Consent",
+        "text": "Each participant agrees under a strict, IRB-approved study protocol, knowing what their data is for."
+      },
+      {
+        "title": "Authorize records",
+        "text": "Participants connect health records from the care sites they've visited, so past records and new data can follow."
+      }
+    ],
+    "groups_title": "The working groups",
+    "groups_intro": "We approached each advisor individually before any data arrived, and each group worked from a charter with clear objectives.",
+    "groups": [
+      {
+        "title": "Clinical",
+        "text": "Defined the clinical use case and judged whether the data looked like a real patient."
+      },
+      {
+        "title": "Data integration",
+        "text": "Set the expectations for extraction, mapping, data standards and quality."
+      },
+      {
+        "title": "Patient advocacy",
+        "text": "Brought the community's view, including how disease subtypes get lost in records."
       }
     ]
   },
