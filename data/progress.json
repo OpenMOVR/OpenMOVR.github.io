@@ -28,14 +28,14 @@
     }
   ],
   "pilot": {
-    "title": "MOVR 2.0 pilot",
-    "intro": "Families living with SMA, DMD and LGMD walked through every step of joining MOVR 2.0 from home, on three platforms run side by side. Enrollment is closed.",
-    "population": "Participants in the MOVR 2.0 pilot (SMA, DMD and LGMD), 2025 – 2026. Pilot participant counts are shown as ranges",
+    "title": "MOVR 2.0 pilot evaluation",
+    "intro": "In this pilot evaluation phase, families living with SMA, DMD and LGMD walked through every step of joining MOVR 2.0 from home, on three platforms run side by side. Enrollment is closed.",
+    "population": "Participants in the MOVR 2.0 pilot evaluation phase (SMA, DMD and LGMD), 2025 – 2026. Pilot participant counts are shown as ranges",
     "source": "MOVR team pilot records, reported November 2026",
     "stats": [
       {
         "value": "100+",
-        "label": "consented to the study"
+        "label": "consented to take part"
       },
       {
         "value": 3,
@@ -63,7 +63,7 @@
       },
       {
         "title": "Consent",
-        "text": "Each participant agrees under a strict, IRB-approved study protocol, knowing what their data is for."
+        "text": "Each participant agreed under a strict protocol, knowing what their data was for."
       },
       {
         "title": "Authorize records",
