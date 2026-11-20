@@ -147,6 +147,10 @@ pre code { background: none; padding: 0; color: inherit; }
 .logo { display: flex; align-items: center; gap: var(--space-3); text-decoration: none; color: var(--ink); flex-shrink: 0; }
 .logo img { width: 40px; height: 40px; }
 .logo-main { font-weight: 700; font-size: 1.125rem; color: var(--navy); letter-spacing: -0.01em; line-height: 1.1; }
+.wordmark { font-size: 1.3125rem; letter-spacing: -0.02em; }
+.wordmark .wm-open { font-weight: 500; color: var(--sky); }
+.wordmark .wm-movr { font-weight: 700; color: var(--navy); }
+.footer-brand .wordmark .wm-movr { color: var(--white); }
 .logo-sub { font-size: 0.75rem; color: var(--muted); line-height: 1.2; }
 
 .nav { display: flex; align-items: center; gap: var(--space-1); flex: 1; }
@@ -634,8 +638,8 @@ pre code { background: none; padding: 0; color: inherit; }
 .footer ul { list-style: none; }
 .footer li + li { margin-top: var(--space-2); }
 .footer-brand { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-4); }
-.footer-brand img { width: 40px; height: 40px; background: var(--white); border-radius: 8px; padding: 3px; }
-.footer-brand span { font-weight: 700; color: var(--white); font-size: 1.125rem; }
+.footer-brand img { width: 40px; height: 40px; }
+.footer-brand > span { font-weight: 700; color: var(--white); font-size: 1.3125rem; }
 .footer-bottom { border-top: 1px solid rgba(255, 255, 255, 0.12); margin-top: var(--space-7); padding-top: var(--space-5); display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-3); font-size: 0.875rem; }
 
 /* ---------- Motion ---------- */
